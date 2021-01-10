@@ -1,0 +1,51 @@
+<div>
+  <div class="p-grid p-fluid">
+    <div style="display: flex">
+      <div class="mb-12 col-md-6 col-12">
+        <label for="skillsGrouplabel" class="p-float-label" style="font-size: 13px">Libellé</label>
+        <div class="p-inputgroup p-fluid">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+
+          <input [ngClass]="{
+              'is-invalid': skillsGroup.skillsGroupLabel == null
+            }" type="text" class="form-control p-field" id="skillsGrouplabel"
+            [(ngModel)]="skillsGroup.skillsGroupLabel" style="font-size: 13px" (keyup)="checkCode()" />
+        </div>
+      </div>
+      <div class="mb-12 col-md-6 col-12">
+        <label for="code" class="p-float-label" style="font-size: 13px">Code</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          <input [ngClass]="{
+            'is-invalid': skillsGroup.skillsGroupCode == null
+          }" type="text" class="form-control p-field" id="skillsGroupcode" [(ngModel)]="skillsGroup.skillsGroupCode"
+            style="font-size: 13px" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-grid p-fluid">
+    <div style="display: flex">
+      <div class="mb-12 col-md-12 col-12">
+        <label for="details" class="p-float-label" style="font-size: 13px">Détails</label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+          <textArea id="skillsGroupDetails" name="fielddetails" ngDefaultControl
+            [(ngModel)]="skillsGroup.skillsGroupDetails" [placeholder]="
+            'Saisir içi plus de détatils sur votre famille des compétences..'
+          " rows="8" style="width: 100%; text-align: justify; padding: 20px;">
+        </textArea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="p-panel p-panel-header" style="margin-top: 20px; float: right; padding: 2%">
+    <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+    <button [disabled]="checkskillsGroupValid()" [ngClass]="{ disabled: checkskillsGroupValid() }" pButton pRipple
+      label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveNewSkillsGroup()"
+      style="margin-left: 10px"></button>
+  </div>
