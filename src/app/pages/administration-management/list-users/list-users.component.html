@@ -31,14 +31,17 @@ Liste des utilisateurs
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 13px;">
         <th style="text-align: center; font-size: 13px;width: 10%;"> </th>
-        <th style="text-align: center; font-size: 13px;width: 10%;"> Nom complet </th>
+        <th style="text-align: center; font-size: 13px;width: 15%;"> Nom complet </th>
         <th style="text-align: center; font-size: 13px;width: 10%;"> Matricule </th>
         <th style="text-align: center; font-size: 13px;width: 10%;"> Date d'embauche </th>
         <th style="text-align: center; font-size: 13px;width: 10%;">Télephone </th>
-        <th style="text-align: center; font-size: 13px;width: 10%;"> Email </th>
+        <th style="text-align: center; font-size: 13px;width: 15%;"> Email </th>
+        <th style="text-align: center; font-size: 13px;width: 15%;"> Adresse </th>
+        <!--
         <th style="text-align: center; font-size: 13px;width: 10%;">  Date de création </th>
         <th style="text-align: center; font-size: 13px;width: 10%;">Date de modification</th>
-        <th style="text-align: center; font-size: 13px;width: 10%;">Status</th>
+        -->
+        <th style="text-align: center; font-size: 13px;width: 8%;">Status</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
       </ng-template>
     <ng-template pTemplate="body" let-user>
@@ -60,16 +63,24 @@ Liste des utilisateurs
         <td  style="text-align: center;font-size: 13px;">
           {{user.userPhoneNumber}}
         </td>
+        
+       
         <td  style="text-align: center;font-size: 13px;">
           {{user.userEmail}}
         </td>
         <td  style="text-align: center;font-size: 13px;">
+          {{user.userAddress}}
+        </td>
+          <!--
+        <td  style="text-align: center;font-size: 13px;">
           {{user.createdAt}}
         </td>
+       
        
         <td  style="text-align: center;font-size: 13px;">
           {{user.updatedAt}}
         </td>
+         -->
         <td  style="text-align: center;font-size: 13px;">
           <span *ngIf="user.isBlocked==true" class="not-paid-red" placement="top" ></span>
           <span *ngIf="user.isBlocked==false" class="paid-green" placement="top" ></span>
