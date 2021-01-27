@@ -30,12 +30,12 @@ Modifier un utilisateur
         <div style="display: flex">
          
           <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="userFirstName" class="p-float-label">Nom</label>
+            <label for="userFirstName" class="p-float-label">Nom <strong style="color: #960032;">*</strong></label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input type="text" class="form-control p-field" id="userFirstName"
                      [(ngModel)]="user.userFirstName" [ngClass]="{
-        'is-invalid': user.userFirstName == null || user.userFirstName == '' ,
+        
         'is-valid': user.userFirstName != null && user.userFirstName !== ''
       }">
             </div>
@@ -126,126 +126,130 @@ class="browser-default custom-select" >
     
       </div></div></div>
   </p-panel>
-  <div style="margin-top: 1%;">
-    <p-panel header="Contacts" [toggleable]="false">
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-              <input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
-                [ngClass]="{
-          'is-invalid':( user.userPhoneNumber== null || user.userPhoneNumber== '' ) && user.userPhoneNumber.length<8,
-          'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
-        }">
-            </div>
-          </div>
-          <div class="mb-1 col-md-6 col-12 p-field">
-            <label for="userEmail" class="p-float-label">Mail</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
-             
-              <input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail"
-                [ngClass]="{
-          'is-invalid': user.userEmail== null || user.userEmail== '',
-          'is-valid': user.userEmail== null || user.userEmail== '' 
-        }">
-            </div>
-          </div>
-          
-        </div>
-        <div style="display: flex">
-          <div class="mb-1 col-md-12 col-12 p-field">
-            <label for="userAddress" class="p-float-label">Adresse</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-              <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="user.userAddress">
-            </div>
-          </div>
-        </div>
-      </div>
-    </p-panel>
-    </div>
-    <div style="margin-top: 1%;">
-      <p-panel header="Information d'embauche" [toggleable]="false">
-        <div class="p-grid p-fluid" >
+  <div style="margin-top: 1%; display: flex;">
+    <div style="width: 40%">
+      <p-panel header="Contacts" [toggleable]="false">
+        <div class="p-grid p-fluid">
           <div style="display: flex">
             <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userHirringDate" class="p-float-label">Date d’embauche</label>
+              <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone</label>
               <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                <input type="date" class="form-control p-field" id="userHirringDate"
-                       [(ngModel)]="user.userHirringDate" >
+                <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                <input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
+                  [ngClass]="{
+            'is-invalid':( user.userPhoneNumber== null || user.userPhoneNumber== '' ) && user.userPhoneNumber.length<8,
+            'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
+          }">
               </div>
             </div>
-          
-          
             <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userRegistrationNumber" class="p-float-label">Matricule</label>
+              <label for="userEmail" class="p-float-label">Mail</label>
               <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
-                <input type="text" class="form-control p-field" id="userRegistrationNumber"
-                       [(ngModel)]="user.userRegistrationNumber" [ngClass]="{
-          'is-invalid': user.userRegistrationNumber == null || user.userRegistrationNumber == '' ,
-          'is-valid': user.userRegistrationNumber != null && user.userRegistrationNumber !== ''
+                <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+               
+                <input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail"
+                  [ngClass]="{
+            'is-invalid': user.userEmail== null || user.userEmail== '',
+            'is-valid': user.userEmail== null || user.userEmail== '' 
+          }">
+              </div>
+            </div>
+            
+          </div>
+          <div style="display: flex">
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userAddress" class="p-float-label">Adresse</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="user.userAddress">
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-panel>
+    </div>
+
+    <div style="width: 60%">
+      <div>
+        <p-panel header="Information d'embauche" [toggleable]="false">
+          <div class="p-grid p-fluid" >
+            <div style="display: flex">
+              <div class="mb-1 col-md-6 col-12 p-field">
+                <label for="userHirringDate" class="p-float-label">Date d’embauche</label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                  <input type="date" class="form-control p-field" id="userHirringDate"
+                         [(ngModel)]="user.userHirringDate" >
+                </div>
+              </div>
+            
+            
+              <div class="mb-1 col-md-6 col-12 p-field">
+                <label for="userRegistrationNumber" class="p-float-label">Matricule</label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
+                  <input type="text" class="form-control p-field" id="userRegistrationNumber"
+                         [(ngModel)]="user.userRegistrationNumber" [ngClass]="{
+            'is-invalid': user.userRegistrationNumber == null || user.userRegistrationNumber == '' ,
+            'is-valid': user.userRegistrationNumber != null && user.userRegistrationNumber !== ''
+          }">
+                </div>
+              </div>
+              
+              
+            </div>
+          </div>
+          
+        </p-panel>
+        </div>
+    
+    <div style="margin-top: 1%;">
+      <p-panel header="Identifants d'accés" [toggleable]="false">
+        <div class="p-grid p-fluid">
+          <div style="display: flex">
+            <div class="mb-1 col-md-6 col-12">
+              <label for="userLogin" class="p-float-label">Login</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                <input type="text" class="form-control p-field"  id="userLogin"
+                       [(ngModel)]="user.userLogin " [ngClass]="{
+          'is-invalid': user.userLogin  == null || user.userLastName  == '' ,
+          'is-valid': user.userLogin  != null && user.userLogin  !== ''
         }">
               </div>
             </div>
+        
+         
             
-            
+            <div  class="mb-1 col-md-4 col-12">
+              <label for="userPassword" class="p-float-label">Mot de passe</label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+                <input type="password" disabled class="form-control p-field"  id="userPassword"
+                       [(ngModel)]="user.userPassword ">
+              </div>
+              
+              
+  
+               </div>
+               <div  class="mb-1 col-md-2 col-12" style="padding-top: 18px;">
+                <label for="userPassword" class="p-float-label"></label>
+                <div class="p-inputgroup">
+                  <button  pButton pRipple label="Générer" icon="pi pi-cog" class="primaryBtn" 
+          (click)="generatePassword()" placement="top" ngbTooltip="Générer un mot de passe"></button>
+    
+                </div>
+                
+                 </div>
           </div>
         </div>
         
       </p-panel>
-      </div>
-  
-  <div style="margin-top: 1%;">
-    <p-panel header="Identifants d'accés" [toggleable]="false">
-      <div class="p-grid p-fluid">
-        <div style="display: flex">
-          <div class="mb-1 col-md-6 col-12">
-            <label for="userLogin" class="p-float-label">Login</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
-              <input type="text" class="form-control p-field"  id="userLogin"
-                     [(ngModel)]="user.userLogin " [ngClass]="{
-        'is-invalid': user.userLogin  == null || user.userLastName  == '' ,
-        'is-valid': user.userLogin  != null && user.userLogin  !== ''
-      }">
-            </div>
-          </div>
-      
-       
-          
-          <div  class="mb-1 col-md-4 col-12">
-            <label for="userPassword" class="p-float-label">Mot de passe</label>
-            <div class="p-inputgroup">
-              <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-              <input type="password" disabled class="form-control p-field"  id="userPassword"
-                     [(ngModel)]="user.userPassword " [ngClass]="{
-        'is-invalid': user.userPassword  == null || user.userPassword  == '' ,
-        'is-valid': user.userPassword  != null && user.userPassword  !== ''
-      }">
-            </div>
-            
-            
-
-             </div>
-             <div  class="mb-1 col-md-2 col-12" style="padding-top: 18px;">
-              <label for="userPassword" class="p-float-label"></label>
-              <div class="p-inputgroup">
-                <button  pButton pRipple label="Générer" icon="pi pi-cog" class="primaryBtn" 
-        (click)="generatePassword()" placement="top" ngbTooltip="Générer un mot de passe"></button>
-  
-              </div>
-              
-               </div>
-        </div>
-      </div>
-      
-    </p-panel>
-  </div>
+    </div>
+    </div>
+    
+    </div>
+    
   
 
   <br>

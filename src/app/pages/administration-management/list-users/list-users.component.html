@@ -15,7 +15,7 @@ Liste des utilisateurs
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
           <span class="p-input-icon-left" style="width: 100%">
                       <i class="pi pi-search"></i>
-                      <input pInputText type="text" style="margin-left: 5%; width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un utilisateur.." />
+                      <input pInputText type="text" style="width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un utilisateur.." />
                   </span>
           </div>
   
@@ -47,8 +47,8 @@ Liste des utilisateurs
     <ng-template pTemplate="body" let-user>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td  style="text-align: center;font-size: 13px;">
-           <img  class="exemple2" *ngIf="user.userPictureUrl!=null" [src]="  sanitizer.bypassSecurityTrustResourceUrl(user.userPictureUrl)" style="width:100%">
-             <div   *ngIf="user.userPictureUrl==''" class="paid-black" placement="top" ><p class="pad">{{user.userFirstName[0].toUpperCase()}}{{user.userLastName[0].toUpperCase()}}</p></div>
+           <img  class="exemple2" *ngIf="user.userPictureUrl!=null" [src]="  sanitizer.bypassSecurityTrustResourceUrl(user.userPictureUrl)" style="width:50px">
+             <div   *ngIf="user.userPictureUrl==''" style="width:50px" class="paid-black" placement="top" ><p class="pad">{{user.userFirstName[0].toUpperCase()}}{{user.userLastName[0].toUpperCase()}}</p></div>
          
             </td>
         <td  style="text-align: center;font-size: 13px;">
@@ -58,7 +58,7 @@ Liste des utilisateurs
           {{user.userRegistrationNumber}}
         </td>
         <td  style="text-align: center;font-size: 13px;">
-          {{user.userHirringDate}}
+          {{user.userHirringDate | date: 'dd-MM-yyyy'}}
         </td>
         <td  style="text-align: center;font-size: 13px;">
           {{user.userPhoneNumber}}
