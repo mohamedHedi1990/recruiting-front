@@ -14,11 +14,12 @@ import { DatePipe } from "@angular/common";
 })
 export class UtilsService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
-  public static REMOTE_ADDRESS = "http://localhost:8090/";
+  public static REMOTE_ADDRESS = "http://localhost:8081/";
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "api/auth/signin";
-  public static API_USER = UtilsService.REMOTE_ADDRESS + "/" + "api/user";
+  public static API_USER = UtilsService.REMOTE_ADDRESS+ "bs-administration/api/user";
 public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
-  constructor(
+public static API_FILE = UtilsService.REMOTE_ADDRESS +"bs-administration/api/file";  
+constructor(
     private toastrService: NbToastrService,
     private httpClient: HttpClient,
     private datePipe: DatePipe
