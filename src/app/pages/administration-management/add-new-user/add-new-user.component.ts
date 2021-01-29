@@ -12,28 +12,36 @@ export class AddNewUserComponent implements OnInit {
   emailtouch=false;
   @Input() user = {
     userId: null,
-    userRegistrationNumber: '',
-    userFirstName: '',
-    userLastName: '',
-    userPictureUrl: '',
+    userRegistrationNumber: null,
+    userFirstName: null,
+    userLastName: null,
+    userPictureUrl: null,
     userBirthDate:null,
-    userGender: '',
-    userBirthCountry: '',
-    userBirthCity: '',
+    userGender: null,
+    userBirthCountry: null,
+    userBirthCity: null,
     userHirringDate: null,
-    userAddress: '',
-    userEmail: '',
-    userPhoneNumber: '',
-    userLogin: '',
-    userPassword: '',
-    userCivilStatus: '',
-    isBlocked: '',
+    userAddress: null,
+    userEmail: null,
+    userPhoneNumber: null,
+    userLogin: null,
+    userPassword: null,
+    userCivilStatus: null,
+    isBlocked: null,
+    createdAt :null,
+    updatedAt:null
   };
   imagePath;
    imgURL :any;
 userPicture = null;
 messageUserPictureErrorType ='seulement les fichiers de type image sont autorisés!'
   showerrorTypeUserPicture = false;
+  adresse ={
+    nRue :null,
+    pays :null,
+    ville :null
+
+  }
   @Output() addNewUserEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
  
@@ -50,11 +58,12 @@ x:any;
   }
 
   ngOnInit(): void {
+    this.initUser();
     this.imgURL ='./../../assets/images/user.jpg';
   }
   
   saveUser() {
-    
+    this.user.userAddress=this.adresse.nRue+','+this.adresse.ville+','+this.adresse.pays+'.'
     const userObject = {
       user: this.user,
       userPicture: this.userPicture
@@ -78,10 +87,11 @@ x:any;
       this.user.userAddress == null || this.user.userAddress === '' &&
       this.user.userEmail == null || this.user.userEmail === '' &&
       this.user.userPhoneNumber == null || this.user.userPhoneNumber === '' &&
-      this.user.userLogin == null || this.user.userLogin === '' &&
-      this.user.userPassword == null || this.user.userPassword === '' &&
+     // this.user.userLogin == null || this.user.userLogin === '' &&
+       this.user.userPassword == null || this.user.userPassword === '';
+      // &&
       
-      this.user.userCivilStatus == null || this.user.userCivilStatus === '';
+      // this.user.userCivilStatus == null || this.user.userCivilStatus === '';
   }
   preview(files){
     if (files.length === 0) {
@@ -116,4 +126,27 @@ x:any;
   checkemailValid(){
     
    
+ }
+ initUser(){
+  this.user = {
+    userId: null,
+    userRegistrationNumber: null,
+    userFirstName: null,
+    userLastName: null,
+    userPictureUrl: null,
+    userBirthDate:null,
+    userGender: null,
+    userBirthCountry: null,
+    userBirthCity: null,
+    userHirringDate: null,
+    userAddress: null,
+    userEmail: null,
+    userPhoneNumber: null,
+    userLogin: null,
+    userPassword: null,
+    userCivilStatus: null,
+    isBlocked: null,
+    createdAt :null,
+    updatedAt:null
+  };
  }}

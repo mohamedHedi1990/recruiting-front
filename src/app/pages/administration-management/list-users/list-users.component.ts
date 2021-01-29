@@ -16,6 +16,7 @@ export class ListUsersComponent implements OnInit {
   displayDeleteUser = false;
   pipe = new DatePipe('en-US');
   mySimpleFormat;
+  displayBlockUser=false;
   constructor(private UtilsService: UtilsService,private sanitizer: DomSanitizer, public dialogService: DialogService) {
 
   }
@@ -97,8 +98,11 @@ export class ListUsersComponent implements OnInit {
 
   }
   editUser(user) {
+    if(!user.isBlocked){
+      
     this.user = user;
     this.showUserWindow = true;
+    }
   }
 
   delUser() {
@@ -151,25 +155,34 @@ export class ListUsersComponent implements OnInit {
       userLogin: '',
       userPassword: '',
       userCivilStatus: '',
-      isBlocked: '',
+      isBlocked: null,
     };
   }
-
+bloquerUser(user){
   
-  bloquerUser(user){
-    this.UtilsService.put(UtilsService.API_USER+'/blockuser/'+user.userId,null).subscribe(response => {
+  if(!user.isBlocked){
+    this.user=user;
+  this.displayBlockUser=true;
+  }
+}
+  
+  blockUser(){
+    this.UtilsService.put(UtilsService.API_USER+'/blockuser/'+this.user.userId,null).subscribe(response => {
       console.log(response);
       this.hideUserWindow();
+      this.displayBlockUser=false;
         this.UtilsService.showToast('success',
           'Utilisateur bloqué avec succés',
-          `L'utlisateur  ${user.userLogin} a été bloqué avec succcés`);
+          `L'utlisateur  ${this.user.userLogin} a été bloqué avec succcés`);
      
           
       this.getAllUsers();
       this.initUser();
     },  error => {this.UtilsService.showToast('danger',
     'Erreur interne',
-    `Un erreur interne a été produit lors du blocage du utilisateur ${user.userLogin}`); });
+    `Un erreur interne a été produit lors du blocage du utilisateur ${this.user.userLogin}`); });
 }
-
+checkBlockUser(user){
+  return user.isBlocked;
+}
 }

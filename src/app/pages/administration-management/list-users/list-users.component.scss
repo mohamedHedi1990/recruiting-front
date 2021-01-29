@@ -1,29 +1,30 @@
 .paid-green{
-    height: 25px;
-    width: 25px;
+    height: 18px;
+    width: 18px;
     background-color: #4dbd4d;
     border-radius: 50%;
     display: inline-block;
 }
 .paid-black{
-    height: 70px;
-    width: 70px;
     background-color: #B5B7B8;
-    border-radius: 50%;
+    //border-radius: 100%;
     display: inline-block;
+    
+    width:2px;
+    clip-path:ellipse(50% 50%);
 
 }
 .in-progress-orange{
-    height: 25px;
-    width: 25px;
-    background-color: #E65100;
+    height: 18px;
+    width: 18px;
+    background-color: #900C3F;
     border-radius: 50%;
     display: inline-block;
 }
 .not-paid-red{
-    height: 25px;
-    width: 25px;
-    background-color: #ff1a1a;
+    height: 18px;
+    width: 18px;
+    background-color: #900C3F;
     border-radius: 50%;
     display: inline-block;
 }

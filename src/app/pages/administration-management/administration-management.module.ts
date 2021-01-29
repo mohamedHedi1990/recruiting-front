@@ -4,6 +4,7 @@ import {AdministrationManagementRoutingModule} from './administration-management
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { ListUsersComponent } from './list-users/list-users.component'
 
+import {CardModule} from 'primeng/card';
 import { NbMenuModule } from "@nebular/theme";
 
 //dependences
@@ -71,6 +72,7 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
     DialogModule,
     DynamicDialogModule,
     ConfirmDialogModule,
+    CardModule
   
   ],
   providers: [

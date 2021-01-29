@@ -8,8 +8,10 @@ Ajouter un nouveau utilisateur
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-Modifier un utilisateur
-<div><span class="customer-badge status-label">{{user.userLogin}}</span></div>
+Modifier un utilisateur 
+<span style="margin-left: 43%;color:#900C3F" class="customer-badge ">Le profil crée le {{user.createdAt }} -- modifié le {{user.updatedAt }}</span>
+<div>
+  <span class="customer-badge status-label">{{user.userLogin}}</span></div>
 </h4>
 
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
@@ -41,12 +43,11 @@ Modifier un utilisateur
             </div>
           </div>
           <div class="mb-1 col-md-6 col-12">
-            <label for="userLastName" class="p-float-label">Prénom</label>
+            <label for="userLastName" class="p-float-label">Prénom <strong style="color: #960032;">*</strong></label>
             <div class="p-inputgroup">
               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
               <input type="text" class="form-control p-field"  id="userLastName"
                      [(ngModel)]="user.userLastName " [ngClass]="{
-        'is-invalid': user.userLastName  == null || user.userLastName  == '' ,
         'is-valid': user.userLastName  != null && user.userLastName  !== ''
       }">
             </div>
@@ -56,7 +57,7 @@ Modifier un utilisateur
       <div style="display: flex">
        
         <div class="mb-1 col-md-6 col-12 p-field">
-          <label for="userGender" class="p-float-label">Genre</label>
+          <label for="userGender" class="p-float-label">Genre <strong style="color: #960032;">*</strong></label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
 
@@ -67,12 +68,12 @@ Modifier un utilisateur
           >
               <option selected value="MADAME">Madame</option>
               <option value="MADEMOISELLE">Mademoiselle</option>
-              <option value="MONSIEUR">Monsieur</option>
+              <option selected value="MONSIEUR">Monsieur</option>
             </select>
           </div>
         </div>
         <div  class="mb-1 col-md-6 col-12 p-field">
-          <label for="userCivilStatus" class="p-float-label">Etat civil</label>
+          <label for="userCivilStatus" class="p-float-label">Etat civil <strong style="color: #960032;">*</strong></label>
 
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -82,7 +83,7 @@ Modifier un utilisateur
             [(ngModel)]="user.userCivilStatus"
             class="browser-default custom-select"
           >
-              <option selected value="CELIBATAIRE">Célibataire</option>
+              <option  selected  value="CELIBATAIRE">Célibataire</option>
               <option value="MARIE">Marié(e)</option>
               <option value="VEUF">Veuf(ve)</option>
             </select>
@@ -91,7 +92,7 @@ Modifier un utilisateur
       </div>
       <div style="display: flex">
         <div class="mb-1 col-md-4 col-12 p-field">
-          <label for="userBirthDate" class="p-float-label">Date de naissance</label>
+          <label for="userBirthDate" class="p-float-label">Date de naissance <strong style="color: #960032;">*</strong></label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
             <input type="date" class="form-control p-field" id="userBirthDate"
@@ -100,7 +101,7 @@ Modifier un utilisateur
         </div>
         
         <div class="mb-1 col-md-4 col-12 p-field">
-          <label for="userBirthCountry" class="p-float-label"> Pays de naissance</label>
+          <label for="userBirthCountry" class="p-float-label"> Pays de naissance <strong style="color: #960032;">*</strong></label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-flag"></i></span>
     <select [(ngModel)]="user.userBirthCountry" 
@@ -111,7 +112,7 @@ Modifier un utilisateur
 </div>
 </div>
 <div class="mb-1 col-md-4 col-12 p-field">
-  <label for="userBirthCity" class="p-float-label"> Ville de naissance</label>
+  <label for="userBirthCity" class="p-float-label"> Ville de naissance <strong style="color: #960032;">*</strong></label>
   <div class="p-inputgroup">
     <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
 <select [(ngModel)]="user.userBirthCity" 
@@ -131,37 +132,55 @@ class="browser-default custom-select" >
       <p-panel header="Contacts" [toggleable]="false">
         <div class="p-grid p-fluid">
           <div style="display: flex">
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone</label>
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
                 <input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
                   [ngClass]="{
-            'is-invalid':( user.userPhoneNumber== null || user.userPhoneNumber== '' ) && user.userPhoneNumber.length<8,
             'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
           }">
               </div>
             </div>
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userEmail" class="p-float-label">Mail</label>
+          </div>
+          <div style="display: flex">
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userEmail" class="p-float-label">Mail <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
                
                 <input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail"
                   [ngClass]="{
-            'is-invalid': user.userEmail== null || user.userEmail== '',
-            'is-valid': user.userEmail== null || user.userEmail== '' 
+            'is-valid': user.userEmail!= null && user.userEmail!= '' 
           }">
               </div>
             </div>
-            
+          
           </div>
           <div style="display: flex">
             <div class="mb-1 col-md-12 col-12 p-field">
-              <label for="userAddress" class="p-float-label">Adresse</label>
+              <label for="userAddress" class="p-float-label">N° et Rue <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="user.userAddress">
+                <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="adresse.nRue">
+              </div>
+            </div>
+          </div>
+          <div style="display: flex">
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userAddress" class="p-float-label">Pays <strong style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="adresse.pays">
+              </div>
+            </div>
+          </div>
+          <div style="display: flex">
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userAddress" class="p-float-label">Ville  <strong style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="text" class="form-control p-field" id="userAddress" [(ngModel)]="adresse.ville">
               </div>
             </div>
           </div>
@@ -170,12 +189,13 @@ class="browser-default custom-select" >
     </div>
 
     <div style="width: 60%">
+      
       <div>
-        <p-panel header="Information d'embauche" [toggleable]="false">
-          <div class="p-grid p-fluid" >
+        <p-panel  header="Information d'embauche" [toggleable]="false">
+          <div style="margin-top: 4%;" class="p-grid p-fluid" >
             <div style="display: flex">
               <div class="mb-1 col-md-6 col-12 p-field">
-                <label for="userHirringDate" class="p-float-label">Date d’embauche</label>
+                <label for="userHirringDate" class="p-float-label">Date d’embauche <strong style="color: #960032;">*</strong></label>
                 <div class="p-inputgroup">
                   <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
                   <input type="date" class="form-control p-field" id="userHirringDate"
@@ -185,35 +205,33 @@ class="browser-default custom-select" >
             
             
               <div class="mb-1 col-md-6 col-12 p-field">
-                <label for="userRegistrationNumber" class="p-float-label">Matricule</label>
+                <label for="userRegistrationNumber" class="p-float-label">Matricule <strong style="color: #960032;">*</strong></label>
                 <div class="p-inputgroup">
                   <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
                   <input type="text" class="form-control p-field" id="userRegistrationNumber"
                          [(ngModel)]="user.userRegistrationNumber" [ngClass]="{
-            'is-invalid': user.userRegistrationNumber == null || user.userRegistrationNumber == '' ,
             'is-valid': user.userRegistrationNumber != null && user.userRegistrationNumber !== ''
           }">
                 </div>
               </div>
               
-              
+              <br><br><br><br><br>
             </div>
           </div>
           
         </p-panel>
         </div>
-    
+    <br>
     <div style="margin-top: 1%;">
       <p-panel header="Identifants d'accés" [toggleable]="false">
         <div class="p-grid p-fluid">
           <div style="display: flex">
             <div class="mb-1 col-md-6 col-12">
-              <label for="userLogin" class="p-float-label">Login</label>
+              <label for="userLogin" class="p-float-label">Login <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                 <input type="text" class="form-control p-field"  id="userLogin"
                        [(ngModel)]="user.userLogin " [ngClass]="{
-          'is-invalid': user.userLogin  == null || user.userLastName  == '' ,
           'is-valid': user.userLogin  != null && user.userLogin  !== ''
         }">
               </div>
@@ -222,10 +240,10 @@ class="browser-default custom-select" >
          
             
             <div  class="mb-1 col-md-4 col-12">
-              <label for="userPassword" class="p-float-label">Mot de passe</label>
+              <label for="userPassword" class="p-float-label">Mot de passe <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-                <input type="password" disabled class="form-control p-field"  id="userPassword"
+                <input type="text" disabled class="form-control p-field"  id="userPassword"
                        [(ngModel)]="user.userPassword ">
               </div>
               
@@ -234,13 +252,16 @@ class="browser-default custom-select" >
                </div>
                <div  class="mb-1 col-md-2 col-12" style="padding-top: 18px;">
                 <label for="userPassword" class="p-float-label"></label>
-                <div class="p-inputgroup">
-                  <button  pButton pRipple label="Générer" icon="pi pi-cog" class="primaryBtn" 
+                <div  style="width: 80px;" class="p-inputgroup">
+                  <button  pButton pRipple label="Générer" style=" padding-top: 18px;
+                  padding: 5px;
+                  width: 62px;"  class="primaryBtn" 
           (click)="generatePassword()" placement="top" ngbTooltip="Générer un mot de passe"></button>
     
                 </div>
                 
                  </div>
+                 <br><br><br><br><br>
           </div>
         </div>
         
