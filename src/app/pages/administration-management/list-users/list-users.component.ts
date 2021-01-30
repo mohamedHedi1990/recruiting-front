@@ -17,6 +17,7 @@ export class ListUsersComponent implements OnInit {
   pipe = new DatePipe('en-US');
   mySimpleFormat;
   displayBlockUser=false;
+  displayActifUser=false;
   constructor(private UtilsService: UtilsService,private sanitizer: DomSanitizer, public dialogService: DialogService) {
 
   }
@@ -99,7 +100,6 @@ export class ListUsersComponent implements OnInit {
   }
   editUser(user) {
     if(!user.isBlocked){
-      
     this.user = user;
     this.showUserWindow = true;
     }
@@ -160,10 +160,9 @@ export class ListUsersComponent implements OnInit {
   }
 bloquerUser(user){
   
-  if(!user.isBlocked){
     this.user=user;
   this.displayBlockUser=true;
-  }
+ 
 }
   
   blockUser(){
@@ -184,5 +183,25 @@ bloquerUser(user){
 }
 checkBlockUser(user){
   return user.isBlocked;
+}
+activerUser(user){
+  this.user=user;
+  this.displayActifUser=true;
+}
+ActifUser(){
+  this.UtilsService.put(UtilsService.API_USER+'/actifuser/'+this.user.userId,null).subscribe(response => {
+    console.log(response);
+    this.hideUserWindow();
+    this.displayActifUser=false;
+      this.UtilsService.showToast('success',
+        'Utilisateur activé avec succés',
+        `L'utlisateur  ${this.user.userLogin} a été activé avec succcés`);
+   
+        
+    this.getAllUsers();
+    this.initUser();
+  },  error => {this.UtilsService.showToast('danger',
+  'Erreur interne',
+  `Un erreur interne a été produit lors d'activer  l'utilisateur ${this.user.userLogin}`); });
 }
 }

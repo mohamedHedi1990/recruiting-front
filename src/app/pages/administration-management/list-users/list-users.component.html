@@ -91,7 +91,9 @@ Liste des utilisateurs
         </td>
         <td style="text-align: center;">
           <div>
-            <i    placement="top" ngbTooltip="Bloquer"  class="pi pi-ban"  style="margin-right: 7px;color: #6200ee" (click)="bloquerUser(user)" [disabled]="checkBlockUser(user)" [ngClass]= "{'disabled':  checkBlockUser(user)}"></i>
+            <i  *ngIf="!user.isBlocked"  placement="top" ngbTooltip="Bloquer"  class="pi pi-lock"  style="margin-right: 7px;color: #6200ee" (click)="bloquerUser(user)"></i>
+            <i  *ngIf="user.isBlocked"   placement="top" ngbTooltip="Activer"  class="pi pi-unlock"  style="margin-right: 7px;color: #6200ee" (click)="activerUser(user)"  ></i>
+           
             <i    placement="top" ngbTooltip="Modifier"  class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editUser(user)" [disabled]="checkBlockUser(user)" [ngClass]= "{'disabled':  checkBlockUser(user)}"></i>
             <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteUser(user)"></i>
           </div>
@@ -133,6 +135,21 @@ Liste des utilisateurs
 
 			   <button pButton pRipple label="Bloquer" icon="pi pi-check" class="p-button-danger p-mr-2"
               (click)="blockUser()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+<p-dialog header="Activer un utilisateur" [(visible)]="displayActifUser" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous activer l'utilisateur' <span  class="customer-badge status-negotiation">{{user.userLogin}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayActifUser=false"></button>
+
+			   <button pButton pRipple label="Activer" icon="pi pi-check" class="p-button-success p-mr-2"
+              (click)="ActifUser()"></button>
 
     </div>
   </ng-template>

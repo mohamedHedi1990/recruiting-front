@@ -41,7 +41,7 @@ import { ConfirmationService } from "primeng/api";
 import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
-
+import {Ng2TelInputModule} from 'ng2-tel-input';
 
 @NgModule({
   declarations: [AddNewUserComponent, ListUsersComponent],
@@ -72,7 +72,8 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
     DialogModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    CardModule
+    CardModule,
+    Ng2TelInputModule
   
   ],
   providers: [

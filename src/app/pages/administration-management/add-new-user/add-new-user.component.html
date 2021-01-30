@@ -19,14 +19,19 @@ Modifier un utilisateur
       <div class="p-grid p-fluid">
         <div style="display: flex">
         <div class="mb-1 col-md-3 col-12 p-field">
-         <div>
+         
+         
+        
               <div class="exemple1">
-                <img *ngIf="imgURL" [src]="imgURL" style="width:100%">
+                <img *ngIf="imgURL!=null" [src]="imgURL" style="width:100%">
+                <img  style="width:100%" *ngIf="imgURL2!=null" [src]="  sanitizer.bypassSecurityTrustResourceUrl(imgURL2)" style="width:191px">
+                <i type="button" id="loadPhoto"  ngbTooltip="télécharger"  class="pi pi-camera"  onclick="document.getElementById('file').click();" style="margin-bottom: 3%;margin-left:117px" ></i>
+                <input id="file" #file type="file" accept='image/*' (change)="preview(file.files)" style="display: none" />
+              
               </div>
-              <input type="button" id="loadPhoto" value="Choisir le photo d'utilisateur" onclick="document.getElementById('file').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
-              <input id="file" #file type="file" accept='image/*' (change)="preview(file.files)" style="display: none" />
-            
-          </div>
+             
+             
+          
         </div>
         <div class="mb-1 col-md-9 col-12 p-field">
         <div style="display: flex">
@@ -136,11 +141,23 @@ class="browser-default custom-select" >
               <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                <input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
+                <!--<input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
                   [ngClass]="{
             'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
           }">
-              </div>
+               -->
+              <input type="text" 
+  ng2TelInput
+  [ng2TelInputOptions]="{initialCountry: 'tn'}"
+  (hasError)="hasError($event)"
+  (ng2TelOutput)="getNumber($event)"
+  (intlTelInputObject)="telInputObject($event)"
+  (countryChange)="onCountryChange($event)" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
+  (keyup)="CheckTelHasError=null" 
+  [ngClass]="{
+    'is-invalid' : CheckTelHasError==false,
+    'is-valid': CheckTelHasError==true 
+}" /></div> 
             </div>
           </div>
           <div style="display: flex">
@@ -149,9 +166,10 @@ class="browser-default custom-select" >
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
                
-                <input type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail"
+                <input type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" (keyup)="checkMail()" required class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail"
                   [ngClass]="{
-            'is-valid': user.userEmail!= null && user.userEmail!= '' 
+                    'is-invalid' : checkEmail== false ,
+            'is-valid': checkEmail== true && user.userEmail!=null
           }">
               </div>
             </div>

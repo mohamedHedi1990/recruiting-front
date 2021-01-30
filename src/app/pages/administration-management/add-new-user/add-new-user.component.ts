@@ -1,8 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import csc from 'country-state-city'
 
-// Import Interfaces`
-import { ICountry, IState, ICity } from 'country-state-city'
+import { DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'ngx-add-new-user',
   templateUrl: './add-new-user.component.html',
@@ -32,7 +30,7 @@ export class AddNewUserComponent implements OnInit {
     updatedAt:null
   };
   imagePath;
-   imgURL :any;
+   imgURL =null;
 userPicture = null;
 messageUserPictureErrorType ='seulement les fichiers de type image sont autoris√©s!'
   showerrorTypeUserPicture = false;
@@ -42,13 +40,18 @@ messageUserPictureErrorType ='seulement les fichiers de type image sont autoris√
     ville :null
 
   }
+
   @Output() addNewUserEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
  
    worldMapData = require('city-state-country');
     countriesList = this.worldMapData.getAllCountries();
-x:any;
-  constructor() { }
+checkEmail;
+
+CheckTelHasError;
+  imgURL2: string | ArrayBuffer;
+
+  constructor(private sanitizer: DomSanitizer) { }
  
   cities: Array<any>;
   changeCountry(count) {
@@ -58,9 +61,13 @@ x:any;
   }
 
   ngOnInit(): void {
-    this.initUser();
+   this.imgURL2=this.user.userPictureUrl;
+   if(this.imgURL2==null ||this.imgURL2 ==='' ){
     this.imgURL ='./../../assets/images/user.jpg';
   }
+else{
+  this.imgURL=null;
+}}
   
   saveUser() {
     this.user.userAddress=this.adresse.nRue+','+this.adresse.ville+','+this.adresse.pays+'.'
@@ -94,6 +101,7 @@ x:any;
       // this.user.userCivilStatus == null || this.user.userCivilStatus === '';
   }
   preview(files){
+    
     if (files.length === 0) {
       return;
     }
@@ -108,7 +116,11 @@ x:any;
     this.imagePath = files;
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
+      if(this.user.userPictureUrl!=null){
+        this.imgURL2=  reader.result
+       }else{
       this.imgURL = reader.result;
+      }
     };
   }
   generatePassword(){
@@ -149,4 +161,27 @@ x:any;
     createdAt :null,
     updatedAt:null
   };
- }}
+ }
+ checkMail(){
+   this.checkEmail=/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(this.user.userEmail);
+ }
+ onCountryChange($event){
+   this.user.userPhoneNumber=null;
+   
+   this.CheckTelHasError=false;
+   console.log("onCountryChange",$event)
+ }
+ telInputObject($event){
+  console.log("telInputObject",$event) 
+ }
+ hasError($event){
+   this.CheckTelHasError=$event;
+   console.log("haserror",$event)
+  
+ }
+ getNumber($event){
+   console.log("userPhone",this.user.userPhoneNumber)
+  console.log("getNumber",$event) ;
+ }
+
+}
