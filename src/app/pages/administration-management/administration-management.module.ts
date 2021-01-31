@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {AdministrationManagementRoutingModule} from './administration-management-routing.module';
 import { AddNewUserComponent } from './add-new-user/add-new-user.component';
 import { ListUsersComponent } from './list-users/list-users.component'
 
 import {CardModule} from 'primeng/card';
+import { CommonModule} from '@angular/common';
 import { NbMenuModule } from "@nebular/theme";
 
 //dependences
@@ -41,18 +40,27 @@ import { ConfirmationService } from "primeng/api";
 import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
+import { ListGroupsComponent } from './list-groups/list-groups.component';
+import { AdministrationManagementRoutingModule } from './administration-management-routing.module';
+import {DragDropModule} from 'primeng/dragdrop';
+
+import {LOCALE_ID} from '@angular/core';
+import { UtilsService } from '../../services/utils.service';
+import { AddGroupComponent } from './add-group/add-group.component';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [AddNewUserComponent, ListUsersComponent],
+  declarations: [ListGroupsComponent, AddGroupComponent],
   imports: [
     CommonModule,
-    AdministrationManagementRoutingModule,
+    AdministrationManagementRoutingModule,   
     NbMenuModule,
     TableModule,
     CheckboxModule,
     ButtonModule,
     HttpClientModule,
+    CommonModule,
     MatTableModule,
     NgbModule,
     ModalModule,
@@ -73,10 +81,11 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
     DynamicDialogModule,
     ConfirmDialogModule,
     CardModule,
-    Ng2TelInputModule
-  
+    Ng2TelInputModule,
+    DragDropModule
   ],
   providers: [
+    UtilsService,
     DialogService,
     ConfirmationService,
     AuthGuardService,
@@ -86,6 +95,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
       useClass: InterceptService,
       multi: true
     },
+    { provide: LOCALE_ID, useValue: "fr-FR" }
 
   ],
 })

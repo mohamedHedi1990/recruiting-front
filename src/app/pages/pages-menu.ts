@@ -16,9 +16,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/administration/users-list',
         icon: 'people-outline',
       },
-      {
-        title: 'Group des utilisateurs',
-       
+      { 
+        title: 'Gestion des groupes',
+        link: '/zen-people-referential/administration/list-groups',
+        icon: 'file-text-outline',
+
       },
     ],
     
@@ -26,9 +28,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Organisation',
     icon: 'keypad-outline',
-    /*children: [
-      
-    ],*/
+    // children: [
+     
+    // ],
     
   },
   {

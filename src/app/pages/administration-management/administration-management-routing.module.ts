@@ -1,6 +1,7 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ListUsersComponent } from './list-users/list-users.component';
+import { ListGroupsComponent } from './list-groups/list-groups.component';
 
 export const routes: Routes = [
   {
@@ -8,7 +9,16 @@ export const routes: Routes = [
       component: ListUsersComponent,
     },
     
+
+    {
+      path: 'list-groups',
+      component: ListGroupsComponent,
+    },
+    
   
+
+
+
   
 ];
 
