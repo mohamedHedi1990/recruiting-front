@@ -14,15 +14,21 @@ import { DatePipe } from "@angular/common";
 })
 export class UtilsService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
-  public static REMOTE_ADDRESS = "http://localhost:8090/";
+  public static REMOTE_ADDRESS = "http://localhost:8090/bs-administration/";
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "api/auth/signin";
-  public static API_USER = UtilsService.REMOTE_ADDRESS + "/" + "api/user";
-public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
+  public static API_USER = UtilsService.REMOTE_ADDRESS + "api/user";
+  public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group";
+  public static API_GROUP = UtilsService.REMOTE_ADDRESS +"api/group";
+  public static API_USER_GROUP=UtilsService.REMOTE_ADDRESS +"api/user-group";
+
+
   constructor(
     private toastrService: NbToastrService,
     private httpClient: HttpClient,
     private datePipe: DatePipe
-  ) {}
+  ) {
+
+  }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {
     const config = {
@@ -60,6 +66,7 @@ public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
     return this.httpClient.delete(url);
   }
 
+
   now(format: string): string {
 
     return this.datePipe.transform(new Date().toLocaleDateString('en-US', { timeZone: 'Africa/Tunis' }) +
@@ -70,7 +77,6 @@ public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
   getDate(date: any, format: string): string {
     return this.datePipe.transform(date, format, 'Africa/Tunis');
   }
-
   convertAmountToString(initialAmount: string) : string {
     let amount = '';
     if(initialAmount.includes('.')) {

@@ -1,10 +1,16 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ListGroupsComponent } from './list-groups/list-groups.component';
 
 export const routes: Routes = [
   {
   path: '',
   children: [
+    
+    {
+      path: 'list-groups',
+      component: ListGroupsComponent,
+    },
     
   ],
 
