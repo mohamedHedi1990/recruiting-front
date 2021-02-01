@@ -64,10 +64,10 @@ CheckTelHasError;
    this.imgURL2=this.user.userPictureUrl;
    if(this.imgURL2==null ||this.imgURL2 ==='' ){
     this.imgURL ='./../../assets/images/user.jpg';
-  }
-else{
-  this.imgURL=null;
-}}
+    }
+    else{
+      this.imgURL=null;
+    }}
   
   saveUser() {
     this.user.userAddress=this.adresse.nRue+','+this.adresse.ville+','+this.adresse.pays+'.'
