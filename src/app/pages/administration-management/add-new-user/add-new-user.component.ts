@@ -133,7 +133,7 @@ else{
       }
       return result;
    }
-   this.user.userPassword = makeid(15) ;
+   this.user.userPassword = makeid(8) ;
   }
   checkemailValid(){
     

@@ -145,7 +145,7 @@ export class ListUsersComponent implements OnInit {
       userLastName: '',
       userPictureUrl: '',
       userBirthDate: '',
-      userGender: '',
+      userGender: 'MONSIEUR',
       userBirthCountry: '',
       userBirthCity: '',
       userHirringDate: '',
@@ -154,7 +154,7 @@ export class ListUsersComponent implements OnInit {
       userPhoneNumber: '',
       userLogin: '',
       userPassword: '',
-      userCivilStatus: '',
+      userCivilStatus: 'CELIBATAIRE',
       isBlocked: null,
     };
   }

@@ -9,13 +9,13 @@ padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
 Modifier un utilisateur 
-<span style="margin-left: 43%;color:#900C3F" class="customer-badge ">Le profil crée le {{user.createdAt }} -- modifié le {{user.updatedAt }}</span>
+<span style="margin-left: 43%;color:#900C3F" class="customer-badge ">crée le {{user.createdAt }} -- modifié le {{user.updatedAt }}</span>
 <div>
   <span class="customer-badge status-label">{{user.userLogin}}</span></div>
 </h4>
 
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
-  <p-panel header="Informations génerale" [toggleable]="false">
+  <p-panel header="Informations génerales" [toggleable]="false">
       <div class="p-grid p-fluid">
         <div style="display: flex">
         <div class="mb-1 col-md-3 col-12 p-field">
@@ -71,9 +71,9 @@ Modifier un utilisateur
             [(ngModel)]="user.userGender"
             class="browser-default custom-select"
           >
-              <option selected value="MADAME">Madame</option>
+              <option value="MADAME">Madame</option>
               <option value="MADEMOISELLE">Mademoiselle</option>
-              <option selected value="MONSIEUR">Monsieur</option>
+              <option value="MONSIEUR">Monsieur</option>
             </select>
           </div>
         </div>
@@ -88,7 +88,7 @@ Modifier un utilisateur
             [(ngModel)]="user.userCivilStatus"
             class="browser-default custom-select"
           >
-              <option  selected  value="CELIBATAIRE">Célibataire</option>
+              <option value="CELIBATAIRE">Célibataire</option>
               <option value="MARIE">Marié(e)</option>
               <option value="VEUF">Veuf(ve)</option>
             </select>
@@ -146,7 +146,7 @@ class="browser-default custom-select" >
             'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
           }">
                -->
-              <input type="text" 
+              <input type="text"
   ng2TelInput
   [ng2TelInputOptions]="{initialCountry: 'tn'}"
   (hasError)="hasError($event)"
@@ -155,7 +155,6 @@ class="browser-default custom-select" >
   (countryChange)="onCountryChange($event)" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
   (keyup)="CheckTelHasError=null" 
   [ngClass]="{
-    'is-invalid' : CheckTelHasError==false,
     'is-valid': CheckTelHasError==true 
 }" /></div> 
             </div>
@@ -209,7 +208,7 @@ class="browser-default custom-select" >
     <div style="width: 60%">
       
       <div>
-        <p-panel  header="Information d'embauche" [toggleable]="false">
+        <p-panel  header="Informations d'embauche" [toggleable]="false">
           <div style="margin-top: 4%;" class="p-grid p-fluid" >
             <div style="display: flex">
               <div class="mb-1 col-md-6 col-12 p-field">
@@ -238,8 +237,8 @@ class="browser-default custom-select" >
           </div>
           
         </p-panel>
-        </div>
-    <br>
+      </div>
+    
     <div style="margin-top: 1%;">
       <p-panel header="Identifants d'accés" [toggleable]="false">
         <div class="p-grid p-fluid">
@@ -291,7 +290,7 @@ class="browser-default custom-select" >
     
   
 
-  <br>
+ 
 
   <div class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
 
