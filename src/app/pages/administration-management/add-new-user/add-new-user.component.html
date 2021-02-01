@@ -30,7 +30,10 @@ Modifier un utilisateur
 
                 padding: auto;
                 margin-left: 10%;">
-                <img  class="img2" style="border-radius: 50%;" *ngIf="imgURL2!=null" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgURL2)" >
+                <img  class="img2" style="border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    margin-left: 10%;" *ngIf="imgURL2!=null" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgURL2)" >
 
 
                 <i type="button" id="loadPhoto"  ngbTooltip="télécharger"  class="pi pi-camera"  onclick="document.getElementById('file').click();" 
