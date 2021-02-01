@@ -5,7 +5,7 @@
     color: #222b45;
     margin-left: 10px;
   ">
-  Ajouter un group
+  Ajouter un groupe d'utilisateurs
 </h4>
 <h4 *ngIf="group.groupId != null && group.groupId != ''" style="
     background: #e7e8e8;
@@ -14,7 +14,7 @@
     color: #222b45;
     margin-left: 10px;
   ">
-  Modifier groupe
+  Modifier un groupe d'utilisateurs
   <div><span class="customer-badge status-label">{{group.groupName}}</span></div>
 
 </h4>
@@ -115,11 +115,11 @@
         <p-table [value]="selectedUsersGroup">
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 30%;">Nom Complet</th>
-                    <th style="width: 21%;">Matricule</th>
-                    <th style="width: 21%;">Date Debut Affectation</th>
-                    <th style="width: 21%;">Date Fin Affectation</th>
-                    <th style="width: 7%;"></th>
+                    <th style="font-size: 13px; width: 30%;">Nom Complet</th>
+                    <th style="font-size: 13px; width: 21%;">Matricule</th>
+                    <th style="font-size: 13px; width: 21%;">Date Debut Affectation</th>
+                    <th style="font-size: 13px; width: 21%;">Date Fin Affectation</th>
+                    <th style="font-size: 13px; width: 7%;"></th>
                   </tr>
             </ng-template>
             <ng-template pTemplate="body" let-userGroup>
