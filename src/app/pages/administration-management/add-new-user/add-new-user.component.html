@@ -31,8 +31,11 @@ padding: 10px 10px 10px 10px !important;
 
                 padding: auto;
                 margin-left: 10%;">
-            <img class="img2" style="border-radius: 50%;" *ngIf="imgURL2!=null"
-              [src]="sanitizer.bypassSecurityTrustResourceUrl(imgURL2)">
+            <img class="img2" style="border-radius: 50%; width: 200px;
+            height: 200px;
+
+            padding: auto;
+            margin-left: 10%;" *ngIf="imgURL2!=null" [src]="sanitizer.bypassSecurityTrustResourceUrl(imgURL2)">
 
 
             <i type="button" id="loadPhoto" ngbTooltip="télécharger" class="pi pi-camera"
@@ -150,12 +153,8 @@ padding: 10px 10px 10px 10px !important;
                   style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
-                <!--<input type="number" class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
-                  [ngClass]="{
-            'is-valid': user.userPhoneNumber != null && user.userPhoneNumber!='' 
-          }">
-               -->
-                <input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}"
+
+                <input style="width: 268px;" type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}"
                   (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
                   (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
                   class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
@@ -184,7 +183,10 @@ padding: 10px 10px 10px 10px !important;
               <label for="userNRue" class="p-float-label">N° et Rue <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                <input type="text" class="form-control p-field" id="userNRue" [(ngModel)]="user.userNRue">
+                <input type="text" class="form-control p-field" id="userNRue" [(ngModel)]="user.userNRue" [ngClass]="{
+        
+                  'is-valid': user.userNRue != null && user.userNRue !== ''
+                }">
               </div>
             </div>
           </div>

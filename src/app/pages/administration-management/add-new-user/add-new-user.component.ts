@@ -58,6 +58,9 @@ export class AddNewUserComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.changeCountry('Tunisia');
+    this.user.userCity=this.cities[0].name;
+    this.user.userBirthCity=this.cities[0].name;
     this.imgURL2 = this.user.userPictureUrl;
     if (this.imgURL2 == null || this.imgURL2 === '') {
       this.imgURL = './../../assets/images/user.jpg';
