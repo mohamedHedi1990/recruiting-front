@@ -1,0 +1,265 @@
+
+<h4 *ngIf="company.companyId == null" style="background: #e7e8e8;
+                                            padding: 10px 10px 10px 10px !important;
+                                            font-size: 20px !important;
+                                            color: #222b45;
+                                            margin-left: 10px;">Ajouter une société</h4>
+<h4 *ngIf="company.companyId != null" style="background: #e7e8e8;
+                                            padding: 10px 10px 10px 10px !important;
+                                            font-size: 20px !important;
+                                            color: #222b45;
+                                            margin-left: 10px; ">Modifier une société 
+    <div>
+    <span class="customer-badge status-label">{{ company.companyLabel }}</span>
+    </div>
+</h4>
+<div style=" width: 90%;
+            margin: auto;
+            margin-top: 3%;
+            border-color: #e7e8e8 !important;
+            border: solid;">
+           
+    <p-panel header="Configuration génerale" [toggleable]="false">
+        <div class="logo_company">
+            <input type="button" id="loadFile" value="Choisir le logo de votre société" onclick="document.getElementById('file').click();" style="margin-bottom: 2%;" class="primaryBtn"/>
+            <input id="file" #file type="file" accept='image/*' (change)="preview(file.files)" style="display: none" />
+            <div style="padding-bottom: 5%; text-align: center;">
+                <img *ngIf="imgURL" [src]="imgURL" style="width:20%">
+            </div>
+        </div>
+        <div *ngIf="company.companyId != null" style="display: flex">
+            <div class="mb-1 col-md-6 col-12 p-field">
+                <label for="creationDate" class="p-float-label">Date de création</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                    <input type="text"
+                            class="form-control p-field"
+                            id="creationDate"
+                            [(ngModel)]="company.createdAt"
+                            disabled="true"/>
+                </div>
+            </div>
+            <div class="mb-1 col-md-6 col-12">
+                <label for="modificationDate" class="p-float-label">Date de dernière modification</label>
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                    <input type="text"
+                            class="form-control p-field"
+                            id="modificationDate"
+                            [(ngModel)]="company.updatedAt"
+                            disabled="true"/>
+                </div>
+            </div>
+        </div>
+
+        <div style="width: 48%;float: left;">
+            <p-panel header="Informations du société" [toggleable]="false" >
+                <div class="mb-1 col-md-12 col-12 p-field">
+                    <label for="companyLabel" class="p-float-label">Dénomination Societe <strong style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input  type="text"
+                                class="form-control p-field"
+                                id="companyLabel"
+                                [(ngModel)]="company.companyLabel"
+                                [ngClass]="{
+                               
+                                'is-valid':
+                                    company.companyLabel != null && company.companyLabel !== ''
+                                }"/>
+                    </div>   
+                </div>      
+                    <div class="mb-1 col-md-12 col-12">
+                        <label for="identifiant" class="p-float-label" >Identifiant unique <strong style="color: #960032;">*</strong></label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                            <input
+                                type="text"
+                                class="form-control p-field"
+                                id="identifiant"
+                                [(ngModel)]="company.companyUniqueIdentifier"
+                                [ngClass]="{
+                                    
+                                    'is-valid':
+                                    company.companyUniqueIdentifier != null &&
+                                    company.companyUniqueIdentifier !== ''
+                                    }"/>
+                        </div>
+                    </div>
+                    <div class="p-col-12 mb-1 col-md-12 p-field">
+                        <label for="manager" class="p-float-label">Responsable <strong style="color: #960032;">*</strong></label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                            <input
+                                type="text"
+                                class="form-control p-field"
+                                id="manager"
+                                [(ngModel)]="company.companyManagerName"
+                                [ngClass]="{
+                                      
+                                        'is-valid':
+                                        company.companyManagerName != null &&
+                                        company.companyManagerName !== ''
+                            }"
+                            />
+                        </div>
+                    </div> 
+                
+                    <div class="p-col-12 mb-1 col-md-12 p-field">
+                        <label for="companyDescription" class="p-float-label">Un petit mot à propos la société (facultatif)</label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+                            <textarea
+                                id="story"
+                                name="story"
+                                rows="3"
+                                class="form-control p-field"
+                                pInputText
+                                style="width: 100%"
+                                id="companyDescription"
+                                [(ngModel)]="company.companyDescription"
+                                [ngClass]="{
+                                    
+                                    'is-valid':
+                                    company.companyDescription != null && company.companyDescription != ''
+                                }"
+                                ></textarea>
+                        </div>
+                    </div>
+                
+            
+            </p-panel>
+        </div>
+
+        <div style="width: 48%;float: left;">
+            <p-panel header="Coordonnées" [toggleable]="false" >
+                
+                <div class="mb-1 col-md-12 col-12">
+                    <label for="mail" class="p-float-label">Email <strong style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+                        <input
+                        type="email"
+                        class="form-control"
+                        placeholder="-- Email  --"
+                        id="mail"
+                        [(ngModel)]="company.companyEmail"
+                        (change)="validEmail($event)"
+                        [ngClass]="{
+                       
+                        'is-valid':
+                        company.companyEmail != null && company.companyEmail != ''
+                        }" />
+                    </div>
+                </div>
+                <div class="mb-1 col-md-12 col-12 p-field row" >
+                    <div class="mb-1 col-md-6 col-6" style="padding-right: 0px;">
+                        <label for="companyCountry" class="p-float-label"> Pays<strong style="color: #960032;">*</strong></label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-flag"></i></span>
+                            <select [(ngModel)]="address.pays"  style="height: 33.5px;"
+                                class="browser-default custom-select" 
+                                (change)="changeCountry($event.target.value)">
+                                    <option *ngFor ="let count of countriesList"> {{count.name}} </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-1 col-md-6 col-6 " style="padding-right: 0px;">
+                        <label for="companyCity" class="p-float-label"> Ville <strong style="color: #960032;">*</strong></label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
+                            <select [(ngModel)]="address.ville"  style="height: 33.5px;"
+                                class="browser-default custom-select" >
+                                <option *ngFor ="let city of cities">{{city.name}} </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="mb-1 col-md-12 col-12">
+                    <label for="tel" class="p-float-label">Téléphone <strong style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
+                        <input
+                            type="number"
+                            class="form-control"
+                            placeholder="-- Téléphone  --"
+                            id="tel"
+                            [(ngModel)]="company.companyPhoneNumber"
+                            [ngClass]="{
+                            
+                            'is-valid':
+                            company.companyPhoneNumber != null &&
+                            company.companyPhoneNumber != ''
+                            }"
+                        />
+                    </div>
+                </div>
+                
+                <div class="p-col-12 mb-1 col-md-12 p-field">
+                        <label for="companyAddress" class="p-float-label">Adresse </label>
+                        <div class="p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                            <textarea
+                                id="story"
+                                name="story"
+                                rows="3"
+                                class="form-control p-field"
+                                pInputText
+                                style="width: 100%"
+                                id="companyAddress"
+                                [(ngModel)]="address.nRue"
+                                [ngClass]="{
+                                    
+                                    'is-valid':
+                                    address.nRue != null && address.nRue !== ''
+                                    }"
+                            ></textarea>
+                        </div>
+                </div>
+        </p-panel>
+        </div>
+
+    </p-panel>
+
+
+
+
+
+    <div  class="p-panel p-panel-header"
+        style="margin-top: 20px; float: right; padding: 2%"
+        >
+        <button
+            pButton
+            pRipple
+            label="Annuler"
+            icon="pi pi-times"
+            class="btn btn-secondary"
+            (click)="cancel()"
+        ></button>
+
+        <button
+            [disabled]="checkCompanyValid()"
+          
+            pButton
+            pRipple
+            label="Enregistrer"
+            icon="pi pi-check"
+            class="primaryBtn"
+            (click)="saveCompany()"
+            style="margin-left: 10px"
+        ></button>
+    </div>
+</div>
