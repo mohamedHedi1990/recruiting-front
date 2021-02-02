@@ -47,20 +47,36 @@ export class AddNewUserComponent implements OnInit {
 
   CheckTelHasError;
   imgURL2: string | ArrayBuffer;
+  phone: any;
 
   constructor(private sanitizer: DomSanitizer) { }
 
   cities: Array<any>;
+  cities_: Array<any>;
   changeCountry(count) {
     this.cities = this.worldMapData.getAllStatesFromCountry(count);
     console.log(this.cities)
 
   }
+  changeCountry_(count) {
+    this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
+    console.log(this.cities_)
+
+  }
 
   ngOnInit(): void {
-    this.changeCountry('Tunisia');
-    this.user.userCity=this.cities[0].name;
+    console.log("USER---------",this.user)
+    
+    this.changeCountry(this.user.userBirthCountry);
+    this.changeCountry_(this.user.userPays);
+    if(this.user.userId==null){
+      this.changeCountry('Tunisia');
+      
     this.user.userBirthCity=this.cities[0].name;
+
+    this.changeCountry_('Tunisia');
+    this.user.userCity=this.cities_[0].name;
+  }
     this.imgURL2 = this.user.userPictureUrl;
     if (this.imgURL2 == null || this.imgURL2 === '') {
       this.imgURL = './../../assets/images/user.jpg';
@@ -169,7 +185,7 @@ export class AddNewUserComponent implements OnInit {
   onCountryChange($event) {
     this.user.userPhoneNumber = null;
 
-    this.CheckTelHasError = false;
+    this.CheckTelHasError = true;
     console.log("onCountryChange", $event)
   }
   telInputObject($event) {
@@ -182,6 +198,7 @@ export class AddNewUserComponent implements OnInit {
   }
   getNumber($event) {
     console.log("userPhone", this.user.userPhoneNumber)
+    this.phone= $event;
     console.log("getNumber", $event);
   }
 

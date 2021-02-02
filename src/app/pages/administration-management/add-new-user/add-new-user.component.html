@@ -9,7 +9,7 @@ padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
   Modifier un utilisateur
-  <span style="margin-left: 43%;color:#900C3F" class="customer-badge ">crée le {{user.createdAt }} -- modifié le
+  <span style="margin-left: 336px;color:#900C3F" class="customer-badge ">crée le {{user.createdAt }} -- modifié le
     {{user.updatedAt }}</span>
   <div>
     <span class="customer-badge status-label">{{user.userLogin}}</span></div>
@@ -159,7 +159,8 @@ padding: 10px 10px 10px 10px !important;
                   (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
                   class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
                   (keyup)="CheckTelHasError=null" [ngClass]="{
-    'is-valid': CheckTelHasError==true 
+    'is-valid': CheckTelHasError==true && user.userPhoneNumber!=null ,
+    'is-invalid': CheckTelHasError==false && user.userPhoneNumber!= phone
 }" /></div>
             </div>
           </div>
@@ -196,7 +197,7 @@ padding: 10px 10px 10px 10px !important;
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                 <select [(ngModel)]="user.userPays" class="browser-default custom-select"
-                  (change)="changeCountry($event.target.value)">
+                  (change)="changeCountry_($event.target.value)">
                   <option *ngFor="let count of countriesList"> {{count.name}} </option>
                 </select>
               </div>
@@ -208,7 +209,7 @@ padding: 10px 10px 10px 10px !important;
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                 <select [(ngModel)]="user.userCity" class="browser-default custom-select">
-                  <option *ngFor="let city of cities">{{city.name}} </option>
+                  <option *ngFor="let city of cities_">{{city.name}} </option>
                 </select>
               </div>
             </div>
