@@ -65,7 +65,7 @@ export class ListUsersComponent implements OnInit {
   saveUserPicture(userId, userPicture) {
     const formData = new FormData();
     formData.append('file', userPicture);
-    this.UtilsService.post(UtilsService.API_FILE + '/ADD_USER_PICTURE/' + userId, formData).subscribe(response => {
+    this.UtilsService.post(UtilsService.API_USER_FILE + '/ADD_USER_PICTURE/' + userId, formData).subscribe(response => {
       this.hideUserWindow();
       if ( this.user.userId == null) {
         this.UtilsService.showToast('success',
