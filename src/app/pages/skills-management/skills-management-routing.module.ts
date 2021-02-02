@@ -16,6 +16,7 @@ export const routes: Routes = [
       component: SkillsManagementComponent,
     },
   ],
+  
 
 }
   

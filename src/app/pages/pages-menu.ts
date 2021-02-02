@@ -10,9 +10,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Administration',
     icon: 'settings-2-outline',
-    /*children: [
-      
-    ],*/
+    children: [
+      {
+        title: 'Utilisateurs',
+        link: '/zen-people-referential/administration/users-list',
+        icon: 'people-outline',
+      },
+      {
+        title: 'Group des utilisateurs',
+       
+      },
+    ],
     
   },
   {
