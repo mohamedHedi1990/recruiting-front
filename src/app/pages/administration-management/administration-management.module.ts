@@ -51,7 +51,7 @@ import {Ng2TelInputModule} from 'ng2-tel-input';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [ListGroupsComponent, AddGroupComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ListGroupsComponent, AddGroupComponent],
   imports: [
     CommonModule,
     AdministrationManagementRoutingModule,   

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {DialogService} from 'primeng/dynamicdialog';
+//import {DialogService} from 'primeng/dynamicdialog';
 import { UtilsService } from "./../../../services/utils.service";
 import { DatePipe } from '@angular/common';
 import { DomSanitizer} from '@angular/platform-browser';
@@ -18,7 +18,7 @@ export class ListUsersComponent implements OnInit {
   mySimpleFormat;
   displayBlockUser=false;
   displayActifUser=false;
-  constructor(private UtilsService: UtilsService,private sanitizer: DomSanitizer, public dialogService: DialogService) {
+  constructor(private UtilsService: UtilsService,private sanitizer: DomSanitizer) {
 
   }
 
