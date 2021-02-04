@@ -42,8 +42,7 @@ export class AddNewCompanyComponent implements OnInit {
   cities: Array<any>;
   changeCountry(count) {
     this.cities  = this.worldMapData.getAllStatesFromCountry(count);
-    console.log(this.cities)
- 
+    
   }
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -108,7 +107,6 @@ export class AddNewCompanyComponent implements OnInit {
   }
   validEmail(event){
     let email = event.target.value;
-    console.log(email)
     var emailRegex = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([\.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
     if(!emailRegex.test(email))
       this.company.companyEmail ='';

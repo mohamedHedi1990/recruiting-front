@@ -9,7 +9,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {TreeModule} from 'primeng/tree';
 
 import { NbMenuModule } from "@nebular/theme";
-
+import {ContextMenuModule} from 'primeng/contextmenu';
 //dependences
 import { TableModule } from "primeng/table";
 import { CheckboxModule } from "primeng/checkbox";
@@ -42,9 +42,10 @@ import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
 import { ConfirmationService } from 'primeng/api';
 import { AddNewCompanyComponent } from './add-new-company/add-new-company.component';
+import { AddNewBusinessUnitComponent } from './add-new-business-unit/add-new-business-unit.component';
 
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,
@@ -75,6 +76,7 @@ import { AddNewCompanyComponent } from './add-new-company/add-new-company.compon
     DynamicDialogModule,
     ConfirmDialogModule,
     TreeModule,
+    ContextMenuModule,
   ],
   providers: [
     DialogService,

@@ -2,7 +2,6 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
-import { TreeNode } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,6 +12,7 @@ export class OrganisationManagementService {
   public static REMOTE_ADDRESS = "http://localhost:8090/";
   public static bs_organisation_base_url = OrganisationManagementService.REMOTE_ADDRESS +'bs-organisation-management/';
   public static API_COMPANY= OrganisationManagementService.bs_organisation_base_url + "api/company/";
+  public static API_BUSINESS_UNIT= OrganisationManagementService.bs_organisation_base_url + "api/business-unit/";
   public static API_FILE = OrganisationManagementService.bs_organisation_base_url+ 'api/file/';
   header = new HttpHeaders();
   constructor(

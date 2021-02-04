@@ -109,8 +109,12 @@ Sociétés
     </div>
   </ng-template>
 </p-dialog>
-<ngx-add-new-company *ngIf="showCompanyWindow" [company]="company" (addNewCompanyEvent)="saveNewCompany($event)"
-                     (cancelEvent)="hideCompanyWindow(); initCompany();"></ngx-add-new-company>
+<ngx-add-new-company *ngIf="showCompanyWindow" 
+                      [company]="company" 
+                      (addNewCompanyEvent)="saveNewCompany($event)"
+                      (cancelEvent)="hideCompanyWindow(); initCompany();">
+</ngx-add-new-company>
+
 
 
 

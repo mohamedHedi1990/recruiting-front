@@ -43,7 +43,6 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
     this.initCompany();
     this.getAllCompanies();
-    console.log('companies');
   }
  
   getAllCompanies() {
@@ -51,7 +50,7 @@ export class CompanyComponent implements OnInit {
     const context = this;
     this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe( response => {
         context.companies = response;
-        console.log(this.companies);
+        
         
       },
       error => {
@@ -97,7 +96,7 @@ export class CompanyComponent implements OnInit {
   }
 
   saveCompanyLogo(companyId, logo) {
-    console.log(logo)
+    
     const formData = new FormData();
     formData.append('file', logo);
     this.organisationManagementService.post(OrganisationManagementService.API_FILE + 'ADD_COMPANY_PICTURE/'+companyId, formData).subscribe(response => {
@@ -129,7 +128,7 @@ export class CompanyComponent implements OnInit {
     this.showCompanyWindow = true;
   }
   deleteCompany(company) {
-    console.log("company--------",company);
+    
     this.company = company;
     this.displayDeleteCompany = true;
 
