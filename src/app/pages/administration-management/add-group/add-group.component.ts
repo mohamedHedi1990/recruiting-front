@@ -47,9 +47,14 @@ export class AddGroupComponent implements OnInit {
 
   getAllUsersActive()
   {
-    
+      let url=""
+      if(this.group.groupId != null){
+        url=UtilsService.API_USER+"/usersnotingroup/"+this.group.groupId;
+      }else{
+        url= UtilsService.API_USER
+      }
       const context = this;
-      this.UtilsService.get(UtilsService.API_USER+"/usersnotingroup/"+this.group.groupId).subscribe(
+      this.UtilsService.get(url).subscribe(
         (response:any) => {
           context.availableUsers = response;
           console.log("liste des users------", context.availableUsers);

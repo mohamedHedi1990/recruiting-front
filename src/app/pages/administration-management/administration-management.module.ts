@@ -43,10 +43,11 @@ import {DragDropModule} from 'primeng/dragdrop';
 import {LOCALE_ID} from '@angular/core';
 import { UtilsService } from '../../services/utils.service';
 import { AddGroupComponent } from './add-group/add-group.component';
+import { AccessRightManagementComponent } from './access-right-management/access-right-management.component';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [ListGroupsComponent, AddGroupComponent],
+  declarations: [ListGroupsComponent, AddGroupComponent, AccessRightManagementComponent],
   imports: [
     CommonModule,
     AdministrationManagementRoutingModule,   

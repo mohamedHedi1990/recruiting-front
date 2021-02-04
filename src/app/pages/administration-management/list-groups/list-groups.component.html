@@ -1,4 +1,4 @@
-<h4 *ngIf="!displayAddNewGroup"
+<h4 *ngIf="!displayAddNewGroup && !displayAccessRight"
 style="
     background: #e7e8e8;
     padding: 10px 10px 10px 10px !important;
@@ -8,7 +8,7 @@ style="
   ">
     Liste des groupes
 </h4>
-<p-table *ngIf="!displayAddNewGroup"
+<p-table *ngIf="!displayAddNewGroup && !displayAccessRight"
 #dt [value]="groupsList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
     [showCurrentPageReport]="true" [rowsPerPageOptions]="[5, 10, 15]" [loading]="loading" [paginator]="true"
     currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[
@@ -31,7 +31,7 @@ style="
             <div style="float: right;">
 
                 <div style="display: flex">
-                    <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewGroup()"
+                    <button  pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewGroup()"
                         style="margin-right: 10px;"></button>
 
                 </div>
@@ -71,10 +71,12 @@ style="
             <td>
                 <div
                 style="float : left; background-color: #960032 ; color: white; width: 20px; height: 20px; border-radius: 40%;margin-right: 7px;margin-top: -3px;"
-                ngbTooltip="{{group.nbuser}} user(s)"> {{group.nbUser}}</div>
+                ngbTooltip='{{group.nbUser}} user(s)'> {{group.nbUser}}</div>
             </td>
             <td style="text-align: center">
                <div>
+                <i placement="top" ngbTooltip="Modifier Access Right" class="pi pi-cog" style="margin-right: 7px"
+                (click)="EditAccessRight(group)"></i>
                     <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px"
                         (click)="editGroup(group)"></i>
                     <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
@@ -98,7 +100,10 @@ style="
     (cancelEvent)="hideAddNewGroup()"
     (addNewGroupEvent)="saveNewGroup($event)"
   >
-  </ngx-add-group>
+</ngx-add-group  >
+  <ngx-access-right-management [group]="group" *ngIf="displayAccessRight"
+    (cancelEvent)="hideAccessRights()">
+  </ngx-access-right-management>
 
 
 

@@ -15,6 +15,8 @@ export class ListGroupsComponent implements OnInit {
   titleHeader: any;
   displayAddNewGroup = false;
   displayDeleteGroup=false;
+  displayAccessRight = false;
+
   constructor(private UtilsService: UtilsService,private datePipe: DatePipe) { }
 
 
@@ -99,6 +101,14 @@ export class ListGroupsComponent implements OnInit {
     this.getAllGroups();
   }
 
+  EditAccessRight(group) {
+    this.group=group;
+    this.displayAccessRight=true;
+  }
+  hideAccessRights() {
+    this.displayAccessRight = false;
+    this.getAllGroups();
+  }
   saveNewGroup(group) {
     const context = this;
     this.UtilsService.post(

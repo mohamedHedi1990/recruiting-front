@@ -21,6 +21,8 @@ export class UtilsService {
   public static API_GROUP = UtilsService.REMOTE_ADDRESS +"api/group";
   public static API_USER_GROUP=UtilsService.REMOTE_ADDRESS +"api/user-group";
 
+  public static API_ACCESS_RIGHT=UtilsService.REMOTE_ADDRESS +"api/access-right";
+  public static API_GROUP_ACCESS_RIGHT=UtilsService.REMOTE_ADDRESS +"api/group-access-right";
 
   constructor(
     private toastrService: NbToastrService,

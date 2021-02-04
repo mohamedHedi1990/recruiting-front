@@ -96,7 +96,7 @@
     <div class="row">
 
 
-      <div class="col-4 md-4 drag-column" style="margin-top: 70px;">
+      <div class="col-4 md-4 drag-column scrollable-container" style="margin-top: 70px;height:300px;">
         <div *ngFor="let user of availableUsers">
           <div class="product-item" pDraggable="users" (onDragStart)="dragStart(user)" (onDragEnd)="dragEnd()">
             <div class="image-container">
@@ -111,7 +111,7 @@
           </div>
         </div>
       </div>
-      <div class="col-8 md-8 drop-column" pDroppable="users" (onDrop)="drop($event)">
+      <div class="col-8 md-8 drop-column scrollable-container" pDroppable="users" (onDrop)="drop($event)" style="height:300px;">
         <p-table [value]="selectedUsersGroup">
             <ng-template pTemplate="header">
                 <tr>
