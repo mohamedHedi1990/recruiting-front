@@ -1,0 +1,134 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4 *ngIf="!showCompanyWindow" style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Sociétés
+</h4>
+<div *ngIf="!showCompanyWindow" class="card">
+  <p-table #dt [value]="companies" 
+          dataKey="id"
+            styleClass="p-datatable-customers" 
+            [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" 
+           [rowsPerPageOptions]="[10,15]" 
+           [loading]="loading"
+           [paginator]="true" 
+           currentPageReportTemplate=""
+           [filterDelay]="0"
+            [globalFilterFields]="[
+            'companyId',
+            'companyLabel',
+            'companyUniqueIdentifier',
+            'companyAddress',
+            'companyManagerName']"
+           >
+        <ng-template pTemplate="caption">
+        <div>
+            <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
+            <span class="p-input-icon-left" style="width: 100%">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" style="width: 93%;
+                padding-left: 35px!important;" class="searchInput, p-inputtext"
+                (input)="dt.filterGlobal($event.target.value, 'contains')"
+                placeholder="Chercher une société.." />
+            </span>
+            </div>
+
+            <div style="float: right;">
+
+            <div style="display: flex">
+                <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewCompany()"
+                style="margin-right: 10px;"></button>
+                
+            </div>
+            </div>
+        </div>
+        </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px;">
+        <th style="width: 15%; text-align: center;">Logo</th>
+        <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 13%">Dénomination</th>
+        <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 12%">Identifiant unique</th>
+        <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 17%">Adresse</th>
+        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 10%">Responsable</th>
+        <th pSortableColumn="createdAt"  style="text-align: center; font-size: 13px;width: 10%">Télephone</th>
+        <th pSortableColumn="updatedAt"  style="text-align: center; font-size: 13px;width: 13%">Email</th>
+        <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-company>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+        <td>
+
+          <img *ngIf="company.companyLogoUrl != null" [src]=" sanitizer.bypassSecurityTrustResourceUrl(company.companyLogoUrl )"
+          style="width: 100px; height: 60px;">
+          <img *ngIf="company.companyLogoUrl == null" src="../../../../assets/images/default_company_logo.jpg"
+          style="width: 100px; height: 60px;">
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyLabel}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyUniqueIdentifier}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          <div>
+            {{company.companyAddress}}
+          </div>
+          <div>
+            {{company.companyCountry}} -- {{company.companyCity}}
+          </div>
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyManagerName}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyPhoneNumber}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyEmail}}
+        </td>
+        <td style="text-align: center;">
+          <div>
+             <i    placement="top" ngbTooltip="Modifier" class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editCompany(company)"></i>
+            <i    placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #6200ee" (click)="deleteCompany(company)"></i>
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important;">Aucune societé trouvée!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+<p-dialog header="Supprimer une societé" [(visible)]="displayDeleteCompany" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+  <br>
+  Voulez-vous supprimer la societé' <span  class="customer-badge status-negotiation">{{company.companyLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteCompany=false"></button>
+
+			   <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delCompany()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+<ngx-add-new-company *ngIf="showCompanyWindow" 
+                      [company]="company" 
+                      (addNewCompanyEvent)="saveNewCompany($event)"
+                      (cancelEvent)="hideCompanyWindow(); initCompany();">
+</ngx-add-new-company>
+
+
+
+
+
+

@@ -20,6 +20,8 @@ import {FormsModule} from '@angular/forms';
 import { AuthGuardService } from './services/auth/AuthGuard.service';
 import { AuthServiceService } from './services/auth/auth-service.service';
 import { InterceptService } from './services/auth/InterceptService.service';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService, SharedModule } from 'primeng/api';
 //import { AuthServiceService } from './services/auth-service.service';
 //import { AuthGuardService } from './services/AuthGuard.service';
 //import { InterceptService } from './services/auth/InterceptService.service';
@@ -44,6 +46,7 @@ import { InterceptService } from './services/auth/InterceptService.service';
         CoreModule.forRoot(),
         ThemeModule.forRoot(),
         FormsModule,
+       
     ],
     providers:[
       AuthGuardService,
