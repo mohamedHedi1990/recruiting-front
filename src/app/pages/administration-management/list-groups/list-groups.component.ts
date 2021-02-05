@@ -40,7 +40,7 @@ export class ListGroupsComponent implements OnInit {
         );
       }
     );
-  } 
+  }
 
   initGroup() {
     this.group = {
@@ -52,18 +52,18 @@ export class ListGroupsComponent implements OnInit {
   }
 
   editGroup(rowgroup) {
- 
+
    this.group=rowgroup;
     this.displayAddNewGroup = true;
     this.titleHeader = "Modification d'un group ";
-  
+
   }
-  
+
   deleteGroup(rowdata) {
     this.group = rowdata;
     console.log(this.group);
     this.displayDeleteGroup=true;
-    
+
   }
   delGroup()
   {

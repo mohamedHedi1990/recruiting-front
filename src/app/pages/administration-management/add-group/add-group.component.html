@@ -5,7 +5,7 @@
     color: #222b45;
     margin-left: 10px;
   ">
-  Ajouter un group
+  Ajouter un groupe d'utilisateurs
 </h4>
 <h4 *ngIf="group.groupId != null && group.groupId != ''" style="
     background: #e7e8e8;
@@ -14,7 +14,7 @@
     color: #222b45;
     margin-left: 10px;
   ">
-  Modifier groupe
+  Modifier un groupe d'utilisateurs
   <div><span class="customer-badge status-label">{{group.groupName}}</span></div>
 
 </h4>
@@ -100,11 +100,11 @@
         <div *ngFor="let user of availableUsers">
           <div class="product-item" pDraggable="users" (onDragStart)="dragStart(user)" (onDragEnd)="dragEnd()">
             <div class="image-container">
-              <img src='{{"http://localhost:8090/bs-administration/api/file/downloadFile/"+user.userPictureUrl}}'  [alt]="user.name" width="32" style="vertical-align: middle"
+              <img src='{{user.userPictureUrl}}'  [alt]="user.name" width="32" style="vertical-align: middle"
                 class="product-image" />
             </div>
             <div class="product-list-detail">
-              <h5 class="p-mb-2">{{user.userLastName +' '+ user.userFirstName}}</h5>
+              <h5 class="p-mb-2" style="font-size: 15px;">{{user.userLastName +' '+ user.userFirstName}}</h5>
               <i class="pi pi-tag product-category-icon"></i>
               <span class="product-category">{{user.userRegistrationNumber}}</span>
           </div>
@@ -115,20 +115,20 @@
         <p-table [value]="selectedUsersGroup">
             <ng-template pTemplate="header">
                 <tr>
-                    <th style="width: 30%;">Nom Complet</th>
-                    <th style="width: 21%;">Matricule</th>
-                    <th style="width: 21%;">Date Debut Affectation</th>
-                    <th style="width: 21%;">Date Fin Affectation</th>
-                    <th style="width: 7%;"></th>
+                    <th style="font-size: 13px; width: 30%;text-align: center;">Nom Complet</th>
+                    <th style="font-size: 13px; width: 21%;text-align: center;">Matricule</th>
+                    <th style="font-size: 13px; width: 21%;text-align: center;">Date Debut Affectation</th>
+                    <th style="font-size: 13px; width: 21%;text-align: center;">Date Fin Affectation</th>
+                    <th style="font-size: 13px; width: 7%;text-align: center;"></th>
                   </tr>
             </ng-template>
             <ng-template pTemplate="body" let-userGroup>
                 <tr>
-                        <td  class="text-left">
-                          <img src='{{"http://localhost:8090/bs-administration/api/file/downloadFile/"+userGroup.user.userPictureUrl}}'  [alt]="userGroup.name" width="32" style="vertical-align: middle;border-radius: 50%;" />
+                        <td  style="font-size: 13px;text-align: center;font-weight: bold;">
+                          <img src='{{userGroup.user.userPictureUrl}}'  [alt]="userGroup.name" width="32" style="vertical-align: middle;border-radius: 50%;" />
                 <span class="image-text">{{userGroup.user.userLastName +' '+ userGroup.user.userFirstName}}</span>
                         </td>
-                        <td class="text-left">{{userGroup.user.userRegistrationNumber}}</td>
+                        <td  style="font-size: 13px;text-align: center;">{{userGroup.user.userRegistrationNumber}}</td>
                         <td pEditableColumn style="text-align: center;" class="text-left">
                           <p-cellEditor>
                             <ng-template pTemplate="input">
@@ -136,7 +136,13 @@
                                      [(ngModel)]="userGroup.startDate" >
                             </ng-template>
                             <ng-template pTemplate="output">
-                              {{userGroup.startDate | date: 'dd-MM-yyyy'}}
+                              <div style="text-align: center;">
+                                <span style="font-size: 13px;">
+                                  {{userGroup.startDate | date: 'dd-MM-yyyy'}}
+                                </span>
+                              </div>
+
+
                             </ng-template>
                           </p-cellEditor>
                         </td>
@@ -147,7 +153,15 @@
                                      [(ngModel)]="userGroup.endDate" >
                             </ng-template>
                             <ng-template pTemplate="output">
-                              {{userGroup.endDate | date: 'dd-MM-yyyy'}}
+                              <div style="text-align: center;">
+                                <span style="font-size: 13px;">
+                                  {{userGroup.endDate | date: 'dd-MM-yyyy'}}
+                                </span>
+                              </div>
+
+
+
+
                             </ng-template>
                           </p-cellEditor>
                         </td>

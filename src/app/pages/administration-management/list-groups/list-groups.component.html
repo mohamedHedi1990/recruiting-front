@@ -6,7 +6,7 @@ style="
     color: #222b45;
     margin-left: 10px;
   ">
-    Liste des groupes
+    Liste des groupes utilisateurs
 </h4>
 <p-table *ngIf="!displayAddNewGroup && !displayAccessRight"
 #dt [value]="groupsList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
@@ -23,7 +23,7 @@ style="
             <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
                 <span class="p-input-icon-left" style="width: 100%">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" style="margin-left: 5%; width: 93%" class="searchInput, p-inputtext"
+                    <input pInputText type="text" style="width: 93%" class="searchInput, p-inputtext"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher un groupe.." />
                 </span>
             </div>
@@ -31,7 +31,7 @@ style="
             <div style="float: right;">
 
                 <div style="display: flex">
-                    <button  pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewGroup()"
+                    <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewGroup()"
                         style="margin-right: 10px;"></button>
 
                 </div>
@@ -40,7 +40,7 @@ style="
     </ng-template>
 
     <ng-template pTemplate="header">
-        <tr style="text-align: center; font-size: 15px">
+        <tr style="text-align: center; font-size: 13px">
             <th style="text-align: center; font-size: 13px; width: 15%">Libellé</th>
             <th style="text-align: center; font-size: 13px; width: 15%">Code</th>
             <th style="text-align: center; font-size: 13px; width: 30%">Détails</th>
@@ -71,12 +71,12 @@ style="
             <td>
                 <div
                 style="float : left; background-color: #960032 ; color: white; width: 20px; height: 20px; border-radius: 40%;margin-right: 7px;margin-top: -3px;"
-                ngbTooltip='{{group.nbUser}} user(s)'> {{group.nbUser}}</div>
+                ngbTooltip="{{group.nbuser}} utilisateur(s)"> {{group.nbUser}}</div>
             </td>
             <td style="text-align: center">
-               <div>
-                <i placement="top" ngbTooltip="Modifier Access Right" class="pi pi-cog" style="margin-right: 7px"
-                (click)="EditAccessRight(group)"></i>
+                  <div>
+                     <i placement="top" ngbTooltip="Modifier Access Right" class="pi pi-cog" style="margin-right: 7px"
+                      (click)="EditAccessRight(group)"></i>
                     <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px"
                         (click)="editGroup(group)"></i>
                     <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
@@ -100,7 +100,7 @@ style="
     (cancelEvent)="hideAddNewGroup()"
     (addNewGroupEvent)="saveNewGroup($event)"
   >
-</ngx-add-group  >
+  </ngx-add-group>
   <ngx-access-right-management [group]="group" *ngIf="displayAccessRight"
     (cancelEvent)="hideAccessRights()">
   </ngx-access-right-management>
@@ -109,7 +109,7 @@ style="
 
   <p-dialog header="Supprimer un group" [(visible)]="displayDeleteGroup" [modal]="true"
   [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-  
+
   <br>
   Voulez-vous toujours supprimer le groupe <span
     class="customer-badge status-negotiation">{{group.groupId}}</span> ?

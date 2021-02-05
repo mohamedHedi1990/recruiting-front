@@ -26,7 +26,7 @@ export class AddGroupComponent implements OnInit {
   availableUsers:any[];
   selectedUsersGroup:any[];
   draggedUserGroup:any;
-  
+
   @Output() addNewGroupEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   constructor(private UtilsService: UtilsService,private datePipe:DatePipe) {}
@@ -67,7 +67,7 @@ export class AddGroupComponent implements OnInit {
           );
         }
       );
-    
+
   }
   saveNewGroup() {
     this.group.userGroupList=this.selectedUsersGroup;
@@ -154,11 +154,11 @@ deleteUserGroup(userGroup){
           "Erreur interne",
           `Un erreur interne a été produit lors du suppression du user de ce group`
         );
-       
+
       }
 
     )
-    
+
   }
 }
 

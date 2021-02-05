@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, registerLocaleData } from '@angular/common';
+import { AddNewUserComponent } from './add-new-user/add-new-user.component';
+import { ListUsersComponent } from './list-users/list-users.component'
 
+import {CardModule} from 'primeng/card';
+import { CommonModule} from '@angular/common';
 import { NbMenuModule } from "@nebular/theme";
 
 //dependences
@@ -13,7 +16,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ModalModule } from "ngx-bootstrap/modal";
 import localeFr from "@angular/common/locales/fr";
 import localeFrExtra from "@angular/common/locales/extra/fr";
-
+import { DatePipe, registerLocaleData } from "@angular/common";
 import {
   NbActionsModule,
   NbButtonModule,
@@ -39,18 +42,18 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
 import { ListGroupsComponent } from './list-groups/list-groups.component';
 import { AdministrationManagementRoutingModule } from './administration-management-routing.module';
 import {DragDropModule} from 'primeng/dragdrop';
-
+import { AccessRightManagementComponent } from './access-right-management/access-right-management.component';
 import {LOCALE_ID} from '@angular/core';
 import { UtilsService } from '../../services/utils.service';
 import { AddGroupComponent } from './add-group/add-group.component';
-import { AccessRightManagementComponent } from './access-right-management/access-right-management.component';
+import {Ng2TelInputModule} from 'ng2-tel-input';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [ListGroupsComponent, AddGroupComponent, AccessRightManagementComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ListGroupsComponent, AddGroupComponent, AccessRightManagementComponent],
   imports: [
     CommonModule,
-    AdministrationManagementRoutingModule,   
+    AdministrationManagementRoutingModule,
     NbMenuModule,
     TableModule,
     CheckboxModule,
@@ -76,7 +79,9 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     DialogModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    DragDropModule,
+    CardModule,
+    Ng2TelInputModule,
+    DragDropModule
   ],
   providers: [
     UtilsService,

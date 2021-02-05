@@ -14,15 +14,16 @@ import { DatePipe } from "@angular/common";
 })
 export class UtilsService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
-  public static REMOTE_ADDRESS = "http://localhost:8090/bs-administration/";
+  public static REMOTE_ADDRESS = "http://localhost:8090/";
+  public static REMOTE_ADMINISTRATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-administration';
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "api/auth/signin";
-  public static API_USER = UtilsService.REMOTE_ADDRESS + "api/user";
-  public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group";
-  public static API_GROUP = UtilsService.REMOTE_ADDRESS +"api/group";
-  public static API_USER_GROUP=UtilsService.REMOTE_ADDRESS +"api/user-group";
-
-  public static API_ACCESS_RIGHT=UtilsService.REMOTE_ADDRESS +"api/access-right";
-  public static API_GROUP_ACCESS_RIGHT=UtilsService.REMOTE_ADDRESS +"api/group-access-right";
+  public static API_USER = UtilsService.REMOTE_ADMINISTRATION_URL+ "/api/user";
+  public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
+  public static API_USER_FILE = UtilsService.REMOTE_ADMINISTRATION_URL +"/api/file";
+  public static API_USER_GROUP=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/user-group";
+  public static API_GROUP = UtilsService.REMOTE_ADMINISTRATION_URL +"/api/group";
+  public static API_ACCESS_RIGHT=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/access-right";
+  public static API_GROUP_ACCESS_RIGHT=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/group-access-right";
 
   constructor(
     private toastrService: NbToastrService,

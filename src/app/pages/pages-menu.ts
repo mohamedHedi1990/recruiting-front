@@ -12,20 +12,26 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'settings-2-outline',
     children: [
       {
-        title: 'Gestion des groupes',
-        link: '/zen-people-referential/administration/list-groups',
+        title: 'Utilisateurs',
+        link: '/zen-people-referential/administration/users-list',
         icon: 'people-outline',
       },
+      {
+        title: 'Gestion des groupes',
+        link: '/zen-people-referential/administration/list-groups',
+        icon: 'file-text-outline',
+
+      },
     ],
-    
+
   },
   {
     title: 'Organisation',
     icon: 'keypad-outline',
     // children: [
-     
+
     // ],
-    
+
   },
   {
     title: 'Compétences',
@@ -42,7 +48,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'file-text-outline',
       },
     ],
-    
+
   },
   {
     title: 'Indicateurs de performance',
@@ -59,15 +65,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'file-text-outline',
       },
     ],
-    
+
   },
   {
     title: 'Evaluation des performances',
     icon: 'checkmark-square-outline',
     /*children: [
-     
+
     ],*/
-    
+
   },
   /*{
     title: 'IoT Dashboard',
@@ -165,7 +171,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/suivi-tresorerie/rapprochement-bancaire',
         icon: 'browser-outline',
       },
-      
+
     ],
   },
   {
@@ -177,8 +183,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/suivi-tresorerie/etat-engage',
         icon: 'browser-outline',
       },
-      
+
     ],
   },*/
-  
+
 ];

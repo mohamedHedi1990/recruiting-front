@@ -7,10 +7,10 @@ export const routes: Routes = [
   {
     path: 'auth/login',
     loadChildren:() => import('./auth/auth.module').then(m=> m.NgxAuthModule),
-   
+
   },
   {
-    // canActivate: [AuthGuardService],
+  //canActivate: [AuthGuardService],
     path: 'zen-people-referential',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
