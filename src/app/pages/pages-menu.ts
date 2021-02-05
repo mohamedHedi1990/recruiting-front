@@ -17,9 +17,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'people-outline',
       },
       {
-        title: 'Gestion des groupes',
+        title: 'Groupes d\'utilisateurs',
         link: '/zen-people-referential/administration/list-groups',
-        icon: 'file-text-outline',
+        icon: 'radio-button-on-outline',
 
       },
     ],

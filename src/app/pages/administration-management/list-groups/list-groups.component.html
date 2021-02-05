@@ -41,13 +41,11 @@ style="
 
     <ng-template pTemplate="header">
         <tr style="text-align: center; font-size: 13px">
-            <th style="text-align: center; font-size: 13px; width: 15%">Libellé</th>
-            <th style="text-align: center; font-size: 13px; width: 15%">Code</th>
-            <th style="text-align: center; font-size: 13px; width: 30%">Détails</th>
-            <th style="text-align: center; font-size: 13px; width: 20%">Date de création </th>
-            <th style="text-align: center; font-size: 13px; width: 20%">Date de modification</th>
-            <th style="text-align: center; font-size: 13px; width: 5%"></th>
-            <th style="width: 10%; font-size: 13px; text-align: center">Actions</th>
+            <th style="text-align: center; font-size: 13px; width: 20%">Libellé</th>
+            <th style="text-align: center; font-size: 13px; width: 20%">Code</th>
+            <th style="text-align: center; font-size: 13px; width: 40%">Détails</th>
+            <th style="text-align: center; font-size: 13px; width: 10%"></th>
+            <th style="width: 15%; font-size: 13px; text-align: center">Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-group>
@@ -61,12 +59,6 @@ style="
 
             <td style="text-align: center">
                 {{ group.groupDetails }}
-            </td>
-            <td style="text-align: center; font-size: 13px">
-                {{ group.createdAtS }}
-            </td>
-            <td style="text-align: center; font-size: 13px">
-                {{  group.updatedAtS}}
             </td>
             <td>
                 <div

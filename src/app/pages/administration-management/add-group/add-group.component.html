@@ -15,6 +15,8 @@
     margin-left: 10px;
   ">
   Modifier un groupe d'utilisateurs
+  <span style="float:right;color:#900C3F" class="customer-badge ">crée le {{group.createdAt }} -- modifié le
+    {{group.updatedAt }}</span>
   <div><span class="customer-badge status-label">{{group.groupName}}</span></div>
 
 </h4>
@@ -22,6 +24,7 @@
     margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel [toggleable]="false">
     <div class="p-grid p-fluid">
+<!-- 
       <div *ngIf="group.groupId!=null" style="display: flex">
         <div class="mb-1 col-md-6 col-12 p-field">
           <label for="creationDate" class="p-float-label">Date de création</label>
@@ -40,11 +43,11 @@
           </div>
         </div>
       </div>
-
+    -->
 
       <div style="display: flex">
         <div class="mb-12 col-md-6 col-12">
-          <label for="groupName" class="p-float-label" style="font-size: 13px">Name</label>
+          <label for="groupName" class="p-float-label" style="font-size: 13px">Libellé</label>
           <div class="p-inputgroup p-fluid">
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
 
@@ -70,7 +73,7 @@
     <div class="p-grid p-fluid">
       <div style="display: flex">
         <div class="mb-12 col-md-12 col-12">
-          <label for="groupDetails" class="p-float-label" style="font-size: 13px">Détails</label>
+          <label for="groupDetails" class="p-float-label" style="font-size: 13px">Un petit mot à propos le groupe (facultatif)</label>
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
             <textArea id="groupDetails" name="fielddetails" ngDefaultControl [(ngModel)]="group.groupDetails"
@@ -103,7 +106,7 @@
               <img src='{{user.userPictureUrl}}'  [alt]="user.name" width="32" style="vertical-align: middle"
                 class="product-image" />
             </div>
-            <div class="product-list-detail">
+            <div class="product-list-detail" >
               <h5 class="p-mb-2" style="font-size: 15px;">{{user.userLastName +' '+ user.userFirstName}}</h5>
               <i class="pi pi-tag product-category-icon"></i>
               <span class="product-category">{{user.userRegistrationNumber}}</span>
@@ -126,7 +129,7 @@
                 <tr>
                         <td  style="font-size: 13px;text-align: center;font-weight: bold;">
                           <img src='{{userGroup.user.userPictureUrl}}'  [alt]="userGroup.name" width="32" style="vertical-align: middle;border-radius: 50%;" />
-                <span class="image-text">{{userGroup.user.userLastName +' '+ userGroup.user.userFirstName}}</span>
+                <span class="image-text" style="margin-left: 10px">{{userGroup.user.userLastName +' '+ userGroup.user.userFirstName}}</span>
                         </td>
                         <td  style="font-size: 13px;text-align: center;">{{userGroup.user.userRegistrationNumber}}</td>
                         <td pEditableColumn style="text-align: center;" class="text-left">
