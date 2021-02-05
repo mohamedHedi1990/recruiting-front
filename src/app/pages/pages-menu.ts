@@ -26,9 +26,19 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Organisation',
     icon: 'keypad-outline',
-    /*children: [
+    children: [
+      {
+        title: 'Sociétés',
+        link: '/zen-people-referential/organisation/companies',
+        icon: 'home-outline',
+      },
+      {
+        title: 'Unités fonctionnelles',
+        link: '/zen-people-referential/organisation/business-units',
+        icon: 'shuffle-2-outline',
+      },
       
-    ],*/
+    ],
     
   },
   {
