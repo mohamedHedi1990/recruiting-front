@@ -30,12 +30,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Sociétés',
         link: '/zen-people-referential/organisation/companies',
-        icon: 'briefcase-outline',
+        icon: 'home-outline',
       },
       {
         title: 'Unités fonctionnelles',
         link: '/zen-people-referential/organisation/business-units',
-        icon: 'file-text-outline',
+        icon: 'shuffle-2-outline',
       },
       
     ],

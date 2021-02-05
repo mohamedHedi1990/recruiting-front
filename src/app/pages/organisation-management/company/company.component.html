@@ -48,10 +48,12 @@ Sociétés
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
         <th style="width: 15%; text-align: center;">Logo</th>
-        <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 15%">Dénomination<p-sortIcon field="companyLabel"></p-sortIcon></th>
-        <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 20%">Identifiant unique<p-sortIcon field="companyUniqueIdentifier"></p-sortIcon></th>
-        <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 25%">Adresse<p-sortIcon field="companyAddress"></p-sortIcon></th>
-        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 15%">Nom du responsable<p-sortIcon field="companyManagerName"></p-sortIcon></th>
+        <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 13%">Dénomination</th>
+        <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 12%">Identifiant unique</th>
+        <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 17%">Adresse</th>
+        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 10%">Responsable</th>
+        <th pSortableColumn="createdAt"  style="text-align: center; font-size: 13px;width: 10%">Télephone</th>
+        <th pSortableColumn="updatedAt"  style="text-align: center; font-size: 13px;width: 13%">Email</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-company>
@@ -70,12 +72,22 @@ Sociétés
           {{company.companyUniqueIdentifier}}
         </td>
         <td style="text-align: center;font-size: 13px;">
-          {{company.companyAddress}}
+          <div>
+            {{company.companyAddress}}
+          </div>
+          <div>
+            {{company.companyCountry}} -- {{company.companyCity}}
+          </div>
         </td>
         <td style="text-align: center;font-size: 13px;">
           {{company.companyManagerName}}
         </td>
-
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyPhoneNumber}}
+        </td>
+        <td style="text-align: center;font-size: 13px;">
+          {{company.companyEmail}}
+        </td>
         <td style="text-align: center;">
           <div>
              <i    placement="top" ngbTooltip="Modifier" class="pi pi-pencil"  style="margin-right: 7px;color: #6200ee" (click)="editCompany(company)"></i>
