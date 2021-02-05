@@ -18,13 +18,20 @@ export class UtilsService {
   public static REMOTE_ADMINISTRATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-administration';
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "api/auth/signin";
   public static API_USER = UtilsService.REMOTE_ADMINISTRATION_URL+ "/api/user";
-public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
-public static API_USER_FILE = UtilsService.REMOTE_ADMINISTRATION_URL +"/api/file";  
-constructor(
+  public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"
+  public static API_USER_FILE = UtilsService.REMOTE_ADMINISTRATION_URL +"/api/file";
+  public static API_USER_GROUP=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/user-group";
+  public static API_GROUP = UtilsService.REMOTE_ADMINISTRATION_URL +"/api/group";
+  public static API_ACCESS_RIGHT=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/access-right";
+  public static API_GROUP_ACCESS_RIGHT=UtilsService.REMOTE_ADMINISTRATION_URL +"/api/group-access-right";
+
+  constructor(
     private toastrService: NbToastrService,
     private httpClient: HttpClient,
     private datePipe: DatePipe
-  ) {}
+  ) {
+
+  }
 
   public showToast(type: NbComponentStatus, title: string, body: string) {
     const config = {
@@ -62,6 +69,7 @@ constructor(
     return this.httpClient.delete(url);
   }
 
+
   now(format: string): string {
 
     return this.datePipe.transform(new Date().toLocaleDateString('en-US', { timeZone: 'Africa/Tunis' }) +
@@ -72,7 +80,6 @@ constructor(
   getDate(date: any, format: string): string {
     return this.datePipe.transform(date, format, 'Africa/Tunis');
   }
-
   convertAmountToString(initialAmount: string) : string {
     let amount = '';
     if(initialAmount.includes('.')) {

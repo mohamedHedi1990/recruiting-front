@@ -40,7 +40,6 @@ import { DialogModule } from "primeng/dialog";
 import { DialogService, DynamicDialogModule } from "primeng/dynamicdialog";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
-import { UtilsService } from "../services/utils.service";
 import { SkillsManagementService } from "../services/skills-management.service";
 import { PerformanceManagementService } from "../services/performance-management.service";
 
@@ -80,7 +79,6 @@ import { PerformanceManagementService } from "../services/performance-management
   ],
   declarations: [PagesComponent],
   providers: [
-    UtilsService,
     SkillsManagementService,
     PerformanceManagementService,
     DialogService,
