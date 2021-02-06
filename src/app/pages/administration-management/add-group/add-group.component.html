@@ -57,6 +57,7 @@
               style="font-size: 13px" (keyup)="checkCode()" />
           </div>
         </div>
+        <!-- 
         <div class="mb-12 col-md-6 col-12">
           <label for="groupCode" class="p-float-label" style="font-size: 13px">Code</label>
           <div class="p-inputgroup">
@@ -67,6 +68,7 @@
               style="font-size: 13px" />
           </div>
         </div>
+        -->
       </div>
     </div>
 
@@ -111,9 +113,12 @@
                  margin-top: -7%;"  class="pad">{{user.userFirstName[0].toUpperCase()}}{{user.userLastName[0].toUpperCase()}}</p></div>
             </div>
             <div class="product-list-detail" >
-              <h5 class="p-mb-2" style="font-size: 15px;">{{user.userLastName +' '+ user.userFirstName}}</h5>
-              <i class="pi pi-tag product-category-icon"></i>
-              <span class="product-category">{{user.userRegistrationNumber}}</span>
+              <h5 class="p-mb-2" style="    font-size: 13px;
+              margin-left: 10px;">{{user.userLastName +' '+ user.userFirstName}}</h5>
+              <i style="
+              margin-left: 10px;"class="pi pi-tag product-category-icon"></i>
+              <span style="    font-size: 13px;
+              ">{{user.userRegistrationNumber}}</span>
             </div>
           </div>
         </div>

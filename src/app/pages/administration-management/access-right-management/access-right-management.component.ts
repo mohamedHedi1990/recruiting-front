@@ -103,7 +103,7 @@ export class AccessRightManagementComponent implements OnInit {
           this.utilsService.showToast(
             "success",
             "Droits d'accès modifiés avec succés",
-            `Les droits d'accès de groupe ont été modifiés avec succés`
+            `Les droits d'accès du groupe ont été modifiés avec succés`
           );
        this.getAccessRights();
      },
