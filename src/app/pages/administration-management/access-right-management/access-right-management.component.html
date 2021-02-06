@@ -5,19 +5,19 @@
     color: #222b45;
     margin-left: 1px;
   ">
-    Gérer Les Droits d'Acces
+    Gérer les droits d'accès
 </h4>
 <p-table [value]="accessRights" sortField="accessRightId" >
     <ng-template pTemplate="header">
-        <tr>
-            <th>Libellé </th>
-            <th>Code</th>
-            <th>Droits</th>
+        <tr style="font-size: 13px;">
+            <th style="width: 70%">Libellé </th>
+            <!--<th>Code</th>-->
+            <th style="width: 30%">Droits d'accès</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-accessRigthParent let-rowIndex="rowIndex">
         <tr>
-            <td class="text-left">
+            <td class="text-left;" style="font-size: 13px;text-align: left !important;">
                 <span class="font-weight-bold ml-2">{{accessRigthParent.accessRightParent.accessRightLabel}}</span>
             </td>
             <td></td>
@@ -26,27 +26,28 @@
 
 
         <tr *ngFor="let accessRightListChild of accessRigthParent.accessRightListChild">
-            <td class="text-left">
+            <td class="text-left" style="font-size: 13px; text-align: left !important;">
                 <span class="ml-6" style="margin-left: 20px;">{{accessRightListChild.accessRightLabel}}</span>
             </td>
+            <!-- 
             <td class="text-left">
                 <span class="ml-6" style="margin-left: 20px;">{{accessRightListChild.accessRightCode}}</span>
             </td>
-
+-->
             <td class="text-left">
                 <span *ngFor="let groupAccessRightDtos of accessRightListChild.groupAccessRightDtos">
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='READ' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)"></button>
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='READ' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='READ' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)"placement="top" ngbTooltip="Lire"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='READ' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-eye" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Lire"></button>
 
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='WRITE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)"></button>
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='WRITE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='WRITE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Modifier"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='WRITE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Modifier"></button>
 
 
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='DELETE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)"></button>
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='DELETE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='DELETE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Supprimer"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='DELETE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Supprimer"></button>
 
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='ARCHIVE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-inbox" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)"></button>
-                    <button *ngIf="groupAccessRightDtos.accessRightType=='ARCHIVE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-inbox" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='ARCHIVE' && groupAccessRightDtos.hasAccessRight == true" pButton pRipple type="button" icon="pi pi-inbox" class="p-button-rounded p-button-danger p-button-outlined" (click)="deleteGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Archiver"></button>
+                    <button *ngIf="groupAccessRightDtos.accessRightType=='ARCHIVE' && groupAccessRightDtos.hasAccessRight == false" pButton pRipple type="button" icon="pi pi-inbox" class="p-button-rounded p-button-danger p-button-outlined strikethrough" (click)="addGroupAccessRight(groupAccessRightDtos)" placement="top" ngbTooltip="Archiver"></button>
 
                     &nbsp; &nbsp;
                 </span>
@@ -60,6 +61,6 @@
 <div class="p-panel p-panel-header" style="margin-top: 20px; float: right; padding: 2%">
     <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
   
-    <button pButton pRipple label="valider"
+    <button pButton pRipple label="Enregistrer"
       icon="pi pi-check" class="primaryBtn" (click)="valider()" style="margin-left: 10px"></button>
   </div>

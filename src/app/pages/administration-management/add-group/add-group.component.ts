@@ -7,6 +7,7 @@ import {
   Output,
   SimpleChanges,
 } from "@angular/core";
+import { DomSanitizer } from '@angular/platform-browser';
 import { UtilsService } from "./../../../services/utils.service";
 
 @Component({
@@ -29,7 +30,7 @@ export class AddGroupComponent implements OnInit {
 
   @Output() addNewGroupEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
-  constructor(private UtilsService: UtilsService,private datePipe:DatePipe) {}
+  constructor(private UtilsService: UtilsService,private datePipe:DatePipe,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     this.initDraggedUserGroup();
