@@ -97,7 +97,15 @@
 <div style="width: 100%;
     margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel [toggleable]="false" header="Affecter des utilisateurs">
+     <div class="row">
+       <span *ngIf="availableUsers!=null && availableUsers.length==0 && selectedUsersGroup!=null && selectedUsersGroup.length!=0" style="font-size: 13px;
+       margin-left: 20px;
+     ">Tous les utilisateurs crés ont été affectés à ce groupe! </span>
+       <span style="font-size: 13px;
+       margin-left: 20px;
+      " *ngIf="availableUsers!=null && availableUsers.length==0 && selectedUsersGroup!=null && selectedUsersGroup.length==0">Aucun utilisateur trouvé!</span>
 
+      </div>
     <div class="row">
 
 
@@ -174,7 +182,7 @@
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input style="font-size: 13px;" pInputText type="date" class="form-control p-field"
-                      [(ngModel)]="userGroup.endDate">
+                      [(ngModel)]="userGroup.endDate" [min]="userGroup.startDate">
                   </ng-template>
                   <ng-template pTemplate="output">
                     <div style="text-align: center;">

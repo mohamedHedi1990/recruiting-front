@@ -6,7 +6,12 @@
     margin-left: 1px;
   ">
     Gérer les droits d'accès
+    <span style="float:right;color:#900C3F" class="customer-badge ">crée le {{group.createdAt }} -- modifié le
+        {{group.updatedAt }}</span>
+      <div><span class="customer-badge status-label">{{group.groupName}}</span></div>
 </h4>
+<div class="col-8 md-8 drop-column scrollable-container"
+style="height:500px; margin-top:3%;">
 <p-table [value]="accessRights" sortField="accessRightId" >
     <ng-template pTemplate="header">
         <tr style="font-size: 13px;">
@@ -56,7 +61,7 @@
 
     </ng-template>
 </p-table>
-
+</div>
 
 <div class="p-panel p-panel-header" style="margin-top: 20px; float: right; padding: 2%">
     <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
