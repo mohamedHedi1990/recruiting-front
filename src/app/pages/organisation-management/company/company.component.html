@@ -47,11 +47,10 @@ Sociétés
         </ng-template>
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
-        <th style="width: 15%; text-align: center;">Logo</th>
+        <th style="width: 15%; text-align: center;font-size: 13px">Logo</th>
         <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 13%">Dénomination</th>
         <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 12%">Identifiant unique</th>
         <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 17%">Adresse</th>
-        <th pSortableColumn="companyManagerName"  style="text-align: center; font-size: 13px;width: 10%">Responsable</th>
         <th pSortableColumn="createdAt"  style="text-align: center; font-size: 13px;width: 10%">Télephone</th>
         <th pSortableColumn="updatedAt"  style="text-align: center; font-size: 13px;width: 13%">Email</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
@@ -79,9 +78,7 @@ Sociétés
             {{company.companyCountry}} -- {{company.companyCity}}
           </div>
         </td>
-        <td style="text-align: center;font-size: 13px;">
-          {{company.companyManagerName}}
-        </td>
+       
         <td style="text-align: center;font-size: 13px;">
           {{company.companyPhoneNumber}}
         </td>

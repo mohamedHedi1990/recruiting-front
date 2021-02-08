@@ -22,55 +22,14 @@ businessUnit =null;
 company = null;
 action="add";
 businessUnitName=""
+mode ;
 constructor(private organisationManagementService: OrganisationManagementService ,
   private router: Router) { }
 
 ngOnInit() {
   this.getAllCompanies();
-
-  this.items = [
-    {label: 'Ajouter', icon: 'pi pi-plus', command: (event) => {
-      this.addUnitWindow = true ;
-      
-      if(this.selectedFile.data.companyId){
-        this.company=this.selectedFile.data;
-      }else{
-        this.businessUnit = this.selectedFile.data;
-      }
-      this.action="add";
-      
-    }
-  },
-  {label: 'Editer', icon: 'pi pi-pencil', command: (event) => {
-    this.addUnitWindow = true ;
-    
-    if(this.selectedFile.data.companyId){
-      this.company=this.selectedFile.data;
-    }else{
-      this.businessUnit = this.selectedFile.data;
-    }
-    this.action="edit";
-    
-  }
-},
-    {label: 'Supprimer', icon: 'pi pi-times', command: (event) =>  {
-
-      if(this.selectedFile.data.companyId){
-        this.company=this.selectedFile.data;
-        this.businessUnitName = this.company.companyLabel;
-      }else{
-        this.businessUnit = this.selectedFile.data;
-        this.businessUnitName = this.businessUnit.businessUnitLabel;
-
-      }
-      this.action="delete";
-     
-    this.displayDeleteBusinessUnit = true;
-    }
-  }
-   //, {label: 'Afficher', icon: 'pi pi-search', command: (event) =>  console.log('okk_______')}
-
-];
+this.mode ="horizontal";
+ 
 
 }
 
@@ -82,6 +41,8 @@ getAllCompanies() {
       context.companies.forEach(company =>{
 
           let globalTree : TreeNode = new Tree(company, company.companyLabel , []);
+          globalTree.expandedIcon= "pi pi-home";
+          globalTree.collapsedIcon = "pi pi-home";
           company.businessUnitList.forEach(companyBU => {
           globalTree.children.push(new Tree(companyBU, companyBU.businessUnitLabel, []));
           this.getUnits(companyBU , globalTree.children[globalTree.children.length-1].children);
@@ -93,6 +54,11 @@ getAllCompanies() {
       });
       
       
+      this.tab_companies.forEach( node => {
+        
+        this.expandRecursive(node[0], true);
+    } );
+    
     },
     error => {
       console.log(error)
@@ -119,6 +85,8 @@ getUnits( businessUnit , children : any[]){
 }
 
 saveNewBusinessUnit(businessUnit){
+  delete businessUnit.createdAt;
+  delete businessUnit.updatedAt;
   let url ='';
   if(this.company){
      url = OrganisationManagementService.API_COMPANY+this.company.companyId+'/add-business-unit';
@@ -133,14 +101,14 @@ saveNewBusinessUnit(businessUnit){
       this.getAllCompanies();
       this.addUnitWindow = false;
 
-      if ( this.businessUnit.businessUnitId == null  ) {
+      if ( businessUnit.businessUnitId == null  ) {
         this.organisationManagementService.showToast('success',
           'Unité fonctionnelle ajoutée avec succés',
-          `L'unité fonctionnelle  ${this.businessUnit.businessUnitLabel} a été ajoutée avec succcés`);
+          `L'unité fonctionnelle  ${businessUnit.businessUnitLabel} a été ajoutée avec succcés`);
       } else {
         this.organisationManagementService.showToast('success',
           'Unité fonctionnelle modfiée avec succés',
-          `L'unité fonctionnelle  ${this.businessUnit.businessUnitLabel} a été modifiée avec succcés`);
+          `L'unité fonctionnelle  ${businessUnit.businessUnitLabel} a été modifiée avec succcés`);
       }
          
 
@@ -156,17 +124,20 @@ saveNewBusinessUnit(businessUnit){
   
 editBusinessUnit(businessUnit){
   console.log('---------------------------//-----------------------',businessUnit);
+  delete businessUnit.createdAt;
+  delete businessUnit.updatedAt;
   const context = this;
+
   this.organisationManagementService.put(OrganisationManagementService.API_BUSINESS_UNIT+businessUnit.businessUnitId, businessUnit).subscribe( response => {
       console.log(response);
       
       this.getAllCompanies();
       this.addUnitWindow = false;
 
-      if ( this.businessUnit.businessUnitId == null  ) {
+      if ( businessUnit.businessUnitId == null  ) {
         this.organisationManagementService.showToast('success',
           'Unité fonctionnelle modifiée avec succés',
-          `L'unité fonctionnelle  ${this.businessUnit.businessUnitLabel} a été modifiée avec succcés`);
+          `L'unité fonctionnelle  ${businessUnit.businessUnitLabel} a été modifiée avec succcés`);
       } 
           
 
@@ -176,6 +147,8 @@ editBusinessUnit(businessUnit){
         context.organisationManagementService.showToast('danger',
           'Erreur interne',
           `Un erreur interne a été produit lors du chargement des societés`);
+          this.addUnitWindow = false;
+
       });
 }
 delBusinessUnit(){
@@ -208,7 +181,93 @@ delBusinessUnit(){
 
   
 }
+private expandRecursive(node:TreeNode, isExpand:boolean){
+  node.expanded = isExpand;
+  if (node.children.length == 0){
+    node.expanded = !isExpand;
+  }
+ 
+  if (node.children){
+      node.children.forEach( childNode => {
+          this.expandRecursive(childNode, isExpand);
+      } );
+  }
+}
 
+
+public nodeMenu(event, node) {
+  console.log( node.data);
+  this.items = [];
+  if (node.data.businessUnitId) {
+
+    this.items = [
+      {label: 'Ajouter', icon: 'pi pi-plus', command: (event) => {
+        this.addUnitWindow = true ;
+        
+        if(this.selectedFile.data.companyId){
+          this.company=this.selectedFile.data;
+        }else{
+          this.businessUnit = this.selectedFile.data;
+        }
+        this.action="add";
+        
+      }
+    },
+    {label: 'Editer', icon: 'pi pi-pencil', command: (event) => {
+      this.addUnitWindow = true ;
+      
+      if(this.selectedFile.data.companyId){
+        this.company=this.selectedFile.data;
+      }else{
+        this.businessUnit = this.selectedFile.data;
+      }
+      this.action="edit";
+      
+    }
+  },
+      {label: 'Supprimer', icon: 'pi pi-times', command: (event) =>  {
+  
+        if(this.selectedFile.data.companyId){
+          this.company=this.selectedFile.data;
+          this.businessUnitName = this.company.companyLabel;
+        }else{
+          this.businessUnit = this.selectedFile.data;
+          this.businessUnitName = this.businessUnit.businessUnitLabel;
+  
+        }
+        this.action="delete";
+       
+      this.displayDeleteBusinessUnit = true;
+      }
+    }
+     //, {label: 'Afficher', icon: 'pi pi-search', command: (event) =>  console.log('okk_______')}
+  
+  ];
+ }else{
+  this.items = [
+    {label: 'Ajouter', icon: 'pi pi-plus', command: (event) => {
+      this.addUnitWindow = true ;
+      
+      if(this.selectedFile.data.companyId){
+        this.company=this.selectedFile.data;
+      }else{
+        this.businessUnit = this.selectedFile.data;
+      }
+      this.action="add";
+      
+    }
+  
+    
+  }
+   //, {label: 'Afficher', icon: 'pi pi-search', command: (event) =>  console.log('okk_______')}
+
+];
+ }
+   
+  
+  // this.rightMenu.show();
+  return false;
+}
 
 hideBusinessUnitWindow(){
   this.addUnitWindow = false;
@@ -230,6 +289,43 @@ initBusinessUnit(){
     businessUnitCity : '',
     businessUnitCountry : ''
   };
+}
+
+toggleMode(mode){
+    
+  var mode_card = document.getElementById('mode_card');
+  var mode_list = document.getElementById('mode_list');
+  let url ;
+  if(mode == 'card'){
+    
+    this.mode="horizontal";
+
+   
+    mode_card.style.backgroundColor = "#c1bbbb";
+    mode_list.style.backgroundColor = "#d0d0d0";
+    
+  }
+  if(mode == 'list'){
+    this.mode="";
+    mode_list.style.backgroundColor = "#c1bbbb";
+    mode_card.style.backgroundColor = "#d0d0d0";
+  }
+}
+
+onDragStart($event, node):void{
+  console.log('onDragStart' ,node );
+}
+onDragEnd($event, node):void{
+  console.log('onDragEnd' ,node );
+}
+onDrop($event, node):void{
+  console.log('onDrop' ,node );
+}
+onDragEnter($event, node):void{
+  console.log('onDragEnter',node );
+}
+onDragLeave($event, node):void{
+  console.log('onDragLeave' ,node );
 }
 
 }

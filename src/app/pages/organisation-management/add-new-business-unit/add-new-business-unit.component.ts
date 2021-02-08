@@ -84,7 +84,9 @@ saveBusinessUnit() {
   
 }
 
-checkBusinessUnitValid(){}
+checkBusinessUnitValid(): boolean{
+  return this.businessUnit.businessUnitLabel == null || this.businessUnit.businessUnitLabel === '';
+}
 cancel(){}
 delUnit(){}
 validEmail(event){

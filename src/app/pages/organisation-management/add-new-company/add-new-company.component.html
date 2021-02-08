@@ -183,8 +183,9 @@
                             <span class="p-inputgroup-addon"><i class="pi pi-flag"></i></span>
                             <select [(ngModel)]="address.pays"  style="height: 33.5px;"
                                 class="browser-default custom-select" 
-                                (change)="changeCountry($event.target.value)">
-                                    <option *ngFor ="let count of countriesList"> {{count.name}} </option>
+                                (change)="changeCountry($event.target.value)"
+                                >
+                                    <option *ngFor ="let count of countriesList" > {{count.name}} </option>
                             </select>
                         </div>
                     </div>
@@ -192,9 +193,12 @@
                         <label for="companyCity" class="p-float-label"> Ville <strong style="color: #960032;">*</strong></label>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
-                            <select [(ngModel)]="address.ville"  style="height: 33.5px;"
-                                class="browser-default custom-select" >
-                                <option *ngFor ="let city of cities">{{city.name}} </option>
+                            <select 
+                                [(ngModel)]="address.ville"  
+                                style="height: 33.5px;"
+                                class="browser-default custom-select"
+                                >
+                                <option *ngFor ="let city of cities" >{{city.name}} </option>
                             </select>
                         </div>
                     </div>
@@ -226,11 +230,11 @@
                                 pInputText
                                 style="width: 100%"
                                 id="companyAddress"
-                                [(ngModel)]="address.nRue"
+                                [(ngModel)]="company.companyAddress"
                                 [ngClass]="{
                                     
                                     'is-valid':
-                                    address.nRue != null && address.nRue !== ''
+                                    company.companyAddress != null && company.companyAddress !== ''
                                     }"
                             ></textarea>
                         </div>

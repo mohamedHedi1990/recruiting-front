@@ -1,9 +1,9 @@
-<p-dialog header="{{headerTitle}}" [(visible)]="displayAddUnit" [modal]="true" [style]="{width: '65vw'}" [baseZIndex]="10000"
+<p-dialog header="{{headerTitle}}" [(visible)]="displayAddUnit" [modal]="true" [style]="{width: '27vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false">
   
-        <div  style="display: flex">
+        <div style="margin-top: 5%;">
              <!--businessLabel-->
-            <div class="mb-1 col-md-6 col-12 p-field" *ngIf="businessUnit">
+            <div class="mb-1 col-md-12 col-12 p-field" *ngIf="businessUnit">
                 <label for="businessLabel" class="p-float-label">Dénomination unité <strong style="color: #960032;">*</strong></label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -19,8 +19,8 @@
                 </div> 
             </div> 
              <!--businessUnitManagerName-->
-            <div class="mb-1 col-md-6 col-12 p-field">
-                <label for="manager" class="p-float-label">Responsable <strong style="color: #960032;">*</strong></label>
+            <div class="mb-1 col-md-12 col-12 p-field">
+                <label for="manager" class="p-float-label">Responsable</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
                     <input
@@ -28,22 +28,17 @@
                         class="form-control p-field"
                         id="manager"
                         [(ngModel)]="businessUnit.businessUnitManagerName"
-                        [ngClass]="{
-                            
-                                'is-valid':
-                                businessUnit.businessUnitManagerName != null &&
-                                businessUnit.businessUnitManagerName !== ''
-                    }"
+                        
                     />
                 </div>
             </div>
          
         </div>
-        <div  style="display: flex">
+        <div >
             <!--businessLabel-->
-           <div class="mb-1 col-md-6 col-12 p-field">
+           <div class="mb-1 col-md-12 col-12 p-field">
                 <!--email-->
-                <label for="email" class="p-float-label">Email <strong style="color: #960032;">*</strong></label>
+                <label for="email" class="p-float-label">Email</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
                     <input
@@ -53,17 +48,13 @@
                     id="email"
                     [(ngModel)]="businessUnit.businessUnitEmail"
                     (change)="validEmail($event)"
-                    [ngClass]="{
-                    
-                    'is-valid':
-                    businessUnit.businessUnitEmail != null && businessUnit.businessUnitEmail != ''
-                    }" />
+                     />
                 </div>
            </div>
            <!--tel-->
-           <div class="mb-1 col-md-6 col-12 p-field">
+           <div class="mb-1 col-md-12 col-12 p-field">
                
-                <label for="tel" class="p-float-label">Téléphone <strong style="color: #960032;">*</strong></label>
+                <label for="tel" class="p-float-label">Téléphone</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
                     <input
@@ -72,20 +63,15 @@
                         placeholder="-- Téléphone  --"
                         id="tel"
                         [(ngModel)]="businessUnit.businessUnitPhoneNumber"
-                        [ngClass]="{
                         
-                        'is-valid':
-                        businessUnit.businessUnitPhoneNumber != null &&
-                        businessUnit.businessUnitPhoneNumber != ''
-                        }"
                     />
                 </div>
             </div>
         </div>
-        <div  style="display: flex">
+        <div>
             <!--businessUnitDescription-->
             <div class="mb-1 col-md-12 col-12 p-field">
-                <label for="businessUnitDescription" class="p-float-label">Un petit mot à propos la société (facultatif)</label>
+                <label for="businessUnitDescription" class="p-float-label">Un petit mot à propos l'unité fonctionelle</label>
                 <div class="p-inputgroup">
                     <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
                     <textarea
@@ -97,11 +83,7 @@
                         style="width: 100%"
                         id="businessUnitDescription"
                         [(ngModel)]="businessUnit.businessUnitDescription"
-                        [ngClass]="{
-                            
-                            'is-valid':
-                            businessUnit.businessUnitDescription != null && businessUnit.businessUnitDescription != ''
-                        }"
+                        
                         ></textarea>
                 </div>
             </div>

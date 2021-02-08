@@ -2,26 +2,70 @@
 <h4  style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
+    color: #222b45;margin-left: 10px;
+    margin-bottom: 3%;">
 Unités fonctionnelles
+
+<div style="overflow: hidden;
+float: right;">
+ 
+      <div style="float: left;float: left;
+        background: #d0d0d0;
+        width: 30px;
+        height: 30px;
+        border-radius: 5px; cursor: pointer;
+        margin-right: 7px;
+        " id="mode_card" (click)="toggleMode('card')"
+
+       >
+          <i style="margin-left: 7px; margin-top: 7px;" class="pi pi-th-large"></i> 
+      </div>
+ 
+    <div style="float: left;
+      background: #d0d0d0;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;cursor: pointer;" id="mode_list" 
+      (click)="toggleMode('list')"
+    > 
+        <i style="margin-left: 7px; margin-top: 7px;" class="pi pi-bars"></i>
+    </div>
+
+
+</div>
 </h4>
-<div class="card" style="margin-top: 3%;">
+
 
 
     <div *ngFor ="let company of tab_companies">
         
         <p-tree  
                 [value]="company" 
-                layout="horizontal" 
+                [layout]="mode" 
                 selectionMode="single" 
                 [(selection)]="selectedFile"
-                [contextMenu]="cm" >
+                [contextMenu]="cm" 
+                [filter]="true" 
+                
+               >
+
+                <ng-template let-node pTemplate="default">
+                  <span (contextmenu)="nodeMenu($event, node)" 
+
+                  >{{node.label}}</span>
+                  </ng-template>
         </p-tree>
-        <p-contextMenu #cm [model]="items"></p-contextMenu>
+        <p-contextMenu  #cm [model]="items"></p-contextMenu>
         
 
+
+       
+
+
+
+
     </div>
-</div>
+
 
 <ngx-add-new-business-unit *ngIf="addUnitWindow" 
                     [action]="action"

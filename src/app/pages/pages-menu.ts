@@ -37,7 +37,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Unités fonctionnelles',
         link: '/zen-people-referential/organisation/business-units',
-        icon: 'shuffle-2-outline',
+        icon: 'shuffle-outline',
       },
       
     ],

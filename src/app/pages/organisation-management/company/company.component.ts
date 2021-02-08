@@ -63,6 +63,8 @@ export class CompanyComponent implements OnInit {
   }
 
   saveNewCompany(companyObject) {
+    delete this.company.createdAt;
+    delete this.company.updatedAt;
     console.log('----------company ---------------: ', companyObject);
     const context = this;
     this.company=companyObject.company;

@@ -31,39 +31,40 @@ export class AddNewCompanyComponent implements OnInit {
   messageLogoErrorType ='seulement les fichiers de type image sont autorisés!'
   showerrorTypeLogo = false;
  
+ 
+  worldMapData = require('city-state-country');;
+  countriesList = this.worldMapData.getAllCountries();
+  cities: Array<any>;
   address ={
     nRue :null,
     pays :null,
     ville :null
 
   }
-  worldMapData = require('city-state-country');;
-  countriesList = this.worldMapData.getAllCountries();
-  cities: Array<any>;
   changeCountry(count) {
     this.cities  = this.worldMapData.getAllStatesFromCountry(count);
-    
+   
   }
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     if(this.company.companyLogoUrl != null) {
       this.imgURL = this.company.companyLogoUrl;
 
     }
-    if(this.company.companyAddress){
-     let array = this.company.companyAddress.split(",");
-     this.address.pays = array[2]
-     this.address.ville = array[1];
-     this.address.nRue = array[0];
+    if(this.company.companyCountry){
       
-
-    }
-
+      this.address.pays = this.company.companyCountry;
+      this.address.ville =this.company.companyCity;
+      this.cities  = this.worldMapData.getAllStatesFromCountry(this.company.companyCountry);
+       
+ 
+     }
+    
   }
 
   saveCompany() {
-    this.company.companyAddress=this.address.nRue+','+this.address.ville+','+this.address.pays+'.'
+
     const companyObject = {
       company: this.company,
       logo: this.logo
@@ -111,5 +112,8 @@ export class AddNewCompanyComponent implements OnInit {
     if(!emailRegex.test(email))
       this.company.companyEmail ='';
     
+  }
+  compareFn(a, b) {
+    return a && b && a.name == b.name;
   }
 }
