@@ -68,11 +68,7 @@
                                 class="form-control p-field"
                                 id="companyLabel"
                                 [(ngModel)]="company.companyLabel"
-                                [ngClass]="{
-                               
-                                'is-valid':
-                                    company.companyLabel != null && company.companyLabel !== ''
-                                }"/>
+                                />
                     </div>   
                 </div>      
                     <div class="mb-1 col-md-12 col-12">
@@ -84,12 +80,7 @@
                                 class="form-control p-field"
                                 id="identifiant"
                                 [(ngModel)]="company.companyUniqueIdentifier"
-                                [ngClass]="{
-                                    
-                                    'is-valid':
-                                    company.companyUniqueIdentifier != null &&
-                                    company.companyUniqueIdentifier !== ''
-                                    }"/>
+                               />
                         </div>
                     </div>
                     <div class="p-col-12 mb-1 col-md-12 p-field">
@@ -101,18 +92,13 @@
                                 class="form-control p-field"
                                 id="manager"
                                 [(ngModel)]="company.companyManagerName"
-                                [ngClass]="{
-                                      
-                                        'is-valid':
-                                        company.companyManagerName != null &&
-                                        company.companyManagerName !== ''
-                            }"
+                                
                             />
                         </div>
                     </div> 
                 
                     <div class="p-col-12 mb-1 col-md-12 p-field">
-                        <label for="companyDescription" class="p-float-label">Un petit mot à propos la société (facultatif)</label>
+                        <label for="companyDescription" class="p-float-label">Un petit mot à propos la société</label>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
                             <textarea
@@ -124,11 +110,7 @@
                                 style="width: 100%"
                                 id="companyDescription"
                                 [(ngModel)]="company.companyDescription"
-                                [ngClass]="{
-                                    
-                                    'is-valid':
-                                    company.companyDescription != null && company.companyDescription != ''
-                                }"
+                                
                                 ></textarea>
                         </div>
                     </div>
@@ -219,7 +201,7 @@
                 
                 
                 <div class="p-col-12 mb-1 col-md-12 p-field">
-                        <label for="companyAddress" class="p-float-label">Adresse </label>
+                        <label for="companyAddress" class="p-float-label">Adresse <strong style="color: #960032;">*</strong></label>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                             <textarea

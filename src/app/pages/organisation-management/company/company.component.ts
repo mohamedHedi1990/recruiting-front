@@ -148,8 +148,8 @@ export class CompanyComponent implements OnInit {
        
       }else if (response.MESSAGE === 'NOT_EMPTY') {
         this.organisationManagementService.showToast(
-          "danger","Societé non vide",
-          `Des unités reliées à la societé  ${this.company.companyLabel} ont été trouvés. Merci de les supprimer ou de l'associer à des autres societés avant de supprimer cette societé.`
+          "danger","Des unités fonctionelles rattachées à cette société",
+          `Des unités fonctionelles rattachées à la societé  ${this.company.companyLabel} ont été trouvés. Merci de les supprimer avant de supprimer cette societé.`
         );
       }
       context.getAllCompanies();
