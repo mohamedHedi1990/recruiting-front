@@ -54,7 +54,7 @@ changeCountry(count) {
   
 }
 constructor() { }
-headerTitle="Ajouter une unités fonctionnelles"
+headerTitle="Ajouter une unité fonctionnelle"
 ngOnInit(): void {
 
   
@@ -66,7 +66,7 @@ ngOnInit(): void {
   }
   if(this.action=="edit"){
     if(this.businessUnit){
-      this.headerTitle ="Modifer une l'unité fonctionnelle "+this.businessUnit.businessUnitLabel;
+      this.headerTitle ="Modifer l'unité fonctionnelle "+this.businessUnit.businessUnitLabel;
     }
   }
   
