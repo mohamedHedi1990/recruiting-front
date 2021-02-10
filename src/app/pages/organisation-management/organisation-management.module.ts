@@ -43,9 +43,10 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
 import { ConfirmationService } from 'primeng/api';
 import { AddNewCompanyComponent } from './add-new-company/add-new-company.component';
 import { AddNewBusinessUnitComponent } from './add-new-business-unit/add-new-business-unit.component';
+import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-evaluation.component';
 
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,

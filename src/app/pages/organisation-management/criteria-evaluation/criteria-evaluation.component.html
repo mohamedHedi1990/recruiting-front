@@ -1,0 +1,130 @@
+<h4 
+style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;
+    margin-left: 10px;
+  ">
+    Liste des critères d'évaluations
+</h4>
+<div
+  class="card"
+  style="
+    margin: auto;
+    margin-top: 3%;
+    border-color: #e7e8e8 !important;
+    border: solid;
+  "
+>
+<p-table 
+#dt [value]="criteriaList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[
+  'criteriaId',
+  'criteriaLabel',
+  'criteriaStatus'
+]">
+    <ng-template pTemplate="caption">
+      <div
+      class="p-d-flex p-ai-center p-jc-between"
+      style="width: 55%; display: inline-block"
+    >
+      <span class="p-input-icon-left" style="width: 100%">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          style="width: 93%"
+          class="searchInput, p-inputtext"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Chercher un critère d'évaluation.."
+        />
+      </span>
+    </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr style="text-align: center; font-size: 13px">
+            <th style="text-align: center; font-size: 13px; width: 70%">Libellé</th>
+        
+            <th style="text-align: center; font-size: 13px; width: 20%">Status</th>
+            <th style="width: 15%; font-size: 13px; text-align: center">Actions</th>
+        </tr>
+        <tr>
+            <th style="font-size: 13px;">
+              <input style="font-size: 13px;" 
+               pInputText type="text" placeholder="Libellé du critère" class="form-control p-field"
+                  [(ngModel)]="criteria.evaluationCriteriaLabel">
+            </th>
+            <th></th>
+            
+            <th style="text-align: center">
+              <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                class="p-button-rounded p-mr-2" style="background-color: #960032;
+                 border-color: #960032;" [disabled]="checkCriteriaValid()"
+                [ngClass]="{ disabled: checkCriteriaValid() }" (click)="saveNewCriteria()"></button>
+            </th>
+          </tr>
+        
+    </ng-template>
+    <ng-template pTemplate="body" let-criteria>
+       
+        <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+            <td pEditableColumn style="text-align: left !important; font-size: 13px">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+              <input style="font-size: 13px;" pInputText type="text" placeholder="Critère d'évaluation"
+                     class="form-control p-field" [(ngModel)]="criteria.evaluationCriteriaLabel" (change)="editCriteria(criteria)">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{criteria.evaluationCriteriaLabel}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
+            <td style="text-align: center">
+                {{ criteria.evaluationCriteriaStatus }}
+                <span *ngIf="true" class="customer-badge status-progress">Non Affecte</span>
+
+            </td>
+           
+            <td style="text-align: center">
+                  <div>
+                    <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                        (click)="deleteCriteria(criteria)"></i>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr style="font-size: 13px">
+            <td colspan="8" style="text-align: left !important">
+                Aucun critère trouvé!
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
+
+
+
+
+
+
+  <p-dialog header="Supprimer un critère d'évaluation" [(visible)]="displayDeleteCriteria" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  <br>
+  Voulez-vous toujours supprimer le critère d'évaluation <span
+    class="customer-badge status-negotiation">{{criteria.evaluationCriteriaLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+        (click)="displayDeleteCriteria=false"></button>
+
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+        (click)="delCriteria()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>

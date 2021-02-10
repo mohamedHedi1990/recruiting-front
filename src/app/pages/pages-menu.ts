@@ -39,7 +39,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/business-units',
         icon: 'shuffle-outline',
       },
-      
+      {
+        title: "Critères d'évaluation",
+        link: '/zen-people-referential/organisation/evaluation-criteria',
+        icon: 'shuffle-2-outline',
+      },
+
     ],
   },
   {
