@@ -54,14 +54,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Gestion des compétences',
         link: '/zen-people-referential/skills/skills-management',
-        icon: 'file-text-outline',
+        icon: 'award-outline',
       },
     ],
 
   },
   {
     title: 'Indicateurs de performance',
-    icon: 'trending-up-outline',
+    icon: 'bar-chart-outline',
     children: [
       {
         title: 'Domaines des indicateurs',
@@ -71,7 +71,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Gestion des indicateurs',
         link: '/zen-people-referential/performance/indicator-management',
-        icon: 'file-text-outline',
+        icon: 'bar-chart-outline',
       },
     ],
 

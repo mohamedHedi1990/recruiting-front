@@ -37,16 +37,21 @@ import { DialogService, DynamicDialogModule } from "primeng/dynamicdialog";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
 import { AddNewskillsGroupComponent } from './add-new-skills-group/add-new-skills-group.component';
+
+import { AddNewSkillComponent } from './add-new-skill/add-new-skill.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
-  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent],
+  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent],
   imports: [
     CommonModule,
     SkillsManagementRoutingModule,
-   
+    FileUploadModule,
     NbMenuModule,
     TableModule,
     CheckboxModule,
@@ -72,8 +77,9 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
     DialogModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-  
+    DragDropModule
   ],
+ 
   providers: [
     DialogService,
     ConfirmationService,

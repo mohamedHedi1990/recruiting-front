@@ -2,11 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import {
   EventEmitter,
   Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
+  Output
 } from "@angular/core";
-import { UtilsService } from "./../../../services/utils.service";
+
+import { exit } from "process";
 @Component({
   selector: "ngx-add-new-skills-group",
   templateUrl: "./add-new-skills-group.component.html",
@@ -16,15 +15,52 @@ export class AddNewskillsGroupComponent implements OnInit {
   @Input() skillsGroup = {
     skillsGroupId: null,
     skillsGroupLabel: null,
-    skillsGroupCode: null,
     skillsGroupDetails: null,
+    skillsGroupCreatedAt: null,
+    skillsGroupUpdatedAt: null,
+    skillList: [],
   };
+  checkInValidSkills = false ;
+
+  line = {
+    skillLabel: null,
+    skillCode: null,
+
+  };
+  skillsList = [];
+  @Input() titleHeaderskill:any;
   @Output() addNewSkillsGroupEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
-  constructor() {}
+  @Output() deleteSkillEvent = new EventEmitter();
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
 
+  }
+  initiateLine() {
+    this.line = {
+      skillLabel: null,
+      skillCode: null,
+    };
+    this.line.skillLabel = null;
+  }
+  addLine() {
+    
+    this.skillsGroup.skillList.push(this.line);
+    this.initiateLine();
+  }
+  deleteLine(line) {
+    for (let i = 0; i < this.skillsGroup.skillList.length; i++) {
+      const element = this.skillsGroup.skillList[i];
+      if (element != null && element === line) {
+         
+        this.skillsGroup.skillList.splice(i, 1);
+        if(element.skillId!=null){
+        this.deleteSkillEvent.emit(element);}
+        break;
+      }
+    }
+  }
   saveNewSkillsGroup() {
     this.addNewSkillsGroupEvent.emit(this.skillsGroup);
   }
@@ -33,20 +69,30 @@ export class AddNewskillsGroupComponent implements OnInit {
     this.cancelEvent.emit();
   }
 
-  checkCode() {
-    console.log("formulation de code apartir de label");
 
-    this.skillsGroup.skillsGroupCode = this.skillsGroup.skillsGroupLabel
-      .toUpperCase()
-      .replaceAll(" ", "_");
-  }
 
   checkskillsGroupValid(): boolean {
     return (
-      this.skillsGroup.skillsGroupLabel === "" ||
-      this.skillsGroup.skillsGroupCode === "" ||
-      this.skillsGroup.skillsGroupLabel == null ||
-      this.skillsGroup.skillsGroupCode == null
+      this.skillsGroup.skillsGroupLabel === "" || this.skillsGroup.skillsGroupLabel == null
     );
   }
+  checkLineValid(): boolean {
+    return (
+      this.line.skillLabel === "" || this.line.skillLabel == null ||
+      this.line.skillCode === "" || this.line.skillCode == null
+    );
+  }
+  
+validIndicator()  {
+  this.checkInValidSkills = false ;
+  this.skillsGroup.skillList.forEach(element => {
+    if(element.skillLabel == null || element.skillLabel == "" ||
+    element.skillCode == null || element.skillCode == "" ){
+        this.checkInValidSkills = true ;
+        exit(1) ;
+    }else{
+
+    }
+  });
+}
 }

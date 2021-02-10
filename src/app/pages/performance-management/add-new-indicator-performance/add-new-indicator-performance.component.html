@@ -1,0 +1,164 @@
+<div class="p-grid p-fluid" style="margin-top: 2%;">
+    <div style="display: flex">
+      <div class="mb-1 col-md-6 col-12 p-field">
+        <label for="indicatorName" class="p-float-label">Libellé <strong style="color: #960032;">*</strong></label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-folder"></i></span>
+          <input type="text" class="form-control p-field" id="indicatorName"
+                 [(ngModel)]="performanceIndicator.indicatorName" >
+        </div>
+      </div>
+
+      <div  class="mb-1 col-md-6 col-12">
+        <label for="domaine" class="p-float-label" style="font-size: 13px">Domaine <strong style="color: #960032;">*</strong></label>
+        <div class="p-inputgroup p-fluid">
+          <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+          
+          <select class="form-control p-field" id="domaine" name="side" 
+          
+          [(ngModel)]="performanceIndicator.indicatorArea"
+             style="font-size: 13px"
+            [compareWith]="compareArea">
+            <option *ngFor="let a of areas;" [ngValue]="a">{{a.indicatorAreaLabel}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+   
+    <div style="display: flex;">
+      <div class="mb-1 col-md-6 col-12">
+          <label for="indicatorSens" class="p-float-label">Sens <strong style="color: #960032;">*</strong></label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-sort-alt"></i></span>
+            <select class="form-control p-field" name="currency" [(ngModel)]="performanceIndicator.indicatorSens" id="indicatorSens" (change)="changeSens()">
+              <option [ngValue]="'DECROISSANT'">DECROISSANT</option>  
+              <option [ngValue]="'CROISSANT'">CROISSANT</option>
+              
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-1 col-md-6 col-12">
+          <label for="indicatorType" class="p-float-label">Type <strong style="color: #960032;">*</strong></label>
+          
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-clone"></i></span>
+            <select class="form-control p-field" name="currency" [(ngModel)]="performanceIndicator.indicatorType" id="indicatorType">
+                    
+                <option [ngValue]="'QUALITATIF'">QUALITATIF</option> 
+                    <option [ngValue]="'QUANTITATIF'">QUANTITATIF</option>
+                  </select>
+          </div>
+        </div>
+    </div>
+  
+    <div style="display: flex">
+      
+      <div class="mb-1 col-md-12 col-12" *ngIf="performanceIndicator.indicatorType == 'QUANTITATIF'">
+        <label for="indicatorFormula" class="p-float-label ">Formule</label>
+        <div class="p-inputgroup p-fluid">
+          <span class="p-inputgroup-addon"><i class="pi pi-mobile"></i></span>
+          <input type="text" class="form-control p-fluid"  id="indicatorFormula"
+                 [(ngModel)]="performanceIndicator.indicatorFormula " >
+        </div>
+      </div>
+      
+      
+
+      
+    </div>
+
+  </div>
+<div *ngIf="performanceIndicator.indicatorType == 'QUALITATIF'" style="width: 97%;margin: auto;margin-top: 15px;" >
+  <p-panel header="Ajouter ou modifier l'échelle des valeurs" >
+   
+          
+    <p-table #dt  dataKey="id" 
+                  [value]="ListScale"
+                  styleClass="p-datatable-customers" 
+                  [rowHover]="true"
+                  [rows]="5" 
+                  [showCurrentPageReport]="true" 
+                  [rowsPerPageOptions]="[10,15]"
+                  [paginator]="true" 
+                  currentPageReportTemplate=""
+                  >
+                <ng-template pTemplate="header">
+                  <tr style="text-align: center; font-size: 13px;">
+                    <th style="text-align: center; font-size: 13px; width: 45%;" >Libellé</th>
+                    <th style="text-align: center; font-size: 13px; width: 45%;">Valeur (%)</th>
+                    
+                    <th style="width:10%" ></th>
+                  </tr>
+
+                  <tr>
+                    <th style="font-size: 13px;">
+                       <input style="font-size: 13px;" pInputText type="text" placeholder="Libellé" class="form-control p-field"
+                       [(ngModel)]="line.indicatorScaleLabel" >
+                    </th>
+                    <th  style="font-size: 13px;">
+                     
+                      <input style="font-size: 13px;" pInputText type="number" placeholder="Valeur (%)" class="form-control p-field"
+                       [(ngModel)]="line.indicatorScaleValue">
+                    </th>
+                    
+                   
+                    <th>
+                      <button pButton   placement="top" ngbTooltip="Ajouter" 
+                              pRipple icon="pi pi-plus" class="p-button-rounded p-mr-2"  
+                              style="margin-right: 7px; background-color: #960032; border-color: #960032;" 
+                              [disabled]="checkScaleValid()"
+                              (click)="addLine()"></button>
+                    </th>
+                  </tr>
+
+                </ng-template>
+                <ng-template pTemplate="body" let-line>
+                  <tr class="p-selectable-row" style="text-align: center; font-size: 13px; font-weight: bold;">
+                    <td pEditableColumn style="text-align: center;">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input style="font-size: 13px;" pInputText type="text" [(ngModel)]="line.indicatorScaleLabel" (change)="validScale()"
+                           class="form-control p-field" >
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{line.indicatorScaleLabel}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="text-align: center;">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                          <input style="font-size: 13px;" pInputText type="number" [(ngModel)]="line.indicatorScaleValue" (change)="validScale()"
+                           class="form-control p-field" >
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{line.indicatorScaleValue}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    
+                    <td style="text-align: center;">
+                      <div style="display: flex;"> 
+                        <i  placement="top" ngbTooltip="Supprimer"  class="pi pi-trash"  style="color: #960032" (click)="deleteLine(line)"></i>
+                      </div>
+        
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr style="font-size: 13px;">
+                    <td colspan="8" style="text-align: left !important;">Aucune ligne trouvée !</td>
+                  </tr>
+                </ng-template>
+  </p-table>
+</p-panel>
+</div>
+  <div  class="p-panel p-panel-header" style="margin-top: 20px;float: right; padding: 2%;">
+
+    <button  pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
+
+      <button [disabled]="checkIndicatorValid() || checkInValidScales"
+      [ngClass]= "{'disabled':  checkIndicatorValid() || checkInValidScales}" pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn"
+      (click)="saveIndicator()" style="margin-left: 10px;"></button>
+  </div>

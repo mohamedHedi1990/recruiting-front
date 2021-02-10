@@ -1,0 +1,236 @@
+<h4 *ngIf="area.indicatorAreaId == null">Ajouter un domaine des indicateurs</h4>
+<h4 *ngIf="area.indicatorAreaId != null">
+  Modifier un domaine des indicateurs
+  <span style="color:#900C3F; float: right" class="customer-badge ">crée le {{ area.createdAt }} -- modifié le
+    {{area.updatedAt }}</span>
+  <div>
+    <span class="customer-badge status-label">{{area.indicatorAreaLabel}}</span>
+  </div>
+</h4>
+<div class="card-add">
+  <p-panel class="no-header">
+    <div class="p-grid p-fluid">
+      <div style="display: flex">
+        <div class="mb-1 col-md-6 col-12">
+          <label for="areaLabel" class="p-float-label">Libellé <strong style="color: #960032;">*</strong></label>
+          <div class="p-inputgroup">
+            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+            <input
+              type="text"
+              class="form-control p-field"
+              id="areaLabel"
+              [(ngModel)]="area.indicatorAreaLabel"
+              [placeholder]="'Libéllé du domaine'"
+              (keyup)="onKeyUp($event)"
+              
+            />
+          </div>
+        </div>
+      </div>
+      <div class="mb-1 col-md-12 col-12">
+        <label for="areaDetails" class="p-float-label">Détails <strong style="color: #960032;">*</strong></label>
+        <div class="p-inputgroup">
+          <span class="p-inputgroup-addon"><i class="pi pi-pencil"></i></span>
+          <textarea
+            class="form-control"
+            rows="3"
+            style="
+              resize: none;
+              width: 100%;
+              text-align: justify;
+              padding: 20px;
+            "
+            [(ngModel)]="area.indicatorAreaDetails"
+            [placeholder]="
+              'Saisir içi plus de détatils sur le domaine des indicateurs..'
+            "
+          >
+          </textarea>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+  <br />
+
+  <p-panel
+    header="{{headerTitle}}"
+    
+  >
+    <p-table
+      #dt
+      dataKey="id"
+      [value]="area.performanceIndicators"
+      styleClass="p-datatable-customers"
+      [rowHover]="true"
+      [rows]="5"
+      [showCurrentPageReport]="true"
+      [rowsPerPageOptions]="[10, 15]"
+      [paginator]="true"
+      currentPageReportTemplate=""
+    >
+      <ng-template pTemplate="header">
+        <tr style="text-align: center; font-size: 13px">
+          <th style="text-align: center; font-size: 13px; width: 30%">Libellé</th>
+          <th style="text-align: center; font-size: 13px; width: 30%">Sens</th>
+          <th style="text-align: center; font-size: 13px; width: 30%">Type</th>
+          <th style="width: 10%"></th>
+        </tr>
+
+        <tr>
+          <th style="font-size: 13px">
+            <input
+              style="font-size: 13px"
+              pInputText
+              type="text"
+              placeholder="Libellé de l'indicateur"
+              class="form-control p-field"
+              [(ngModel)]="line.indicatorName"
+              
+            />
+          </th>
+          <th style="font-size: 13px">
+            <select
+              class="form-control p-field"
+              style="font-size: 13px"
+              name="currency"
+              [(ngModel)]="line.indicatorSens"
+            >
+              <option [ngValue]="'DECROISSANT'">DECROISSANT</option>
+              <option [ngValue]="'CROISSANT'">CROISSANT</option>
+            </select>
+          </th>
+          <th style="font-size: 13px">
+            <select
+              class="form-control p-field"
+              [(ngModel)]="line.indicatorType"
+            >
+              <option [ngValue]="'QUALITATIF'">QUALITATIF</option>
+              <option [ngValue]="'QUANTITATIF'">QUANTITATIF</option>
+            </select>
+          </th>
+
+          <th>
+            <button
+              pButton
+              placement="top"
+              ngbTooltip="Ajouter"
+              pRipple
+              icon="pi pi-plus"
+              class="p-button-rounded p-mr-2"
+              style="
+                margin-right: 7px;
+                background-color: #960032;
+                border-color: #960032;
+              "
+              [disabled]="checkIndicatorValid()"
+              (click)="addLine()"
+            ></button>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-line>
+        <tr
+          class="p-selectable-row"
+          style="text-align: center; font-size: 13px"
+        >
+          <td pEditableColumn style="text-align: center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input
+                  style="font-size: 13px"
+                  pInputText
+                  type="text"
+                  [(ngModel)]="line.indicatorName"
+                  class="form-control p-field"
+                />
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ line.indicatorName }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+         
+          <td pEditableColumn style="text-align: center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <select
+                  class="form-control p-field"
+                  style="font-size: 13px"
+                  name="currency"
+                  [(ngModel)]="line.indicatorSens"
+                >
+                  <option [ngValue]="'DECROISSANT'">DECROISSANT</option>
+                  <option [ngValue]="'CROISSANT'">CROISSANT</option>
+                </select>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ line.indicatorSens }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+          <td pEditableColumn style="text-align: center">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <select
+                  class="form-control p-field"
+                  [(ngModel)]="line.indicatorType"
+                >
+                  <option [ngValue]="'QUALITATIF'">QUALITATIF</option>
+                  <option [ngValue]="'QUANTITATIF'">QUANTITATIF</option>
+                </select>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ line.indicatorType }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+
+          <td style="text-align: center">
+            <div style="display: flex">
+              <i
+                placement="top"
+                ngbTooltip="Supprimer"
+                class="pi pi-trash"
+                style="color: #960032"
+                (click)="deleteLine(line)"
+              ></i>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr style="font-size: 13px">
+          <td colspan="8" style="text-align: left !important">
+            Aucun indicateur trouvé!
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-panel>
+  <div
+    class="p-panel p-panel-header"
+    style="margin-top: 20px; float: right; padding: 2%"
+  >
+    <button
+      pButton
+      pRipple
+      label="Annuler"
+      icon="pi pi-times"
+      class="btn btn-secondary"
+      (click)="cancel()"
+    ></button>
+
+    <button
+      [disabled]="checkAreaValid() || checkInValidIndicators"
+      [ngClass]="{ disabled: checkAreaValid() || checkInValidIndicators }"
+      pButton
+      pRipple
+      label="Enregistrer"
+      icon="pi pi-check"
+      class="primaryBtn"
+      (click)="saveArea()"
+      style="margin-left: 10px"
+    ></button>
+  </div>
+</div>

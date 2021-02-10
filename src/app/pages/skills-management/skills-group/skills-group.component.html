@@ -1,88 +1,46 @@
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  [baseZIndex]="10000"
-></p-confirmDialog>
-<h4
-  style="
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
+<h4 *ngIf="!displayAddNewSkillsGroupModal" style="
     background: #e7e8e8;
     padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;
     margin-left: 10px;
-  "
->
-  Liste des Familles des compétences
+  ">
+  Familles des compétences
 </h4>
-<div
-  class="card"
-  style="
+<div *ngIf="!displayAddNewSkillsGroupModal" class="card" style="
     margin: auto;
     margin-top: 3%;
     border-color: #e7e8e8 !important;
     border: solid;
-  "
->
-  <p-table
-    #dt
-    [value]="skillsGroupList"
-    dataKey="id"
-    styleClass="p-datatable-customers"
-    [rowHover]="true"
-    [rows]="5"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[5, 10, 15]"
-    [loading]="loading"
-    [paginator]="true"
-    currentPageReportTemplate=""
-    [filterDelay]="0"
-    [globalFilterFields]="[
+  ">
+  <p-table #dt [value]="skillsGroupList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="5"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[
       'skillsGroupId',
       'skillsGroupLabel',
       'skillsGroupCode',
       'skillsGroupDetails',
       'createdAt',
       'updatedAt'
-    ]"
-  >
+    ]">
     <ng-template pTemplate="caption">
       <div>
-        <div
-          class="p-d-flex p-ai-center p-jc-between"
-          style="width: 60%; display: inline-block"
-        >
+        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
           <span class="p-input-icon-left" style="width: 100%">
             <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              style="margin-left: 5%; width: 93%"
-              class="searchInput, p-inputtext"
+            <input pInputText type="text" style=" width: 93%" class="searchInput, p-inputtext"
               (input)="dt.filterGlobal($event.target.value, 'contains')"
-              placeholder="Chercher une famille des compétences.."
-            />
+              placeholder="Chercher une famille des compétences.." />
           </span>
         </div>
 
         <div style="float: right;">
-          
+
           <div style="display: flex">
-            <button
-            pButton
-            pRipple
-            label="Ajouter"
-            icon="pi pi-plus"
-            class="primaryBtn"
-            (click)="addNewSkillsGroup()"
-            style="margin-right: 10px;"
-          ></button>
-            <button
-              pButton
-              pRipple
-              label="Importer"
-              icon="pi pi-file-excel"
-              class="primaryBtn"
-              (click)="ImportNewskillsGroup()"
-            ></button>
+            <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewSkillsGroup()"
+              style="margin-right: 10px;"></button>
+
           </div>
         </div>
       </div>
@@ -90,10 +48,21 @@
 
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px">
-        <th style="text-align: center; font-size: 13px; width: 20%">Libellé</th>
-        <th style="text-align: center; font-size: 13px; width: 20%">Code</th>
-        <th style="text-align: center; font-size: 13px; width: 50%">Détails</th>
-        <th style="width: 10%; font-size: 13px; text-align: center">Action</th>
+        <th style="text-align: center; font-size: 13px; width: 40%" pSortableColumn="skillsGroupLabel">
+          Libellé 
+        </th>
+        <th style="text-align: center; font-size: 13px; width: 45%" pSortableColumn="skillsGroupDetails">
+          Détails
+        </th>
+        <!-- 
+        <th style="text-align: center; font-size: 13px; width: 15%" pSortableColumn="createdAt">
+          Date de création <p-sortIcon field="createdAt"></p-sortIcon>
+        </th>
+        <th style="text-align: center; font-size: 13px; width: 15%" pSortableColumn="updatedAt">
+          Date de modification <p-sortIcon field="updatedAt"></p-sortIcon>
+        </th>
+        -->
+        <th style="width: 17%; font-size: 13px; text-align: center">Action</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-skillsGroup>
@@ -101,29 +70,26 @@
         <td style="text-align: center; font-size: 13px">
           {{ skillsGroup.skillsGroupLabel }}
         </td>
-        <td style="text-align: center; font-size: 13px">
-          {{ skillsGroup.skillsGroupCode }}
-        </td>
 
         <td style="text-align: center">
           {{ skillsGroup.skillsGroupDetails }}
         </td>
-
+        <!-- 
+        <td style="text-align: center; font-size: 13px">
+          {{ skillsGroup.createdAt }}
+        </td>
+        <td style="text-align: center; font-size: 13px">
+          {{ skillsGroup.updatedAt }}
+        </td>
+        -->
         <td style="text-align: center">
           <div>
-            <i
-              placement="top"
-              ngbTooltip="Modifier"
-              class="pi pi-pencil"
-              style="margin-right: 7px"
-              (click)="editSkillsGroup(skillsGroup)"
-            ></i>
-            <i
-              placement="top"
-              ngbTooltip="Supprimer"
-              class="pi pi-trash"
-              (click)="deleteSkillsGroup(skillsGroup)"
-            ></i>
+            <div
+              style="float : left; background-color: #960032 ; color: white; width: 20px; height: 20px; border-radius: 40%;margin-right: 7px;margin-top: -3px;"
+              ngbTooltip="{{skillsGroup.skillList.length}} compétence(s)"> {{skillsGroup.skillList.length}}</div>
+            <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px"
+              (click)="editSkillsGroup(skillsGroup)"></i>
+            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deleteSkillsGroup(skillsGroup)"></i>
           </div>
         </td>
       </tr>
@@ -137,32 +103,20 @@
     </ng-template>
   </p-table>
 </div>
-<p-dialog
-  header="{{ titleHeader }}"
-  [(visible)]="displayAddNewSkillsGroupModal"
-  [modal]="true"
-  [style]="{ width: '50vw' }"
-  [baseZIndex]="10000"
-  [draggable]="false"
-  [resizable]="false"
->
-  <br />
-  <ngx-add-new-skills-group
-    [skillsGroup]="skillsGroup"
-    (cancelEvent)="hideAddNewSkillsGroupModal()"
-    (addNewSkillsGroupEvent)="saveNewSkillsGroup($event)"
-  >
-  </ngx-add-new-skills-group>
-</p-dialog>
+<ngx-add-new-skills-group *ngIf="displayAddNewSkillsGroupModal" [titleHeaderskill]="titleHeaderskill" [skillsGroup]="skillsGroup"
+  (cancelEvent)="hideAddNewSkillsGroupModal()" (deleteSkillEvent)="deleteSkill($event)" (addNewSkillsGroupEvent)="saveNewSkillsGroup($event)">
+</ngx-add-new-skills-group>
 
-<p-dialog header="Supprimer une famille de compétences" [(visible)]="displayDeleteSkillsGroupInvoice" [modal]="true"
+
+<p-dialog header="Supprimer une famille de compétences" [(visible)]="displayDeleteSkillsGroupModal" [modal]="true"
   [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
   <br>
-  Voulez-vous vraiment supprimer la famille de compétences <span class="customer-badge status-negotiation">{{skillsGroup.skillsGroupLabel}}</span> ?
+  Voulez-vous vraiment supprimer la famille de compétences <span
+    class="customer-badge status-negotiation">{{skillsGroup.skillsGroupLabel}}</span> ?
   <ng-template pTemplate="footer">
     <div style="margin-top: 20px;">
       <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
-        (click)="displayDeleteSkillsGroupInvoice=false"></button>
+        (click)="displayDeleteSkillsGroupModal=false"></button>
 
       <button pButton pRipple label="Supprimer" icon="pi pi-check" class="primaryBtn"
         (click)="delSkillsGroup()"></button>
