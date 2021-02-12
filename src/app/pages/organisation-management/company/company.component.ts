@@ -43,13 +43,16 @@ export class CompanyComponent implements OnInit {
   ngOnInit(): void {
     this.initCompany();
     this.getAllCompanies();
+    
   }
+
  
   getAllCompanies() {
 
     const context = this;
     this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe( response => {
         context.companies = response;
+        console.log(context.companies)
         
         
       },

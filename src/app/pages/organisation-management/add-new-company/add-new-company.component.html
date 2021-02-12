@@ -124,21 +124,18 @@
                 <div class="mb-1 col-md-12 col-12">
                     <label for="tel" class="p-float-label">Téléphone <strong style="color: #960032;">*</strong></label>
                     <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-check"></i></span>
-                        <input
-                            type="number"
-                            class="form-control"
-                            placeholder="-- Téléphone  --"
-                            id="tel"
-                            [(ngModel)]="company.companyPhoneNumber"
-                            [ngClass]="{
-                            
-                            'is-valid':
-                            company.companyPhoneNumber != null &&
-                            company.companyPhoneNumber != ''
-                            }"
-                        />
+                        <span class="p-inputgroup-addon"><i class="icon-phone-1"></i></span>
+                        <input style="padding-left: 33%;
+                        padding-right: 14%;" type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}"
+                        (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
+                        (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
+                        class="form-control p-field" id="tel"  placeholder="-- Téléphone  --"  [(ngModel)]="company.companyPhoneNumber"
+                        (keyup)="CheckTelHasError=null" [ngClass]="{
+                                    'is-valid': CheckTelHasError==true && company.companyPhoneNumber!=null ,
+                                    'is-invalid': CheckTelHasError==false && company.companyPhoneNumber!= phone
+                                }" />
                     </div>
+
                 </div>
                 <div class="mb-1 col-md-12 col-12">
                     <label for="mail" class="p-float-label">Email <strong style="color: #960032;">*</strong></label>
@@ -150,12 +147,12 @@
                         placeholder="-- Email  --"
                         id="mail"
                         [(ngModel)]="company.companyEmail"
-                        (change)="validEmail($event)"
-                        [ngClass]="{
                        
-                        'is-valid':
-                        company.companyEmail != null && company.companyEmail != ''
-                        }" />
+                        pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" (keyup)="validEmail()" required
+                        [ngClass]="{
+                            'is-invalid' : checkEmail== false ,
+                    'is-valid': checkEmail== true && company.companyEmail!=null
+                  }" />
                     </div>
                 </div>
                 <div class="mb-1 col-md-12 col-12 p-field row" >
@@ -163,7 +160,7 @@
                         <label for="companyCountry" class="p-float-label"> Pays<strong style="color: #960032;">*</strong></label>
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-flag"></i></span>
-                            <select [(ngModel)]="address.pays"  style="height: 33.5px;"
+                            <select [(ngModel)]="company.companyCountry"  style="height: 33.5px;"
                                 class="browser-default custom-select" 
                                 (change)="changeCountry($event.target.value)"
                                 >
@@ -176,7 +173,7 @@
                         <div class="p-inputgroup">
                             <span class="p-inputgroup-addon"><i class="pi pi-home"></i></span>
                             <select 
-                                [(ngModel)]="address.ville"  
+                                [(ngModel)]="company.companyCity"  
                                 style="height: 33.5px;"
                                 class="browser-default custom-select"
                                 >
@@ -203,7 +200,7 @@
                 <div class="p-col-12 mb-1 col-md-12 p-field">
                         <label for="companyAddress" class="p-float-label">Adresse <strong style="color: #960032;">*</strong></label>
                         <div class="p-inputgroup">
-                            <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                            <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
                             <textarea
                                 id="story"
                                 name="story"

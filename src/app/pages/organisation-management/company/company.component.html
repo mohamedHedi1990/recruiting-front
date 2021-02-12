@@ -48,20 +48,20 @@ Sociétés
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px;">
         <th style="width: 15%; text-align: center;font-size: 13px">Logo</th>
-        <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 13%">Dénomination</th>
-        <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 12%">Identifiant unique</th>
-        <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 17%">Adresse</th>
+        <th pSortableColumn="companyLabel" style="text-align: center; font-size: 13px;width: 15%">Dénomination</th>
+        <th pSortableColumn="companyUniqueIdentifier" style="text-align: center; font-size: 13px;width: 15%">Identifiant unique</th>
+        <th pSortableColumn="companyAddress" style="text-align: center;font-size: 13px;width: 15%">Adresse</th>
         <th pSortableColumn="createdAt"  style="text-align: center; font-size: 13px;width: 10%">Télephone</th>
-        <th pSortableColumn="updatedAt"  style="text-align: center; font-size: 13px;width: 13%">Email</th>
+        <th pSortableColumn="updatedAt"  style="text-align: center; font-size: 13px;width: 20%">Email</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
     </ng-template>
     <ng-template pTemplate="body" let-company>
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td>
 
-          <img *ngIf="company.companyLogoUrl != null" [src]=" sanitizer.bypassSecurityTrustResourceUrl(company.companyLogoUrl )"
+          <img *ngIf="company.companyLogoUrl != ''" [src]=" sanitizer.bypassSecurityTrustResourceUrl(company.companyLogoUrl )"
           style="width: 100px; height: 60px;">
-          <img *ngIf="company.companyLogoUrl == null" src="../../../../assets/images/default_company_logo.jpg"
+          <img *ngIf="company.companyLogoUrl == ''" class="img_class" src="./../../../../assets/images/default_company_logo.jpg"
           style="width: 100px; height: 60px;">
         </td>
         <td style="text-align: center;font-size: 13px;">

@@ -2,8 +2,8 @@ import { TreeNode } from "primeng/api";
 
 export class Tree {
     label: string;
-    expandedIcon= "pi pi-share-alt";
-    collapsedIcon = "pi pi-share-alt";
+    expandedIcon= "pi pi-circle-on";
+    collapsedIcon = "pi pi-circle-on";
     data: any;
     children :TreeNode[];
     expanded :boolean;

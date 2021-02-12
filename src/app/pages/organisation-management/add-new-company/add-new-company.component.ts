@@ -30,20 +30,26 @@ export class AddNewCompanyComponent implements OnInit {
   logo = null;
   messageLogoErrorType ='seulement les fichiers de type image sont autorisés!'
   showerrorTypeLogo = false;
- 
- 
+  CheckTelHasError;
+  checkEmail;
   worldMapData = require('city-state-country');;
   countriesList = this.worldMapData.getAllCountries();
+ 
+  
+  
+  phone: any;
+  
   cities: Array<any>;
-  address ={
-    nRue :null,
-    pays :null,
-    ville :null
+  cities_: Array<any>;
+  changeCountry(count) {
+    this.cities = this.worldMapData.getAllStatesFromCountry(count);
+    console.log(this.cities)
 
   }
-  changeCountry(count) {
-    this.cities  = this.worldMapData.getAllStatesFromCountry(count);
-   
+  changeCountry_(count) {
+    this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
+    console.log(this.cities_)
+
   }
   constructor(private sanitizer: DomSanitizer) {}
 
@@ -53,13 +59,20 @@ export class AddNewCompanyComponent implements OnInit {
 
     }
     if(this.company.companyCountry){
-      
-      this.address.pays = this.company.companyCountry;
-      this.address.ville =this.company.companyCity;
       this.cities  = this.worldMapData.getAllStatesFromCountry(this.company.companyCountry);
-       
- 
      }
+
+     this.changeCountry(this.company.companyCountry);
+     
+     if(this.company.companyId==null){
+       this.changeCountry('Tunisia');
+       
+       
+       this.company.companyCity=this.cities[0].name;
+ 
+     this.changeCountry_('Tunisia');
+     this.company.companyCity=this.cities_[0].name;
+   }
     
   }
 
@@ -106,14 +119,32 @@ export class AddNewCompanyComponent implements OnInit {
       this.imgURL = reader.result;
     };
   }
-  validEmail(event){
-    let email = event.target.value;
+  validEmail(){
+    
     var emailRegex = /^[A-Z0-9_'%=+!`#~$*?^{}&|-]+([\.][A-Z0-9_'%=+!`#~$*?^{}&|-]+)*@[A-Z0-9-]+(\.[A-Z0-9-]+)+$/i;
-    if(!emailRegex.test(email))
-      this.company.companyEmail ='';
+    this.checkEmail= emailRegex.test(this.company.companyEmail);
+      
     
   }
+  
   compareFn(a, b) {
     return a && b && a.name == b.name;
+  }
+  getNumber($event) {
+    this.phone= $event;
+  }
+  onCountryChange($event) {
+    this.company.companyPhoneNumber = null;
+
+    this.CheckTelHasError = true;
+    
+  }
+  telInputObject($event) {
+    console.log("telInputObject", $event)
+  }
+  hasError($event) {
+    this.CheckTelHasError = $event;
+    console.log("haserror", $event)
+
   }
 }

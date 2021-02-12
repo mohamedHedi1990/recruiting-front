@@ -171,7 +171,8 @@ padding: 10px 10px 10px 10px !important;
                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
 
                 <input type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" (keyup)="checkMail()" required
-                  class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail" [ngClass]="{
+                  class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail" 
+                  [ngClass]="{
                     'is-invalid' : checkEmail== false ,
             'is-valid': checkEmail== true && user.userEmail!=null
           }">

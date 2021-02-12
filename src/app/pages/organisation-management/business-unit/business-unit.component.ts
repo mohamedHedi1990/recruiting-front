@@ -23,6 +23,8 @@ company = null;
 action="add";
 businessUnitName=""
 mode ;
+moved_node ;
+destination_node;
 constructor(private organisationManagementService: OrganisationManagementService ,
   private router: Router) { }
 
@@ -77,7 +79,7 @@ getUnits( businessUnit , children : any[]){
   businessUnit.subBusinessUnits.forEach(item => {
   
     children.push(new Tree(item ,item.businessUnitLabel, []));
-    this.getUnits(item , children[children.length-1]);
+    this.getUnits(item , children[children.length-1].children);
     
     
   });
@@ -88,10 +90,10 @@ saveNewBusinessUnit(businessUnit){
   delete businessUnit.createdAt;
   delete businessUnit.updatedAt;
   let url ='';
-  if(this.company){
+  if(this.selectedFile.data.companyId){
      url = OrganisationManagementService.API_COMPANY+this.company.companyId+'/add-business-unit';
   }
-  if(this.businessUnit){
+  if(this.selectedFile.data.businessUnitId){
      url = OrganisationManagementService.API_BUSINESS_UNIT+this.businessUnit.businessUnitId+'/add-business-unit';
   }
   const context = this;
@@ -313,19 +315,94 @@ toggleMode(mode){
 }
 
 onDragStart($event, node):void{
-  console.log('onDragStart' ,node );
+  //console.log('onDragStart' ,node );
+  this.moved_node = node;
 }
 onDragEnd($event, node):void{
-  console.log('onDragEnd' ,node );
+  //console.log('onDragEnd' ,node );
 }
 onDrop($event, node):void{
-  console.log('onDrop' ,node );
+//  console.log('onDrop' ,node );
+  this.destination_node = node;
+  console.log('move node ',this.moved_node, 'toooooooooooo',this.destination_node)
+  if(this.destination_node.data.businessUnitId){
+  this.organisationManagementService.put(OrganisationManagementService.API_BUSINESS_UNIT+this.moved_node.data.businessUnitId+'/moved-to/'+this.destination_node.data.businessUnitId, null).subscribe(
+    Response=>{
+      this.getAllCompanies();
+     
+        
+        this.organisationManagementService.showToast('success',
+          'Unité fonctionnelle modfiée avec succés',
+          `L'unité fonctionnelle  ${this.moved_node.data.businessUnitLabel} a été déplacée avec succcés`);
+      
+    },
+    error =>{
+      console.log(error)
+      this.organisationManagementService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors du chargement des societés`);
+    })
+  }
+
+  if(this.destination_node.data.companyId){
+    this.organisationManagementService.put(OrganisationManagementService.API_BUSINESS_UNIT+this.moved_node.data.businessUnitId+'/moved-to-company/'+this.destination_node.data.companyId, null).subscribe(
+      Response=>{
+        this.getAllCompanies();
+       
+          
+          this.organisationManagementService.showToast('success',
+            'Unité fonctionnelle modfiée avec succés',
+            `L'unité fonctionnelle  ${this.moved_node.data.businessUnitLabel} a été déplacée avec succcés`);
+        
+      },
+      error =>{
+        console.log(error)
+        this.organisationManagementService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du chargement des societés`);
+      })
+    }
 }
 onDragEnter($event, node):void{
-  console.log('onDragEnter',node );
+ // console.log('onDragEnter',node );
 }
 onDragLeave($event, node):void{
-  console.log('onDragLeave' ,node );
+ // console.log('onDragLeave' ,node );
 }
+
+
+onSelect($event): void {
+  if ($event.node.leaf === false) {
+      return;
+  }
+  this.selectedFile = $event.node;
+ // console.log(this.selectedFile);
+}
+/*
+onDragStart($event, node): void {
+  if (node.leaf === false) {
+      return;
+  }
+  this.selectedEquipment = node;
+  console.log('onDragStart');
+  console.log(this.selectedEquipment);
+}
+
+onDragEnd($event, node): void {
+  console.log('onDragEnd');
+}
+
+onDrop($event, node): void {
+  console.log('onDrop');
+}
+
+onDragEnter($event, node): void {
+  console.log('onDragEnter');
+}
+
+onDragLeave($event, node): void {
+  console.log('onDragLeave');
+}
+*/
 
 }

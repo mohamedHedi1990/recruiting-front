@@ -5,10 +5,10 @@ padding: 10px 10px 10px 10px !important;
     color: #222b45;margin-left: 10px;
     margin-bottom: 3%;">
 Unités fonctionnelles
+ <!--
 
 <div style="overflow: hidden;
 float: right;">
- 
       <div style="float: left;float: left;
         background: #d0d0d0;
         width: 30px;
@@ -33,6 +33,7 @@ float: right;">
 
 
 </div>
+-->
 </h4>
 
 
@@ -41,16 +42,25 @@ float: right;">
         
         <p-tree  
                 [value]="company" 
-                [layout]="mode" 
+                layout="horizontal" 
                 selectionMode="single" 
                 [(selection)]="selectedFile"
                 [contextMenu]="cm" 
                 [filter]="true" 
+                (onNodeSelect)="onSelect($event)"
+                [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"
                 
                >
 
                 <ng-template let-node pTemplate="default">
                   <span (contextmenu)="nodeMenu($event, node)" 
+                  pDraggable="treedragdrop"
+                  pDroppable="treedragdrop"
+                  (onDragStart)="onDragStart($event, node)"
+                  (onDragEnd)="onDragEnd($event, node)"
+                  (onDrop)="onDrop($event, node)"
+                  (onDragEnter)="onDragEnter($event, node)"
+                  (onDragLeave)="onDragLeave($event, node)"
 
                   >{{node.label}}</span>
                   </ng-template>

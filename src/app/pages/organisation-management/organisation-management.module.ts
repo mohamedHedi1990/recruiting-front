@@ -43,7 +43,12 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
 import { ConfirmationService } from 'primeng/api';
 import { AddNewCompanyComponent } from './add-new-company/add-new-company.component';
 import { AddNewBusinessUnitComponent } from './add-new-business-unit/add-new-business-unit.component';
+
 import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-evaluation.component';
+import { CardModule } from 'primeng/card';
+import { Ng2TelInputModule } from 'ng2-tel-input';
+import { DragDropModule } from 'primeng/dragdrop';
+
 
 @NgModule({
   declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent],
@@ -78,6 +83,10 @@ import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-eval
     ConfirmDialogModule,
     TreeModule,
     ContextMenuModule,
+    
+    CardModule,
+    Ng2TelInputModule,
+    DragDropModule
   ],
   providers: [
     DialogService,
