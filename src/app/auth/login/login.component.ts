@@ -18,6 +18,7 @@ export class NgxLoginComponent {
   loginRequest:LoginRequest;
 
   testAuth=false;
+  authFailed=false;
   constructor(
     private router: Router,private serviceAuth:AuthServiceService) {
 
