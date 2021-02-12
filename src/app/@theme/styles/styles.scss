@@ -175,6 +175,7 @@ select {
   padding: 0.5rem 1rem !important;
 }
 
+
 nb-auth-block {
   max-width: 100% !important;
 }
@@ -182,4 +183,17 @@ nb-auth-block {
 ngx-login nb-layout-column {
   padding: 0 0 0 0 !important;
   overflow:  hidden !important;
+}
+
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: #960032 !important;
+  color: #fff;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.iti {
+  position: relative;
+  display: inline-block;
+  width: 100% !important;
 }

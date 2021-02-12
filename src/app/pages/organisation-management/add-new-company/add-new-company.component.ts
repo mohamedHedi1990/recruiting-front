@@ -51,6 +51,7 @@ export class AddNewCompanyComponent implements OnInit {
     console.log(this.cities_)
 
   }
+ 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {

@@ -30,7 +30,7 @@ export class CompanyComponent implements OnInit {
     companyCity : '',
     companyCountry : ''
   };
-
+  titleHeader = "Ajouter une société";
 
 
   constructor(private service: SmartTableData, private organisationManagementService: OrganisationManagementService,
@@ -130,6 +130,7 @@ export class CompanyComponent implements OnInit {
 
   editCompany(company){
     this.company = company ;
+    this.titleHeader = "Modifier une société";
     this.showCompanyWindow = true;
   }
   deleteCompany(company) {
