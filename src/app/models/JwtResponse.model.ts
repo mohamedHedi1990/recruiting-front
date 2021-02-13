@@ -8,9 +8,9 @@ export class JwtResponse {
 
   roles: string[] ;
 
-  firstName: string;
+  userFirstName: string;
 
-  lastName: string;
+  userLastName: string;
 
 
 }

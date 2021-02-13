@@ -35,8 +35,8 @@ export class NgxLoginComponent {
         console.log("success");
         console.log(data);
         localStorage.setItem('token',data.token);
-        localStorage.setItem('firstName',data.firstName);
-        localStorage.setItem('lastName',data.lastName);
+        localStorage.setItem('userFirstName',data.userFirstName);
+        localStorage.setItem('userLastName',data.userLastName);
         localStorage.setItem("roles", JSON.stringify(data.roles));
 
         this.router.navigateByUrl("/zen-people-referential");

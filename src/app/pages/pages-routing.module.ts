@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { PagesComponent } from './pages.component';
 import { NotFoundComponent } from './miscellaneous/not-found/not-found.component';
+import { AuthGuardService } from '../services/auth/AuthGuard.service';
 
 const routes: Routes = [{
   path: '',

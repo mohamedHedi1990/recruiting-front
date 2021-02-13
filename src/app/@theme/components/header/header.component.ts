@@ -61,8 +61,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
     this.user= this.userService.getCurrentUser();
-
-
+    let firstName=localStorage.getItem("userFirstName");
+    let firstLastName=localStorage.getItem("userLastName");
+    this.user.name= firstName+" "+ firstLastName 
 
 
   //  this.userService.getUsers()
@@ -111,8 +112,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     {
       this.router.navigateByUrl("/auth/login");
       localStorage.removeItem('token');
-      localStorage.removeItem('firstName');
-      localStorage.removeItem('lastName');
+      localStorage.removeItem('userFirstName');
+      localStorage.removeItem('userFirstName');
       localStorage.removeItem('roles');
     }
   }
