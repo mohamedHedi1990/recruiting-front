@@ -48,6 +48,7 @@ import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-eval
 import { CardModule } from 'primeng/card';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { DragDropModule } from 'primeng/dragdrop';
+import { ListCategoriesComponent } from './list-categories/list-categories.component';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
@@ -82,7 +83,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent, ListCategoriesComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,

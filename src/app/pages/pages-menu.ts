@@ -40,6 +40,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'shuffle-outline',
       },
       {
+        title: 'Catégories',
+        link: '/zen-people-referential/organisation/categories',
+        icon: 'radio-button-on-outline',
+
+      },
+      {
         title: "Critères d'évaluation",
         link: '/zen-people-referential/organisation/evaluation-criteria',
         icon: 'shuffle-2-outline',

@@ -18,7 +18,7 @@ style="
   "
 >
 <p-table 
-#dt [value]="criteriaList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+#dt [value]="criteriaList" dataKey="evaluationCriteriaId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
     [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
     currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[
   'criteriaId',
@@ -28,9 +28,9 @@ style="
     <ng-template pTemplate="caption">
       <div
       class="p-d-flex p-ai-center p-jc-between"
-      style="width: 55%; display: inline-block"
+      style="width: 100%; display: inline-block"
     >
-      <span class="p-input-icon-left" style="width: 100%">
+      <span class="p-input-icon-left" style="width: 55%">
         <i class="pi pi-search"></i>
         <input
           pInputText
@@ -41,23 +41,31 @@ style="
           placeholder="Chercher un critère d'évaluation.."
         />
       </span>
+      <span *ngIf="maxPonderation==true" style="width: 45%;color: #960032 !important;" class="menu-title"> <i class="pi pi-exclamation-triangle"></i>La somme totale des pondérations ne doit pas dépasser 100 % </span>
+      <span *ngIf="!maxPonderation && notMaxPonderation==true" style="width: 45%;color: #960032 !important;" class="menu-title"> <i class="pi pi-exclamation-triangle"></i> La somme totale des pondérations est inférieure à 100 % </span>
+
     </div>
+   
     </ng-template>
 
     <ng-template pTemplate="header">
         <tr style="text-align: center; font-size: 13px">
+          <th style="width: 3rem"></th>
             <th style="text-align: center; font-size: 13px; width: 70%">Libellé</th>
         
-            <th style="text-align: center; font-size: 13px; width: 20%">Status</th>
+            <th style="text-align: center; font-size: 13px; width: 20%">Pondération (%) </th>
             <th style="width: 15%; font-size: 13px; text-align: center">Actions</th>
         </tr>
         <tr>
+          <th style="width: 3rem"></th>
             <th style="font-size: 13px;">
               <input style="font-size: 13px;" 
-               pInputText type="text" placeholder="Libellé du critère" class="form-control p-field"
+               pInputText type="text" placeholder="Libellé du critère d'évaluation" class="form-control p-field"
                   [(ngModel)]="criteria.evaluationCriteriaLabel">
             </th>
-            <th></th>
+            <th style="font-size: 13px;">
+              
+            </th>
             
             <th style="text-align: center">
               <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
@@ -68,9 +76,26 @@ style="
           </tr>
         
     </ng-template>
-    <ng-template pTemplate="body" let-criteria>
+    <ng-template pTemplate="body" let-criteria let-expanded="expanded">
        
-        <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+        <tr class="p-selectable-row" style="text-align: center; font-size: 13px"
+        [pSelectableRow]="criteria"
+        name="criteria"
+        id="evaluationCriteriaId"
+        >
+          <td>
+            <i
+              *ngIf="!expanded"
+              [pRowToggler]="criteria"
+              class="pi pi-chevron-right"
+            ></i>
+            <i
+              *ngIf="expanded"
+              [pRowToggler]="criteria"
+              class="pi pi-chevron-down"
+            ></i>
+          </td>
+
             <td pEditableColumn style="text-align: left !important; font-size: 13px">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
@@ -82,24 +107,122 @@ style="
                   </ng-template>
                 </p-cellEditor>
               </td>
-            <td style="text-align: center">
-                {{ criteria.evaluationCriteriaStatus }}
-                <span *ngIf="true" class="customer-badge status-progress">Non Affecte</span>
-
-            </td>
+              <td pEditableColumn style="text-align: center !important; font-size: 13px">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+              <input style="font-size: 13px;" pInputText type="number" placeholder="Pondération"
+                     class="form-control p-field" [(ngModel)]="criteria.evaluationCriteriaPondering" (change)="editCriteria(criteria)">
+                  </ng-template>
+                  <ng-template pTemplate="output">
+                    {{criteria.evaluationCriteriaPondering}}
+                  </ng-template>
+                </p-cellEditor>
+              </td>
            
             <td style="text-align: center">
-                  <div>
+           
                     <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
                         (click)="deleteCriteria(criteria)"></i>
-                </div>
+                
             </td>
         </tr>
     </ng-template>
+    <ng-template pTemplate="rowexpansion" let-criteria>
+      <tr>
+        <td colspan="5">
+          <div class="p-p-3">
+            <p-table
+              [value]="criteria.ratingScales"
+              dataKey="criteria.ratingScales.ratingScaleId"
+            >
+            <ng-template pTemplate="header">
+              <tr style="text-align: center; font-size: 13px">
+                  <th style="text-align: center; font-size: 13px; width: 50%">Libellé de l'intervale des valeurs</th>
+              
+                  <th style="text-align: center; font-size: 13px; width: 20%">Valeur min</th>
+                  <th style="width: 20%; font-size: 13px; text-align: center">Valeur max (non inclus)</th>
+                  <th style="width: 10%; font-size: 13px; text-align: center"></th>
+      
+                </tr>
+              <tr>
+                  <th style="font-size: 13px;">
+                    <input style="font-size: 13px;" 
+                     pInputText type="text" placeholder="Libellé de l'intervale des valeurs" class="form-control p-field"
+                        [(ngModel)]="scale.ratingScaleLabel">
+                  </th>
+                  <th style="font-size: 13px;">
+                    <input style="font-size: 13px;" 
+                     pInputText type="number" placeholder="Valeur minimal" class="form-control p-field"
+                        [(ngModel)]="scale.ratingScaleValueMin">
+                  </th>
+                  <th style="font-size: 13px;">
+                    <input style="font-size: 13px;" 
+                     pInputText type="number" placeholder="Valeur maximal" class="form-control p-field"
+                        [(ngModel)]="scale.ratingScaleValueMax">
+                  </th>
+                  
+                  <th style="text-align: center">
+                    <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                      class="p-button-rounded p-mr-2" style="background-color: #960032;
+                       border-color: #960032;" [disabled]="checkValidScale()"
+                      [ngClass]="{ disabled: checkValidScale() }" (click)="saveNewScaleFromExpand(criteria,scale)"></button>
+                  </th>
+                </tr>
+              
+          </ng-template>
+          <ng-template pTemplate="body" let-scale let-rowIndex="rowIndex">
+             
+              <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+                  <td pEditableColumn style="text-align: left !important; font-size: 13px">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                    <input style="font-size: 13px;" pInputText type="text" placeholder="Critère d'évaluation"
+                           class="form-control p-field" [(ngModel)]="scale.ratingScaleLabel" (change)="editCriteria(criteria)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{scale.ratingScaleLabel}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="text-align: center!important; font-size: 13px">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                    <input style="font-size: 13px;" pInputText type="number" placeholder="Valeur minimal"
+                           class="form-control p-field" [(ngModel)]="scale.ratingScaleValueMin" (change)="editCriteria(criteria)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          
+                            {{scale.ratingScaleValueMin}}
+                          
+                         
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="text-align: center!important; font-size: 13px">
+                      <p-cellEditor>
+                        <ng-template pTemplate="input">
+                    <input style="font-size: 13px;" pInputText type="number" placeholder="Valeur maximal"
+                           class="form-control p-field" [(ngModel)]="scale.ratingScaleValueMax" (change)="editCriteria(criteria)">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                          {{scale.ratingScaleValueMax}}
+                        </ng-template>
+                      </p-cellEditor>
+                    </td>
+                  
+                 
+                  <td style="text-align: center">
+                          <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                              (click)="deleteScaleFromExpend(criteria,scale,rowIndex)"></i>
+                      
+                  </td>
+              </tr>
+          </ng-template>
+
     <ng-template pTemplate="emptymessage">
         <tr style="font-size: 13px">
             <td colspan="8" style="text-align: left !important">
-                Aucun critère trouvé!
+                L'échelle de notation est pas encore configuré pour ce critère!
             </td>
         </tr>
     </ng-template>
@@ -128,3 +251,5 @@ style="
     </div>
   </ng-template>
 </p-dialog>
+
+

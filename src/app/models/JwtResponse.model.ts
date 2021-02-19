@@ -11,6 +11,7 @@ export class JwtResponse {
   userFirstName: string;
 
   userLastName: string;
-
+ 
+  userPictureUrl: string;
 
 }

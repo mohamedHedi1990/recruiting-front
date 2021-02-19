@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     let firstName=localStorage.getItem("userFirstName");
     let firstLastName=localStorage.getItem("userLastName");
     this.user.name= firstName+" "+ firstLastName 
-
+    this.user.picture=localStorage.getItem("picture");
 
   //  this.userService.getUsers()
     //  .pipe(takeUntil(this.destroy$))
@@ -115,6 +115,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       localStorage.removeItem('userFirstName');
       localStorage.removeItem('userFirstName');
       localStorage.removeItem('roles');
+      localStorage.removeItem('picture')
     }
   }
   
