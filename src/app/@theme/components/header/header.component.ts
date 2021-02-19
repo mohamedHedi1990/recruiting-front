@@ -64,7 +64,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     let firstName=localStorage.getItem("userFirstName");
     let firstLastName=localStorage.getItem("userLastName");
     this.user.name= firstName+" "+ firstLastName 
-    this.user.picture=localStorage.getItem("picture");
+    let picture=localStorage.getItem("picture");
+    if(picture != undefined && picture != null && picture != ""){
+        this.user.picture=localStorage.getItem("picture");
+    }
 
   //  this.userService.getUsers()
     //  .pipe(takeUntil(this.destroy$))

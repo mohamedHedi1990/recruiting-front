@@ -38,7 +38,9 @@ export class NgxLoginComponent {
         localStorage.setItem('userFirstName',data.userFirstName);
         localStorage.setItem('userLastName',data.userLastName);
         localStorage.setItem("roles", JSON.stringify(data.roles));
+        if(data.userPictureUrl != null && data.userPictureUrl != ""){
         localStorage.setItem("picture",data.userPictureUrl)
+        }
         this.router.navigateByUrl("/zen-people-referential");
         this.testAuth=false;
       },

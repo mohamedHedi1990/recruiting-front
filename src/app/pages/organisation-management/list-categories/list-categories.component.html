@@ -48,9 +48,11 @@ style="
     <ng-template pTemplate="header">
         <tr style="text-align: center; font-size: 13px">
           <th style="width: 3rem"></th>
-            <th style="text-align: center; font-size: 13px; width: 70%">Libellé</th>
-        
-            <th style="width: 30%; font-size: 13px; text-align: center">Actions</th>
+            <th style="text-align: center; font-size: 13px; width: 60%">Libellé</th>
+           
+            <th style="text-align: center; font-size: 13px; width: 15%">Valeur minimal</th>
+            <th style="text-align: center; font-size: 13px; width: 15%">Valeur maximal</th>
+            <th style="width: 10%; font-size: 13px; text-align: center">Actions</th>
         </tr>
         <tr>
           <th style="width: 3rem"></th>
@@ -58,6 +60,12 @@ style="
               <input style="font-size: 13px; " 
                pInputText type="text" placeholder="Libellé du catégorie" class="form-control p-field"
                   [(ngModel)]="categorie.positionCategoryLabel">
+            </th>
+            <th style="font-size: 13px;">
+          
+            </th> 
+            <th style="font-size: 13px;">
+           
             </th>
             
             <th style="text-align: center">
@@ -85,9 +93,10 @@ style="
                   </ng-template>
                 </p-cellEditor>
               </td>
-             
-           
-            <td style="text-align: center;">
+             <td>{{categorie.minValue}}</td>
+              <td>{{categorie.maxValue}}</td>
+
+                <td style="text-align: center;">
            
                     <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
                         (click)="deleteCategorie(categorie)"></i>

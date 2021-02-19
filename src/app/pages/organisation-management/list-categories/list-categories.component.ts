@@ -47,6 +47,8 @@ export class ListCategoriesComponent implements OnInit {
       positionCategoryId: null,
       positionCategoryLabel: null,
       positionCategoryDetails: null,
+      minValue:0.000,
+      maxValue:0.000,
       positionList:null,
     };
   }
