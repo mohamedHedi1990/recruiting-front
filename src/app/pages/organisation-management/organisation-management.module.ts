@@ -8,7 +8,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import {TreeModule} from 'primeng/tree';
 
-import { NbMenuModule } from "@nebular/theme";
+import { NbMenuModule, NbStepperModule } from "@nebular/theme";
 import {ContextMenuModule} from 'primeng/contextmenu';
 //dependences
 import { TableModule } from "primeng/table";
@@ -34,7 +34,7 @@ import {
   NbSelectModule,
   NbUserModule,
 } from "@nebular/theme";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2SmartTableModule } from "ng2-smart-table";
 import { PanelModule } from "primeng/panel";
 import { AuthServiceService } from '../../services/auth/auth-service.service';
@@ -82,8 +82,16 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
+import { PositionComponent } from './position/position.component';
+import { PositionListTableComponent } from './position-list-table/position-list-table.component';
+import { PositionListTreeComponent } from './position-list-tree/position-list-tree.component';
+import { PositionCategoryComponent } from './position-category/position-category.component';
+import { AddNewPositionComponent } from './add-new-position/add-new-position.component';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { DropdownModule } from 'primeng/dropdown';
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent, ListCategoriesComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,
@@ -102,6 +110,7 @@ import {MatTreeModule} from '@angular/material/tree';
     NbCardModule,
     NbCheckboxModule,
     NbDatepickerModule,
+    DropdownModule,
     NbIconModule,
     NbInputModule,
     NbRadioModule,
@@ -115,10 +124,13 @@ import {MatTreeModule} from '@angular/material/tree';
     ConfirmDialogModule,
     TreeModule,
     ContextMenuModule,
-    
+    ReactiveFormsModule,
     CardModule,
     Ng2TelInputModule,
     DragDropModule,
+    NgSelectModule,
+    NbStepperModule,
+    
 
     MatAutocompleteModule,
     MatBadgeModule,
@@ -155,6 +167,7 @@ import {MatTreeModule} from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    AutoCompleteModule,
     
   ],
   providers: [

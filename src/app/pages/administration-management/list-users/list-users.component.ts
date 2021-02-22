@@ -88,7 +88,6 @@ export class ListUsersComponent implements OnInit {
 
     const context = this;
     this.UtilsService.get(UtilsService.API_USER).subscribe( response => {
-      console.log("USERS---------------",response)
         context.users = response;
         },
       error => {
@@ -127,7 +126,6 @@ export class ListUsersComponent implements OnInit {
   }
 
   deleteUser(user) {
-    console.log("USEEEEER--------",user);
    this.user = user;
    this.displayDeleteUser = true;
 
@@ -169,7 +167,6 @@ bloquerUser(user){
   
   blockUser(){
     this.UtilsService.put(UtilsService.API_USER+'/blockuser/'+this.user.userId,null).subscribe(response => {
-      console.log(response);
       this.hideUserWindow();
       this.displayBlockUser=false;
         this.UtilsService.showToast('success',
@@ -192,7 +189,6 @@ activerUser(user){
 }
 ActifUser(){
   this.UtilsService.put(UtilsService.API_USER+'/actifuser/'+this.user.userId,null).subscribe(response => {
-    console.log(response);
     this.hideUserWindow();
     this.displayActifUser=false;
       this.UtilsService.showToast('success',

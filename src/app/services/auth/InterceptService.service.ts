@@ -22,8 +22,7 @@ export class InterceptService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     if (request.url.indexOf("assets") == -1) {
-      console.log("url interceptor ");
-      console.log(request.url);
+      
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -31,20 +30,20 @@ export class InterceptService implements HttpInterceptor {
       });
     }
 
-    console.log("----request----");
+   
     return next.handle(request).pipe(
       tap(
         (event) => {
           if (event instanceof HttpResponse) {
-            console.log("all looks good");
+            
           }
         },
         (error) => {
           // http response status code
-          console.log("----response----");
+          
           console.error(error.status);
           console.error(error.message);
-          console.log("--- end of response---");
+         
         }
       )
     );

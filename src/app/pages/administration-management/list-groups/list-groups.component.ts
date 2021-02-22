@@ -30,7 +30,6 @@ export class ListGroupsComponent implements OnInit {
     this.UtilsService.get(UtilsService.API_GROUP).subscribe(
       (response:any) => {
         context.groupsList = response;
-        console.log("liste des groups------", context.groupsList);
       },
       (error) => {
         this.UtilsService.showToast(
@@ -61,7 +60,7 @@ export class ListGroupsComponent implements OnInit {
 
   deleteGroup(rowdata) {
     this.group = rowdata;
-    console.log(this.group);
+    
     this.displayDeleteGroup=true;
 
   }

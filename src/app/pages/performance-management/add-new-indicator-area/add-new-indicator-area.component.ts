@@ -48,6 +48,7 @@ ngOnInit(): void {
       this.getAreaIndicators(this.area);
       this.headerTitle = "Modifier la liste des indicateurs du domaine";
     }
+    
     this.initiateLine();
 }
 getAreaIndicators(area){
@@ -75,8 +76,6 @@ checkAreaValid (): boolean {
   this.area.indicatorAreaLabel == null || this.area.indicatorAreaLabel === '' ;
 }
   saveArea() {
-    console.log("area to save ");
-    console.log(this.area);
     this.addNewIndicatorAreaEvent.emit(this.area);
   }
 
@@ -87,7 +86,7 @@ onKeyUp(x) {
   label = label.replace(/ /g, '-');
   let code = label.toLocaleUpperCase();
   this.area.indicatorAreaCode = code ; 
-  console.log(code)
+ 
 } 
 initiateLine() {
   this.line = {
@@ -113,7 +112,7 @@ cancel() {this.cancelEvent.emit(); }
 deleteLine(line) {
   if(line.indicatorId != null){
     this.performanceManagementService.delete(this.performanceManagementService.API_PERFORMANCE_INDICATOR +line.indicatorId).subscribe(
-      response => {console.log(response);},
+      response => {},
       error => { console.log(error); });
   }
   for(let i=0; i<this.area.performanceIndicators.length ; i++) {

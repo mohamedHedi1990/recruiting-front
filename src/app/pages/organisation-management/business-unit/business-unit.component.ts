@@ -98,7 +98,7 @@ saveNewBusinessUnit(businessUnit){
   }
   const context = this;
   this.organisationManagementService.put(url, businessUnit).subscribe( response => {
-      console.log(response);
+      
       
       this.getAllCompanies();
       this.addUnitWindow = false;
@@ -125,13 +125,12 @@ saveNewBusinessUnit(businessUnit){
   
   
 editBusinessUnit(businessUnit){
-  console.log('---------------------------//-----------------------',businessUnit);
   delete businessUnit.createdAt;
   delete businessUnit.updatedAt;
   const context = this;
 
   this.organisationManagementService.put(OrganisationManagementService.API_BUSINESS_UNIT+businessUnit.businessUnitId, businessUnit).subscribe( response => {
-      console.log(response);
+      
       
       this.getAllCompanies();
       this.addUnitWindow = false;
@@ -324,7 +323,6 @@ onDragEnd($event, node):void{
 onDrop($event, node):void{
 //  console.log('onDrop' ,node );
   this.destination_node = node;
-  console.log('move node ',this.moved_node, 'toooooooooooo',this.destination_node)
   if(this.destination_node.data.businessUnitId){
   this.organisationManagementService.put(OrganisationManagementService.API_BUSINESS_UNIT+this.moved_node.data.businessUnitId+'/moved-to/'+this.destination_node.data.businessUnitId, null).subscribe(
     Response=>{

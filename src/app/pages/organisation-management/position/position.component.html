@@ -1,0 +1,16 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4  style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px;
+    margin-bottom: 3%;">
+Liste des positions
+
+</h4>
+
+<ngx-position-list-table *ngIf="mode_table" 
+                          [positions_list]="positions_list"
+                          (reloadPositionListEvent)="getAllPositions()"
+                         >
+
+</ngx-position-list-table>

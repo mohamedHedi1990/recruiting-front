@@ -84,7 +84,6 @@ export class AddNewSkillComponent implements OnInit {
   }
 
   saveNewskill() {
-    console.log("SKILL TO SAVE--", this.skill);
     this.addNewSkillsGroupEvent.emit(this.skill);
   }
 
@@ -98,7 +97,6 @@ export class AddNewSkillComponent implements OnInit {
             this.skill.skillsGroup = context.skillsGroupList[0];
           }
         }
-        console.log("liste des skillsGroup------", context.skillsGroupList);
       },
       (error) => {
         this.skillsManagementService.showToast(

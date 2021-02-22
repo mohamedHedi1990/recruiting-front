@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { CompanyComponent } from './company/company.component';
 import { BusinessUnitComponent } from './business-unit/business-unit.component';
 import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-evaluation.component';
+import { PositionComponent } from './position/position.component';
+import { PositionCategoryComponent } from './position-category/position-category.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 
 export const routes: Routes = [
@@ -16,6 +18,14 @@ export const routes: Routes = [
     {
       path: 'business-units',
       component: BusinessUnitComponent,
+    },
+    {
+      path: 'position-categories',
+      component: PositionCategoryComponent,
+    },
+    {
+      path: 'positions',
+      component: PositionComponent,
     },
     {
       path: 'evaluation-criteria',

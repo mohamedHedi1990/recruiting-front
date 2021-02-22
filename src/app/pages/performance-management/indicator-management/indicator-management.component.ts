@@ -143,7 +143,6 @@ export class IndicatorManagementComponent implements OnInit {
   }
   editIndicator(indicator){
     this.indicator = indicator;
-    console.log('indicator to edit',this.indicator)
     this.displayIndicatorModal = true;
     this.HeaderIndicator = "Modifier un indicateur"
 

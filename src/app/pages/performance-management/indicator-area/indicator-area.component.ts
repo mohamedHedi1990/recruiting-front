@@ -47,8 +47,7 @@ export class IndicatorAreaComponent implements OnInit {
     this.getAllAreas();
   }
   saveArea(area) {
-    console.log('area to save');
-    console.log(area);
+  
     if(area.performanceIndicators.length >0){
       area.performanceIndicators.forEach(indicator => {
         if(indicator.indicatorType =="QUALITATIF" && (indicator.indicatorScales == null || indicator.indicatorScales.length === 0))
@@ -133,8 +132,7 @@ export class IndicatorAreaComponent implements OnInit {
   editArea(area) {
     this.area = area;
     this.area.performanceIndicators= [];
-    console.log('area to edit ')
-    console.log(area)
+    
     this.showIndicatorAriaWindow = true;
   }
 
@@ -142,7 +140,7 @@ export class IndicatorAreaComponent implements OnInit {
 
 
     this.performanceManagementService.delete(this.performanceManagementService.API_INDICATOR_AREA+this.area.indicatorAreaId).subscribe(response => {
-      console.log('response', response)
+      
 
 
         this.getAllAreas();

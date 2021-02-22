@@ -11,9 +11,9 @@ export class PerformanceManagementService {
 
 
 REMOTE_ADDRESS = 'http://localhost:8090/bs-performance-management/';
-API_INDICATOR_AREA = this.REMOTE_ADDRESS  + 'api/indicator-area/';
-API_PERFORMANCE_INDICATOR = this.REMOTE_ADDRESS  + 'api/performance-indicator/';
-API_SCALE_INDICATOR = this.REMOTE_ADDRESS  + 'api/indicator-scale/';
+API_INDICATOR_AREA = this.REMOTE_ADDRESS  + 'api/indicator-area';
+API_PERFORMANCE_INDICATOR = this.REMOTE_ADDRESS  + 'api/performance-indicator';
+API_SCALE_INDICATOR = this.REMOTE_ADDRESS  + 'api/indicator-scale';
 
 
    header = new HttpHeaders();

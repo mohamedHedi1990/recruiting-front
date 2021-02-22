@@ -87,7 +87,9 @@ saveBusinessUnit() {
 checkBusinessUnitValid(): boolean{
   return this.businessUnit.businessUnitLabel == null || this.businessUnit.businessUnitLabel === '';
 }
-cancel(){}
+cancel(){
+  this.cancelEvent.emit();
+}
 delUnit(){}
 validEmail(event){
   let email = event.target.value;

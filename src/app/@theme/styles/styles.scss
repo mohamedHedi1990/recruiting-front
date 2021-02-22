@@ -158,7 +158,7 @@ input {
       background-color: #FFD8B2;
       color: #805B36;
   }
- 
+
 }
 
 i {
@@ -189,6 +189,23 @@ ngx-login nb-layout-column {
   background-color: #960032 !important;
   color: #fff;
 }
+.nb-theme-default nb-stepper .header .step.completed .label-index{
+  background-color: #960032 !important;
+  border-color:#960032 !important;
+}
+.nb-theme-default nb-stepper .header .step.selected .label-index{
+  border-color:#960032 !important;
+}
+.nb-theme-default nb-stepper .header .step.selected{
+  color: #960032 !important;
+}
+.step-content{
+  width: 100% !important;
+
+}
+nb-stepper{
+  margin-top: 15px;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -196,4 +213,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   position: relative;
   display: inline-block;
   width: 100% !important;
+}
+.nb-theme-default nb-stepper .step-content {
+   padding: 0px !important;
+}
+.p-autocomplete {
+  display: inline-flex;
+  position: relative;
+  width: 100% !important;
+  text-align: left !important;
+  font-size: 13px !important;
+}
+p-cellEditor {
+  font-size: 13px !important;
+}
+p-autoComplete {
+  font-size: 13px !important;
 }

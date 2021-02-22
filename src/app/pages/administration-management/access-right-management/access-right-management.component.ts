@@ -83,16 +83,14 @@ export class AccessRightManagementComponent implements OnInit {
     }
     valider()
     { this.listGroupAccessRightDto=[];
-      console.log("-----------valider les droits d'acces------------");
-      console.log(this.accessRights);
+     
       for(let access of this.accessRights)
       {
         for(let accessChild of access.accessRightListChild)
         {
           for(let groupAccessRight of accessChild.groupAccessRightDtos)
           {
-            console.log("-----------Access Right Dto-------")
-            console.log(groupAccessRight);
+            
             this.listGroupAccessRightDto.push(groupAccessRight);
           }
         }

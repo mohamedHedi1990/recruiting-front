@@ -1,0 +1,726 @@
+<nb-stepper orientation="vertical">
+    <!--Informations génerales-->
+    <nb-step label="Informations génerales">
+        <div class="step_container" style="margin-top: 30px;">
+            <div style="display: flex;">
+                <div class="mb-1 col-md-6 col-12">
+                    <label for="positionLabel" class="p-float-label">Dénomination <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="positionLabel"
+                            [(ngModel)]="position.positionLabel" />
+                    </div>
+                </div>
+            <div class="mb-1 col-md-6 col-6">
+
+                    <label for="positionCode" class="p-float-label">Code <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <input type="text" class="form-control p-field" id="positionCode"
+                            [(ngModel)]="position.positionCode" />
+                    </div>
+                </div>
+			</div>
+            <!-- row 1 -->
+
+            <div style="display: flex;">
+                <div class="mb-1 col-md-6 col-6">
+                    <label for="identifiant" class="p-float-label">Société <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <select class="form-control p-field" id="businessUnit" name="side"
+                            [(ngModel)]="position.businessUnit" style="font-size: 13px"
+                            [compareWith]="compareBusinessUnit" (change)="getAllUnitsByCompany()">
+                            <option *ngFor="let b of businessUnitsList;" [ngValue]="b">{{b.businessUnitLabel}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-1 col-md-6 col-6">
+                    <label for="identifiant" class="p-float-label">Unité organisationnelle <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <select class="form-control p-field" id="businessUnit" name="side"
+                            [(ngModel)]="position.businessUnit" style="font-size: 13px"
+                            [compareWith]="compareBusinessUnit"
+                            [disabled]="position.company == null">
+                            <option *ngFor="let b of businessUnitsList;" [ngValue]="b">{{b.businessUnitLabel}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /row 1 -->
+            <!-- row 2 -->
+            <div style="display: flex;">
+                <div class="mb-1 col-md-6 col-6">
+                    <label for="identifiant" class="p-float-label">Supérieure hiérarchique <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <select class="form-control p-field" id="hierarchicalManagerPosition" name="side"
+                            [(ngModel)]="position.hierarchicalManagerPosition" style="font-size: 13px"
+                            [compareWith]="comparePosition">
+                            <option *ngFor="let p of positions_list;" [ngValue]="p">{{p.positionLabel}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-1 col-md-6 col-6">
+                    <label for="identifiant" class="p-float-label">Categorie <strong
+                            style="color: #960032;">*</strong></label>
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                        <select class="form-control p-field" id="fonctionalManagerPosition" name="side"
+                            [(ngModel)]="position.positionCategory" style="font-size: 13px"
+                            [compareWith]="compareCategory">
+                            <option *ngFor="let cat of categories;" [ngValue]="cat">{{cat.positionCategoryLabel}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!-- /row 2 -->
+
+        </div>
+        <button nbButton nbStepperNext>suivant</button>
+
+    </nb-step>
+    <!--/Informations génerales-->
+
+    
+    <!--Compétences
+    <nb-step label="Compétences">
+
+        <p-table #dt [value]="this.position.positionSubSkillList" dataKey="id" styleClass="p-datatable-customers"
+            [rowHover]="true" currentPageReportTemplate="">
+            <ng-template pTemplate="header">
+                <tr style="text-align: center; font-size: 13px;">
+                    <th style="text-align: center; font-size: 13px; width: 60%;">Compétence</th>
+                    <th style="text-align: center; font-size: 13px; width: 30%;">Niveau cible</th>
+                    <th style="width:10%"></th>
+                </tr>
+
+                <tr>
+                    <th style="font-size: 13px;">
+                        <p-autoComplete [group]="true" [suggestions]="skillsList" optionGroupLabel="skillLabel"
+                            optionGroupChildren="subSkills" (completeMethod)="filterSubSkills($event)"
+                            field="subSkillLabel" [multiple]="false" (onSelect)="onSelectSkills($event)"
+                            [dropdown]="true" [(ngModel)]="line.subSkill">
+                            <ng-template let-group pTemplate="group">
+                                <div class="p-d-flex p-ai-center">
+                                    <span>{{group.skillLabel}}</span>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+                    </th>
+
+                    <th style="font-size: 13px;">
+                        <select class="form-control p-field" id="requiredLevel" name="side"
+                            [(ngModel)]="line.requiredLevel" style="font-size: 13px" [compareWith]="compareSkillLevel">
+
+                            <option *ngFor="let level of skillLevelList;" [ngValue]="level">{{level.skillLevelLabel}}
+                            </option>
+
+                        </select>
+                    </th>
+
+                    <th>
+                        <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                            class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                                background-color: #960032; border-color: #960032;" [disabled]="checkLineValid()"
+                            [ngClass]="{ disabled: checkLineValid() }" (click)="addLine()"></button>
+                    </th>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="body" let-line>
+                <tr class="p-selectable-row" style="text-align: left; font-size: 13px;">
+                    <td pEditableColumn style="text-align: left !important;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <select class="form-control p-field" id="subSkill" name="subSkill"
+                                    [(ngModel)]="line.subSkill" style="font-size: 13px" [compareWith]="compareSubSkill"
+                                    (change)="changeSubSkill(line.subSkill)">
+                                    <option *ngFor="let s of skillsList;" [ngValue]="s">{{s.subSkillLabel}}</option>
+                                </select>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{line.subSkill.subSkillLabel}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn style="text-align: left !important;">
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <select class="form-control p-field" id="required_Level" name="side"
+                                    [(ngModel)]="line.requiredLevel" style="font-size: 13px"
+                                    [compareWith]="compareSkillLevel">
+
+                                    <option *ngFor="let level of skillLevelList;" [ngValue]="level">
+                                        {{level.skillLevelLabel}}</option>
+
+                                </select>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{line.requiredLevel.skillLevelLabel}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+
+                    <td style="text-align: center;">
+                        <div style="display: flex;">
+
+                            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
+                                (click)="deleteLine(line)"></i>
+                        </div>
+
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr style="font-size: 13px;">
+                    <td colspan="8" style="text-align: left !important;">Aucune compétence trouvée!</td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <button nbButton nbStepperPrevious>précedant</button>
+        <button nbButton nbStepperNext>suivant</button>
+
+    </nb-step>
+    -->
+    <!--Indicateurs
+    <nb-step label="Indicateurs qualitatifs">
+
+
+        <p-panel header="Indicateurs qualitatifs">
+
+
+            <p-table #dt [value]="positionIndicatorListQualitatif" dataKey="id" styleClass="p-datatable-customers"
+                currentPageReportTemplate="">
+                <ng-template pTemplate="header">
+                    <tr style="text-align: center; font-size: 13px;">
+                        <th style="text-align: left; font-size: 13px; width: 45%;">Indicateur</th>
+                        <th style="text-align: left; font-size: 13px; width: 45%;">Niveau cible</th>
+                        <th style="width:10%"></th>
+                    </tr>
+
+                    <tr>
+                        <th style="font-size: 13px;">
+
+
+
+                            <p-autoComplete [group]="true" [suggestions]="indicatorsListQualitatif"
+                                optionGroupLabel="indicatorAreaLabel" optionGroupChildren="performanceIndicators"
+                                (completeMethod)="filterIndicateurQualitatif($event)" field="indicatorName"
+                                [multiple]="false" (onSelect)="onSelectIndicateurQualitatif($event)" [dropdown]="true"
+                                [(ngModel)]="line_indic.indicator">
+                                <ng-template let-group pTemplate="group">
+                                    <div class="p-d-flex p-ai-center">
+                                        <span>{{group.indicatorAreaLabel}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+
+                        </th>
+
+
+                        <th style="font-size: 13px;">
+                            <select class="form-control p-field" id="requiredLevel" name="side"
+                                [(ngModel)]="line_indic.targetLevel" style="font-size: 13px"
+                                [compareWith]="compareIndicatorScales">
+
+                                <option *ngFor="let scale of indicatorScalesList;" [ngValue]="scale">
+                                    {{scale.indicatorScaleLabel}} ({{scale.indicatorScaleValue}}%) </option>
+
+                            </select>
+                        </th>
+
+                        <th>
+                            <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                                class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                                background-color: #960032; border-color: #960032;"
+                                [disabled]="checkLineValidIndicQualitatif()"
+                                [ngClass]="{ disabled: checkLineValidIndicQualitatif() }"
+                                (click)="addLineIndic()"></button>
+                        </th>
+                    </tr>
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-line_indic>
+                    <tr class="p-selectable-row" style="text-align: left; font-size: 13px;">
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+
+                                    <p-autoComplete [group]="true" [suggestions]="indicatorsListQualitatif"
+                                        optionGroupLabel="indicatorAreaLabel"
+                                        optionGroupChildren="performanceIndicators"
+                                        (completeMethod)="filterIndicateurQualitatif($event)" field="indicatorName"
+                                        [multiple]="false" (onSelect)="changeIndicator(line_indic.indicator)"
+                                        [dropdown]="true" [(ngModel)]="line_indic.indicator">
+                                        <ng-template let-group pTemplate="group">
+                                            <div class="p-d-flex p-ai-center">
+                                                <span>{{group.indicatorAreaLabel}}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.indicator.indicatorName}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <select class="form-control p-field" id="requiredLevel" name="side"
+                                        [(ngModel)]="line_indic.targetValue" style="font-size: 13px"
+                                        [compareWith]="compareIndicatorScales">
+
+                                        <option *ngFor="let scale of indicatorScalesList;" [ngValue]="scale">
+                                            {{scale.indicatorScaleLabel}}</option>
+
+                                    </select>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.targetValue.indicatorScaleLabel}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="text-align: center;">
+                            <div style="display: flex;">
+
+                                <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
+                                    (click)="deleteLineIndic(line_indic)"></i>
+                            </div>
+
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr style="font-size: 13px;">
+                        <td colspan="8" style="text-align: left !important;">Aucun indicateur trouvé!</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-panel>
+
+
+        <button nbButton nbStepperPrevious>précedant</button>
+        <button nbButton nbStepperNext>suivant</button>
+
+
+    </nb-step>
+
+
+    <nb-step label="Indicateurs quantitatifs">
+
+        <p-panel header="Indicateurs quantitatifs">
+            <p-table #dt [value]="positionIndicatorListQuantitatif" dataKey="id" styleClass="p-datatable-customers"
+                currentPageReportTemplate="">
+                <ng-template pTemplate="header">
+                    <tr style="text-align: center; font-size: 13px;">
+                        <th style="text-align: left; font-size: 13px; width: 30%;">Indicateur</th>
+                        <th style="text-align: left; font-size: 13px; width: 20%;">Niveau cible</th>
+                        <th style="text-align: left; font-size: 13px; width: 20%;">Valeur maximal</th>
+                        <th style="text-align: left; font-size: 13px; width: 20%;">Valeur minimal</th>
+                        <th style="width:10%"></th>
+                    </tr>
+
+
+                    <tr>
+                        <th style="font-size: 13px;">
+
+
+                            <p-autoComplete [group]="true" [suggestions]=" indicatorsListQuantitatif"
+                                optionGroupLabel="indicatorAreaLabel" optionGroupChildren="performanceIndicators"
+                                (completeMethod)="filterIndicateurQuantitif($event)" field="indicatorName"
+                                [multiple]="false" (onSelect)="onSelectIndicateurQuantitatif($event)" [dropdown]="true"
+                                [(ngModel)]="line_indic.indicator">
+                                <ng-template let-group pTemplate="group">
+                                    <div class="p-d-flex p-ai-center">
+                                        <span>{{group.indicatorAreaLabel}}</span>
+                                    </div>
+                                </ng-template>
+                            </p-autoComplete>
+
+                        </th>
+
+
+                        <th style="font-size: 13px;">
+                            <input type="number" class="form-control p-field" id="targetValue"
+                                [(ngModel)]="line_indic.targetValue" (change)="changeTargetValue()" />
+                        </th>
+                        <th style="font-size: 13px;">
+                            <input type="number" class="form-control p-field" id="maxValue"
+                                [(ngModel)]="line_indic.maxValue" (change)="changeMaxValue()" />
+                        </th>
+                        <th style="font-size: 13px;">
+                            <input type="number" class="form-control p-field" id="minValue"
+                                [(ngModel)]="line_indic.minValue" (change)="changeMinValue()" />
+                        </th>
+
+
+                        <th>
+                            <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                                class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                            background-color: #960032; border-color: #960032;"
+                                [disabled]="checkLineValidIndicQuantitatif()"
+                                [ngClass]="{ disabled: checkLineValidIndicQuantitatif() }"
+                                (click)="addLineIndic()"></button>
+                        </th>
+                    </tr>
+
+                </ng-template>
+
+                <ng-template pTemplate="body" let-line_indic>
+                    <tr class="p-selectable-row" style="text-align: left; font-size: 13px;">
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+
+                                    <p-autoComplete [group]="true" [suggestions]=" indicatorsListQuantitatif"
+                                        optionGroupLabel="indicatorAreaLabel"
+                                        optionGroupChildren="performanceIndicators"
+                                        (completeMethod)="filterIndicateurQuantitif($event)" field="indicatorName"
+                                        [multiple]="false" (onSelect)="changeIndicator(line_indic.indicator)"
+                                        [dropdown]="true" [(ngModel)]="line_indic.indicator">
+                                        <ng-template let-group pTemplate="group">
+                                            <div class="p-d-flex p-ai-center">
+                                                <span>{{group.indicatorAreaLabel}}</span>
+                                            </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.indicator.indicatorName}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="number" class="form-control p-field" id="targetValue"
+                                        [(ngModel)]="line_indic.targetValue" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.targetValue}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="number" class="form-control p-field" id="maxValue"
+                                        [(ngModel)]="line_indic.maxValue" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.maxValue}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn style="text-align: left !important;">
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="number" class="form-control p-field" id="minValue"
+                                        [(ngModel)]="line_indic.minValue" />
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{line_indic.minValue}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                        <td style="text-align: center;">
+                            <div style="display: flex;">
+
+                                <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
+                                    (click)="deleteLineIndic(line_indic)"></i>
+                            </div>
+
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="emptymessage">
+                    <tr style="font-size: 13px;">
+                        <td colspan="8" style="text-align: left !important;">Aucun indicateur trouvé!</td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </p-panel>
+        <button nbButton nbStepperPrevious>précedant</button>
+        <button nbButton nbStepperNext>suivant</button>
+    </nb-step>
+    -->
+    <!--Poids-->
+    <nb-step label="Poids de position">
+        <div class="col-8 md-8 drop-column scrollable-container" style="height:300px;">
+            <p-table #dt [value]="position.evaluationCriteriaList" dataKey="id" styleClass="p-datatable-customers" [loading]="loading"
+                [filterDelay]="0">
+
+
+                <ng-template pTemplate="header">
+                    <tr style="text-align: center; font-size: 13px">
+                        <th style="text-align: left !important; font-size: 13px; width: 70%">Critère d'evaluation</th>
+                        <th style="text-align: center; font-size: 13px; width: 30%">Pondération (%)</th>
+                        <th style="text-align: center; font-size: 13px; width: 30%">Note</th>
+                    </tr>
+
+                </ng-template>
+                <ng-template pTemplate="body" let-evaluationP>
+
+                    <tr class="p-selectable-row">
+                        <td style="text-align: left !important;font-size: 13px;">
+                            {{evaluationP.evaluationCriteria.evaluationCriteriaLabel}}
+                        </td>
+                        <td style="text-align: center !important;font-size: 13px;">
+                            {{evaluationP.evaluationCriteria.evaluationCriteriaPondering}}
+                        </td>
+                        <td pEditableColumn style="text-align: center">
+
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input style="font-size: 13px !important" pInputText type="number" class="form-control p-field"
+                                        [(ngModel)]="evaluationP.note">
+                                </ng-template>
+                                <ng-template pTemplate="output" style="font-size: 13px !important;">
+                                    {{evaluationP.note}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                       <!-- <td style="text-align: center">
+                        <div>
+                            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                                (click)="deleteLineCre(line_cre)"></i>
+                        </div>
+                    </td> -->
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr style="font-size: 13px">
+                        <td colspan="8" style="text-align: left !important">
+                            Aucun critère trouvé!
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <button nbButton nbStepperPrevious>précedant</button>
+        <button nbButton nbStepperNext>suivant</button>
+
+    </nb-step>
+    <nb-step label="Missions">
+
+
+        <p-table #dt [value]="position.missions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+            [loading]="loading" currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="">
+
+
+            <ng-template pTemplate="header">
+                <tr style="text-align: center; font-size: 13px">
+                    <th style="text-align: left !important; font-size: 13px; width: 90%">Mission</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+
+                <tr>
+                    <th style="font-size: 13px;">
+
+
+                        <p-autoComplete [(ngModel)]="line_miss" [suggestions]="missionsList"
+                            (completeMethod)="filterMissions($event)" field="missionLabel" [dropdown]="true">
+                            <ng-template let-country pTemplate="item">
+                                <div class="country-item">
+                                    <div>{{country.missionLabel}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+
+
+                    </th>
+
+
+                    <th>
+                        <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                            class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                            background-color: #960032; border-color: #960032;" [disabled]="checkLineValidMiss()"
+                            [ngClass]="{ disabled: checkLineValidMiss() }" (click)="addLineMiss()"></button>
+                    </th>
+                </tr>
+
+
+            </ng-template>
+
+            <ng-template pTemplate="body" let-line_miss>
+
+                <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+
+                    <td pEditableColumn style="text-align: center !important;">
+
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                               
+
+                                <p-autoComplete  [suggestions]="missionsList"  
+                                    (completeMethod)="filterMissions($event)" field="missionLabel" [dropdown]="true">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{country.missionLabel}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-autoComplete>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{line_miss.missionLabel}}
+                            </ng-template>
+                        </p-cellEditor>
+
+                    </td>
+
+                    <td style="text-align: center">
+                        <div>
+                            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                                (click)="deleteLineMiss(line_mis)"></i>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr style="font-size: 13px">
+                    <td colspan="8" style="text-align: left !important">
+                        Aucune mission trouvée!
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+        <button nbButton nbStepperPrevious>précedant</button>
+
+
+
+
+
+        <div class="p-panel p-panel-header" style="margin-top: 20px; float: right; padding: 2%">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
+                (click)="cancel()"></button>
+
+            <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="savePosition()"
+                style="margin-left: 10px"></button>
+        </div>
+    </nb-step>
+    <nb-step label="Attributions">
+
+
+        <p-table #dt [value]="position.attributions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+            [loading]="loading" [filterDelay]="0">
+
+
+            <ng-template pTemplate="header">
+                <tr style="text-align: center; font-size: 13px">
+                    <th style="text-align: left !important; font-size: 13px; width: 90%">Attribution</th>
+                    <th style="width: 10%;"></th>
+                </tr>
+
+                <tr>
+                    <th style="font-size: 13px;">
+
+
+                        <p-autoComplete [(ngModel)]="line_miss" [suggestions]="attributionList"
+                            (completeMethod)="filterAttributions($event)" field="attributionLabel" [dropdown]="true">
+                            <ng-template let-attribution pTemplate="item">
+                                <div class="country-item">
+                                    <div>{{attribution.attributionLabel}}</div>
+                                </div>
+                            </ng-template>
+                        </p-autoComplete>
+
+
+                    </th>
+
+
+                    <th>
+                        <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                            class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                            background-color: #960032; border-color: #960032;" [disabled]="checkLineValidMiss()"
+                            [ngClass]="{ disabled: checkLineValidMiss() }" (click)="addLineMiss()"></button>
+                    </th>
+                </tr>
+
+
+            </ng-template>
+
+            <ng-template pTemplate="body" let-line_attribution>
+
+                <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+
+                    <td pEditableColumn style="text-align: center !important;">
+
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                               
+
+                                <p-autoComplete  [suggestions]="attributionList"  
+                                    (completeMethod)="filterAttributions($event)" field="attributionLabel" [dropdown]="true">
+                                    <ng-template let-country pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{line_attribution.attributionLabel}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-autoComplete>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{line_attribution.attributionLabel}}
+                            </ng-template>
+                        </p-cellEditor>
+
+                    </td>
+
+                    <td style="text-align: center">
+                        <div>
+                            <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+                                (click)="deleteLineMiss(line_mis)"></i>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage">
+                <tr style="font-size: 13px">
+                    <td colspan="8" style="text-align: left !important">
+                        Aucune attribution trouvée!
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+
+        <button nbButton nbStepperPrevious>précedant</button>
+
+
+
+
+
+        <div class="p-panel p-panel-header" style="margin-top: 20px; float: right; padding: 2%">
+            <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary"
+                (click)="cancel()"></button>
+
+            <button pButton pRipple label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="savePosition()"
+                style="margin-left: 10px"></button>
+        </div>
+    </nb-step>
+
+</nb-stepper>

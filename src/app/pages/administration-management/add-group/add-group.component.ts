@@ -58,7 +58,6 @@ export class AddGroupComponent implements OnInit {
       this.UtilsService.get(url).subscribe(
         (response:any) => {
           context.availableUsers = response;
-          console.log("liste des users------", context.availableUsers);
         },
         (error) => {
           this.UtilsService.showToast(

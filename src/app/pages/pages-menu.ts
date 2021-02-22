@@ -35,9 +35,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'home-outline',
       },
       {
-        title: 'Unités fonctionnelles',
+        title: 'Unités organisationnelles',
         link: '/zen-people-referential/organisation/business-units',
         icon: 'shuffle-outline',
+      },
+    
+      
+      {
+        title: "Catégories des positions",
+        link: '/zen-people-referential/organisation/position-categories',
+        icon: 'shuffle-2-outline',
+      },
+      {
+        title: "Positions",
+        link: '/zen-people-referential/organisation/positions',
+        icon: 'shuffle-2-outline',
       },
       {
         title: 'Catégories',

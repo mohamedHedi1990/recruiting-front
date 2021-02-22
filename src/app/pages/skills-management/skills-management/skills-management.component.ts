@@ -78,7 +78,7 @@ export class SkillsManagementComponent implements OnInit {
   }
 
   clickOnImportFileButton() {
-    console.log('click');
+    
   }
 
   clear(event){
@@ -274,7 +274,6 @@ export class SkillsManagementComponent implements OnInit {
   }
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.subSkill.skillLevels, event.previousIndex, event.currentIndex);
-    console.log("after----",this.subSkill.skillLevels);
     let i =1
     this.subSkill.skillLevels.forEach(skillLevel =>{
         skillLevel. orderValue = i;
@@ -283,7 +282,7 @@ export class SkillsManagementComponent implements OnInit {
   }
 
   addskillLevel() {
-    console.log(this.subSkill.skillLevels)
+   
     let index = this.subSkill.skillLevels.length;
     this.skillLevel.orderValue = index;
     this.subSkill.skillLevels.push(this.skillLevel);
@@ -326,7 +325,7 @@ export class SkillsManagementComponent implements OnInit {
   }
   saveNewSubskill(subSkill , open :boolean){
     let skill_id = this.skill.skillId
-    console.log(this.skill.skillId)
+    
     this.subSkill=subSkill;
     this.subSkill.skill = this.skill;
     delete this.subSkill.createdAt;
@@ -338,8 +337,7 @@ export class SkillsManagementComponent implements OnInit {
         delete element.updatedAt;
       });
     }
-    console.log('sub skill to add ------------------------------');
-    console.log(this.subSkill)
+
 
 
    this.skillsManagementService.put(SkillsManagementService.API_SKILL+skill_id+'/add-sub-skill',this.subSkill).subscribe(

@@ -43,12 +43,10 @@ export class AddNewCompanyComponent implements OnInit {
   cities_: Array<any>;
   changeCountry(count) {
     this.cities = this.worldMapData.getAllStatesFromCountry(count);
-    console.log(this.cities)
 
   }
   changeCountry_(count) {
     this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
-    console.log(this.cities_)
 
   }
  
@@ -84,8 +82,6 @@ export class AddNewCompanyComponent implements OnInit {
       logo: this.logo
     }
     this.addNewCompanyEvent.emit(companyObject);
-    console.log('------------------company object-------------------');
-    console.log(companyObject)
   }
 
   cancel() {
@@ -141,11 +137,11 @@ export class AddNewCompanyComponent implements OnInit {
     
   }
   telInputObject($event) {
-    console.log("telInputObject", $event)
+    
   }
   hasError($event) {
     this.CheckTelHasError = $event;
-    console.log("haserror", $event)
+  
 
   }
 }

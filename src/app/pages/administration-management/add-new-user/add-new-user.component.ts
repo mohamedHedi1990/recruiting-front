@@ -55,17 +55,14 @@ export class AddNewUserComponent implements OnInit {
   cities_: Array<any>;
   changeCountry(count) {
     this.cities = this.worldMapData.getAllStatesFromCountry(count);
-    console.log(this.cities)
 
   }
   changeCountry_(count) {
     this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
-    console.log(this.cities_)
 
   }
 
   ngOnInit(): void {
-    console.log("USER---------",this.user)
     
     this.changeCountry(this.user.userBirthCountry);
     this.changeCountry_(this.user.userPays);
@@ -186,20 +183,15 @@ export class AddNewUserComponent implements OnInit {
     this.user.userPhoneNumber = null;
 
     this.CheckTelHasError = true;
-    console.log("onCountryChange", $event)
   }
   telInputObject($event) {
-    console.log("telInputObject", $event)
   }
   hasError($event) {
     this.CheckTelHasError = $event;
-    console.log("haserror", $event)
 
   }
   getNumber($event) {
-    console.log("userPhone", this.user.userPhoneNumber)
     this.phone= $event;
-    console.log("getNumber", $event);
   }
 
 }

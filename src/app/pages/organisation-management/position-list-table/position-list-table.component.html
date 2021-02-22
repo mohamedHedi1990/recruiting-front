@@ -1,0 +1,143 @@
+
+
+<p-table #dt
+        [value]="positions_list"
+        dataKey="id"
+        styleClass="p-datatable-customers"
+        [rowHover]="true"
+        [rows]="10"
+        [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10, 15]"
+        [loading]="loading"
+        [paginator]="true"
+        currentPageReportTemplate=""
+        [filterDelay]="0"
+        >
+<ng-template pTemplate="caption">
+  <div>
+    <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
+      <span class="p-input-icon-left" style="width: 100%">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" style=" width: 93%" class="searchInput, p-inputtext"
+            (input)="dt.filterGlobal($event.target.value, 'contains')"
+            placeholder="Chercher une position.." />
+      </span>
+    </div>
+
+    <div style="float: right;">
+
+      <div style="display: flex">
+        <button pButton pRipple label="Ajouter" icon="pi pi-plus" class="primaryBtn" (click)="addNewPosition()"
+          style="margin-right: 10px;"></button>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="header">
+  <tr style="text-align: center; font-size: 15px">
+    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="positionLabel">
+      Dénomination
+    </th>
+    <th style="text-align: center; font-size: 13px; width: 25%" pSortableColumn="businessUnit.businessUnitLabel">
+      Unité organisationnelle
+    </th>
+
+    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="positionCategory.positionCategoryLabel">
+      Catégorie
+    </th>
+    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="hierarchicalManagerPosition.positionLabel">
+      Supérieure hiérarchique
+    </th>
+    <th style="text-align: center; font-size: 13px; width: 10%" pSortableColumn="positionWeight">
+      Poids
+    </th>
+
+    <th style="width: 10%; font-size: 13px; text-align: center">Action</th>
+  </tr>
+</ng-template>
+
+<ng-template pTemplate="body" let-positionTable>
+  <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+    <td style="text-align: center; font-size: 13px">
+      {{ positionTable.positionLabel }}
+
+    </td>
+
+    <td style="text-align: center">
+      <span *ngIf="position.businessUnit != null">
+        {{ positionTable.businessUnit.businessUnitLabel }}
+      </span>
+      <span *ngIf="position.businessUnit == null">
+        Non défini
+      </span>
+      
+    </td>
+
+    <td style="text-align: center; font-size: 13px">
+      <span *ngIf="position.positionCategory != null">
+        {{ positionTable.positionCategory.positionCategoryLabel }}
+      </span>
+      <span *ngIf="position.positionCategory == null">
+        Non défini
+      </span>
+     
+    </td>
+    <td style="text-align: center; font-size: 13px" >
+      <span *ngIf="position.hierarchicalManagerPosition != null">
+        {{ positionTable.hierarchicalManagerPosition.positionLabel }}
+      </span>
+      <span *ngIf="position.hierarchicalManagerPosition == null">
+        Non défini
+      </span>
+      <!-- 
+      {{position.hierarchicalManagerPosition.userPosition.user.userFirstName}}
+      {{position.hierarchicalManagerPosition.userPosition.user.userLastName}}
+      -->
+    </td>
+    <!--
+    <td style="text-align: center; font-size: 13px" *ngIf="position.fonctionalManagerPosition">
+      {{ position.fonctionalManagerPosition.positionLabel }}
+      {{position.fonctionalManagerPosition.userPosition.user.userFirstName}}
+      {{position.fonctionalManagerPosition.userPosition.user.userLastName}}
+    </td>
+    <td style="text-align: center; font-size: 13px" *ngIf="!position.fonctionalManagerPosition">
+      Non défini
+    </td>
+    -->
+    <td style="text-align: center; font-size: 13px">
+      {{ positionTable.positionWeight }}
+    </td>
+
+    <td style="text-align: center">
+      <div>
+
+        <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px"
+          (click)="editPosition(positionTable)"></i>
+        <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deletePosition(positionTable)"></i>
+      </div>
+    </td>
+  </tr>
+</ng-template>
+
+<ng-template pTemplate="emptymessage">
+  <tr style="font-size: 13px">
+    <td colspan="8" style="text-align: left !important">
+      Aucune position trouvée!
+    </td>
+  </tr>
+</ng-template>
+
+</p-table>
+
+<p-dialog header="{{titleHeader}}" [(visible)]="addNewPositionModal" [modal]="true" [style]="{width: '85vw'}" [baseZIndex]="10000"
+          [draggable]="false" [resizable]="false">
+    <ngx-add-new-position [position]="position"
+                           [positions_list]="positions_list"
+                           (addNewPositionEvent)="saveNewPosition($event)"
+
+                          (cancelEvent)="addNewPositionModal=false; initPosition();"
+                            >
+    </ngx-add-new-position>
+</p-dialog>

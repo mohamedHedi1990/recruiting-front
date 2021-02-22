@@ -52,7 +52,7 @@ export class CompanyComponent implements OnInit {
     const context = this;
     this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe( response => {
         context.companies = response;
-        console.log(context.companies)
+        
         
         
       },
@@ -68,7 +68,6 @@ export class CompanyComponent implements OnInit {
   saveNewCompany(companyObject) {
     delete this.company.createdAt;
     delete this.company.updatedAt;
-    console.log('----------company ---------------: ', companyObject);
     const context = this;
     this.company=companyObject.company;
    

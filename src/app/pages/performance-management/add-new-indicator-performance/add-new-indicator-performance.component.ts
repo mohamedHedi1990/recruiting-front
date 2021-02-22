@@ -159,7 +159,7 @@ export class AddNewIndicatorPerformanceComponent implements OnInit, OnChanges {
             this.ListScale.splice(i, 1);
             this.sortTable(this.ListScale , this.performanceIndicator.indicatorSens);
 
-            console.log('o2',this.ListScale)
+            
             break;
           }
       }

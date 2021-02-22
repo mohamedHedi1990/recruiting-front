@@ -17,7 +17,7 @@ export class UtilsService {
   public static REMOTE_ADDRESS = "http://localhost:8090/";
   public static REMOTE_ADMINISTRATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-administration';
 
-  public static REMOTE_ORGANISATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-organisation-management';
+  public static REMOTE_ORGANISATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-organisation-management/';
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "api/auth/signin";
   public static API_USER = UtilsService.REMOTE_ADMINISTRATION_URL+ "/api/user";
   public static API_SKILLS_GROUP = UtilsService.REMOTE_ADDRESS +"api/skills-group"

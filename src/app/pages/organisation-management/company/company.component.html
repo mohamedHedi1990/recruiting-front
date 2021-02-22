@@ -59,7 +59,7 @@ Sociétés
       <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
         <td>
 
-          <img *ngIf="company.companyLogoUrl != ''" [src]=" sanitizer.bypassSecurityTrustResourceUrl(company.companyLogoUrl )"
+          <img *ngIf="company.companyLogoUrl != ''" [src]="sanitizer.bypassSecurityTrustResourceUrl(company.companyLogoUrl)"
           style="width: 100px; height: 60px;">
           <img *ngIf="company.companyLogoUrl == ''" class="img_class" src="./../../../../assets/images/default_company_logo.jpg"
           style="width: 100px; height: 60px;">
