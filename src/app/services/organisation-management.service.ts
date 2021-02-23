@@ -16,6 +16,7 @@ export class OrganisationManagementService {
   public static API_FILE = OrganisationManagementService.bs_organisation_base_url+ 'api/file/';
   public static API_POSITION_CATEGORY= OrganisationManagementService.bs_organisation_base_url + "api/position-category";
   public static API_POSITION= OrganisationManagementService.bs_organisation_base_url + "api/position";
+  public static API_POSITION_LITE= OrganisationManagementService.bs_organisation_base_url + "api/position/lite";
   public static API_MISSION= OrganisationManagementService.bs_organisation_base_url + "api/mission";
 
   header = new HttpHeaders();
