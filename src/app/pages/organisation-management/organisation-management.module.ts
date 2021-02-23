@@ -90,8 +90,9 @@ import { AddNewPositionComponent } from './add-new-position/add-new-position.com
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropdownModule } from 'primeng/dropdown';
+import { AddSkillToPositionComponent } from './add-skill-to-position/add-skill-to-position.component';
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent, AddSkillToPositionComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,
