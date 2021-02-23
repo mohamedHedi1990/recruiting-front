@@ -38,7 +38,7 @@ export class PositionComponent implements OnInit {
   }
   getAllPositions(){
   const context = this;
-  this.organisationManagementService.get(OrganisationManagementService.API_POSITION).subscribe( response => {
+  this.organisationManagementService.get(OrganisationManagementService.API_POSITION_LITE).subscribe( response => {
       context.positions_list = response;
       console.log('-----------positions_list-----', this.positions_list)
      

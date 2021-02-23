@@ -14,7 +14,10 @@ export class PositionListTableComponent implements OnInit, OnChanges {
 position :Position  = new Position();
 loading;
 addNewPositionModal =false;
+viewPositionModal=false;
 titleHeader ="Ajouter une nouvelle position"
+titleViewPoition=null;
+viewPositionTable=[];
   constructor(private organisationManagementService: OrganisationManagementService , private utilsService: UtilsService,) { }
   ngOnChanges(changes: SimpleChanges): void {
     
@@ -58,5 +61,10 @@ titleHeader ="Ajouter une nouvelle position"
   initPosition(){
     this.position = new Position();
   }
-
+  viewPosition(positionTable){
+   this.titleViewPoition= "Fiche de la position "+positionTable.positionLabel +":";
+   console.log("-------------------",positionTable)
+this.viewPositionTable.push(positionTable);
+   this.viewPositionModal=true;
+  }
 }
