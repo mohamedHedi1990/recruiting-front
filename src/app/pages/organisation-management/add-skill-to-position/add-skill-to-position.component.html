@@ -5,8 +5,9 @@
     font-size: 20px !important;
     color: #222b45;
     margin-left: 10px;
-  ">
-  Ajouter des compétences aux positions
+  "
+>
+  Affecter des compétences aux positions
 </h4>
 <div
   class="card"
@@ -17,46 +18,59 @@
     border: solid;
   "
 >
-  <p-table #dt
-           [value]="positions_list"
-           dataKey="id"
-           styleClass="p-datatable-customers"
-           [rowHover]="true"
-           [rows]="10"
-           [showCurrentPageReport]="true"
-           [rowsPerPageOptions]="[10, 15]"
-           [paginator]="true"
-           currentPageReportTemplate=""
-           [filterDelay]="0"
+  <p-table
+    #dt
+    [value]="positions_list"
+    dataKey="id"
+    styleClass="p-datatable-customers"
+    [rowHover]="true"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 15]"
+    [paginator]="true"
+    currentPageReportTemplate=""
+    [filterDelay]="0"
   >
     <ng-template pTemplate="caption">
       <div>
-        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
-      <span class="p-input-icon-left" style="width: 100%">
-          <i class="pi pi-search"></i>
-          <input pInputText type="text" style=" width: 93%" class="searchInput, p-inputtext"
-                 (input)="dt.filterGlobal($event.target.value, 'contains')"
-                 placeholder="Chercher une position.." />
-      </span>
+        <div
+          class="p-d-flex p-ai-center p-jc-between"
+          style="width: 60%; display: inline-block"
+        >
+          <span class="p-input-icon-left" style="width: 100%">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              style="width: 93%"
+              class="searchInput, p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Chercher une position.."
+            />
+          </span>
         </div>
       </div>
     </ng-template>
 
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px">
-        <th style="text-align: center; font-size: 13px; width: 3rem;" >
-        </th>
-        <th style="text-align: left; font-size: 13px; width: 95%" pSortableColumn="positionLabel">
-          Dénomination
+        <th style="text-align: center; font-size: 13px; width: 3rem"></th>
+        <th
+          style="text-align: left; font-size: 13px; width: 95%"
+          pSortableColumn="positionLabel"
+        >
+          Position
         </th>
       </tr>
     </ng-template>
 
     <ng-template pTemplate="body" let-position let-expanded="expanded">
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px"
-          [pSelectableRow]="position"
-          name="position"
-          id="positionId"
+      <tr
+        class="p-selectable-row"
+        style="text-align: center; font-size: 13px"
+        [pSelectableRow]="position"
+        name="position"
+        id="positionId"
       >
         <td>
           <i
@@ -70,9 +84,13 @@
             class="pi pi-chevron-down"
           ></i>
         </td>
-        <td style="text-align: left !important; font-size: 13px">
+        <td style="text-align: left !important;
+        padding: 10px 10px 10px 10px !important;
+        font-size: 13px !important;
+        color: #222b45;
+        margin-left: 10px;
+        font-weight: bold;">
           {{ position.positionLabel }}
-
         </td>
       </tr>
     </ng-template>
@@ -82,92 +100,133 @@
           <div class="p-p-3">
             <p-table
               [value]="position.positionSubSkills"
-              dataKey="position.positionSubSkills.positionSubSkillId"
+              dataKey="position.positionId"
             >
               <ng-template pTemplate="header">
                 <tr style="text-align: center; font-size: 13px">
-                  <th style="width: 10%; font-size: 13px; text-align: center"></th>
-                  <th style="text-align: center; font-size: 13px; width: 40%">Sous compétence</th>
-                  <th style="text-align: center; font-size: 13px; width: 40%">Niveau réquis</th>
-                  <th style="width: 10%; font-size: 13px; text-align: center"></th>
+                  <th
+                    style="
+                      text-align: left !important;
+                      font-size: 13px;
+                      width: 60%;
+                    "
+                  >
+                    Compétence
+                  </th>
+                  <th style="text-align: center; font-size: 13px; width: 30%">
+                    Niveau réquis
+                  </th>
+                  <th
+                    style="width: 10%; font-size: 13px; text-align: center"
+                  ></th>
                 </tr>
+
                 <tr>
-                  <th style="font-size: 13px;">
-
+                  <th style="font-size: 13px">
+                    <p-autoComplete
+                      [group]="true"
+                      [suggestions]="skillsList"
+                      optionGroupLabel="skillLabel"
+                      optionGroupChildren="subSkills"
+                      (completeMethod)="filterSubSkills($event)"
+                      field="subSkillLabel"
+                      [multiple]="false"
+                      (onSelect)="onSelectSkills($event)"
+                      [dropdown]="true"
+                      [(ngModel)]="positionSubSkill.skill"
+                      [style]="{ height: '33.5px' }"
+                    >
+                      <ng-template let-group pTemplate="group">
+                        <div class="p-d-flex p-ai-center">
+                          <span>{{ group.skillLabel }}</span>
+                        </div>
+                      </ng-template>
+                    </p-autoComplete>
                   </th>
-                  <th style="font-size: 13px;">
-
-                  </th>
-                  <th style="font-size: 13px;">
-
+                  <th style="font-size: 13px">
+                    <select
+                      class="form-control p-field"
+                      id="requiredLevel"
+                      name="side"
+                      [(ngModel)]="positionSubSkill.level"
+                      style="font-size: 13px"
+                      [compareWith]="compareSkillLevel"
+                    >
+                      <option
+                        *ngFor="let level of skillLevelList"
+                        [ngValue]="level"
+                      >
+                        {{ level.skillLevelLabel }}
+                      </option>
+                    </select>
                   </th>
 
                   <th style="text-align: center">
+                    <button
+                      pButton
+                      placement="top"
+                      ngbTooltip="Ajouter"
+                      pRipple
+                      icon="pi pi-plus"
+                      class="p-button-rounded p-mr-2"
+                      style="background-color: #960032; border-color: #960032"
+                      [disabled]="checkValidPositionSubSkill()"
+                      [ngClass]="{ disabled: checkValidPositionSubSkill() }"
+                      (click)="savePositionSubSkill(position)"
+                    ></button>
                   </th>
                 </tr>
-      <tr>
-        <th style="font-size: 13px;">
-        </th>
-        <th style="font-size: 13px;">
-          <p-autoComplete [group]="true" [suggestions]="skillsList" optionGroupLabel="skillLabel"
-                          optionGroupChildren="subSkills" (completeMethod)="filterSubSkills($event)"
-                          field="subSkillLabel" [multiple]="false" (onSelect)="onSelectSkills($event)"
-                          [dropdown]="true" [(ngModel)]="positionSubSkill.skill" [style]="{'height': '33.5px'}">
-            <ng-template let-group pTemplate="group">
-              <div class="p-d-flex p-ai-center">
-                <span>{{group.skillLabel}}</span>
-              </div>
-            </ng-template>
-          </p-autoComplete>
-        </th>
-        <th style="font-size: 13px;">
-          <select class="form-control p-field" id="requiredLevel" name="side"
-                  [(ngModel)]="positionSubSkill.level" style="font-size: 13px" [compareWith]="compareSkillLevel">
+              </ng-template>
+              <ng-template
+                pTemplate="body"
+                let-positionSubSkill
+                let-rowIndex="rowIndex"
+              >
+                <tr
+                  class="p-selectable-row"
+                  style="text-align: center; font-size: 13px"
+                >
+                  <td
+                    pEditableColumn
+                    style="text-align: left !important; font-size: 13px"
+                  >
+                    {{ positionSubSkill.subSkill.subSkillLabel }}
+                  </td>
+                  <td
+                    pEditableColumn
+                    style="text-align: center !important; font-size: 13px"
+                  >
+                    {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+                  </td>
 
-            <option *ngFor="let level of skillLevelList;" [ngValue]="level">{{level.skillLevelLabel}}
-            </option>
+                  <td style="text-align: center">
+                    <i
+                      placement="top"
+                      ngbTooltip="Supprimer"
+                      class="pi pi-trash"
+                      (click)="
+                        deletePositionSubSkill(
+                          position,
+                          positionSubSkill,
+                          rowIndex
+                        )
+                      "
+                    ></i>
+                  </td>
+                </tr>
+              </ng-template>
 
-          </select>
-        </th>
-
-        <th style="text-align: center">
-          <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
-                  class="p-button-rounded p-mr-2" style="background-color: #960032;
-                       border-color: #960032;" [disabled]="checkValidPositionSubSkill()"
-                  [ngClass]="{ disabled: checkValidPositionSubSkill() }" (click)="savePositionSubSkill(position)"></button>
-        </th>
-      </tr>
-
-    </ng-template>
-    <ng-template pTemplate="body" let-positionSubSkill let-rowIndex="rowIndex">
-
-      <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
-        <td pEditableColumn style="text-align: left !important; font-size: 13px">
-
+              <ng-template pTemplate="emptymessage">
+                <tr style="font-size: 13px">
+                  <td colspan="8" style="text-align: left !important">
+                    Aucune compétence a été ajoutée pour cette position!
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
         </td>
-        <td pEditableColumn style="text-align: left !important; font-size: 13px">
-         {{positionSubSkill.subSkill.subSkillLabel}}
-        </td>
-        <td pEditableColumn style="text-align: left !important; font-size: 13px">
-          {{positionSubSkill.requiredLevel.skillLevelLabel}}
-        </td>
-
-        <td style="text-align: center">
-
-          <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
-             (click)="deletePositionSubSkill(position,positionSubSkill,rowIndex)"></i>
-        </td>
-      </tr>
-    </ng-template>
-
-    <ng-template pTemplate="emptymessage">
-      <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important">
-          Aucune position trouvée!
-        </td>
-      </tr>
-    </ng-template>
-
-  </p-table>
-
+      </tr></ng-template
+    ></p-table
+  >
 </div>
