@@ -21,7 +21,7 @@
   <p-table
     #dt
     [value]="positions_list"
-    dataKey="id"
+    dataKey="positionId"
     styleClass="p-datatable-customers"
     [rowHover]="true"
     [rows]="10"
@@ -70,7 +70,7 @@
         style="text-align: center; font-size: 13px"
         [pSelectableRow]="position"
         name="position"
-        id="positionId"
+        id="position"
       >
         <td>
           <i
@@ -170,8 +170,8 @@
             icon="pi pi-plus"
             class="p-button-rounded p-mr-2"
             style="background-color: #960032; border-color: #960032"
-            [disabled]="checkValidPositionSubSkill()"
-            [ngClass]="{ disabled: checkValidPositionSubSkill() }"
+            [disabled]="checkValidPositionSubSkill(position)"
+            [ngClass]="{ disabled: checkValidPositionSubSkill(position) }"
             (click)="savePositionSubSkill(position)"
           ></button>
         </th>
@@ -196,7 +196,28 @@
           pEditableColumn
           style="text-align: center !important; font-size: 13px"
         >
-          {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <select
+                class="form-control p-field"
+                id="requiredLevel"
+                name="side"
+                [(ngModel)]="positionSubSkill.requiredLevel"
+                style="font-size: 13px"
+                [compareWith]="compareSkillLevel" (change)="editPositionSubSkill(positionSubSkill)"
+              >
+                <option
+                  *ngFor="let level of positionSubSkill.subSkill.skillLevels"
+                  [ngValue]="level"
+                >
+                  {{ level.skillLevelLabel }}
+                </option>
+              </select>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+            </ng-template>
+          </p-cellEditor>
         </td>
 
         <td style="text-align: center">

@@ -63,7 +63,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'shuffle-2-outline',
       },
       {
-        title: "Ajouter compétence au position",
+        title: "Affectation des compétences",
         link: '/zen-people-referential/organisation/add-skill-to-position',
         icon: 'shuffle-2-outline',
       },

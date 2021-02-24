@@ -54,8 +54,20 @@ export class AddSkillToPositionComponent implements OnInit {
 
   }
 
-  checkValidPositionSubSkill() {
-    return this.positionSubSkill.skill == null || this.positionSubSkill.level == null;
+  checkValidPositionSubSkill(position) {
+    //let contains=true;
+
+    return this.positionSubSkill.skill == null || this.positionSubSkill.level == null ||
+      position.positionSubSkills.some(positionSubSkill =>
+                           positionSubSkill.subSkill.subSkillId == this.positionSubSkill.skill.subSkillId );
+  }
+  positionContainsSubSkill(position){
+    position.positionSubSkills.forEach(positionSubSkill => {
+      if(positionSubSkill.subSkill.subSkillId == this.positionSubSkill.skill.subSkillId){
+        return true;
+      }
+    })
+    return false;
   }
 
  initPositionSubSkill() {
@@ -93,6 +105,7 @@ export class AddSkillToPositionComponent implements OnInit {
   onSelectSkills(event)
   {
     this.skillLevelList=event.skillLevels;
+    this.positionSubSkill.level=null;
   }
 
   compareSkillLevel(a, b) {
@@ -112,6 +125,22 @@ export class AddSkillToPositionComponent implements OnInit {
         );
       }
     );
+  }
+
+  editPositionSubSkill(positionSubSkill){
+    this.skillsManagementService.post(SkillsManagementService.API_POSITION_SUB_SKILL,positionSubSkill).subscribe(
+      response => {
+        this.skillsManagementService.showToast('success',
+          'Compétence modifiée avec succé',
+          `La compétence  ${positionSubSkill.subSkill.subSkillLabel} du position a été modifiée avec succcés`);
+        this.getAllPositions();
+        this.initPositionSubSkill();
+      },
+      error => {
+        this.skillsManagementService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors du modification de compétence du position`);
+      });
   }
 
 }
