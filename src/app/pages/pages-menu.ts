@@ -39,8 +39,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/business-units',
         icon: 'shuffle-outline',
       },
-    
-      
+
+
       {
         title: "Catégories des positions",
         link: '/zen-people-referential/organisation/position-categories',
@@ -77,6 +77,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Gestion des compétences',
         link: '/zen-people-referential/skills/skills-management',
+        icon: 'award-outline',
+      },
+      {
+        title: "Affectation des compétences",
+        link: '/zen-people-referential/skills/add-skill-to-position',
         icon: 'award-outline',
       },
     ],
