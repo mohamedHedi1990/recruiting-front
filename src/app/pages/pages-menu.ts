@@ -62,11 +62,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/evaluation-criteria',
         icon: 'shuffle-2-outline',
       },
-      {
-        title: "Affectation des compétences",
-        link: '/zen-people-referential/organisation/add-skill-to-position',
-        icon: 'shuffle-2-outline',
-      },
 
     ],
   },
@@ -82,6 +77,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Gestion des compétences',
         link: '/zen-people-referential/skills/skills-management',
+        icon: 'award-outline',
+      },
+      {
+        title: "Affectation des compétences",
+        link: '/zen-people-referential/skills/add-skill-to-position',
         icon: 'award-outline',
       },
     ],

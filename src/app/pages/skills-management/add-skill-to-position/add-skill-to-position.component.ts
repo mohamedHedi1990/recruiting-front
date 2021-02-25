@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {OrganisationManagementService} from "../../../services/organisation-management.service";
 import {SkillsManagementService} from "../../../services/skills-management.service";
-import {SubSkill} from "../../../models/SubSkill.model";
-import {UtilsService} from "../../../services/utils.service";
 
 @Component({
   selector: 'ngx-add-skill-to-position',
@@ -55,8 +53,6 @@ export class AddSkillToPositionComponent implements OnInit {
   }
 
   checkValidPositionSubSkill(position) {
-    //let contains=true;
-
     return this.positionSubSkill.skill == null || this.positionSubSkill.level == null ||
       position.positionSubSkills.some(positionSubSkill =>
                            positionSubSkill.subSkill.subSkillId == this.positionSubSkill.skill.subSkillId );

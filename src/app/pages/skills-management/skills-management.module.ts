@@ -45,9 +45,11 @@ import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
 import { FileUploadModule } from 'primeng/fileupload';
+import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-position.component";
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
-  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent],
+  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent],
   imports: [
     CommonModule,
     SkillsManagementRoutingModule,
@@ -77,9 +79,11 @@ import { FileUploadModule } from 'primeng/fileupload';
     DialogModule,
     DynamicDialogModule,
     ConfirmDialogModule,
-    DragDropModule
+    DragDropModule,
+    AutoCompleteModule
+
   ],
- 
+
   providers: [
     DialogService,
     ConfirmationService,

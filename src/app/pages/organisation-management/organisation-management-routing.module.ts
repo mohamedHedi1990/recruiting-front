@@ -6,7 +6,6 @@ import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-eval
 import { PositionComponent } from './position/position.component';
 import { PositionCategoryComponent } from './position-category/position-category.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
-import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-position.component";
 
 export const routes: Routes = [
   {
@@ -35,9 +34,6 @@ export const routes: Routes = [
     {
       path:'categories',
       component:ListCategoriesComponent,
-    },{
-      path:'add-skill-to-position',
-      component:AddSkillToPositionComponent,
     }
   ],
 
