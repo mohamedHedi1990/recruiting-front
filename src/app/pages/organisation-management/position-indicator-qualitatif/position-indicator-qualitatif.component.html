@@ -1,0 +1,177 @@
+<p-tabView>
+  <p-tabPanel header="Unités organisationnelles">
+  </p-tabPanel>
+  <p-tabPanel header="Positions">
+    <h4 style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;
+    margin-left: 10px;
+  ">
+  Affecter des indicateurs qualitatifs aux positions
+</h4>
+<div class="p-p-3">
+
+  <p-table #dt [value]="positionWithIndicator" dataKey="positionId" styleClass="p-datatable-customers" [rowHover]="true"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[]">
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
+        <span class="p-input-icon-left" style="width: 100%">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" style="width: 93%" class="searchInput, p-inputtext"
+            (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une position.." />
+        </span>
+
+
+      </div>
+
+    </ng-template>
+
+
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 15px">
+        <th style="text-align: center;font-size: 13px; width: 3rem"></th>
+        <th style="text-align: left; font-size: 13px; width: 95% ">Position</th>
+        <th style="text-align: center; font-size: 13px; width: 3rem"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-position let-expanded="expanded">
+
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="position" name="position"
+        id="positionIndicatorId">
+        <td>
+          <i *ngIf="!expanded" [pRowToggler]="position" class="pi pi-chevron-right"></i>
+          <i *ngIf="expanded" [pRowToggler]="position" class="pi pi-chevron-down"></i>
+        </td>
+        <td style="text-align: left !important;
+      padding: 10px 10px 10px 10px !important;
+      font-size: 13px !important;
+      color: #222b45;
+      margin-left: 10px;
+      font-weight: bold;">
+          {{ position.positionLabel}}
+        </td>
+        <td>
+          <div
+            style="
+                float: left;
+                background-color: #960032;
+                color: white;
+                width: 20px;
+                height: 20px;
+                border-radius: 40%;
+                margin-left: -60px;
+                margin-top: -3px;
+              "
+            ngbTooltip="{{ position.positionIndicatorList.length }} indicateur(s) affecter"
+          >
+            {{position.positionIndicatorList.length }}
+          </div>
+
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-position>
+      <tr>
+        <td colspan="5">
+          <div class="p-p-3">
+            <p-table [value]="position.positionIndicatorList"
+              dataKey="position.positionIndicatorList.positionIndicatorId">
+              <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px">
+        <th style="text-align: left !important; font-size: 13px; width: 50%">Indicateur</th>
+        <th style="text-align: center; font-size: 13px; width: 40%;">Niveau</th>
+        <th style="width: 10%; font-size: 13px; text-align: center"></th>
+      </tr>
+
+
+
+      <tr>
+
+        <th style="font-size: 13px;">
+          <p-autoComplete [group]="true" [suggestions]="indicatorsListQualitatif" optionGroupLabel="indicatorAreaLabel"
+            optionGroupChildren="performanceIndicators" (completeMethod)="filterIndicateurQualitatif($event)"
+            field="indicatorName" [multiple]="false" (onSelect)="onSelectIndicateurQualitatif($event)" [dropdown]="true"
+            [(ngModel)]="positionIndicator.indicator" [style]="{'height': '33.5px'}">
+            <ng-template let-group pTemplate="group">
+              <div class="p-d-flex p-ai-center">
+                <span>{{group.indicatorAreaLabel}}</span>
+              </div>
+            </ng-template>
+          </p-autoComplete>
+        </th>
+        <th style="font-size: 13px;">
+          <select class="form-control p-field" id="requiredLevel" name="side"
+            [(ngModel)]="positionIndicator.targetLevel" style="font-size: 13px" [compareWith]="compareIndicatorScales">
+
+            <option *ngFor="let scale of indicatorScalesList;" [ngValue]="scale">
+              {{scale.indicatorScaleLabel}} ({{scale.indicatorScaleValue}}%) </option>
+
+          </select>
+        </th>
+
+        <th style="text-align: center">
+          <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus" class="p-button-rounded p-mr-2"
+            style="margin-right: 7px;
+        background-color: #960032; border-color: #960032;" [disabled]="checkLineValidIndicQualitatif(position)"
+            [ngClass]="{ disabled: checkLineValidIndicQualitatif(position) }" (click)="addPositionIndicator(position)"></button>
+        </th>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-positionIndicator let-rowIndex="rowIndex">
+
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+
+        <td pEditableColumn style="text-align: left !important; font-size: 13px">
+          {{positionIndicator.indicator.indicatorName}}
+        </td>
+        <td pEditableColumn style="text-align: center !important; font-size: 13px">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <select class="form-control p-field" id="requiredLevel" name="side"
+            [(ngModel)]="positionIndicator.targetLevel" style="font-size: 13px" [compareWith]="compareIndicatorScales"
+            (change)="editPositionIndicator(positionIndicator)"
+            >
+
+            <option *ngFor="let scale of positionIndicator.indicator.indicatorScales;" [ngValue]="scale">
+              {{scale.indicatorScaleLabel}} ({{scale.indicatorScaleValue}}%) </option>
+
+          </select>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{positionIndicator.targetLevel.indicatorScaleLabel}}            
+            </ng-template>
+          </p-cellEditor>
+        </td>
+
+        <td style="text-align: center">
+
+          <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+            (click)="deletePositionIndicator(position,positionIndicator,rowIndex)"></i>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important">
+          Aucune indicateur qualitatif a été ajoutée pour cette position!
+        </td>
+      </tr>
+    </ng-template>
+    
+  </p-table>
+</div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+  </p-tabPanel>
+</p-tabView> 
+
+

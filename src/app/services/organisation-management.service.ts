@@ -11,12 +11,13 @@ export class OrganisationManagementService {
 
   public static REMOTE_ADDRESS = "http://localhost:8090/";
   public static bs_organisation_base_url = OrganisationManagementService.REMOTE_ADDRESS +'bs-organisation-management/';
-  public static API_COMPANY= OrganisationManagementService.bs_organisation_base_url + "api/company";
-  public static API_BUSINESS_UNIT= OrganisationManagementService.bs_organisation_base_url + "api/business-unit";
+  public static API_COMPANY= OrganisationManagementService.bs_organisation_base_url + "api/company/";
+  public static API_BUSINESS_UNIT= OrganisationManagementService.bs_organisation_base_url + "api/business-unit/";
   public static API_FILE = OrganisationManagementService.bs_organisation_base_url+ 'api/file/';
-  public static API_POSITION_CATEGORY= OrganisationManagementService.bs_organisation_base_url + "api/position-category";
-  public static API_POSITION= OrganisationManagementService.bs_organisation_base_url + "api/position";
-  public static API_MISSION= OrganisationManagementService.bs_organisation_base_url + "api/mission";
+  public static API_POSITION_CATEGORY= OrganisationManagementService.bs_organisation_base_url + "api/position-category/";
+  public static API_POSITION= OrganisationManagementService.bs_organisation_base_url + "api/position/";
+  public static API_MISSION= OrganisationManagementService.bs_organisation_base_url + "api/mission/";
+  //public static API_POSITION_INDICATOR= OrganisationManagementService.API_POSITION+"get-all-position-with-quantitatif-indicator"
 
   header = new HttpHeaders();
   constructor(
