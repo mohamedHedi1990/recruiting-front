@@ -1,4 +1,5 @@
 import { NbMenuItem } from '@nebular/theme';
+import { icon } from 'leaflet';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -61,7 +62,8 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Critères d'évaluation",
         link: '/zen-people-referential/organisation/evaluation-criteria',
         icon: 'shuffle-2-outline',
-      },
+      }
+      
 
     ],
   },
@@ -101,6 +103,22 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/performance/indicator-management',
         icon: 'bar-chart-outline',
       },
+      
+      {
+      title: 'Affecter des indicateurs',
+      icon: 'radio-button-on-outline',
+      children: [
+        {
+          title: 'Qualitatif',
+          link: '/zen-people-referential/organisation/position-indicator-qualitatif',
+          icon: 'home-outline',
+        },
+        {
+          title: 'Quantitatif',
+          link: '/zen-people-referential/organisation/position-indicator-quantitatif',
+          icon: 'shuffle-outline',
+        },]
+      }
     ],
 
   },

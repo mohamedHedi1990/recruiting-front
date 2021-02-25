@@ -6,6 +6,8 @@ import { CriteriaEvaluationComponent } from './criteria-evaluation/criteria-eval
 import { PositionComponent } from './position/position.component';
 import { PositionCategoryComponent } from './position-category/position-category.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
+import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
+import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +36,14 @@ export const routes: Routes = [
     {
       path:'categories',
       component:ListCategoriesComponent,
+    },
+    {
+      path:'position-indicator-qualitatif',
+      component:PositionIndicatorQualitatifComponent
+    },
+    {
+      path:'position-indicator-quantitatif',
+      component:PositionIndicatorQuantitatifComponent
     }
   ],
 

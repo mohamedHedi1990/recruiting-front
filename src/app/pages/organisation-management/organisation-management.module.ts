@@ -90,13 +90,15 @@ import { AddNewPositionComponent } from './add-new-position/add-new-position.com
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropdownModule } from 'primeng/dropdown';
-import { AddSkillToPositionComponent } from '../skills-management/add-skill-to-position/add-skill-to-position.component';
+import {TabViewModule} from 'primeng/tabview';
+import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
+import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent],
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,
-
+    TabViewModule,
     NbMenuModule,
     TableModule,
     CheckboxModule,
