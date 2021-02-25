@@ -86,12 +86,12 @@ export class AddNewPositionComponent implements OnInit  {
     this.getAllCompanies();
     //this.getAllUnits();
     this.getAllCategories();
-    
-   
+
+
     this.getAllMissions();
     this.getAllAttributions();
-    
-  
+
+
   }
   getAllCompanies() {
     this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe(response => {
@@ -139,9 +139,9 @@ export class AddNewPositionComponent implements OnInit  {
     console.log(event);
   }
   filterSubSkills(event) {
-  
+
     this.getAllSkills();
-    
+
   }
   filterMissions(event)
   {
@@ -304,7 +304,7 @@ this.attributionList = [];
         context.criteriaList.forEach(criteria => {
           context.position.evaluationCriteriaList.push(new PositionEvaluationCriteria(criteria, 0));
         });
-      
+
       },
       (error) => {
         this.utilsService.showToast(
@@ -337,8 +337,6 @@ this.attributionList = [];
 
   onSelectSkills(event)
   {
-    console.log("-------select sous competance--------------");
-    console.log(event);
     this.skillLevelList=event.skillLevels;
   }
   comparePosition(a, b) {

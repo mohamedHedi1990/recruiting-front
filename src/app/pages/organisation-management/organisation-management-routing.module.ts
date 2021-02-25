@@ -48,7 +48,7 @@ export const routes: Routes = [
   ],
 
 }
-  
+
 ];
 
 const config: ExtraOptions = {

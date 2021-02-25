@@ -91,7 +91,6 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropdownModule } from 'primeng/dropdown';
 import {TabViewModule} from 'primeng/tabview';
-
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
 @NgModule({
@@ -134,7 +133,7 @@ import { PositionIndicatorQualitatifComponent } from './position-indicator-quali
     DragDropModule,
     NgSelectModule,
     NbStepperModule,
-    
+
 
     MatAutocompleteModule,
     MatBadgeModule,
@@ -172,7 +171,7 @@ import { PositionIndicatorQualitatifComponent } from './position-indicator-quali
     MatTooltipModule,
     MatTreeModule,
     AutoCompleteModule,
-    
+
   ],
   providers: [
     DialogService,
