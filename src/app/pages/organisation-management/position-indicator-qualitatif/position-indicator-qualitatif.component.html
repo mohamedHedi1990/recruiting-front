@@ -11,7 +11,13 @@
   ">
   Affecter des indicateurs qualitatifs aux positions
 </h4>
-<div class="p-p-3">
+<div  class="card"
+style="
+  margin: auto;
+  margin-top: 3%;
+  border-color: #e7e8e8 !important;
+  border: solid;
+">
 
   <p-table #dt [value]="positionWithIndicator" dataKey="positionId" styleClass="p-datatable-customers" [rowHover]="true"
     [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
@@ -33,8 +39,8 @@
     <ng-template pTemplate="header">
       <tr style="text-align: center; font-size: 15px">
         <th style="text-align: center;font-size: 13px; width: 3rem"></th>
-        <th style="text-align: left; font-size: 13px; width: 95% ">Position</th>
-        <th style="text-align: center; font-size: 13px; width: 3rem"></th>
+        <th style="text-align: left; font-size: 13px; width: 90% ">Position</th>
+        <th style="text-align: center; font-size: 13px;  width: 10%"></th>
       </tr>
     </ng-template>
 

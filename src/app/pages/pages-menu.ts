@@ -82,9 +82,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'award-outline',
       },
       {
-        title: "Affectation des compétences",
+        title: "Affectation",
         link: '/zen-people-referential/skills/add-skill-to-position',
-        icon: 'award-outline',
+        icon: 'checkmark-square-outline',
       },
     ],
 
@@ -105,18 +105,18 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
       
       {
-      title: 'Affecter des indicateurs',
-      icon: 'radio-button-on-outline',
+      title: 'Affectation',
+      icon: 'checkmark-square-outline',
       children: [
         {
-          title: 'Qualitatif',
+          title: 'Qualitatifs',
           link: '/zen-people-referential/organisation/position-indicator-qualitatif',
-          icon: 'home-outline',
+          icon: 'radio-button-off-outline',
         },
         {
-          title: 'Quantitatif',
+          title: 'Quantitatifs',
           link: '/zen-people-referential/organisation/position-indicator-quantitatif',
-          icon: 'shuffle-outline',
+          icon: 'radio-button-off-outline',
         },]
       }
     ],
