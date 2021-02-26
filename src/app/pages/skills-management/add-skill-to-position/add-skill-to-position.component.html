@@ -61,6 +61,7 @@
         >
           Position
         </th>
+        <th style="text-align: center; font-size: 13px; width: 3rem"></th>
       </tr>
     </ng-template>
 
@@ -91,6 +92,23 @@
         margin-left: 10px;
         font-weight: bold;">
           {{ position.positionLabel }}
+        </td>
+        <td>
+            <div
+              style="
+                float: left;
+                background-color: #960032;
+                color: white;
+                width: 20px;
+                height: 20px;
+                border-radius: 40%;
+                margin-right: 7px;
+                margin-top: -3px;
+              "
+              ngbTooltip="{{ position.positionSubSkills.length }} sous compétence(s) affecter"
+            >
+              {{ position.positionSubSkills.length }}
+            </div>
         </td>
       </tr>
     </ng-template>
