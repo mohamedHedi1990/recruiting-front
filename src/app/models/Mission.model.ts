@@ -1,9 +1,17 @@
 export class Mission {
   missionId: number;
-
   missionLabel: string;
 
   missionCode: string;
 
-  constructor() {}
+    constructor(){
+        this.missionId=null;
+	
+        this.missionLabel='';
+        
+        this.missionCode='';
+    }
+
 }
+
+

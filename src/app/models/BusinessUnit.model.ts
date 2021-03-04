@@ -12,4 +12,5 @@ export class BusinessUnit{
     parentBusinessUnit  
     businessUnitCity 
     businessUnitCountry 
+    company
 }

@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { Attribution } from '../../../models/attribution.model';
 import { BusinessUnit } from '../../../models/BusinessUnit.model';
 import { Company } from '../../../models/Company.model';
@@ -13,7 +11,6 @@ import { Position } from '../../../models/Position.model';
 import { PositionEvaluationCriteria } from '../../../models/PositionEvaluationCriteria.model';
 import { PositionIndicator } from '../../../models/PositionIndicator.model';
 import { PositionSubSkill } from '../../../models/PositionSubSkill.model';
-import { SkillLevel } from '../../../models/SkillLevel.model';
 import { SubSkill } from '../../../models/SubSkill.model';
 import { OrganisationManagementService } from '../../../services/organisation-management.service';
 import { PerformanceManagementService } from '../../../services/performance-management.service';
@@ -25,7 +22,7 @@ import { UtilsService } from '../../../services/utils.service';
   templateUrl: './add-new-position.component.html',
   styleUrls: ['./add-new-position.component.scss'],
 })
-export class AddNewPositionComponent implements OnInit  {
+export class AddNewPositionComponent implements OnInit, OnChanges  {
   @Input() position = new Position();
   @Input()  positions_list: Position[];
   @Output() addNewPositionEvent = new EventEmitter();
@@ -41,6 +38,13 @@ export class AddNewPositionComponent implements OnInit  {
   line_indic = new PositionIndicator();
   line_cre = new EvaluationCriteria();
   line_miss = new Mission();
+  line_attr = new Attribution();
+  line_role = {
+    "roleId":null,
+    "hierarchicalManagerPosition":null,
+    "roleLabel":""
+  }
+
   indicatorScalesList = [];
   skillLevelList = [];
   categories = [];
@@ -49,61 +53,83 @@ export class AddNewPositionComponent implements OnInit  {
   loading;
   missionsList: Mission[];
   attributionList: Attribution[];
+  roleList:[]
   companies : Company[];
   areas=[];
+  linearMode = false;
 
   constructor(private organisationManagementService: OrganisationManagementService ,
     private performanceManagementService: PerformanceManagementService,
     private skillsManagementService: SkillsManagementService,
     private router: Router, private utilsService: UtilsService,
     private _formBuilder: FormBuilder) { }
+    ngOnChanges(changes: SimpleChanges): void {
+
+      console.log('changes: ', changes);
+      if (this.position.positionId == null) {
+        this.getAllCriteria();
+      }
+    }
 
 
   ngOnInit(): void {
-    /*if(this.position.positionIndicatorList){
-    this.position.positionIndicatorList.forEach(positionIndicator =>{
-      if(positionIndicator.indicator.indicatorType ==='QUALITATIF'){
-        this.positionIndicatorListQualitatif.push(positionIndicator);
-      }
-      if(positionIndicator.indicator.indicatorType ==='QUANTITATIF'){
-        this.positionIndicatorListQuantitatif.push(positionIndicator);
-      }
-
-
-    })
-
-  }*/
-    /*this.getAllIndicatorAreas();
-    this.getAllSkills();
-    this.getAllIndicators();
-     this.initiateLine();
-    */
-
-   ;
+    this.linearMode = false;
    if(this.position.positionId == null) {
     this.getAllCriteria();
    }
-    this.getAllCompanies();
-    //this.getAllUnits();
-    this.getAllCategories();
 
+    this.getAllCompanies();
+    this.getAllCategories();
 
     this.getAllMissions();
     this.getAllAttributions();
-
-
+    this.getAllRoles();
   }
+
   getAllCompanies() {
     this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe(response => {
       this.companies = response;
     })
   }
   getAllUnitsByCompany() {
+    let id = this.position.company.companyId;
     this.businessUnitsList = [];
+    this.organisationManagementService.get(OrganisationManagementService.API_COMPANY+id+'/business-unit-list').subscribe(response => {
+      this.businessUnitsList = response;
+
+    })
+
+  }
+  getAllPositionsByCompany() {
+    let id = this.position.company.companyId;
+    this.positions_list = [];
+    this.organisationManagementService.get(OrganisationManagementService.API_COMPANY+id+'/positions-list').subscribe(response => {
+      this.positions_list = response;
+
+
+
+    })
+
+
+  }
+  getUnitByHirarchicalManager(hierarchicalManagerPosition : Position){
+    if(hierarchicalManagerPosition == null){
+      this.getAllUnitsByCompany();
+    }else{
+      this.position.businessUnit = hierarchicalManagerPosition.businessUnit;
+    }
   }
   getAllAttributions() {
-    this.attributionList = [];
+    //this.attributionList = [];
+    this.organisationManagementService.get(OrganisationManagementService.API_ATTRIBUTION).subscribe(response => {
+      this.attributionList = response;
+    })
 
+  }
+  getAllRoles(){
+    this.organisationManagementService.get(OrganisationManagementService.API_FUNCTIONAL_ROLE).subscribe(response => {
+      this.roleList = response;
+    })
   }
   changeTargetValue()
   {
@@ -148,10 +174,12 @@ export class AddNewPositionComponent implements OnInit  {
     this.getAllMissions();
   }
   filterAttributions(event) {
-this.attributionList = [];
+    this.getAllAttributions();
+  }
+  filterRoles(event){
+    this.getAllRoles();
   }
   changeSubSkill(subSkill: SubSkill) {
-
     this.skillLevelList = subSkill.skillLevels;
   }
   changeIndicator(indicator: Indicator) {
@@ -205,10 +233,7 @@ this.attributionList = [];
 
         });
 
-     console.log("------list indicateur qualitatif--------------");
-     console.log(this.indicatorsListQualitatif);
-     console.log("--------list quantitatif--------------");
-     console.log(this.indicatorsListQuantitatif);
+
     },
     error => {
       console.log(error);
@@ -300,11 +325,11 @@ this.attributionList = [];
     const context = this;
     this.utilsService.get(UtilsService.API_EVALUATIONCRITERIA).subscribe(
       (response: any) => {
-        context.criteriaList = response;
-        context.criteriaList.forEach(criteria => {
-          context.position.evaluationCriteriaList.push(new PositionEvaluationCriteria(criteria, 0));
+        this.criteriaList = response;
+        this.criteriaList.forEach(criteria => {
+          this.position.evaluationCriteriaList.push(new PositionEvaluationCriteria(criteria, 0));
         });
-
+      console.log(this.position)
       },
       (error) => {
         this.utilsService.showToast(
@@ -321,8 +346,6 @@ this.attributionList = [];
     this.organisationManagementService.get(OrganisationManagementService.API_MISSION).subscribe(
       (response: any) => {
         context.missionsList = response;
-        console.log("----------Missions----------");
-        console.log(this.missionsList);
 
       },
       (error) => {
@@ -336,9 +359,8 @@ this.attributionList = [];
   }
 
   onSelectSkills(event)
-  {
-    this.skillLevelList=event.skillLevels;
-  }
+  {this.skillLevelList=event.skillLevels;}
+
   comparePosition(a, b) {
     return a && b && a.positionLabel == b.positionLabel;
   }
@@ -352,10 +374,15 @@ this.attributionList = [];
     this.line_indic = new PositionIndicator();
     this.line_cre = new EvaluationCriteria();
     this.line_miss = new Mission();
+    this.line_attr = new Attribution();
+    this.line_role ={
+      "roleId":null,
+      "hierarchicalManagerPosition":null,
+      "roleLabel":""
+    };
   }
   addLine() {
     //this.position.positionSubSkillList.push(this.line);
-
     this.initiateLine();
   }
   deleteLine(line) {
@@ -363,47 +390,12 @@ this.attributionList = [];
    /* if (this.position.positionSubSkillList.includes(line)) {
       const index = this.position.positionSubSkillList.indexOf(line);
       this.position.positionSubSkillList.splice(index, 1);
-
     }*/
   }
   checkLineValid(): boolean {
     return  this.line.subSkill == null || this.line.requiredLevel == null;
   }
 
-
-
-  /*addLineIndic() {
-    this.position.positionIndicatorList.push(this.line_indic);
-
-
-
-     if (this.line_indic.indicator.indicatorType === 'QUALITATIF') {
-      this.positionIndicatorListQualitatif.push(this.line_indic);
-     }
-     if (this.line_indic.indicator.indicatorType === 'QUANTITATIF') {
-       this.positionIndicatorListQuantitatif.push(this.line_indic);
-     }
-
-
-
-    this.initiateLine();
-  }*/
-  /*deleteLineIndic(line_indic) {
-
-    if (this.position.positionIndicatorList.includes(line_indic)) {
-      const index = this.position.positionIndicatorList.indexOf(line_indic);
-      this.position.positionIndicatorList.splice(index, 1);
-
-    }
-    if (this.positionIndicatorListQualitatif.includes(line_indic)) {
-      const index = this.positionIndicatorListQualitatif.indexOf(line_indic);
-      this.positionIndicatorListQualitatif.splice(index, 1);
-     }
-     if (this.positionIndicatorListQuantitatif.includes(line_indic)) {
-      const index = this.positionIndicatorListQuantitatif.indexOf(line_indic);
-      this.positionIndicatorListQuantitatif.splice(index, 1);
-     }
-  }*/
 
 
   checkLineValidIndicQualitatif(): boolean {
@@ -415,10 +407,7 @@ this.attributionList = [];
     this.line_indic.maxValue < this.line_indic.minValue;
   }
 
-  /*addLineCre() {
-    //this.position.evaluationCriteriaList.push(this.line_cre);
-    this.initiateLine();
-  }*/
+
   deleteLineCre(line) {
 
     if (this.position.evaluationCriteriaList.includes(line)) {
@@ -431,17 +420,68 @@ this.attributionList = [];
     return  this.line_cre == null || this.line_cre.evaluationCriteriaLabel == '' || this.line_cre.ponderation == null;
   }
 
+  editAttribute(attribution){
+    if(this.line_attr.attributionLabel != ""){
+      attribution.attributionLabel=this.line_attr.attributionLabel
+    }
+    this.initiateLine();
+  }
+  checkRole(){
+    if(this.line_role.roleLabel == undefined){
+      let roleLabel=this.line_role;
+      this.initiateLine();
+      // @ts-ignore
+      this.line_role.roleLabel=roleLabel;
+    }
+  }
+
+  editRole(role){
+    if( this.line_role.roleLabel != "" && this.line_role.roleLabel != undefined){
+        role.roleLabel=this.line_role.roleLabel;
+      }else if(this.line_role.roleLabel == undefined ){
+        role.roleLabel=this.line_role;
+      }
+    this.initiateLine();
+  }
+
+  editMission(mission){
+    if(this.line_miss.missionLabel == undefined || this.line_miss.missionLabel != ""){
+    if(this.line_miss.missionId == undefined ){
+      mission.missionLabel=this.line_miss;
+    }else{
+      mission.missionLabel=this.line_miss.missionLabel;
+    }
+    }
+    this.initiateLine();
+  }
+
   addLineMiss() {
+    if(this.line_miss.missionId == undefined){
+      let mission= new Mission();
+      // @ts-ignore
+      mission.missionLabel=this.line_miss;
+      this.line_miss=mission
+    }else{
+      this.line_miss.missionId=null;
+    }
     this.position.missions.push(this.line_miss);
     this.initiateLine();
   }
-  deleteLineMiss(line) {
+  deleteLineMiss(mission,index) {
+    if(mission.missionId != undefined) {
+      this.organisationManagementService.delete(OrganisationManagementService.API_MISSION + mission.missionId).subscribe(response => {
+          this.position.missions.splice(index, 1);
+        },
+        error => {
+          this.organisationManagementService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du supression de mission`);
 
-    if (this.position.missions.includes(line)) {
-      const index = this.position.missions.indexOf(line);
-      this.position.missions.splice(index, 1);
-
+        });
     }
+    else{
+        this.position.missions.splice(index, 1);
+      }
   }
   checkLineValidMiss(): boolean {
     return  this.line_miss == null || this.line_miss.missionLabel == '' ;
@@ -452,9 +492,75 @@ this.attributionList = [];
   }
 
 
+  addLineAttr() {
+      if(this.line_attr.attributionId == undefined){
+      let attribut= new Attribution();
+      // @ts-ignore
+      attribut.attributionLabel=this.line_attr;
+      this.line_attr=attribut
+    }else{
+      this.line_attr.attributionId=null;
+    }
+    this.position.attributions.push(this.line_attr);
+    this.initiateLine();
+  }
+  deleteAttribution(attribution,index) {
+    if(attribution.attributionId != undefined) {
+      this.organisationManagementService.delete(OrganisationManagementService.API_ATTRIBUTION + attribution.attributionId).subscribe(response => {
+          this.position.attributions.splice(index, 1);
+        },
+        error => {
+          this.organisationManagementService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du supression d'attribution`);
+
+        });
+    }else{
+      this.position.attributions.splice(index, 1);
+    }
+  }
+  checkLineValidAttr(): boolean {
+    return  this.line_attr == null || this.line_attr.attributionLabel == '' ;
+  }
+  compareAttribution(a, b) {
+    return a && b && a.attributionLabel == b.attributionLabel;
+
+  }
 
 
 
+  addLineRole() {
+    if(this.line_role.roleId == undefined){
+     // let role = {
+     //   "roleId":null,
+     //   "hierarchicalManagerPosition":this.line_role,
+     //   "roleLabel":this.line_role
+     // }
+     // this.line_role=role;
+    }else{
+      this.line_role.roleId=null;
+    }
+    this.position.functionalRoles.push(this.line_role);
+    this.initiateLine();
+  }
+  deleteRole(role,index) {
+    if(role.roleId != undefined) {
+      this.organisationManagementService.delete(OrganisationManagementService.API_FUNCTIONAL_ROLE + role.roleId).subscribe(response => {
+          this.position.functionalRoles.splice(index, 1);
+        },
+        error => {
+          this.organisationManagementService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du supression de role fonctionnel`);
+
+        });
+    }else{
+      this.position.functionalRoles.splice(index, 1);
+    }
+  }
+  checkLineValidRole(): boolean {
+    return  this.line_role == null || this.line_role.roleLabel == '' ;
+  }
 
   compareSubSkill(a, b ) {
     return a && b && a.subSkillLabel == b.subSkillLabel;
@@ -478,15 +584,23 @@ this.attributionList = [];
     return a && b && a.evaluationCriteriaLabel == b.evaluationCriteriaLabel;
 
   }
+  compareCompany(a,b){
+    return a && b && a.companyLabel == b.companyLabel;
+  }
   cancel() {
+    this.position = new Position();
     this.cancelEvent.emit();
   }
   savePosition() {
-    /*console.log("---------position----------");
-    console.log(this.position);
-    this.position.evaluationCriteriaList=this.criteriaList;*/
     this.addNewPositionEvent.emit(this.position);
   }
+  checkGeneralInforValid():Boolean{
+    return  this.position.positionLabel == null || this.position.positionLabel == '' ||
+    this.position.positionCategory ==null || this.position.businessUnit ==null ||
+    this.position.company == null ||
+    this.position.positionCode == null || this.position.positionCode == ''
+
+
+    ;
+  }
 }
-
-

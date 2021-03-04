@@ -10,27 +10,48 @@ import { PositionSubSkill } from "./PositionSubSkill.model";
 import { UserPosition } from "./UserPosition.model";
 
 export class Position {
-    
+
     createdAt
     updatedAt
     positionId: number;
     positionCode: string;
     positionLabel: string
-    hierarchicalManagerPosition: Position;
-    fonctionalManagerPosition: Position[];
+
+    hierarchicalManagerPosition;
+
+
+    functionalRoles: any[];
     positionWeight: number;
-    businessUnit: BusinessUnit;
-    company:Company;
+    businessUnit
+    company
     attributions:Attribution[];
     evaluationCriteriaList : PositionEvaluationCriteria[] = []
     positionCategory : Category
     missions : Mission[]
+
+
     //userPosition :UserPosition;
     //positionSubSkillList: PositionSubSkill[];
     //positionIndicatorList: PositionIndicator[];
 
-    constructor(){ 
-        
+    constructor(){
+        this.positionId= null;
+        this.positionCode =null;
+        this.positionLabel= '';
+        this.hierarchicalManagerPosition= null;
+        this.functionalRoles= [];
+        this.positionWeight= null;
+        this.businessUnit= null;
+        this.company= null;
+        this.attributions= null;
+        this.evaluationCriteriaList= [];
+        this.positionCategory= null;
+        this.missions= [];
+        this.attributions=[];
+
     }
-   
+
+
+
+
 }

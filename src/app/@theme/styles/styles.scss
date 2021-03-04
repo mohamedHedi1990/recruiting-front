@@ -201,6 +201,7 @@ ngx-login nb-layout-column {
 }
 .step-content{
   width: 100% !important;
+  height: 340px!important;
 
 }
 nb-stepper{
@@ -224,9 +225,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-align: left !important;
   font-size: 13px !important;
 }
+
 p-cellEditor {
   font-size: 13px !important;
 }
 p-autoComplete {
   font-size: 13px !important;
 }
+
+.step_container.ng-star-inserted{
+  height: 270px;
+}
+

@@ -32,10 +32,11 @@ export class PositionComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.getAllPositions();
+    
     
 
   }
+
   getAllPositions(){
   const context = this;
   this.organisationManagementService.get(OrganisationManagementService.API_POSITION_LITE).subscribe( response => {
@@ -50,6 +51,7 @@ export class PositionComponent implements OnInit {
         `Un erreur interne a été produit lors du chargement des societés`);
     });
   }
+
   private expandRecursive(node:TreeNode, isExpand:boolean){
     node.expanded = isExpand;
     if (node.children.length == 0){

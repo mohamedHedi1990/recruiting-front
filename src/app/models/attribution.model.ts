@@ -5,5 +5,9 @@ export class Attribution {
 
   attributionCode: string;
 
-  constructor() {}
+  constructor() {
+    this.attributionId = null;
+    this.attributionLabel =''
+    this.attributionCode =''
+  }
 }

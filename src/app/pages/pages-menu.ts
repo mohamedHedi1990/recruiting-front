@@ -41,28 +41,27 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'shuffle-outline',
       },
 
+      {
+        title: 'Catégories des positions',
+        link: '/zen-people-referential/organisation/categories',
+        icon: 'radio-button-on-outline',
+
+      },
 
       {
-        title: "Catégories des positions",
-        link: '/zen-people-referential/organisation/position-categories',
+        title: "Poids des positions",
+        link: '/zen-people-referential/organisation/evaluation-criteria',
         icon: 'shuffle-2-outline',
       },
+
       {
         title: "Positions",
         link: '/zen-people-referential/organisation/positions',
         icon: 'shuffle-2-outline',
       },
-      {
-        title: 'Catégories',
-        link: '/zen-people-referential/organisation/categories',
-        icon: 'radio-button-on-outline',
-
-      },
-      {
-        title: "Critères d'évaluation",
-        link: '/zen-people-referential/organisation/evaluation-criteria',
-        icon: 'shuffle-2-outline',
-      }
+      
+      
+      
       
 
     ],

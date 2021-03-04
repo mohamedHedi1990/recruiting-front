@@ -85,16 +85,18 @@ import {MatTreeModule} from '@angular/material/tree';
 import { PositionComponent } from './position/position.component';
 import { PositionListTableComponent } from './position-list-table/position-list-table.component';
 import { PositionListTreeComponent } from './position-list-tree/position-list-tree.component';
-import { PositionCategoryComponent } from './position-category/position-category.component';
 import { AddNewPositionComponent } from './add-new-position/add-new-position.component';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DropdownModule } from 'primeng/dropdown';
+
 import {TabViewModule} from 'primeng/tabview';
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
+
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, PositionCategoryComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent],
+
   imports: [
     CommonModule,
     OrganisationManagementRoutingModule,
@@ -133,8 +135,6 @@ import { PositionIndicatorQualitatifComponent } from './position-indicator-quali
     DragDropModule,
     NgSelectModule,
     NbStepperModule,
-
-
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,
@@ -171,7 +171,6 @@ import { PositionIndicatorQualitatifComponent } from './position-indicator-quali
     MatTooltipModule,
     MatTreeModule,
     AutoCompleteModule,
-
   ],
   providers: [
     DialogService,

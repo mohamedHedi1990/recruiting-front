@@ -16,6 +16,7 @@ export class SkillsManagementService {
   public static API_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS +"api/sub-skill";
   public static API_SKILL_LEVEL=SkillsManagementService.REMOTE_ADDRESS +"api/skill-level";
   public static API_POSITION_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/position-sub-skill/";
+
   header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,

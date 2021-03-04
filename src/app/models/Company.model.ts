@@ -1,4 +1,5 @@
 import { BusinessUnit } from "./BusinessUnit.model";
+import { Position } from "./Position.model";
 
 export class Company {
   companyId: number;
