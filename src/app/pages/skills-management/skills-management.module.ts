@@ -47,9 +47,10 @@ import { InterceptService } from '../../services/auth/InterceptService.service';
 import { FileUploadModule } from 'primeng/fileupload';
 import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-position.component";
 import {AutoCompleteModule} from "primeng/autocomplete";
+import { SkillsReferentialComponent } from './skills-referential/skills-referential.component';
 
 @NgModule({
-  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent],
+  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent],
   imports: [
     CommonModule,
     SkillsManagementRoutingModule,

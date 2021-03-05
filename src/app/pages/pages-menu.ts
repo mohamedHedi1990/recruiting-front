@@ -59,10 +59,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/positions',
         icon: 'shuffle-2-outline',
       },
-      
-      
-      
-      
+
 
     ],
   },
@@ -85,6 +82,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/skills/add-skill-to-position',
         icon: 'checkmark-square-outline',
       },
+      {
+        title: "Matrice des compétences",
+        link: '/zen-people-referential/skills/skills-referential',
+        icon: 'award-outline',
+      },
     ],
 
   },
@@ -102,7 +104,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/performance/indicator-management',
         icon: 'bar-chart-outline',
       },
-      
+
       {
       title: 'Affectation',
       icon: 'checkmark-square-outline',

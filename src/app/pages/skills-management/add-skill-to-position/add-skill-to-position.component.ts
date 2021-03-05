@@ -41,7 +41,8 @@ export class AddSkillToPositionComponent implements OnInit {
   getAllSkills() {
     const context = this;
     this.skillsManagementService.getAll(SkillsManagementService.API_SKILL).subscribe( response => {
-        context.skillsList = response;
+      context.skillsList = response;
+      console.log('contex ', context.skillsList);
       },
       error => {
         context.organisationManagementService.showToast('danger',

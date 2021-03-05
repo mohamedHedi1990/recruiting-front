@@ -116,8 +116,9 @@ export class SkillsManagementComponent implements OnInit {
       subSkills: []
     };
   }
-  initskillLevel(level,ordre){
-    this.skillLevel.skillLevelLabel=level;
+  initskillLevel(label,code, ordre){
+    this.skillLevel.skillLevelLabel = label;
+    this.skillLevel.skillLevelCode = code;
     this.skillLevel.orderValue=ordre;
   }
 
@@ -229,16 +230,16 @@ export class SkillsManagementComponent implements OnInit {
   }
   setdefaulskillLevel() {
     if(this.subSkill.skillLevels.length<=0){
-        this.initskillLevel("DEBUTANT",1);
+      this.initskillLevel("DEBUTANT","DEBUTANT",1);
         this.subSkill.skillLevels.push(this.skillLevel);
         this.initiateskilLevel();
-        this.initskillLevel("INTERMEDIAIRE",2);
+      this.initskillLevel("INTERMEDIAIRE","INTERMEDIAIRE", 2);
         this.subSkill.skillLevels.push(this.skillLevel);
         this.initiateskilLevel();
-        this.initskillLevel("AVANCE",3);
+      this.initskillLevel("AVANCE","AVANCE", 3);
         this.subSkill.skillLevels.push(this.skillLevel);
         this.initiateskilLevel();
-        this.initskillLevel("EXPERT",4);
+      this.initskillLevel("EXPERT","EXPERT", 4);
         this.subSkill.skillLevels.push(this.skillLevel);
         this.initiateskilLevel();
     }

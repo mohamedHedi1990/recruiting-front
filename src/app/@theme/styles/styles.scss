@@ -130,35 +130,61 @@ input {
   font-weight: 700;
   font-size: 11px;
   letter-spacing: .3px;
+
   &.status-active {
-      background-color: #C8E6C9;
-      color: #256029;
-  }
-  &.status-label {
-      background-color: #c5d1e4;
-      color: #2289a0;
-  }
-  &.status-blocked {
-      background-color: #FFCDD2;
-      color: #C63737;
-  }
-  &.status-negotiation {
-      background-color: #FEEDAF;
-      color: #8A5340;
-  }
-  &.status-new {
-      background-color: #B3E5FC;
-      color: #23547B;
-  }
-  &.status-renewal {
-      background-color: #ECCFFF;
-      color: #694382;
-  }
-  &.status-progress {
-      background-color: #FFD8B2;
-      color: #805B36;
+    background-color: #C8E6C9;
+    color: #256029;
   }
 
+  &.status-label {
+    background-color: #c5d1e4;
+    color: #2289a0;
+  }
+
+  &.status-blocked {
+    background-color: #FFCDD2;
+    color: #C63737;
+  }
+
+  &.status-negotiation {
+    background-color: #FEEDAF;
+    color: #8A5340;
+  }
+
+  &.status-new {
+    background-color: #B3E5FC;
+    color: #23547B;
+  }
+
+  &.status-renewal {
+    background-color: #ECCFFF;
+    color: #694382;
+  }
+
+  &.status-progress {
+    background-color: #FFD8B2;
+    color: #805B36;
+  }
+
+  &.low {
+    background-color: #e695b0;
+    color: black;
+  }
+
+  &.middle {
+    background-color: #e36891;
+    color: black;
+  }
+
+  &.advanced {
+    background-color: #e62968;
+    color: black;
+  }
+
+  &.expert {
+    background-color: #cc0447;
+    color: black;
+  }
 }
 
 i {
@@ -235,5 +261,9 @@ p-autoComplete {
 
 .step_container.ng-star-inserted{
   height: 270px;
+}
+
+.p-autocomplete-panel {
+    font-size:13px !important;
 }
 

@@ -140,19 +140,17 @@
 
       <tr>
         <th style="font-size: 13px">
-          <p-autoComplete
-            [group]="true"
-            [suggestions]="skillsList"
-            optionGroupLabel="skillLabel"
-            optionGroupChildren="subSkills"
-            (completeMethod)="filterSubSkills($event)"
-            field="subSkillLabel"
-            [multiple]="false"
-            (onSelect)="onSelectSkills($event)"
-            [dropdown]="true"
-            [(ngModel)]="positionSubSkill.skill"
-            [style]="{ height: '33.5px' }"
-          >
+          <p-autoComplete [group]="true"
+                          [suggestions]="skillsList"
+                          optionGroupLabel="skillLabel"
+                          optionGroupChildren="subSkills"
+                          (completeMethod)="filterSubSkills($event)"
+                          field="subSkillLabel"
+                          [multiple]="false"
+                          (onSelect)="onSelectSkills($event)"
+                          [dropdown]="true"
+                          [(ngModel)]="positionSubSkill.skill"
+                          [style]="{ height: '33.5px' }">
             <ng-template let-group pTemplate="group">
               <div class="p-d-flex p-ai-center">
                 <span>{{ group.skillLabel }}</span>
@@ -232,7 +230,23 @@
               </select>
             </ng-template>
             <ng-template pTemplate="output">
-              {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'DEBUTANT'"
+                    class="customer-badge low">
+                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+              </span>
+              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'INTERMEDIAIRE'"
+                    class="customer-badge middle">
+                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+              </span>
+              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'AVANCE'"
+                    class="customer-badge advanced">
+                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+              </span>
+              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'EXPERT'"
+                    class="customer-badge expert">
+                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+              </span>
+
             </ng-template>
           </p-cellEditor>
         </td>

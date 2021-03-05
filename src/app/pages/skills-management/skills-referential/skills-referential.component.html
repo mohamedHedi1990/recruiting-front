@@ -1,0 +1,112 @@
+<h4
+  style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;
+    margin-left: 10px;
+  "
+>
+  Matrice des compétences
+</h4>
+
+<div
+  class="card"
+  style="
+    margin: auto;
+    margin-top: 3%;
+    border-color: #e7e8e8 !important;
+    border: solid;
+  "
+>
+  <div class="row" style="margin: 30px;">
+    <div class="col-4">
+      <label class="p-float-label">Sociétes</label>
+      <span class="p-fluid">
+    <select
+      class="form-control p-field"
+      id="company"
+      name="side"
+      [(ngModel)]="filter.company"
+      style="font-size: 13px"
+      [compareWith]="compareCompany"
+      (change)="onSelectCompany()"
+    >
+      <option
+        *ngFor="let company of companies"
+        [ngValue]="company"
+      >
+        {{ company.companyLabel }}
+      </option>
+    </select>
+      </span>
+    </div>
+    <div class="col-4">
+      <label class="p-float-label">Unité fonctionnel</label>
+      <span class="p-fluid">
+    <select
+      class="form-control p-field"
+      id="businesunit"
+      name="side"
+      [(ngModel)]="filter.businesUnit"
+      style="font-size: 13px"
+      [compareWith]="compareBusinessUnit"
+      (change)="getReferential()"
+    >
+      <option
+        *ngFor="let businessUnit of filter.company.businessUnitList"
+        [ngValue]="businessUnit"
+      >
+        {{ businessUnit.businessUnitLabel }}
+      </option>
+    </select>
+      </span>
+    </div>
+
+  </div>
+  <div class="row scrollable-container" style="margin: 10px;">
+  <p-table [value]="referential" styleClass="mt-03" [tableStyle]="{'border': '1px solid var(--layer-2)'}" >
+    <ng-template pTemplate="body" let-ligne>
+      <tr>
+        <td style="    text-align: left !important;
+    font-size: 13px;
+">{{ ligne[0] }}</td>
+        <td style="    text-align: center !important;
+    font-size: 13px;
+" *ngFor="let item of ligne.slice(1); let i = index;">
+          <span *ngIf="ligne[0] === ''"
+               >
+            {{ item }}
+          </span>
+          <span *ngIf="item === 'DEBUTANT'"
+                class="customer-badge low"
+                placement="top"
+              ngbTooltip="{{referential[i]}}">
+            {{ item }}
+          </span>
+          <span *ngIf="item === 'INTERMEDIAIRE'"
+                class="customer-badge middle"
+                 placement="top"
+              >
+            {{ item }}
+          </span>
+          <span *ngIf="item === 'AVANCE'"
+                class="customer-badge advanced"
+                 placement="top"
+              >
+            {{ item }}
+          </span>
+          <span *ngIf="item === 'EXPERT'"
+                class="customer-badge expert"
+                 placement="top"
+              >
+            {{ item }}
+          </span>
+
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </div>
+</div>
+

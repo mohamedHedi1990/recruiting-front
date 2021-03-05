@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\models",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\organisation-management",
+    "\\src\\app\\pages\\organisation-management\\add-new-position",
+    "\\src\\app\\pages\\organisation-management\\position-list-tree",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\pages\\organisation-management\\organisation-management-routing.module.ts",
+  "PreviewInSolutionExplorer": false
+}

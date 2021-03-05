@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
 export class SkillsManagementService {
 
   public static REMOTE_ADDRESS = "http://localhost:8090/bs-skills-management/";
-  public static API_SKILLS_GROUP = SkillsManagementService.REMOTE_ADDRESS + "api/skills-group";
+  public static API_SKILLS_GROUP = SkillsManagementService.REMOTE_ADDRESS + "api/skills-group/";
 
-  public static API_SKILL = SkillsManagementService.REMOTE_ADDRESS + "api/skill";
-  public static API_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS +"api/sub-skill";
-  public static API_SKILL_LEVEL=SkillsManagementService.REMOTE_ADDRESS +"api/skill-level";
+  public static API_SKILL = SkillsManagementService.REMOTE_ADDRESS + "api/skill/";
+  public static API_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS +"api/sub-skill/";
+  public static API_SKILL_LEVEL=SkillsManagementService.REMOTE_ADDRESS +"api/skill-level/";
   public static API_POSITION_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/position-sub-skill/";
 
   header = new HttpHeaders();
