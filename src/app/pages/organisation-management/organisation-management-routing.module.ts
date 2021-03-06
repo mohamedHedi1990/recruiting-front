@@ -7,6 +7,7 @@ import { PositionComponent } from './position/position.component';
 import { ListCategoriesComponent } from './list-categories/list-categories.component';
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
+import { BuisnessUnitListComponent } from './buisness-unit-list/buisness-unit-list.component';
 
 
 export const routes: Routes = [
@@ -19,7 +20,7 @@ export const routes: Routes = [
     },
     {
       path: 'business-units',
-      component: BusinessUnitComponent,
+      component: BuisnessUnitListComponent,
     },
     
     {

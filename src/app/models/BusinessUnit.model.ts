@@ -1,16 +1,25 @@
+import { Company } from './Company.model';
+
 export class BusinessUnit{
-    updatedAt 
-    createdAt  
-    businessUnitId 
-    businessUnitLabel: string
-    businessUnitEmail: string
-    businessUnitPhoneNumber
-    businessUnitManagerName
-    businessUnitDescription
-    businessUnitAddress
-    businessUnitUniqueIdentifier
-    parentBusinessUnit  
-    businessUnitCity 
-    businessUnitCountry 
-    company
+  updatedAt: string;
+  createdAt: string;
+  businessUnitId; number;
+  businessUnitLabel: string;
+  businessUnitCode: string;
+  parentBusinessUnit: BusinessUnit;
+  businessUnitEmail: string;
+  businessUnitPhoneNumber: string;
+  businessUnitManagerName: string;
+  businessUnitDescription: string;
+  businessUnitAddress: string;
+  businessUnitUniqueIdentifier: string;
+ 
+  businessUnitCity: string;
+  businessUnitCountry: string;
+  company: Company;
+
+  constructor() {
+    //Utile pour initailiser le select
+    this.parentBusinessUnit = null;
+  }
 }

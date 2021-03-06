@@ -93,9 +93,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import {TabViewModule} from 'primeng/tabview';
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
+import { BuisnessUnitListComponent } from './buisness-unit-list/buisness-unit-list.component';
 
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent, BuisnessUnitListComponent],
 
   imports: [
     CommonModule,
