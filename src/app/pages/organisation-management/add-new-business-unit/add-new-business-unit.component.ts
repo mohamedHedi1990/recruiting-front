@@ -63,25 +63,25 @@ changeCountry (count ) {
 }
   constructor(private organisationManagementService : OrganisationManagementService ,
     private utilsService : UtilsService ) { }
-  ngOnChanges (changes : SimpleChanges ): void {
-    if (this.businessUnit .company == null) {
-      if (this.companies .length !== 0) {
-        this.businessUnit .company == this.companies [0];
-      }
+  ngOnChanges(changes: SimpleChanges): void {
+    
+    if (this.businessUnit.businessUnitId != null) {
+      this.getAllBuisnessUnitForCompany();
 
+    } else {
+      this.businessUnit.company = null;
     }
-    this.getAllBuisnessUnitForCompany ();
+    
 
     }
 
 ngOnInit (): void {
-  if (this.businessUnit .company == null) {
-    if (this.companies .length !== 0) {
-      this.businessUnit .company == this.companies [0];
-    }
+  if (this.businessUnit.businessUnitId != null) {
+    this.getAllBuisnessUnitForCompany();
 
+  } else {
+    this.businessUnit.company = null;
   }
-  this.getAllBuisnessUnitForCompany ();
 
 
   /*if (this.action =="add" ) {
@@ -106,9 +106,9 @@ ngOnInit (): void {
     this.organisationManagementService .get (OrganisationManagementService .API_COMPANY + this.businessUnit .company .companyId + "/business-unit-list").subscribe (response => {
       const companyBuisnessUnits : BusinessUnit [] = response ;
       this.companyBuisnessUnits = companyBuisnessUnits.filter(buisnessUnit => buisnessUnit.businessUnitLabel !== this.businessUnit.businessUnitLabel);
-      if (this.businessUnit.businessUnitId == null && this.companyBuisnessUnits.length !== 0) {
+      /*if (this.businessUnit.businessUnitId == null && this.companyBuisnessUnits.length !== 0) {
         this.businessUnit.parentBusinessUnit = this.companyBuisnessUnits[0];
-      }
+      }*/
     }, error => {
       this.utilsService .showToast (
         "danger",
@@ -127,14 +127,14 @@ saveBusinessUnit () {
 
 checkBusinessUnitValid (): boolean{
   return this.businessUnit .businessUnitLabel == null || this.businessUnit .businessUnitLabel === '' ||
-    this.businessUnit .businessUnitCode == null || this.businessUnit .businessUnitCode === '' ||
-    this.businessUnit .company == null ;
+    this.businessUnit .businessUnitCode == null || this.businessUnit .businessUnitCode === '';
 }
 cancel (){
   this.cancelEvent .emit ();
 }
   delUnit () { }
-  compareCompany (a , b ) {
+  compareCompany(a, b) {
+    if (a == null && b == null) return true;
     return a && b && a .companyId === b .companyId ;
 
   }

@@ -139,11 +139,111 @@
 
 <p-dialog header="{{titleHeader}}" [(visible)]="showBuisnessUnitModal" [modal]="true" [style]="{width: '45vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false" (onHide)="hideBuisnessUnitWindow()">
-  <ngx-add-new-business-unit [businessUnit]="buisnessUnit"
-                        [companies]="companies"
-                        (addNewBusinessUnitEvent)="saveNewBuisnessUnit($event)"
-                        (cancelEvent)="hideBuisnessUnitWindow()">
-  </ngx-add-new-business-unit>
+
+
+  <div style="margin-top: 5%;">
+    <!--businessLabel-->
+    <div class="mb-1 col-md-12 col-12 p-field" *ngIf="buisnessUnit">
+      <label for="businessLabel" class="p-float-label">Dénomination <strong style="color: #960032;">*</strong></label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="text"
+               class="form-control p-field"
+               id="businessUnitLabel"
+               [(ngModel)]="buisnessUnit.businessUnitLabel" />
+      </div>
+    </div>
+    <div class="mb-1 col-md-12 col-12 p-field" *ngIf="buisnessUnit">
+      <label for="businessCode" class="p-float-label">Code <strong style="color: #960032;">*</strong></label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <input type="text"
+               class="form-control p-field"
+               id="businessUnitCode"
+               [(ngModel)]="buisnessUnit.businessUnitCode" />
+      </div>
+    </div>
+
+    <div class="mb-1 col-md-12 col-12 p-field" *ngIf="buisnessUnit">
+      <label for="businessCompany" class="p-float-label">Société <strong style="color: #960032;">*</strong></label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select class="form-control p-field" id="positionCompany" name="side"
+                [(ngModel)]="buisnessUnit.company" style="font-size: 13px"
+                [compareWith]="compareCompany"
+                (change)="getAllBuisnessUnitForCompany()">
+          <option [ngValue]="null">
+            Selectionner la société
+          </option>
+          <option *ngFor="let company of companies;" [ngValue]="company">
+            {{company.companyLabel}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!--businessUnitManagerName-->
+    <div class="mb-1 col-md-12 col-12 p-field" *ngIf="buisnessUnit">
+      <label for="businessCompany" class="p-float-label">Unité organisationelle parente <strong style="color: #960032;">*</strong></label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+        <select class="form-control p-field" id="parentBU" name="side"
+                [(ngModel)]="buisnessUnit.parentBusinessUnit" style="font-size: 13px"
+                [compareWith]="compareBU"
+                [disabled]="buisnessUnit.company == null">
+          <option [ngValue]="null">
+            {{buisnessUnit.businessUnitLabel}}
+          </option>
+          <option *ngFor="let bu of companyBuisnessUnits;" [ngValue]="bu">
+            {{bu.businessUnitLabel}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-1 col-md-12 col-12 p-field">
+      <label for="businessUnitDescription" class="p-float-label">Un petit mot à propos l'unité organisationelle</label>
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
+        <textarea id="story"
+                  name="story"
+                  rows="3"
+                  class="form-control p-field"
+                  pInputText
+                  style="width: 100%"
+                  id="businessUnitDescription"
+                  [(ngModel)]="buisnessUnit.businessUnitDescription"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top: 20px; float:right">
+      <button pButton
+              pRipple
+              label="Annuler"
+              icon="pi pi-times"
+              class="btn btn-secondary"
+              (click)="hideBuisnessUnitWindow()">
+      </button>
+
+      <button [disabled]="checkBusinessUnitValid()"
+              pButton
+              pRipple
+              label="Enregistrer"
+              icon="pi pi-check"
+              class="primaryBtn"
+              (click)="saveNewBuisnessUnit(buisnessUnit)"
+              style="margin-left: 10px">
+      </button>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
 
 </p-dialog>
 

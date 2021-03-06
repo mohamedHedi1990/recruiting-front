@@ -21,5 +21,10 @@ export class BusinessUnit{
   constructor() {
     //Utile pour initailiser le select
     this.parentBusinessUnit = null;
+    this.company = null;
+    this.businessUnitId = null;
+    this.businessUnitCode = null;
+    this.businessUnitLabel = null;
+    this.businessUnitDescription = null;
   }
 }

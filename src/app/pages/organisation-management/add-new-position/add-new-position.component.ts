@@ -66,7 +66,7 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
     ngOnChanges(changes: SimpleChanges): void {
 
       console.log('changes: ', changes);
-      if (this.position.positionId == null) {
+      if (this.position.positionId == null && this.position.evaluationCriteriaList.length == 0) {
         this.getAllCriteria();
       }
     }

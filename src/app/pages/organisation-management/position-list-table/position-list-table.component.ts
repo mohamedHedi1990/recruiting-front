@@ -34,12 +34,12 @@ displayDeletePosition=false;
 
 
   }
-  addNewPosition(){
+  addNewPosition() {
+    this.position = new Position();
 
-
-      let racine = new Position();
-      racine.positionLabel = "Racine";
-      this.position.hierarchicalManagerPosition = racine;
+      //let racine = new Position();
+      //racine.positionLabel = "Racine";
+      //this.position.hierarchicalManagerPosition = racine;
 
 
     this.addNewPositionModal = true;
