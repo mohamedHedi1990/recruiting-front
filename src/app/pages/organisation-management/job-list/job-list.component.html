@@ -1,0 +1,131 @@
+<h4
+  style="
+    background: #e7e8e8;
+    padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;
+    margin-left: 10px;
+  ">
+  Liste des métiers
+</h4>
+<div
+  class="card"
+  style="
+    margin: auto;
+    margin-top: 3%;
+    border-color: #e7e8e8 !important;
+    border: solid;
+  "
+>
+  <p-table
+    #dt [value]="jobList" dataKey="jobId" styleClass="p-datatable-customers" [rowHover]="true" [rows]="10"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [loading]="loading" [paginator]="true"
+    currentPageReportTemplate="" [filterDelay]="0" [globalFilterFields]="[
+  'jobId',
+  'jobLabel',
+  'jobCode'
+]">
+    <ng-template pTemplate="caption">
+      <div
+        class="p-d-flex p-ai-center p-jc-between"
+        style="width: 100%; display: inline-block"
+      >
+      <span class="p-input-icon-left" style="width: 55%">
+        <i class="pi pi-search"></i>
+        <input
+          pInputText
+          type="text"
+          style="width: 93%"
+          class="searchInput, p-inputtext"
+          (input)="dt.filterGlobal($event.target.value, 'contains')"
+          placeholder="Chercher un métier.."
+        />
+      </span>
+      </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px">
+        <th style="text-align: left; font-size: 13px; width: 85%">Désignation</th>
+
+        <th style="width: 15%; font-size: 13px; text-align: center">Actions</th>
+      </tr>
+      <tr>
+        <th style="font-size: 13px;">
+          <input style="font-size: 13px;"
+                 pInputText type="text" placeholder="Libellé du métier" class="form-control p-field"
+                 [(ngModel)]="job.jobLabel">
+        </th>
+
+        <th style="text-align: center">
+          <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                  class="p-button-rounded p-mr-2" style="background-color: #960032;
+                 border-color: #960032;" [disabled]="checkJobValid()"
+                  [ngClass]="{ disabled: checkJobValid() }" (click)="saveNewJob()"></button>
+        </th>
+      </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-job >
+
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px"
+          [pSelectableRow]="job"
+          name="job"
+          id="jobId"
+      >
+
+        <td pEditableColumn style="text-align: left !important; font-size: 13px">
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input style="font-size: 13px;" pInputText type="text" placeholder="métier"
+                     class="form-control p-field" [(ngModel)]="job.jobLabel" (change)="editJob(job)">
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{job.jobLabel}}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td style="text-align: center">
+
+          <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
+             (click)="deleteJob(job)"></i>
+
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important">
+          Aucun métier trouvé!
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+
+
+
+
+
+<p-dialog header="Supprimer un métier" [(visible)]="displayDeleteJob" [modal]="true"
+          [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+  <br>
+  Voulez-vous toujours supprimer le métier <span
+  class="customer-badge status-negotiation">{{job.jobLabel}}</span> ?
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+              (click)="displayDeleteJob=false"></button>
+
+      <button pButton pRipple label="Supprimer" icon="pi pi-check" class="p-button-danger p-mr-2"
+              (click)="delJob()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
+
+

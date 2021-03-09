@@ -8,6 +8,7 @@ import { ListCategoriesComponent } from './list-categories/list-categories.compo
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 import { BuisnessUnitListComponent } from './buisness-unit-list/buisness-unit-list.component';
+import {JobListComponent} from "./job-list/job-list.component";
 
 
 export const routes: Routes = [
@@ -22,7 +23,7 @@ export const routes: Routes = [
       path: 'business-units',
       component: BuisnessUnitListComponent,
     },
-    
+
     {
       path: 'positions',
       component: PositionComponent,
@@ -42,6 +43,10 @@ export const routes: Routes = [
     {
       path:'position-indicator-quantitatif',
       component:PositionIndicatorQuantitatifComponent
+    },
+    {
+      path:'job-list',
+      component:JobListComponent
     }
   ],
 

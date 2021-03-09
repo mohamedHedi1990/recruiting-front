@@ -40,27 +40,36 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/business-units',
         icon: 'shuffle-outline',
       },
-
       {
-        title: 'Catégories des positions',
-        link: '/zen-people-referential/organisation/categories',
-        icon: 'radio-button-on-outline',
-
+        title: "Métiers",
+        link: '/zen-people-referential/organisation/job-list',
+        icon: 'briefcase-outline',
       },
 
-      {
-        title: "Poids des positions",
-        link: '/zen-people-referential/organisation/evaluation-criteria',
-        icon: 'shuffle-2-outline',
-      },
 
       {
         title: "Positions",
         link: '/zen-people-referential/organisation/positions',
         icon: 'shuffle-2-outline',
       },
+      
+    ],
+  },
+  {
+    title: 'Catégorisation des métiers',
+    icon: 'grid-outline',
+    children: [
+      {
+        title: "Critères d'évaluation",
+        link: '/zen-people-referential/organisation/evaluation-criteria',
+        icon: 'flip-outline',
+      },
+      {
+        title: 'Catégories des métiers',
+        link: '/zen-people-referential/organisation/categories',
+        icon: 'radio-button-on-outline',
 
-
+      },
     ],
   },
   {

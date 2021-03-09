@@ -21,6 +21,8 @@ export class OrganisationManagementService {
   public static API_MISSION= OrganisationManagementService.bs_organisation_base_url + "api/mission/";
   public static API_ATTRIBUTION= OrganisationManagementService.bs_organisation_base_url + "api/attribution/";
   public static API_FUNCTIONAL_ROLE= OrganisationManagementService.bs_organisation_base_url +"api/functional-role/";
+  public static API_JOB= OrganisationManagementService.bs_organisation_base_url +"api/job/";
+
   header = new HttpHeaders();
   constructor(
     private toastrService: NbToastrService,
