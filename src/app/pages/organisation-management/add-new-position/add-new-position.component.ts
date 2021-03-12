@@ -28,18 +28,19 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
   @Output() addNewPositionEvent = new EventEmitter();
   @Output() cancelEvent = new EventEmitter();
   businessUnitsList: BusinessUnit[];
+  jobs=[];
   skillsList = [];
   indicatorsList: Indicator[] = [];
   positionIndicatorListQuantitatif = [];
   positionIndicatorListQualitatif = [];
   indicatorsListQuantitatif: Indicator[] = [];
   indicatorsListQualitatif: Indicator[] = [];
-  line = new PositionSubSkill();
-  line_indic = new PositionIndicator();
-  line_cre = new EvaluationCriteria();
-  line_miss = new Mission();
-  line_attr = new Attribution();
-  line_role = {
+  //line = new PositionSubSkill();
+  //line_indic = new PositionIndicator();
+  //line_cre = new EvaluationCriteria();
+  //line_miss = new Mission();
+  //line_attr = new Attribution();
+  /* line_role = {
     "roleId":null,
     "hierarchicalManagerPosition":null,
     "roleLabel":""
@@ -54,36 +55,50 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
   missionsList: Mission[];
   attributionList: Attribution[];
   roleList:[]
+ */
   companies : Company[];
   areas=[];
-  linearMode = false;
+  //linearMode = false;
 
   constructor(private organisationManagementService: OrganisationManagementService ,
     private performanceManagementService: PerformanceManagementService,
     private skillsManagementService: SkillsManagementService,
     private router: Router, private utilsService: UtilsService,
     private _formBuilder: FormBuilder) { }
-    ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.position.company != null) {
+      this.getAllUnitsByCompany();
+    }
+      //this.getAllCompanies();
+      //this.getAllJobs();
 
-      console.log('changes: ', changes);
-      if (this.position.positionId == null && this.position.evaluationCriteriaList.length == 0) {
-        this.getAllCriteria();
-      }
+      //if (this.position.positionId == null && this.position.evaluationCriteriaList.length == 0) {
+      //  this.getAllCriteria();
+     // }
     }
 
 
   ngOnInit(): void {
-    this.linearMode = false;
-   if(this.position.positionId == null) {
-    this.getAllCriteria();
-   }
+    //this.linearMode = false;
+   //if(this.position.positionId == null) {
+   // this.getAllCriteria();
+   //}
 
     this.getAllCompanies();
-    this.getAllCategories();
+    this.getAllJobs();
+    
+    //this.getAllCategories();
 
-    this.getAllMissions();
-    this.getAllAttributions();
-    this.getAllRoles();
+    //this.getAllMissions();
+    //this.getAllAttributions();
+    //this.getAllRoles();
+
+  }
+
+  getAllJobs(){
+    this.organisationManagementService.get(OrganisationManagementService.API_JOB).subscribe(response => {
+      this.jobs = response;
+    })
   }
 
   getAllCompanies() {
@@ -119,7 +134,7 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
       this.position.businessUnit = hierarchicalManagerPosition.businessUnit;
     }
   }
-  getAllAttributions() {
+  /*getAllAttributions() {
     //this.attributionList = [];
     this.organisationManagementService.get(OrganisationManagementService.API_ATTRIBUTION).subscribe(response => {
       this.attributionList = response;
@@ -360,26 +375,37 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
 
   onSelectSkills(event)
   {this.skillLevelList=event.skillLevels;}
-
-  comparePosition(a, b) {
-    return a && b && a.positionLabel == b.positionLabel;
+ */
+  comparePositionH(a, b) {
+    if (!a && !b) return true;
+    return a && b && a.positionId == b.positionId;
   }
+  comparePositionF(a, b) {
+    return a && b && a.positionId == b.positionId;
+  }
+
+
+
+  compareJob(a, b) {
+    return a && b && a.jobLabel == b.jobLabel;
+  }
+
   compareBusinessUnit(a, b) {
     return a && b && a.businessUnitLabel == b.businessUnitLabel;
 
   }
 
   initiateLine() {
-    this.line = new PositionSubSkill();
-    this.line_indic = new PositionIndicator();
-    this.line_cre = new EvaluationCriteria();
-    this.line_miss = new Mission();
-    this.line_attr = new Attribution();
-    this.line_role ={
-      "roleId":null,
-      "hierarchicalManagerPosition":null,
-      "roleLabel":""
-    };
+    //this.line = new PositionSubSkill();
+    //this.line_indic = new PositionIndicator();
+    //this.line_cre = new EvaluationCriteria();
+    //this.line_miss = new Mission();
+    //this.line_attr = new Attribution();
+    //this.line_role ={
+     // "roleId":null,
+     // "hierarchicalManagerPosition":null,
+     // "roleLabel":""
+    //};
   }
   addLine() {
     //this.position.positionSubSkillList.push(this.line);
@@ -392,12 +418,12 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
       this.position.positionSubSkillList.splice(index, 1);
     }*/
   }
-  checkLineValid(): boolean {
-    return  this.line.subSkill == null || this.line.requiredLevel == null;
-  }
+  //checkLineValid(): boolean {
+ //   return  this.line.subSkill == null || this.line.requiredLevel == null;
+ // }
 
 
-
+/*
   checkLineValidIndicQualitatif(): boolean {
     return  this.line_indic.indicator == null || this.line_indic.targetLevel == null || this.line_indic.targetLevel=="";
   }
@@ -406,8 +432,8 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
     this.line_indic.targetValue < this.line_indic.minValue||this.line_indic.targetValue > this.line_indic.maxValue||
     this.line_indic.maxValue < this.line_indic.minValue;
   }
-
-
+*/
+/*
   deleteLineCre(line) {
 
     if (this.position.evaluationCriteriaList.includes(line)) {
@@ -584,6 +610,8 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
     return a && b && a.evaluationCriteriaLabel == b.evaluationCriteriaLabel;
 
   }
+
+ */
   compareCompany(a,b){
     return a && b && a.companyLabel == b.companyLabel;
   }
@@ -596,11 +624,11 @@ export class AddNewPositionComponent implements OnInit, OnChanges  {
   }
   checkGeneralInforValid():Boolean{
     return  this.position.positionLabel == null || this.position.positionLabel == '' ||
-    this.position.positionCategory ==null || this.position.businessUnit ==null ||
-    this.position.company == null ||
-    this.position.positionCode == null || this.position.positionCode == ''
-
-
-    ;
+    //this.position.positionCategory ==null
+      this.position.businessUnit ==null ||
+    this.position.company == null || this.position.job == null
+      
+      || this.position.startDate == null || this.position.endDate == null ||
+      this.position.startDate > this.position.endDate;
   }
 }

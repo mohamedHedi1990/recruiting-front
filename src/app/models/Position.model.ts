@@ -17,18 +17,20 @@ export class Position {
     positionCode: string;
     positionLabel: string
 
-    hierarchicalManagerPosition;
+    hierarchicalManagerPosition: any;
+  functionalManagerPosition: any;
 
-
-    functionalRoles: any[];
+    //functionalRoles: any[];
     positionWeight: number;
     businessUnit
     company
-    attributions:Attribution[];
-    evaluationCriteriaList : PositionEvaluationCriteria[] = []
-    positionCategory : Category
-    missions : Mission[]
-
+    //attributions:Attribution[];
+    //evaluationCriteriaList : PositionEvaluationCriteria[] = []
+    //positionCategory : Category
+    //missions : Mission[]
+    job;
+    startDate:string;
+    endDate:string;
 
     //userPosition :UserPosition;
     //positionSubSkillList: PositionSubSkill[];
@@ -39,16 +41,19 @@ export class Position {
         this.positionCode =null;
         this.positionLabel= '';
         this.hierarchicalManagerPosition= null;
-        this.functionalRoles= [];
+        this.functionalManagerPosition=null;
+        //this.functionalRoles= [];
         this.positionWeight= null;
         this.businessUnit= null;
         this.company= null;
-        this.attributions= null;
-        this.evaluationCriteriaList= [];
-        this.positionCategory= null;
-        this.missions= [];
-        this.attributions=[];
-
+        //this.attributions= null;
+        //this.evaluationCriteriaList= [];
+        //this.positionCategory= null;
+        //this.missions= [];
+        //this.attributions=[];
+        this.job=null;
+        this.startDate="";
+        this.endDate="";
     }
 
 

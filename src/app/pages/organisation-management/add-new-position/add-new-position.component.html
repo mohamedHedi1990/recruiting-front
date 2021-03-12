@@ -1,33 +1,57 @@
-<nb-stepper orientation="vertical" [linear]="linearMode">
+
+<!-- <nb-stepper orientation="vertical" [linear]="linearMode">-->
     <!--Informations génerales-->
-    <nb-step label="Informations génerales">
-        <div class="step_container" style="padding-top: 30px!important;">
+    <!-- <nb-step label="Informations génerales"> -->
+        <div style="padding-top: 30px!important;">
             <div style="display: flex;">
                 <div class="mb-1 col-md-6 col-12">
                     <label for="positionLabel" class="p-float-label">Dénomination <strong
                             style="color: #960032;">*</strong></label>
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+
                         <input type="text" class="form-control p-field" id="positionLabel"
                             [(ngModel)]="position.positionLabel" />
                     </div>
                 </div>
             <div class="mb-1 col-md-6 col-6">
+              <label for="positionJob" class="p-float-label">Métier <strong
+                style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <select class="form-control p-field" id="positionJob" name="side"
+                        [(ngModel)]="position.job" style="font-size: 13px"
+                        [compareWith]="compareJob">
+                  <option *ngFor="let job of jobs;" [ngValue]="job">{{job.jobLabel}}
+                  </option>
+                </select>
+              </div>
 
-                    <label for="positionCode" class="p-float-label">Code <strong
+                    <!--<label for="positionCode" class="p-float-label">Code <strong
                             style="color: #960032;">*</strong></label>
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                         <input type="text" class="form-control p-field" id="positionCode"
                             [(ngModel)]="position.positionCode" />
                     </div>
+                    -->
                 </div>
 			</div>
             <!-- row 1 -->
 
             <div style="display: flex;">
                 <div class="mb-1 col-md-6 col-6">
-                    <label for="identifiant" class="p-float-label">Categorie <strong
+                  <label for="company" class="p-float-label">Société <strong
+                    style="color: #960032;">*</strong></label>
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                    <select class="form-control p-field" id="company" name="side"
+                            [(ngModel)]="position.company" style="font-size: 13px"
+                            [compareWith]="compareCompany" (change)="getAllUnitsByCompany();getAllPositionsByCompany();">
+                      <option *ngFor="let b of companies;" [ngValue]="b">{{b.companyLabel}}</option>
+                    </select>
+                  </div>
+                   <!-- <label for="positionCategory" class="p-float-label">Categorie <strong
                             style="color: #960032;">*</strong></label>
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
@@ -38,18 +62,21 @@
                             </option>
                         </select>
                     </div>
+                    -->
                 </div>
                 <div class="mb-1 col-md-6 col-6">
-                    <label for="identifiant" class="p-float-label">Société <strong
-                            style="color: #960032;">*</strong></label>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                        <select class="form-control p-field" id="company" name="side"
-                            [(ngModel)]="position.company" style="font-size: 13px"
-                            [compareWith]="compareCompany" (change)="getAllUnitsByCompany();getAllPositionsByCompany();">
-                            <option *ngFor="let b of companies;" [ngValue]="b">{{b.companyLabel}}</option>
-                        </select>
-                    </div>
+                  <label for="businessUnit" class="p-float-label">Unité organisationnelle <strong
+                    style="color: #960032;">*</strong></label>
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                    <select class="form-control p-field" id="businessUnit" name="side"
+                            [(ngModel)]="position.businessUnit" style="font-size: 13px"
+                            [compareWith]="compareBusinessUnit"
+                            [disabled]="position.company == null"
+                            >
+                      <option *ngFor="let b of businessUnitsList;" [ngValue]="b">{{b.businessUnitLabel}}</option>
+                    </select>
+                  </div>
                 </div>
 
 
@@ -58,44 +85,72 @@
             <!-- row 2 -->
             <div style="display: flex;">
                 <div class="mb-1 col-md-6 col-6">
-                    <label for="identifiant" class="p-float-label">Supérieure hiérarchique </label>
+                    <label for="hierarchicalManagerPosition" class="p-float-label">Supérieure hiérarchique <strong style="color: #960032;">*</strong></label>
                     <div class="p-inputgroup">
                         <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                         <select class="form-control p-field" id="hierarchicalManagerPosition" name="side"
                                 [(ngModel)]="position.hierarchicalManagerPosition" style="font-size: 13px"
-                                [compareWith]="comparePosition"
-                                (change)="getAllUnitsByCompany();getUnitByHirarchicalManager(position.hierarchicalManagerPosition)"
-                                [disabled]="position.company == null">
-                          <option [ngValue]="null">{{position.positionLabel}}</option>
+                                [compareWith]="comparePositionH"
+                                [disabled]="position.company == null"
+                                >
+                         
+  <option *ngIf="position.hierarchicalManagerPosition == null && (position.positionLabel !=null && position.positionLabel !== '')" [ngValue]="null">{{position.positionLabel}}</option>
+ 
                           <option *ngFor="let p of positions_list;" [ngValue]="p">{{p.positionLabel}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="mb-1 col-md-6 col-6">
-                    <label for="identifiant" class="p-float-label">Unité organisationnelle <strong
-                            style="color: #960032;">*</strong></label>
-                    <div class="p-inputgroup">
-                        <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                        <select class="form-control p-field" id="businessUnit" name="side"
-                            [(ngModel)]="position.businessUnit" style="font-size: 13px"
-                            [compareWith]="compareBusinessUnit"
-                            [disabled]="position.hierarchicalManagerPosition !=null && position.hierarchicalManagerPosition.positionLabel != 'Racine'">
-                            <option *ngFor="let b of businessUnitsList;" [ngValue]="b">{{b.businessUnitLabel}}</option>
-                        </select>
-                    </div>
+                  <label for="functionalManagerPosition" class="p-float-label">Supérieure fonctionel (facultatitf)</label>
+                  <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                    <select class="form-control p-field" id="functionalManagerPosition" name="side"
+                            [(ngModel)]="position.functionalManagerPosition" style="font-size: 13px"
+                            [compareWith]="comparePositionF"
+                            
+                            [disabled]="position.company == null">
+                      <option *ngFor="let p of positions_list;" [ngValue]="p">{{p.positionLabel}}</option>
+                    </select>
+                  </div>
                 </div>
 
             </div>
             <!-- /row 2 -->
+          <div style="display: flex;">
+            <div class="mb-1 col-md-6 col-6">
+              <label class="p-float-label">Date de début <strong
+                style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="date" placeholder="Date" class="form-control p-field" id="manager"
+                       [(ngModel)]="position.startDate"
+                       style="font-size: 13px"
+                       [max]="position.endDate">
+              </div>
+            </div>
+            <div class="mb-1 col-md-6 col-6">
+              <label for="endDate" class="p-float-label">Date de fin <strong
+                style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <input type="date" placeholder="Date" class="form-control p-field" id="endDate"
+                       [(ngModel)]="position.endDate"
+                       style="font-size: 13px"
+                [min]="position.startDate">
+              </div>
+            </div>
+
+          </div>
 
         </div>
-        <button nbButton nbStepperNext class="btn_stepper next" [disabled]="checkGeneralInforValid()">suivant</button>
+        <!-- <button nbButton nbStepperNext class="btn_stepper next" [disabled]="checkGeneralInforValid()">suivant</button>
+        -->
 
-    </nb-step>
+    <!-- </nb-step> -->
     <!--/Informations génerales-->
 
     <!--Poids-->
-    <nb-step label="Poids de position">
+  <!--   <nb-step label="Poids de position">
         <div class="col-8 md-8 drop-column scrollable-container" style="height:270px;">
             <p-table #dt [value]="position.evaluationCriteriaList" dataKey="id" styleClass="p-datatable-customers" [loading]="loading"
                 [filterDelay]="0">
@@ -136,7 +191,7 @@
                             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash"
                                 (click)="deleteLineCre(line_cre)"></i>
                         </div>
-                    </td> -->
+                    </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="emptymessage">
@@ -151,10 +206,10 @@
         <button nbButton nbStepperPrevious class="btn_stepper prev">précedant</button>
         <button nbButton nbStepperNext class="btn_stepper next">suivant</button>
 
-    </nb-step>
+    </nb-step> -->
     <!--/Poids-->
     <!--Missions-->
-    <nb-step label="Missions">
+   <!-- <nb-step label="Missions">
 
         <div style="height: 270px;">
             <p-table #dt [value]="position.missions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
@@ -248,10 +303,10 @@
 
 
 
-    </nb-step>
+    </nb-step> -->
     <!--/Missions-->
     <!--Attributions-->
-    <nb-step label="Attributions">
+  <!--  <nb-step label="Attributions">
 
         <div style="height: 270px;">
         <p-table #dt [value]="position.attributions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
@@ -349,10 +404,10 @@
 
 
 
-    </nb-step>
+    </nb-step> -->
     <!--/Attributions-->
     <!--Rôle fonctionnel-->
-    <nb-step label="Rôle fonctionnel">
+  <!--  <nb-step label="Rôle fonctionnel">
         <div style="height: 270px;">
             <p-table #dt [value]="position.functionalRoles"
                     dataKey="id"
@@ -441,7 +496,7 @@
                                 <ng-template pTemplate="output">
                                   <span *ngIf="role.hierarchicalManagerPosition == null">{{position.positionLabel}}</span>
                                   <span *ngIf="role.hierarchicalManagerPosition != null"> {{role.hierarchicalManagerPosition.positionLabel}}</span>
-                                 
+
                                 </ng-template>
                             </p-cellEditor>
 
@@ -468,14 +523,21 @@
 
 
 
-        </div>
-            <button nbButton nbStepperPrevious class="btn_stepper prev">précedant</button>
+        </div> -->
+        <button pButton pRipple  label="Enregistrer" icon="pi pi-check" class="primaryBtn btn_stepper next" (click)="savePosition()"
+        style="margin-left: 10px"
+                [disabled]="checkGeneralInforValid()"></button>
+            <button  pButton pRipple label="Annuler" icon="pi pi-times"
+                     class="btn btn-secondary btn_stepper next" (click)="cancel()"
+            ></button>
 
-            <button pButton pRipple  label="Enregistrer" icon="pi pi-check" class="primaryBtn btn_stepper next" (click)="savePosition()"
-                style="margin-left: 10px"></button>
 
 
-    </nb-step>
-    <!--/Rôle fonctionnel-->
+             <!--
+
+
+    </nb-step>-->
+    <!--Rôle fonctionnel  >
 
 </nb-stepper>
+-->

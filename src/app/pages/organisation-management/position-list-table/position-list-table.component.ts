@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, EventEmitter,OnInit, Output, SimpleChanges
 import { Position } from '../../../models/Position.model';
 import { OrganisationManagementService } from '../../../services/organisation-management.service';
 import { UtilsService } from '../../../services/utils.service';
+import {DatePipe} from "@angular/common";
 
 
 @Component({
@@ -23,19 +24,25 @@ titleHeader ="Ajouter une nouvelle position"
 titleViewPoition=null;
 viewPositionTable=[];
 displayDeletePosition=false;
-
-  constructor(private organisationManagementService: OrganisationManagementService , private utilsService: UtilsService,) { }
+currentDate=new Date();
+  constructor(private organisationManagementService: OrganisationManagementService , private utilsService: UtilsService,private datePipe:DatePipe) { }
   ngOnChanges(changes: SimpleChanges): void {
 
   }
 
   ngOnInit(): void {
+    let current=new Date();
+    this.position.startDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    this.position.endDate = this.datePipe.transform(new Date(current.getFullYear()+99 ,current.getMonth(),current.getDay()), 'yyyy-MM-dd');
     this.getAllPositions();
 
 
   }
   addNewPosition() {
     this.position = new Position();
+    this.position.startDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    let current=new Date();
+    this.position.endDate = this.datePipe.transform(new Date(current.getFullYear()+99 ,current.getMonth(),current.getDay()), 'yyyy-MM-dd');
 
       //let racine = new Position();
       //racine.positionLabel = "Racine";
@@ -46,17 +53,34 @@ displayDeletePosition=false;
 
   }
   saveNewPosition(position : Position){
-
-   position.company = position.company.companyId;
-    position.businessUnit = position.businessUnit.businessUnitId;
+    if(position.company == null||position.company.companyId == undefined || position.company.companyId == null){
+      position.company=null;
+    }else {
+      position.company = position.company?.companyId;
+    }
+    if(position.job == null || position.job.jobId == undefined ||position.job.jobId == null){
+      position.job=null;
+    }else {
+      position.job = position.job?.jobId;
+    }
+    if(position.businessUnit == null ||position.businessUnit.businessUnitId == undefined || position.businessUnit.businessUnitId == null){
+      position.businessUnit=null;
+    }else {
+      position.businessUnit = position.businessUnit?.businessUnitId;
+    }
     if (position.hierarchicalManagerPosition != null) {
       position.hierarchicalManagerPosition = position.hierarchicalManagerPosition.positionId;
     }
-  
-   position.positionCategory = position.positionCategory.positionCategoryId;
-  position.evaluationCriteriaList.forEach(elm =>{
+    if (position.functionalManagerPosition != null) {
+      position.functionalManagerPosition = position.functionalManagerPosition.positionId;
+    }
+
+   //position.positionCategory = position.positionCategory.positionCategoryId;
+  /*position.evaluationCriteriaList.forEach(elm =>{
     delete elm.position;
   });
+
+   */
   /*position.functionalRoles.forEach(elem => {
     delete elem.hierarchicalManagerPosition.hierarchicalManagerPosition;
   });*/
@@ -107,14 +131,13 @@ displayDeletePosition=false;
           `Un erreur interne a été produit lors du chargement des societés`);
       });
     }
-  editPosition(position){
+  editPosition(position: Position){
     this.titleHeader ="Modifier une position"
     this.position = position;
-    if(this.position.hierarchicalManagerPosition == null){
-      let racine = new Position();
-      racine.positionLabel = "Racine";
-      this.position.hierarchicalManagerPosition = racine;
-    }
+    this.position.functionalManagerPosition = position.functionalManagerPosition;
+    this.position.startDate=this.datePipe.transform(this.position.startDate, 'yyyy-MM-dd');
+    this.position.endDate=this.datePipe.transform(this.position.endDate, 'yyyy-MM-dd');
+   
     this.addNewPositionModal = true;
   }
   deletePosition(position){
@@ -145,7 +168,8 @@ displayDeletePosition=false;
   }
   initPosition(){
     this.position = new Position();
-  }
+   
+   }
 
   viewPosition(positionTable: Position){
    this.titleViewPoition= "Fiche de la position "+positionTable.positionLabel;
@@ -157,7 +181,12 @@ displayDeletePosition=false;
   hidePositionWindow() {
     this.addNewPositionModal = false;
     this.initPosition();
-    this.getAllPositions();
+    //this.getAllPositions();
+  }
+
+  checkPositionActive(position){
+    let current=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+    return new Date(position.endDate) >= new Date(current) && new Date(position.startDate) <= new Date(current);
   }
 
 }

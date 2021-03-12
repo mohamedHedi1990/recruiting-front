@@ -136,7 +136,7 @@ import { JobListComponent } from './job-list/job-list.component';
     Ng2TelInputModule,
     DragDropModule,
     NgSelectModule,
-    NbStepperModule,
+    //NbStepperModule,
     MatAutocompleteModule,
     MatBadgeModule,
     MatBottomSheetModule,

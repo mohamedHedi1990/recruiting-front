@@ -10,6 +10,7 @@
         [paginator]="true"
         currentPageReportTemplate=""
         [filterDelay]="0"
+         [globalFilterFields]="['positionLabel' ]"
         >
 <ng-template pTemplate="caption">
   <div>
@@ -35,54 +36,64 @@
 
 <ng-template pTemplate="header">
   <tr style="text-align: center; font-size: 15px">
-    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="positionLabel">
+    <th style="text-align: center; font-size: 13px; width: 15%" pSortableColumn="positionLabel">
       Dénomination
     </th>
-    <th style="text-align: center; font-size: 13px; width: 25%" pSortableColumn="businessUnit.businessUnitLabel">
+    <th style="text-align: center; font-size: 13px; width: 15%" pSortableColumn="job.jobLabel">
+      Métier
+    </th>
+
+    <th style="text-align: center; font-size: 13px; width: 12%" pSortableColumn="company.companyLabel">
+      Société
+    </th>
+    <th style="text-align: center; font-size: 13px; width: 15%" pSortableColumn="businessUnit.businessUnitLabel">
       Unité organisationnelle
     </th>
 
-    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="positionCategory.positionCategoryLabel">
-      Catégorie
-    </th>
-    <th style="text-align: center; font-size: 13px; width: 20%" pSortableColumn="hierarchicalManagerPosition.positionLabel">
+    <th style="text-align: center; font-size: 13px; width: 14%" pSortableColumn="hierarchicalManagerPosition.positionLabel">
       Supérieure hiérarchique
     </th>
-    <th style="text-align: center; font-size: 13px; width: 10%" pSortableColumn="positionWeight">
-      Poids
+    <th style="text-align: center; font-size: 13px; width: 13%" pSortableColumn="functionalManagerPosition.positionLabel">
+      Supérieure Fonctionel
     </th>
-
+    <th style="text-align: center; font-size: 13px; width: 10%" >
+      Statut
+    </th>
     <th style="width: 10%; font-size: 13px; text-align: center">Action</th>
   </tr>
 </ng-template>
 
 <ng-template pTemplate="body" let-positionTable>
-  <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
-    <td style="text-align: center; font-size: 13px">
+  <tr class="p-selectable-row" style="text-align: left !important; font-size: 13px">
+    <td style="text-align: center !important; font-size: 13px">
       {{ positionTable.positionLabel }}
 
     </td>
+    <td style="text-align: center !important; font-size: 13px">
+      {{ positionTable.job?.jobLabel }}
 
-    <td style="text-align: center">
+    </td>
+    <td style="text-align: center !important; font-size: 13px">
+      <span *ngIf="positionTable.company != null">
+        {{ positionTable.company.companyLabel }}
+      </span>
+      <span *ngIf="positionTable.company == null">
+        Non défini
+      </span>
+
+    </td>
+    <td style="text-align: center !important">
       <span *ngIf="positionTable.businessUnit != null">
         {{ positionTable.businessUnit.businessUnitLabel }}
       </span>
       <span *ngIf="positionTable.businessUnit == null">
         Non défini
       </span>
-      
+
     </td>
 
-    <td style="text-align: center; font-size: 13px">
-      <span *ngIf="positionTable.positionCategory != null">
-        {{ positionTable.positionCategory.positionCategoryLabel }}
-      </span>
-      <span *ngIf="positionTable.positionCategory == null">
-        Non défini
-      </span>
-     
-    </td>
-    <td style="text-align: center; font-size: 13px" >
+
+    <td style="text-align: center !important; font-size: 13px" >
 
       <span *ngIf="positionTable.hierarchicalManagerPosition != null">
         {{ positionTable.hierarchicalManagerPosition.positionLabel }}
@@ -90,10 +101,18 @@
       <span *ngIf="positionTable.hierarchicalManagerPosition == null">
         {{positionTable.positionLabel}}
       </span>
-      <!-- 
+      <!--
       {{position.hierarchicalManagerPosition.userPosition.user.userFirstName}}
       {{position.hierarchicalManagerPosition.userPosition.user.userLastName}}
       -->
+    </td>
+    <td style="text-align: center !important; font-size: 13px">
+       <span *ngIf="positionTable.functionalManagerPosition != null">
+        {{ positionTable.functionalManagerPosition.positionLabel }}
+      </span>
+      <span *ngIf="positionTable.functionalManagerPosition == null">
+        Non défini
+      </span>
     </td>
     <!--
     <td style="text-align: center; font-size: 13px" *ngIf="position.fonctionalManagerPosition">
@@ -106,14 +125,16 @@
     </td>
     -->
     <td style="text-align: center; font-size: 13px">
-      {{ positionTable.positionWeight }}
+
+      <span ngbTooltip="Non Active" *ngIf="!checkPositionActive(positionTable)" class="not-paid-red" placement="top" ></span>
+      <span ngbTooltip="Active" *ngIf=" checkPositionActive(positionTable)" class="paid-green" placement="top" ></span>
     </td>
 
     <td style="text-align: center">
       <div>
-        <i placement="top" ngbTooltip="Voir la fiche de position" class="pi pi-eye" (click)="viewPosition(positionTable)"
+      <!--  <i placement="top" ngbTooltip="Voir la fiche de position" class="pi pi-eye" (click)="viewPosition(positionTable)"
 		style="margin-right: 7px"></i>
-
+      -->
         <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px"
           (click)="editPosition(positionTable)"></i>
         <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="deletePosition(positionTable)"></i>
@@ -147,9 +168,10 @@
 <p-dialog header="{{titleViewPoition}}" [(visible)]="viewPositionModal" [modal]="true" [style]="{width: '85vw'}" [baseZIndex]="10000"
           [draggable]="false" [resizable]="false" (onHide)="initPosition()">
 		<div style="margin-top: 3% !important">
-		
+
 		<p-panel header= "Roles fonctionels" >
-		
+
+<!--
 		  <p-table [value]="position.functionalRoles">
           <ng-template pTemplate="header">
               <tr style="font-size: 13px !important">
@@ -161,7 +183,7 @@
             <tr style="color: #960032 !important">
 
               <td style="text-align: left !important; font-size: 13px">{{functionalRole.roleLabel }}</td>
-             
+
               <td style="text-align: center !important; font-size: 13px">
                 <span *ngIf="functionalRole.hierarchicalManagerPosition == null">{{position.positionLabel}}</span>
                 <span *ngIf="functionalRole.hierarchicalManagerPosition != null"> {{functionalRole.hierarchicalManagerPosition.positionLabel}}</span>
@@ -179,17 +201,19 @@
           </tr>
         </ng-template>
       </p-table>
-		
-		
+-->
+
+
 		</p-panel>
-		
-		
+
+
 		</div>
-  
+
 		<div style="margin-top: 3% !important">
-		
+
 		<p-panel header= "Liste des missions" >
-		
+
+<!--
 		  <p-table [value]="position.missions">
           <ng-template pTemplate="header">
               <tr style="font-size: 13px !important">
@@ -198,10 +222,10 @@
           </ng-template>
           <ng-template pTemplate="body" let-mission>
               <tr style="color: #960032 !important">
-                
+
                   <td style="text-align: left !important; font-size: 13px">{{mission.missionLabel }}</td>
-                   
-                 
+
+
                 </tr>
           </ng-template>
 		  <ng-template pTemplate="emptymessage">
@@ -212,17 +236,19 @@
           </tr>
         </ng-template>
       </p-table>
-		
-		
+-->
+
+
 		</p-panel>
-		
-		
+
+
 		</div>
-		
+
 		<div style="margin-top: 3% !important">
-		
+
 		<p-panel header= "Liste des attributions" >
-		
+
+<!--
 		  <p-table [value]="position.attributions">
           <ng-template pTemplate="header">
               <tr style="font-size: 13px !important">
@@ -231,10 +257,10 @@
           </ng-template>
           <ng-template pTemplate="body" let-attribution>
               <tr style="color: #960032 !important">
-                
+
                   <td style="text-align: left !important; font-size: 13px">{{attribution.attributionLabel }}</td>
-                   
-                 
+
+
                 </tr>
           </ng-template>
 		  <ng-template pTemplate="emptymessage">
@@ -245,15 +271,16 @@
           </tr>
         </ng-template>
       </p-table>
-		
-		
+-->
+
+
 		</p-panel>
-		
-		
+
+
 		</div>
-      
-      
-    
+
+
+
 
   </p-dialog>
 
