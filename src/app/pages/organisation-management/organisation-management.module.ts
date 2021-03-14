@@ -95,9 +95,13 @@ import { PositionIndicatorQuantitatifComponent } from './position-indicator-quan
 import { PositionIndicatorQualitatifComponent } from './position-indicator-qualitatif/position-indicator-qualitatif.component';
 import { BuisnessUnitListComponent } from './buisness-unit-list/buisness-unit-list.component';
 import { JobListComponent } from './job-list/job-list.component';
+import { JobWeightListComponent } from './job-weight-list/job-weight-list.component';
+import { EditJobWeightComponent } from './edit-job-weight/edit-job-weight.component';
+import { PositionOrganigrammeComponent } from './position-organigramme/position-organigramme.component';
+import {NgxOrgChartModule} from "ngx-org-chart";
 
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent, BuisnessUnitListComponent, JobListComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent, BuisnessUnitListComponent, JobListComponent, JobWeightListComponent, EditJobWeightComponent, PositionOrganigrammeComponent],
 
   imports: [
     CommonModule,
@@ -173,6 +177,7 @@ import { JobListComponent } from './job-list/job-list.component';
     MatTooltipModule,
     MatTreeModule,
     AutoCompleteModule,
+    NgxOrgChartModule,
   ],
   providers: [
     DialogService,

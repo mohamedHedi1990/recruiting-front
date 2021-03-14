@@ -9,6 +9,8 @@ import { PositionIndicatorQualitatifComponent } from './position-indicator-quali
 import { PositionIndicatorQuantitatifComponent } from './position-indicator-quantitatif/position-indicator-quantitatif.component';
 import { BuisnessUnitListComponent } from './buisness-unit-list/buisness-unit-list.component';
 import {JobListComponent} from "./job-list/job-list.component";
+import {JobWeightListComponent} from "./job-weight-list/job-weight-list.component";
+import {PositionOrganigrammeComponent} from "./position-organigramme/position-organigramme.component";
 
 
 export const routes: Routes = [
@@ -47,7 +49,15 @@ export const routes: Routes = [
     {
       path:'job-list',
       component:JobListComponent
-    }
+    },
+    {
+      path: 'job-weight-list',
+      component: JobWeightListComponent,
+    },
+    {
+      path: 'position-organigramme',
+      component: PositionOrganigrammeComponent,
+    },
   ],
 
 }

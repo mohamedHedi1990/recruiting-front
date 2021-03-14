@@ -52,7 +52,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/positions',
         icon: 'shuffle-2-outline',
       },
-      
+      {
+        title: "Organiramme de positions",
+        link: '/zen-people-referential/organisation/position-organigramme',
+        icon: 'shuffle-2-outline',
+      },
+
     ],
   },
   {
@@ -63,6 +68,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: "Critères d'évaluation",
         link: '/zen-people-referential/organisation/evaluation-criteria',
         icon: 'flip-outline',
+      },
+      {
+        title: "Poids de métiers",
+        link: '/zen-people-referential/organisation/job-weight-list',
+        icon: 'compass-outline',
       },
       {
         title: 'Catégories des métiers',

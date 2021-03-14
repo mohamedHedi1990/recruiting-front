@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
+@import '~ngx-org-chart/_theming.scss';
+
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -266,4 +268,8 @@ p-autoComplete {
 .p-autocomplete-panel {
     font-size:13px !important;
 }
-
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: #ffffff;
+  border-color: #960032;
+  color: #960032;
+}
