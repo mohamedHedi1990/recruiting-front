@@ -1,12 +1,11 @@
-<h4
-  style="
+<h4 style="
     background: #e7e8e8;
     padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;
     margin-left: 10px;
   ">
-  Organigramme de positions
+  Organigrammes
 </h4>
 <div
   class="card"
@@ -20,10 +19,10 @@
   <p-tabView>
     <p-tabPanel *ngFor="let company of organirammes" [header]="company.companyLabel">
       <p-tabView>
-        <p-tabPanel header="Supérieur Hierarchique">
+        <p-tabPanel header="Hiérarchie organisationelle">
           <ngx-org-chart [nodes]="company.hierarchiqueManagerOrganisation" direction="vertical" ></ngx-org-chart>
         </p-tabPanel>
-        <p-tabPanel header="Supérieur Fonctionnel">
+        <p-tabPanel header="Hiérarchie fonctionelle">
         <ngx-org-chart [nodes]="company.functionalManagerOrganisation" direction="vertical" ></ngx-org-chart>
         </p-tabPanel>
       </p-tabView>

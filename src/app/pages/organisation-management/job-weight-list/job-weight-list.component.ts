@@ -56,8 +56,8 @@ export class JobWeightListComponent implements OnInit {
       .subscribe((data)=>{
           this.organisationService.showToast(
             "success",
-            "Poid du métier modifié avec succès",
-            `Le poit du métier ${job.jobLabel} a été modifié avec succès`
+            "Poids du métier modifié avec succès",
+            `Le poids du métier ${job.jobLabel} a été modifié avec succès`
           );
           this.getAllJobs();
           this.displayEditJob=false;
@@ -66,7 +66,7 @@ export class JobWeightListComponent implements OnInit {
           this.organisationService.showToast(
             "danger",
             "Erreur interne",
-            `Un erreur interne a été produit lors de modification du poid du métier ${job.jobLabel}`
+            `Un erreur interne a été produit lors de modification du poids du métier ${job.jobLabel}`
           );
         }
       )

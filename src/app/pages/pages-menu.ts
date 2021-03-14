@@ -50,12 +50,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: "Positions",
         link: '/zen-people-referential/organisation/positions',
-        icon: 'shuffle-2-outline',
+        icon: 'briefcase-outline',
       },
       {
-        title: "Organiramme de positions",
+        title: "Organigrammes",
         link: '/zen-people-referential/organisation/position-organigramme',
-        icon: 'shuffle-2-outline',
+        icon: 'layers-outline',
       },
 
     ],
