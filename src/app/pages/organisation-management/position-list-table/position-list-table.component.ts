@@ -12,6 +12,10 @@ import {DatePipe} from "@angular/common";
 })
 export class PositionListTableComponent implements OnInit, OnChanges {
 
+  selectedFile: any = null;
+  displayImporterPosition=false;
+  showImportButton = false;
+
 @Output() reloadPositionListEvent = new EventEmitter();
 position :Position  = new Position();
 positions_list ;
@@ -137,7 +141,7 @@ currentDate=new Date();
     this.position.functionalManagerPosition = position.functionalManagerPosition;
     this.position.startDate=this.datePipe.transform(this.position.startDate, 'yyyy-MM-dd');
     this.position.endDate=this.datePipe.transform(this.position.endDate, 'yyyy-MM-dd');
-   
+
     this.addNewPositionModal = true;
   }
   deletePosition(position){
@@ -168,7 +172,7 @@ currentDate=new Date();
   }
   initPosition(){
     this.position = new Position();
-   
+
    }
 
   viewPosition(positionTable: Position){
@@ -188,5 +192,46 @@ currentDate=new Date();
     let current=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     return new Date(position.endDate) >= new Date(current) && new Date(position.startDate) <= new Date(current);
   }
+
+
+
+  selectFile(event) {
+    this.selectedFile = event.target.files[0];
+    if(this.selectedFile != null) {
+      this.showImportButton = true;
+    }
+  }
+
+  importer() {
+    const context = this;
+    let formData = new FormData()
+    formData.append('file', this.selectedFile)
+    this.organisationManagementService.post(OrganisationManagementService.API_POSITION + "/import", formData).subscribe(
+      (response) => {
+        this.organisationManagementService.showToast('success',
+          "Document importé avec succès",
+          `La liste des positions a été importé avec succès`);
+        this.displayImporterPosition=false;
+        context.getAllPositions();
+      }, (error) => {
+        this.organisationManagementService.showToast('danger',
+          "Erreur interne",
+          `Un erreur interne a été produit lors de l'import des positions. Veuillez verifier le format du fichier importé et verifiez bien qu'elle est compatible avec le format requis! `);
+      })
+  }
+
+  showImportWindow(){
+    this.displayImporterPosition=true;
+  }
+
+  closeImportWindow() {
+    this.selectedFile = null;
+    this.displayImporterPosition=false;
+  }
+
+
+
+
+
 
 }
