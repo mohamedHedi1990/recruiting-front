@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem,  TreeNode } from 'primeng/api';
@@ -8,6 +8,9 @@ import { Tree } from '../../../models/Tree.model';
 import { OrganisationManagementService } from '../../../services/organisation-management.service';
 import { PerformanceManagementService } from '../../../services/performance-management.service';
 import { SkillsManagementService } from '../../../services/skills-management.service';
+import jsPDF from "jspdf";
+import {DatePipe} from "@angular/common";
+import {PositionListTableComponent} from "../position-list-table/position-list-table.component";
 
 @Component({
   selector: 'ngx-position',
@@ -15,6 +18,7 @@ import { SkillsManagementService } from '../../../services/skills-management.ser
   styleUrls: ['./position.component.scss']
 })
 export class PositionComponent implements OnInit {
+  @ViewChild(PositionListTableComponent) positionListTableComponent!: PositionListTableComponent;
 
   position : Position;
   category :positionCategory;
@@ -22,27 +26,25 @@ export class PositionComponent implements OnInit {
   categories ;
   selectedFile: TreeNode;
   positions_list = [];
- 
+
   mode_table=true;
   constructor(private organisationManagementService: OrganisationManagementService ,
     private performanceManagementService : PerformanceManagementService,
     private skillsManagementService : SkillsManagementService,
     private router: Router,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private datePipe:DatePipe
     ) { }
 
   ngOnInit(): void {
-    
-    
-
   }
+
 
   getAllPositions(){
   const context = this;
-  this.organisationManagementService.get(OrganisationManagementService.API_POSITION_LITE).subscribe( response => {
+  this.organisationManagementService.get(OrganisationManagementService.API_POSITION).subscribe( response => {
       context.positions_list = response;
-      console.log('-----------positions_list-----', this.positions_list)
-     
+
     },
     error => {
       console.log(error)
@@ -57,7 +59,7 @@ export class PositionComponent implements OnInit {
     if (node.children.length == 0){
       node.expanded = !isExpand;
     }
-   
+
     if (node.children){
         node.children.forEach( childNode => {
             this.expandRecursive(childNode, isExpand);
@@ -65,7 +67,7 @@ export class PositionComponent implements OnInit {
     }
   }
 
-  
+
 
 
   initPosition(){
@@ -73,6 +75,15 @@ export class PositionComponent implements OnInit {
   }
   initCategory(){
     this.category = new positionCategory();
+  }
+
+  exportPdf() {
+    this.positionListTableComponent.exportPdf();
+  }
+
+
+  exportExcel() {
+    this.positionListTableComponent.exportExcel();
   }
 
 }

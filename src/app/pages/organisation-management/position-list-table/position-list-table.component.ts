@@ -3,6 +3,8 @@ import { Position } from '../../../models/Position.model';
 import { OrganisationManagementService } from '../../../services/organisation-management.service';
 import { UtilsService } from '../../../services/utils.service';
 import {DatePipe} from "@angular/common";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 
 @Component({
@@ -29,6 +31,10 @@ titleViewPoition=null;
 viewPositionTable=[];
 displayDeletePosition=false;
 currentDate=new Date();
+  exportColumns: any[];
+  positionToExport:any[]=[];
+  cols: any[];
+
   constructor(private organisationManagementService: OrganisationManagementService , private utilsService: UtilsService,private datePipe:DatePipe) { }
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -39,8 +45,36 @@ currentDate=new Date();
     this.position.startDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     this.position.endDate = this.datePipe.transform(new Date(current.getFullYear()+99 ,current.getMonth(),current.getDay()), 'yyyy-MM-dd');
     this.getAllPositions();
+    this.exportColumns = [
+      { dataKey: 'positionLabel', title: 'Dénomination' },
+      { dataKey: 'jobLabel', title: 'Métier' },
+      { dataKey: 'companyLabel', title: 'Société' },
+      { dataKey: 'businessUnitLabel', title: 'Unité organisationnelle' },
+      { dataKey: 'hierarchicalManagerPositionLabel', title: 'Supérieure hiérarchique' },
+      { dataKey: 'functionalManagerPositionLabel', title: 'Supérieure Fonctionel' },
+      { dataKey: 'status', title: 'Status' }
+    ];
 
+  }
 
+  getExportColums(){
+    this.positions_list.forEach(position => {
+      let positionToExport = {
+        'positionLabel':position.positionLabel,
+        'jobLabel':position.job?.jobLabel,
+        'companyLabel':position.company?.companyLabel,
+        'businessUnitLabel': position.businessUnit?.businessUnitLabel,
+        'hierarchicalManagerPositionLabel':position.hierarchicalManagerPosition?.positionLabel,
+        'functionalManagerPositionLabel':position.functionalManagerPosition?.positionLabel,
+        'status':''
+      }
+      if(this.checkPositionActive(position)){
+        positionToExport.status="Active"
+      }else{
+        positionToExport.status="Non Active"
+      }
+      this.positionToExport.push(positionToExport);
+    })
   }
   addNewPosition() {
     this.position = new Position();
@@ -125,7 +159,7 @@ currentDate=new Date();
     const context = this;
     this.organisationManagementService.get(OrganisationManagementService.API_POSITION).subscribe( response => {
         context.positions_list = response;
-        console.log('-----------positions_list-----', this.positions_list)
+        this.getExportColums();
 
       },
       error => {
@@ -192,6 +226,37 @@ currentDate=new Date();
     let current=this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     return new Date(position.endDate) >= new Date(current) && new Date(position.startDate) <= new Date(current);
   }
+  exportPdf() {
+    // const doc = new jsPDF();
+    const doc = new jsPDF('p','pt');
+    doc['autoTable'](this.exportColumns, this.positionToExport);
+    // doc.autoTable(this.exportColumns, this.products);
+    doc.save("positions.pdf");
+  }
+
+
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.positionToExport);
+      const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+      const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+      this.saveAsExcelFile(excelBuffer, "positions");
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    import("file-saver").then(FileSaver => {
+      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+      let EXCEL_EXTENSION = '.xlsx';
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    });
+  }
+
+
+
 
 
 
