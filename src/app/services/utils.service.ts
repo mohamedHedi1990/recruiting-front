@@ -29,7 +29,9 @@ export class UtilsService {
   public static API_EVALUATIONCRITERIA = UtilsService.REMOTE_ORGANISATION_URL +"/api/evaluationcriteria";
   public static API_POSITIONCATEGORY=UtilsService.REMOTE_ORGANISATION_URL+"/api/position-category";
   public static API_RATINGSCALE = UtilsService.REMOTE_ORGANISATION_URL +"/api/ratingScale";
-
+  public static API_POSITION=UtilsService.REMOTE_ORGANISATION_URL+"api/position";
+  public static API_MISSION=UtilsService.REMOTE_ORGANISATION_URL+"api/mission";
+ 
   constructor(
     private toastrService: NbToastrService,
     private httpClient: HttpClient,

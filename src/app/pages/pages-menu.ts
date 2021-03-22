@@ -1,5 +1,4 @@
 import { NbMenuItem } from '@nebular/theme';
-import { icon } from 'leaflet';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
@@ -57,6 +56,21 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/zen-people-referential/organisation/position-organigramme',
         icon: 'layers-outline',
       },
+
+    ],
+  },
+  {
+    title: 'Gestion des Positions',
+    icon: 'keypad-outline',
+    children: [
+      {
+        title: 'Missions',
+        link: '/zen-people-referential/positions/missions-list',
+        icon: 'briefcase-outline',
+      },
+     
+
+      
 
     ],
   },

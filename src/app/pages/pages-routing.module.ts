@@ -35,6 +35,11 @@ const routes: Routes = [{
         .then(m => m.AdministrationManagementModule),
     },
     {
+      path:'positions',
+      loadChildren: () => import('./position-management/position-management.module')
+        .then(m => m.PositionManagementModule),
+    },
+    {
       path: '**',
       component: NotFoundComponent,
     },

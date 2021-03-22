@@ -1,0 +1,85 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4  style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px">
+Liste des positions
+</h4>
+<div  class="card" style=" margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
+  <p-table #dt [value]="positions" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+           [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
+           [paginator]="true" currentPageReportTemplate=""
+           [filterDelay]="0" [globalFilterFields]="['positionLabel','mission.missionLabel']">
+    <ng-template pTemplate="caption" >
+      <div >
+        <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+          <span class="p-input-icon-left" style="width: 100%">
+                      <i class="pi pi-search"></i>
+                      <input pInputText type="text" style="width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une position.." />
+                  </span>
+          </div>
+  
+         
+      </div>
+        
+
+     
+
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr style="text-align: center; font-size: 13px;">
+        <th style="text-align: center; font-size: 13px;width: 50%;">Position </th>
+        <th style="text-align: center; font-size: 13px;width: 60%;"> Mission </th>
+           </tr>
+      </ng-template>
+    <ng-template pTemplate="body" let-position>
+      <tr class="p-selectable-row" style="text-align: center; font-size: 13px;">
+       
+        <td  style="    text-align: center !important;
+    font-size: 13px;
+    font-weight: bold;
+">
+          {{position.positionLabel}}
+        </td>
+          <td pEditableColumn style="text-align: left!important;font-size: 13px;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                   <div style="display: flex;">
+                     <div style="width:90%">
+                       <textarea style="font-size: 13px;" type="text" rows="3" class="form-control p-field" pInputTextarea [(ngModel)]="position.mission"></textarea>
+                     </div>
+                  
+                 
+                <div style="margin-left:7px;">
+                  <i style="color: #960032;font-size: 15px;" ngbTooltip="Valider" class="pi pi-check-circle"
+                     (click)="validerOperation(position)"></i>
+
+                  <i style="color: #960032;font-size: 15px;margin-left: 5px" ngbTooltip="Annuler" class="pi pi-times-circle"
+                     (click)="annulerOperation()"></i>
+                </div>
+                   
+              </div>
+  
+                </ng-template>
+                <ng-template pTemplate="output">
+                  <span *ngIf="position.mission == null">Non défini</span>
+                  <span *ngIf="position.mission != null"> {{position.mission}}</span>
+                 
+                </ng-template>
+              </p-cellEditor>
+            </td>
+        
+        
+       
+       
+      
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="10" style="text-align: left !important;">Aucun position trouvé!</td>
+      </tr>
+    </ng-template>
+  </p-table>
+ 
+         
