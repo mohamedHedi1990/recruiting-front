@@ -9,7 +9,7 @@ Liste des utilisateurs
   <p-table #dt [value]="users" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
            [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[5,10,15]" [loading]="loading"
            [paginator]="true" currentPageReportTemplate=""
-           [filterDelay]="0" [globalFilterFields]="['userRegistrationNumber','userFirstName','userLastName','userBirthDate','userGender','userBirthCountry','userBirthCity','userHirringDate','userAddress','userEmail','userPhoneNumber','userLogin','userPassword','userCivilStatus','createdAt', 'updatedAt']">
+           [filterDelay]="0" [globalFilterFields]="['userRegistrationNumber','userFirstName','userLastName','userHirringDate','company.companyLabel','businessUnit.businessUnitLabel','userTypeContract','userLogin','userPassword','userCivilStatus','createdAt', 'updatedAt']">
     <ng-template pTemplate="caption" >
       <div >
         <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
@@ -34,13 +34,14 @@ Liste des utilisateurs
         <th style="text-align: center; font-size: 13px;width: 15%;"> Nom complet </th>
         <th style="text-align: center; font-size: 13px;width: 10%;"> Matricule </th>
         <th style="text-align: center; font-size: 13px;width: 10%;"> Date d'embauche </th>
-        <th style="text-align: center; font-size: 13px;width: 10%;">Télephone </th>
+        <!-- <th style="text-align: center; font-size: 13px;width: 10%;">Télephone </th>
         <th style="text-align: center; font-size: 13px;width: 15%;"> Email </th>
         <th style="text-align: center; font-size: 13px;width: 15%;"> Adresse </th>
-        <!--
-        <th style="text-align: center; font-size: 13px;width: 10%;">  Date de création </th>
-        <th style="text-align: center; font-size: 13px;width: 10%;">Date de modification</th>
-        -->
+         -->
+          <th style="text-align: center; font-size: 13px;width: 10%;">Société </th>
+        <th style="text-align: center; font-size: 13px;width: 15%;"> Unité organisationelle </th>
+        <th style="text-align: center; font-size: 13px;width: 15%;">Type contract </th>
+        
         <th style="text-align: center; font-size: 13px;width: 8%;">Statut</th>
         <th style="width: 10%;font-size: 13px; text-align: center;">Actions</th>      </tr>
       </ng-template>
@@ -64,11 +65,11 @@ Liste des utilisateurs
         <td  style="text-align: center;font-size: 13px;">
           {{user.userHirringDate | date: 'dd-MM-yyyy'}}
         </td>
-        <td  style="text-align: center;font-size: 13px;">
+        <!-- <td  style="text-align: center;font-size: 13px;">
           {{user.userPhoneNumber}}
-        </td>
+        </td> -->
         
-       
+<!--        
         <td  style="text-align: center;font-size: 13px;">
           {{user.userEmail}}
         </td>
@@ -80,17 +81,20 @@ Liste des utilisateurs
             {{user.userCity}} - {{user.userPays}}
           </div>
               
-        </td>
-          <!--
+        </td> -->
         <td  style="text-align: center;font-size: 13px;">
-          {{user.createdAt}}
+          {{user.company.companyLabel}}
         </td>
-       
-       
         <td  style="text-align: center;font-size: 13px;">
-          {{user.updatedAt}}
+ 
+            {{user.businessUnit.businessUnitLabel}}
+    
         </td>
-         -->
+        <td>
+
+            {{user.userTypeContract}}
+ 
+        </td>
         <td  style="text-align: center;font-size: 13px;">
           <span *ngIf="user.isBlocked==true" ngbTooltip="Bloqué" class="not-paid-red" placement="top" ></span>
           <span ngbTooltip="Active" *ngIf="user.isBlocked==false" class="paid-green" placement="top" ></span>

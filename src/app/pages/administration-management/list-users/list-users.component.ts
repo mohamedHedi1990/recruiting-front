@@ -32,6 +32,9 @@ export class ListUsersComponent implements OnInit {
     const context = this;
     this.user=userObject.user;
     this.user.isBlocked=false;
+    delete this.user.company.createdAt;
+
+    delete this.user.company.updatedAt;
     /*this.mySimpleFormat = this.pipe.transform(this.user.userBirthDate, 'dd-MM-yyyy');
     this.user.userBirthDate= this.mySimpleFormat;
     this.mySimpleFormat =   this.pipe.transform(this.user.userHirringDate, 'dd-MM-yyyy');
@@ -156,6 +159,9 @@ export class ListUsersComponent implements OnInit {
       userPassword: null,
       userCivilStatus: 'CELIBATAIRE',
       isBlocked: null,
+      userTypeContract:'STAGE',
+      company:null,
+      businessUnit:null
     };
   }
 bloquerUser(user){
