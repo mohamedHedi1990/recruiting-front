@@ -48,10 +48,13 @@ import { FileUploadModule } from 'primeng/fileupload';
 import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-position.component";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import { SkillsReferentialComponent } from './skills-referential/skills-referential.component';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent],
   imports: [
+    TabViewModule,
+
     CommonModule,
     SkillsManagementRoutingModule,
     FileUploadModule,

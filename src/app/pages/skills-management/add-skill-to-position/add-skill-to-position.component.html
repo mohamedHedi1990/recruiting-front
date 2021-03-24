@@ -1,100 +1,182 @@
-<h4
-  style="
+<p-tabView>
+  <p-tabPanel header="Unités organisationnelles">
+    <p-table #dt [value]="businessUnitSKills" dataKey="businessUnit.businessUnitId" styleClass="p-datatable-customers"
+      [rowHover]="true" [rows]="10" [rowsPerPageOptions]="[10, 15]" [loading]="loading"
+      [paginator]="true" [filterDelay]="0" [globalFilterFields]="[]"
+     >
+
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
+          <span class="p-input-icon-left" style="width: 100%">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" style="width: 93%" class="searchInput, p-inputtext"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Chercher une unité fonctionnelle.." />
+          </span>
+        </div>
+      </ng-template>
+
+      <ng-template pTemplate="header">
+        <tr style="text-align: center; font-size: 15px">
+          <th style="text-align: left; font-size: 13px; width: 30% ">Libélle</th>
+          <th style="text-align: center; font-size: 13px;  width: 50%">compétances</th>
+          <th style="text-align: center; font-size: 13px;  width: 20%">Affectation</th>
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-businessUnitSKill let-expanded="expanded">
+
+        <tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="businessUnitSKill"
+          name="businessUnitSKill" id="businessUnitSKill.businessUnit.businessUnitId">
+        
+          <td  style="text-align: left !important;
+      padding: 10px 10px 10px 10px !important;
+      font-size: 13px !important;
+      color: #222b45;
+      margin-left: 10px;
+      font-weight: bold;">
+            {{ businessUnitSKill.businessUnit.businessUnitLabel}}
+          </td>
+          <td >
+             <tr *ngFor="let skillGroup of businessUnitSKill.skillGroupList">
+                <span *ngFor="let subSkill of skillGroup.skillDtoList">
+{{subSkill.subSkillLabel}}
+                </span>
+              </tr>
+          </td>
+          <td>
+            <button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-danger p-button-text" (click)="AddSkillBusinessUnit(businessUnitSKill)"></button>
+
+          </td>
+        </tr>
+      </ng-template>
+      <!-- <ng-template pTemplate="rowexpansion" let-businessUnitSKill>
+        <tr>
+          <td colspan="5">
+            <div class="p-p-3">
+              <p-table #dt [value]="businessUnitSKill.skillGroupList" dataKey="id" styleClass="p-datatable-customers">
+                <ng-template pTemplate="header">
+        <tr style="text-align: center; font-size: 15px">
+          <th style="text-align: left; font-size: 13px; width: 40% ">Famille de compétence</th>
+          <th style="text-align: center; font-size: 13px;  width: 60%"></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-skillsGroup>
+
+        <tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="skillsGroup"
+          name="skillsGroup" id="id">
+          <td style="text-align: left !important;
+                padding: 10px 10px 10px 10px !important;
+                font-size: 13px !important;
+                color: #222b45;
+                margin-left: 10px;
+                font-weight: bold;">
+            {{ skillsGroup.label}}
+          </td>
+          <td>
+            <p-autoComplete [group]="true" [suggestions]="skillList" [multiple]="true" optionGroupLabel="skillLabel"
+              optionGroupChildren="subSkills" (completeMethod)="filterSkills($event,skillsGroup)" field="subSkillLabel"
+              (onSelect)="onSelectSubSKill($event,businessUnitSKill.businessUnit,skillsGroup)" [dropdown]="true"
+              [(ngModel)]="skillsGroup.skillDtoList" [inputStyle]="{'width':'800px'}">
+              <ng-template let-group pTemplate="group">
+                <div class="p-d-flex p-ai-center">
+                  <span>{{group.skillLabel}}</span>
+                </div>
+              </ng-template>
+            </p-autoComplete> -->
+            <!--    <p-autoComplete [group]="true" [suggestions]="skillList" (completeMethod)="filterSkills($event,skillsGroup)" field="skillLabel" [multiple]="true" [dropdown]="true">
+                      <ng-template let-group pTemplate="group"
+                      [(ngModel)]="selectedSkills">
+                          <div class="p-d-flex p-ai-center">
+                              <span>{{group.label}}</span>
+                          </div>
+                      </ng-template>
+                  </p-autoComplete> -->
+          <!-- </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr style="font-size: 13px">
+          <td colspan="8" style="text-align: left !important">
+            Aucune famille de compétence trouvé!
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    </div>
+    </td>
+    </tr>
+    </ng-template> -->
+    <ng-template pTemplate="emptymessage">
+      <tr style="font-size: 13px">
+        <td colspan="8" style="text-align: left !important">
+          Aucune unité fonctionnelle trouvé!
+        </td>
+      </tr>
+    </ng-template>
+    </p-table>
+  </p-tabPanel>
+  <p-tabPanel header="Positions">
+
+    <h4 style="
     background: #e7e8e8;
     padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;
     margin-left: 10px;
-  "
->
-  Affecter des compétences aux positions
-</h4>
-<div
-  class="card"
-  style="
+  ">
+      Affecter des compétences aux positions
+    </h4>
+    <div class="card" style="
     margin: auto;
     margin-top: 3%;
     border-color: #e7e8e8 !important;
     border: solid;
-  "
->
-  <p-table
-    #dt
-    [value]="positions_list"
-    dataKey="positionId"
-    styleClass="p-datatable-customers"
-    [rowHover]="true"
-    [rows]="10"
-    [showCurrentPageReport]="true"
-    [rowsPerPageOptions]="[10, 15]"
-    [paginator]="true"
-    currentPageReportTemplate=""
-    [filterDelay]="0"
-  >
-    <ng-template pTemplate="caption">
-      <div>
-        <div
-          class="p-d-flex p-ai-center p-jc-between"
-          style="width: 60%; display: inline-block"
-        >
-          <span class="p-input-icon-left" style="width: 100%">
-            <i class="pi pi-search"></i>
-            <input
-              pInputText
-              type="text"
-              style="width: 93%"
-              class="searchInput, p-inputtext"
-              (input)="dt.filterGlobal($event.target.value, 'contains')"
-              placeholder="Chercher une position.."
-            />
-          </span>
-        </div>
-      </div>
-    </ng-template>
+  ">
+      <p-table #dt [value]="positions_list" dataKey="positionId" styleClass="p-datatable-customers" [rowHover]="true"
+        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10, 15]" [paginator]="true"
+        currentPageReportTemplate="" [filterDelay]="0">
+        <ng-template pTemplate="caption">
+          <div>
+            <div class="p-d-flex p-ai-center p-jc-between" style="width: 60%; display: inline-block">
+              <span class="p-input-icon-left" style="width: 100%">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" style="width: 93%" class="searchInput, p-inputtext"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une position.." />
+              </span>
+            </div>
+          </div>
+        </ng-template>
 
-    <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 15px">
-        <th style="text-align: center; font-size: 13px; width: 3rem"></th>
-        <th
-          style="text-align: left; font-size: 13px; width: 90%"
-          pSortableColumn="positionLabel"
-        >
-          Position
-        </th>
-        <th style="text-align: center; font-size: 13px; width: 10%"></th>      </tr>
-    </ng-template>
+        <ng-template pTemplate="header">
+          <tr style="text-align: center; font-size: 15px">
+            <th style="text-align: center; font-size: 13px; width: 3rem"></th>
+            <th style="text-align: left; font-size: 13px; width: 90%" pSortableColumn="positionLabel">
+              Position
+            </th>
+            <th style="text-align: center; font-size: 13px; width: 10%"></th>
+          </tr>
+        </ng-template>
 
-    <ng-template pTemplate="body" let-position let-expanded="expanded">
-      <tr
-        class="p-selectable-row"
-        style="text-align: center; font-size: 13px"
-        [pSelectableRow]="position"
-        name="position"
-        id="position"
-      >
-        <td>
-          <i
-            *ngIf="!expanded"
-            [pRowToggler]="position"
-            class="pi pi-chevron-right"
-          ></i>
-          <i
-            *ngIf="expanded"
-            [pRowToggler]="position"
-            class="pi pi-chevron-down"
-          ></i>
-        </td>
-        <td style="text-align: left !important;
+        <ng-template pTemplate="body" let-position let-expanded="expanded">
+          <tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="position"
+            name="position" id="position">
+            <td>
+              <i *ngIf="!expanded" [pRowToggler]="position" class="pi pi-chevron-right"></i>
+              <i *ngIf="expanded" [pRowToggler]="position" class="pi pi-chevron-down"></i>
+            </td>
+            <td style="text-align: left !important;
         padding: 10px 10px 10px 10px !important;
         font-size: 13px !important;
         color: #222b45;
         margin-left: 10px;
         font-weight: bold;">
-          {{ position.positionLabel }}
-        </td>
-        <td>
-            <div
-              style="
+              {{ position.positionLabel }}
+            </td>
+            <td>
+              <div style="
                 float: left;
                 background-color: #960032;
                 color: white;
@@ -103,182 +185,204 @@
                 border-radius: 40%;
                 margin-right: 7px;
                 margin-top: -3px;
-              "
-              ngbTooltip="{{ position.positionSubSkills.length }} sous compétence(s) affecter"
-            >
-              {{ position.positionSubSkills.length }}
-            </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-position>
-      <tr>
-        <td colspan="5">
-          <div class="p-p-3">
-            <p-table
-              [value]="position.positionSubSkills"
-              dataKey="position.positionId"
-            >
-              <ng-template pTemplate="header">
-      <tr style="text-align: center; font-size: 13px">
-        <th
-          style="
+              " ngbTooltip="{{ position.positionSubSkills.length }} sous compétence(s) affecter">
+                {{ position.positionSubSkills.length }}
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-position>
+          <tr>
+            <td colspan="5">
+              <div class="p-p-3">
+                <p-table [value]="position.positionSubSkills" dataKey="position.positionId">
+                  <ng-template pTemplate="header">
+          <tr style="text-align: center; font-size: 13px">
+            <th style="
                       text-align: left !important;
                       font-size: 13px;
                       width: 60%;
-                    "
-        >
-          Compétence
-        </th>
-        <th style="text-align: center; font-size: 13px; width: 30%">
-          Niveau réquis
-        </th>
-        <th
-          style="width: 10%; font-size: 13px; text-align: center"
-        ></th>
-      </tr>
+                    ">
+              Compétence
+            </th>
+            <th style="text-align: center; font-size: 13px; width: 30%">
+              Niveau réquis
+            </th>
+            <th style="width: 10%; font-size: 13px; text-align: center"></th>
+          </tr>
 
-      <tr>
-        <th style="font-size: 13px">
-          <p-autoComplete [group]="true"
-                          [suggestions]="skillsList"
-                          optionGroupLabel="skillLabel"
-                          optionGroupChildren="subSkills"
-                          (completeMethod)="filterSubSkills($event)"
-                          field="subSkillLabel"
-                          [multiple]="false"
-                          (onSelect)="onSelectSkills($event)"
-                          [dropdown]="true"
-                          [(ngModel)]="positionSubSkill.skill"
-                          [style]="{ height: '33.5px' }">
-            <ng-template let-group pTemplate="group">
-              <div class="p-d-flex p-ai-center">
-                <span>{{ group.skillLabel }}</span>
-              </div>
-            </ng-template>
-          </p-autoComplete>
-        </th>
-        <th style="font-size: 13px">
-          <select
-            class="form-control p-field"
-            id="requiredLevel"
-            name="side"
-            [(ngModel)]="positionSubSkill.level"
-            style="font-size: 13px"
-            [compareWith]="compareSkillLevel"
-          >
-            <option
-              *ngFor="let level of skillLevelList"
-              [ngValue]="level"
-            >
-              {{ level.skillLevelLabel }}
-            </option>
-          </select>
-        </th>
-
-        <th style="text-align: center">
-          <button
-            pButton
-            placement="top"
-            ngbTooltip="Ajouter"
-            pRipple
-            icon="pi pi-plus"
-            class="p-button-rounded p-mr-2"
-            style="background-color: #960032; border-color: #960032"
-            [disabled]="checkValidPositionSubSkill(position)"
-            [ngClass]="{ disabled: checkValidPositionSubSkill(position) }"
-            (click)="savePositionSubSkill(position)"
-          ></button>
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template
-      pTemplate="body"
-      let-positionSubSkill
-      let-rowIndex="rowIndex"
-    >
-      <tr
-        class="p-selectable-row"
-        style="text-align: center; font-size: 13px"
-      >
-        <td
-          pEditableColumn
-          style="text-align: left !important; font-size: 13px"
-        >
-          {{ positionSubSkill.subSkill.subSkillLabel }}
-        </td>
-        <td
-          pEditableColumn
-          style="text-align: center !important; font-size: 13px"
-        >
-          <p-cellEditor>
-            <ng-template pTemplate="input">
-              <select
-                class="form-control p-field"
-                id="requiredLevel"
-                name="side"
-                [(ngModel)]="positionSubSkill.requiredLevel"
-                style="font-size: 13px"
-                [compareWith]="compareSkillLevel" (change)="editPositionSubSkill(positionSubSkill)"
-              >
-                <option
-                  *ngFor="let level of positionSubSkill.subSkill.skillLevels"
-                  [ngValue]="level"
-                >
+          <tr>
+            <th style="font-size: 13px">
+              <p-autoComplete [group]="true" [suggestions]="skillsList" optionGroupLabel="skillLabel"
+                optionGroupChildren="subSkills" (completeMethod)="filterSubSkills($event)" field="subSkillLabel"
+                [multiple]="false" (onSelect)="onSelectSkills($event)" [dropdown]="true"
+                [(ngModel)]="positionSubSkill.skill" [style]="{ height: '33.5px' }">
+                <ng-template let-group pTemplate="group">
+                  <div class="p-d-flex p-ai-center">
+                    <span>{{ group.skillLabel }}</span>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </th>
+            <th style="font-size: 13px">
+              <select class="form-control p-field" id="requiredLevel" name="side" [(ngModel)]="positionSubSkill.level"
+                style="font-size: 13px" [compareWith]="compareSkillLevel">
+                <option *ngFor="let level of skillLevelList" [ngValue]="level">
                   {{ level.skillLevelLabel }}
                 </option>
               </select>
-            </ng-template>
-            <ng-template pTemplate="output">
-              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'DEBUTANT'"
-                    class="customer-badge low">
-                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
-              </span>
-              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'INTERMEDIAIRE'"
+            </th>
+
+            <th style="text-align: center">
+              <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                class="p-button-rounded p-mr-2" style="background-color: #960032; border-color: #960032"
+                [disabled]="checkValidPositionSubSkill(position)"
+                [ngClass]="{ disabled: checkValidPositionSubSkill(position) }"
+                (click)="savePositionSubSkill(position)"></button>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-positionSubSkill let-rowIndex="rowIndex">
+          <tr class="p-selectable-row" style="text-align: center; font-size: 13px">
+            <td pEditableColumn style="text-align: left !important; font-size: 13px">
+              {{ positionSubSkill.subSkill.subSkillLabel }}
+            </td>
+            <td pEditableColumn style="text-align: center !important; font-size: 13px">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <select class="form-control p-field" id="requiredLevel" name="side"
+                    [(ngModel)]="positionSubSkill.requiredLevel" style="font-size: 13px"
+                    [compareWith]="compareSkillLevel" (change)="editPositionSubSkill(positionSubSkill)">
+                    <option *ngFor="let level of positionSubSkill.subSkill.skillLevels" [ngValue]="level">
+                      {{ level.skillLevelLabel }}
+                    </option>
+                  </select>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'DEBUTANT'" class="customer-badge low">
+                    {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+                  </span>
+                  <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'INTERMEDIAIRE'"
                     class="customer-badge middle">
-                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
-              </span>
-              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'AVANCE'"
+                    {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+                  </span>
+                  <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'AVANCE'"
                     class="customer-badge advanced">
-                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
-              </span>
-              <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'EXPERT'"
+                    {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+                  </span>
+                  <span *ngIf="positionSubSkill.requiredLevel.skillLevelCode === 'EXPERT'"
                     class="customer-badge expert">
-                {{ positionSubSkill.requiredLevel.skillLevelLabel }}
-              </span>
+                    {{ positionSubSkill.requiredLevel.skillLevelLabel }}
+                  </span>
 
-            </ng-template>
-          </p-cellEditor>
-        </td>
+                </ng-template>
+              </p-cellEditor>
+            </td>
 
-        <td style="text-align: center">
-          <i
-            placement="top"
-            ngbTooltip="Supprimer"
-            class="pi pi-trash"
-            (click)="
+            <td style="text-align: center">
+              <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="
                         deletePositionSubSkill(
                           position,
                           positionSubSkill,
                           rowIndex
                         )
-                      "
-          ></i>
-        </td>
-      </tr>
-    </ng-template>
+                      "></i>
+            </td>
+          </tr>
+        </ng-template>
 
-    <ng-template pTemplate="emptymessage">
-      <tr style="font-size: 13px">
-        <td colspan="8" style="text-align: left !important">
-          Aucune compétence a été ajoutée pour cette position!
-        </td>
-      </tr>
+        <ng-template pTemplate="emptymessage">
+          <tr style="font-size: 13px">
+            <td colspan="8" style="text-align: left !important">
+              Aucune compétence a été ajoutée pour cette position!
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    </td>
+    </tr>
     </ng-template>
-  </p-table>
-</div>
+    </p-table>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+
+
+
+
+
+<p-dialog header="Affecter des compétances aux Unités organisationnelles" [(visible)]="displayAddSkillsBusinessUnit" [modal]="true"
+  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+ 
+  <ng-template style="margin-top: 40px;"  pTemplate="body">
+
+
+
+
+
+    <p-table  #dt [value]="businessUnitSKill.skillGroupList" dataKey="id" styleClass="p-datatable-customers">
+      <ng-template pTemplate="header">
+<tr style="text-align: center; font-size: 15px">
+<th style="text-align: left; font-size: 13px; width: 40% ">Famille de compétence</th>
+<th style="text-align: center; font-size: 13px;  width: 60%"></th>
+</tr>
+</ng-template>
+
+<ng-template pTemplate="body" let-skillsGroup>
+
+<tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="skillsGroup"
+name="skillsGroup" id="id">
+<td style="text-align: left !important;
+      padding: 10px 10px 10px 10px !important;
+      font-size: 13px !important;
+      color: #222b45;
+      margin-left: 10px;
+      font-weight: bold;">
+  {{ skillsGroup.label}}
 </td>
-</tr></ng-template
-  ></p-table
-  >
-</div>
+<td>
+  <!-- <p-autoComplete [group]="true" [suggestions]="skillList" [multiple]="true" optionGroupLabel="skillLabel"
+    optionGroupChildren="subSkills" (completeMethod)="filterSkills($event,skillsGroup)" field="subSkillLabel"
+    (onSelect)="onSelectSubSKill($event,businessUnitSKill.businessUnit,skillsGroup)" [dropdown]="true"
+    [(ngModel)]="skillsGroup.skillDtoList" [inputStyle]="{'width':'800px'}">
+    <ng-template let-group pTemplate="group">
+      <div class="p-d-flex p-ai-center">
+        <span>{{group.skillLabel}}</span>
+      </div>
+    </ng-template>
+  </p-autoComplete>  -->
+  <p-multiSelect [options]="skillList" [group]="true" [(ngModel)]="skillsGroup.skillDtoList"   optionGroupLabel="skillLabel" [group]="true"
+  defaultLabel="Choisir une compétance" scrollHeight="250px" display="chip" optionGroupChildren="subSkills" 
+  optionLabel="subSkillLabel" >
+   <!-- <ng-template let-group pTemplate="group">
+        <div class="p-d-flex p-ai-center">
+            <span>{{group.skillLabel}}</span>
+        </div>
+    </ng-template> -->
+</p-multiSelect>
+</td>
+</tr>
+</ng-template>
+<ng-template pTemplate="emptymessage">
+<tr style="font-size: 13px">
+<td colspan="8" style="text-align: left !important">
+  Aucune famille de compétence trouvé!
+</td>
+</tr>
+</ng-template>
+</p-table>
+  </ng-template>
+
+
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px;">
+      <button pButton pRipple label="Annuler" icon="pi pi-times" class="p-button-secondary p-mr-2"
+        (click)="displayAddSkillsBusinessUnit=false"></button>
+
+      <button pButton pRipple label="Valider" icon="pi pi-check" class="primaryBtn"
+        (click)="validerSkillsBusinessUnit()"></button>
+
+    </div>
+  </ng-template>
+</p-dialog>
