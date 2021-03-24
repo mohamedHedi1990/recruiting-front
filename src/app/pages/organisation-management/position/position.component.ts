@@ -26,8 +26,25 @@ export class PositionComponent implements OnInit {
   categories ;
   selectedFile: TreeNode;
   positions_list = [];
-
+  showPositionFunctionSheetWindow=false;
   mode_table=true;
+  functionCard = {
+    "functionCardId":"",
+    "reference":"",
+    "revisionIndice":"",
+    "positionLabel":"",
+    "departement":"",
+    "positionHolder":"",
+    "actingPosition":"",
+    "hierarchicalManager":"",
+    "functionalManager":"",
+    "subPositionNumber":"",
+    "mission":"",
+    "attributionList":[],
+    "formation":"",
+    "experience":"",
+  };
+
   constructor(private organisationManagementService: OrganisationManagementService ,
     private performanceManagementService : PerformanceManagementService,
     private skillsManagementService : SkillsManagementService,
@@ -44,10 +61,8 @@ export class PositionComponent implements OnInit {
   const context = this;
   this.organisationManagementService.get(OrganisationManagementService.API_POSITION).subscribe( response => {
       context.positions_list = response;
-
     },
     error => {
-      console.log(error)
       context.organisationManagementService.showToast('danger',
         'Erreur interne',
         `Un erreur interne a été produit lors du chargement des societés`);
@@ -67,12 +82,10 @@ export class PositionComponent implements OnInit {
     }
   }
 
-
-
-
   initPosition(){
     this.position = new Position();
   }
+
   initCategory(){
     this.category = new positionCategory();
   }
@@ -81,9 +94,30 @@ export class PositionComponent implements OnInit {
     this.positionListTableComponent.exportPdf();
   }
 
-
   exportExcel() {
     this.positionListTableComponent.exportExcel();
   }
 
+  showPositionFunctionSheet(position){
+    this.position=position;
+    this.getFunctionCard();
+  }
+
+  getFunctionCard(){
+    if(this.position.positionId != null) {
+      this.organisationManagementService.get(OrganisationManagementService.API_FUNCTION_CARD + this.position.positionId).subscribe(response => {
+          this.functionCard = response;
+          this.showPositionFunctionSheetWindow=true;
+        },
+        error => {
+          this.organisationManagementService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du chargement de fiche fonction`);
+        });
+    }
+  }
+
+  hideSheet(){
+    this.showPositionFunctionSheetWindow=false;
+  }
 }

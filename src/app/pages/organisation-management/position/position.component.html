@@ -3,7 +3,8 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px;
-    margin-bottom: 3%;">
+    margin-bottom: 3%;"
+ *ngIf="! showPositionFunctionSheetWindow">
 Liste des positions
   <div style="float: right;">
 
@@ -16,7 +17,12 @@ Liste des positions
   </div>
 </h4>
 
-<ngx-position-list-table *ngIf="mode_table"
+<ngx-position-list-table *ngIf="mode_table && !showPositionFunctionSheetWindow"
                           (reloadPositionListEvent)="getAllPositions()"
-                         >
+                         (showPositionFunctionSheetWindowEvent)="showPositionFunctionSheet($event)"
+>
 </ngx-position-list-table>
+<ngx-position-function-sheet *ngIf="showPositionFunctionSheetWindow" [functionCard]="functionCard"
+                             (retourEvent)="hideSheet()"
+  >
+</ngx-position-function-sheet>

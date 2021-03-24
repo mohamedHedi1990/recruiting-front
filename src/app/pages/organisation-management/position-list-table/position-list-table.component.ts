@@ -34,6 +34,7 @@ currentDate=new Date();
   exportColumns: any[];
   positionToExport:any[]=[];
   cols: any[];
+  @Output() showPositionFunctionSheetWindowEvent=new EventEmitter();
 
   constructor(private organisationManagementService: OrganisationManagementService , private utilsService: UtilsService,private datePipe:DatePipe) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -253,12 +254,11 @@ currentDate=new Date();
       });
       FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
+
   }
-
-
-
-
-
+  showPositionFunctionSheet(position){
+    this.showPositionFunctionSheetWindowEvent.emit(position);
+  }
 
   selectFile(event) {
     this.selectedFile = event.target.files[0];

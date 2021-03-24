@@ -100,9 +100,10 @@ import { EditJobWeightComponent } from './edit-job-weight/edit-job-weight.compon
 import { PositionOrganigrammeComponent } from './position-organigramme/position-organigramme.component';
 import {NgxOrgChartModule} from "ngx-org-chart";
 import {TooltipModule} from "primeng/tooltip";
+import { PositionFunctionSheetComponent } from './position-function-sheet/position-function-sheet.component';
 
 @NgModule({
-  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent, BuisnessUnitListComponent, JobListComponent, JobWeightListComponent, EditJobWeightComponent, PositionOrganigrammeComponent],
+  declarations: [CompanyComponent, BusinessUnitComponent, AddNewCompanyComponent, AddNewBusinessUnitComponent, CriteriaEvaluationComponent,PositionComponent, PositionListTableComponent, PositionListTreeComponent, AddNewPositionComponent,ListCategoriesComponent, PositionIndicatorQuantitatifComponent, PositionIndicatorQualitatifComponent, BuisnessUnitListComponent, JobListComponent, JobWeightListComponent, EditJobWeightComponent, PositionOrganigrammeComponent, PositionFunctionSheetComponent],
 
     imports: [
         CommonModule,

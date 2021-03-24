@@ -22,7 +22,7 @@ export class OrganisationManagementService {
   public static API_ATTRIBUTION= OrganisationManagementService.bs_organisation_base_url + "api/attribution/";
   public static API_FUNCTIONAL_ROLE= OrganisationManagementService.bs_organisation_base_url +"api/functional-role/";
   public static API_JOB= OrganisationManagementService.bs_organisation_base_url +"api/job/";
-
+  public static API_FUNCTION_CARD = OrganisationManagementService.bs_organisation_base_url +"api/function_card/";
   header = new HttpHeaders();
   constructor(
     private toastrService: NbToastrService,
