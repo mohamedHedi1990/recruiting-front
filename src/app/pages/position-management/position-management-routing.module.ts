@@ -1,22 +1,22 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { MissionsComponent } from './missions/missions.component';
+import { AttributionsComponent } from './attributions/attributions.component';
 
 export const routes: Routes = [
+  {
+    path: '',
+    children: [
   {
     path: 'missions-list',
       component: MissionsComponent,
     },
-
-
-   
-
-
-
-
-
-
-];
+    {
+      path: 'attributions-list',
+        component: AttributionsComponent,
+      }
+    ]}
+  ]
 
 const config: ExtraOptions = {
   useHash: false,

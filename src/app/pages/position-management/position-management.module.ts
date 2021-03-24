@@ -43,10 +43,11 @@ import { UtilsService } from '../../services/utils.service';
 import {Ng2TelInputModule} from 'ng2-tel-input';
 import { MissionsComponent } from './missions/missions.component';
 import { PositionManagementRoutingModule } from './position-management-routing.module';
+import { AttributionsComponent } from './attributions/attributions.component';
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [MissionsComponent],
+  declarations: [MissionsComponent, AttributionsComponent],
   imports: [
     CommonModule,
    PositionManagementRoutingModule,

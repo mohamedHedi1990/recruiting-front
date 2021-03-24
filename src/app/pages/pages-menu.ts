@@ -69,7 +69,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
         icon: 'briefcase-outline',
       },
      
-
+      {
+        title: 'Attributions',
+        link: '/zen-people-referential/positions/attributions-list',
+        icon: 'briefcase-outline',
+      },
       
 
     ],

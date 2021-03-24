@@ -31,6 +31,7 @@ export class UtilsService {
   public static API_RATINGSCALE = UtilsService.REMOTE_ORGANISATION_URL +"/api/ratingScale";
   public static API_POSITION=UtilsService.REMOTE_ORGANISATION_URL+"api/position";
   public static API_MISSION=UtilsService.REMOTE_ORGANISATION_URL+"api/mission";
+  public static API_ATTRIBUTION=UtilsService.REMOTE_ORGANISATION_URL+"api/attribution";
  
   constructor(
     private toastrService: NbToastrService,
