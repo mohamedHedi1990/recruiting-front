@@ -19,7 +19,7 @@
   <p-tabView>
     <p-tabPanel *ngFor="let company of organirammes" [header]="company.companyLabel">
       <p-tabView>
-        <p-tabPanel header="Hiérarchie des unités fonctionnelle">
+        <p-tabPanel header="Hiérarchie des unités fonctionelles">
           <ngx-org-chart [nodes]="company.businessUnistOrganisation" direction="vertical" ></ngx-org-chart>
         </p-tabPanel>
         <p-tabPanel header="Hiérarchie organisationelle">

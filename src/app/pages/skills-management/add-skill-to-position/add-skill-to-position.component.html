@@ -313,65 +313,70 @@
 
 
 <p-dialog header="Affecter des compétances aux Unités organisationnelles" [(visible)]="displayAddSkillsBusinessUnit" [modal]="true"
-  [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+  [style]="{width: '80vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
  
-  <ng-template style="margin-top: 40px;"  pTemplate="body">
+  <ng-template style="margin-top: 40px;" pTemplate="body">
 
 
 
 
 
-    <p-table  #dt [value]="businessUnitSKill.skillGroupList" dataKey="id" styleClass="p-datatable-customers">
+    <p-table #dt [value]="businessUnitSKill.skillGroupList" dataKey="id" styleClass="p-datatable-customers">
       <ng-template pTemplate="header">
-<tr style="text-align: center; font-size: 15px">
-<th style="text-align: left; font-size: 13px; width: 40% ">Famille de compétence</th>
-<th style="text-align: center; font-size: 13px;  width: 60%"></th>
-</tr>
-</ng-template>
+        <tr style="text-align: center; font-size: 15px">
+          <th style="text-align: left; font-size: 13px; width: 30% ">Famille de compétence</th>
+          <th style="text-align: center; font-size: 13px;  width: 70%">Compétences affectées</th>
+        </tr>
+      </ng-template>
 
-<ng-template pTemplate="body" let-skillsGroup>
+      <ng-template pTemplate="body" let-skillsGroup>
 
-<tr class="p-selectable-row" style="text-align: center; font-size: 13px" [pSelectableRow]="skillsGroup"
-name="skillsGroup" id="id">
-<td style="text-align: left !important;
+        <tr  style="text-align: center; font-size: 13px" 
+             id="id">
+          <td style="text-align: left !important;
       padding: 10px 10px 10px 10px !important;
       font-size: 13px !important;
       color: #222b45;
       margin-left: 10px;
       font-weight: bold;">
-  {{ skillsGroup.label}}
-</td>
-<td>
-  <!-- <p-autoComplete [group]="true" [suggestions]="skillList" [multiple]="true" optionGroupLabel="skillLabel"
-    optionGroupChildren="subSkills" (completeMethod)="filterSkills($event,skillsGroup)" field="subSkillLabel"
-    (onSelect)="onSelectSubSKill($event,businessUnitSKill.businessUnit,skillsGroup)" [dropdown]="true"
-    [(ngModel)]="skillsGroup.skillDtoList" [inputStyle]="{'width':'800px'}">
-    <ng-template let-group pTemplate="group">
-      <div class="p-d-flex p-ai-center">
-        <span>{{group.skillLabel}}</span>
-      </div>
-    </ng-template>
-  </p-autoComplete>  -->
-  <p-multiSelect [options]="skillList" [group]="true" [(ngModel)]="skillsGroup.skillDtoList"   optionGroupLabel="skillLabel" [group]="true"
-  defaultLabel="Choisir une compétance" scrollHeight="250px" display="chip" optionGroupChildren="subSkills" 
-  optionLabel="subSkillLabel" >
-   <!-- <ng-template let-group pTemplate="group">
+            {{ skillsGroup.label}}
+          </td>
+          <td>
+            <!-- <p-autoComplete [group]="true" [suggestions]="skillList" [multiple]="true" optionGroupLabel="skillLabel"
+            optionGroupChildren="subSkills" (completeMethod)="filterSkills($event,skillsGroup)" field="subSkillLabel"
+            (onSelect)="onSelectSubSKill($event,businessUnitSKill.businessUnit,skillsGroup)" [dropdown]="true"
+            [(ngModel)]="skillsGroup.skillDtoList" [inputStyle]="{'width':'800px'}">
+            <ng-template let-group pTemplate="group">
+              <div class="p-d-flex p-ai-center">
+                <span>{{group.skillLabel}}</span>
+              </div>
+            </ng-template>
+          </p-autoComplete>  -->
+            <div style="width: 100%">
+              <p-multiSelect [options]="skillsList" [(ngModel)]="skillsGroup.skillDtoList" optionGroupLabel="skillLabel" [group]="true"
+                             defaultLabel="Choisir une compétance" display="chip" optionGroupChildren="subSkills"
+                             optionLabel="subSkillLabel" name="fieldName" ngDefaultControl>
+                <!-- <ng-template let-group pTemplate="group">
         <div class="p-d-flex p-ai-center">
             <span>{{group.skillLabel}}</span>
         </div>
     </ng-template> -->
-</p-multiSelect>
-</td>
-</tr>
-</ng-template>
-<ng-template pTemplate="emptymessage">
-<tr style="font-size: 13px">
-<td colspan="8" style="text-align: left !important">
-  Aucune famille de compétence trouvé!
-</td>
-</tr>
-</ng-template>
-</p-table>
+              </p-multiSelect>
+            </div>
+           
+            
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr style="font-size: 13px">
+          <td colspan="8" style="text-align: left !important">
+            Aucune famille de compétence trouvé!
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+ 
   </ng-template>
 
 

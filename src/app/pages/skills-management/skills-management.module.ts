@@ -40,7 +40,7 @@ import { AddNewskillsGroupComponent } from './add-new-skills-group/add-new-skill
 
 import { AddNewSkillComponent } from './add-new-skill/add-new-skill.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { MultiSelectModule } from 'primeng/multiselect';
 import { AuthServiceService } from '../../services/auth/auth-service.service';
 import { AuthGuardService } from '../../services/auth/AuthGuard.service';
 import { InterceptService } from '../../services/auth/InterceptService.service';
@@ -54,7 +54,7 @@ import { TabViewModule } from 'primeng/tabview';
   declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent],
   imports: [
     TabViewModule,
-
+    MultiSelectModule,
     CommonModule,
     SkillsManagementRoutingModule,
     FileUploadModule,
