@@ -173,6 +173,11 @@ input {
     color: black;
   }
 
+  &.assignedSkill {
+    background-color: #808080a1;
+    color: black;
+  }
+
   &.middle {
     background-color: #e36891;
     color: black;
@@ -272,4 +277,9 @@ p-autoComplete {
   background: #ffffff;
   border-color: #960032;
   color: #960032;
+}
+
+.p-button {
+  background-color: #960032 !important;
+  border-color: #960032 !important;
 }

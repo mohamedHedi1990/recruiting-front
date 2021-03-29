@@ -49,6 +49,8 @@ import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-
 import {AutoCompleteModule} from "primeng/autocomplete";
 import { SkillsReferentialComponent } from './skills-referential/skills-referential.component';
 import { TabViewModule } from 'primeng/tabview';
+import { PickListModule } from 'primeng/picklist';
+
 
 @NgModule({
   declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent],
@@ -84,7 +86,8 @@ import { TabViewModule } from 'primeng/tabview';
     DynamicDialogModule,
     ConfirmDialogModule,
     DragDropModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    PickListModule
 
   ],
 

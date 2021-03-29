@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 import { Observable } from 'rxjs';
+import { AssignedSubSkill } from '../models/AssignedSubSkill.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class SkillsManagementService {
   public static API_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS +"api/sub-skill/";
   public static API_SKILL_LEVEL=SkillsManagementService.REMOTE_ADDRESS +"api/skill-level/";
   public static API_POSITION_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/position-sub-skill/";
+  public static API_BUISNESS_UNIT_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/buisness-unit-sub-skill/";
 
   header = new HttpHeaders();
 
@@ -54,6 +56,22 @@ export class SkillsManagementService {
 
     return this.httpClient.get(url);
   }
+
+  public getAssignedSkillsForBuisnessUnit(buisnessUnitId: number): Observable<any> {
+
+    return this.httpClient.get(SkillsManagementService.API_BUISNESS_UNIT_SUB_SKILL + '/assigned-skills-for-buisness-unit/' +buisnessUnitId);
+  }
+
+  public updateSkillsForBuisnessUnit(buisnessUnitId: number, assignedSubSkils: AssignedSubSkill[]): Observable<any> {
+
+    return this.httpClient.post(SkillsManagementService.API_BUISNESS_UNIT_SUB_SKILL + '/' +buisnessUnitId, assignedSubSkils);
+  }
+
+  public getBuisnessUnitWithAllAssignedSkills(): Observable<any> {
+
+    return this.httpClient.get(SkillsManagementService.API_BUISNESS_UNIT_SUB_SKILL);
+  }
+
 
   public delete(url): Observable<any> {
 

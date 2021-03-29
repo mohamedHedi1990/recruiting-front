@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AssignedSubSkill } from '../../../models/AssignedSubSkill.model';
+import { BusinessUnit } from '../../../models/BusinessUnit.model';
 import { OrganisationManagementService } from "../../../services/organisation-management.service";
 import { SkillsManagementService } from "../../../services/skills-management.service";
 import { UtilsService } from '../../../services/utils.service';
+import { BuisnessUnitListComponent } from '../../organisation-management/buisness-unit-list/buisness-unit-list.component';
 
 @Component({
   selector: 'ngx-add-skill-to-position',
@@ -11,68 +14,84 @@ import { UtilsService } from '../../../services/utils.service';
 export class AddSkillToPositionComponent implements OnInit {
 
   positions_list = []
-  positionSubSkill = {
-    skill: null,
-    level: null,
-  }
-  skillLevelList = [];
-  skillsList = [];
-  businessUnitList = [];
+  
   loading = false;
-  showBusinessUnitSkillsWindow = false;
-  skillsGroupList = [];
-  selectedSkills :any[][];
-  skillList :any [][];
+  
+ 
   businessUnitSKills : any = [];
   displayAddSkillsBusinessUnit=false;
-  businessUnitSKill:any;
+ 
+
+  selectedBuisnessUnit: AssignedSubSkill = new AssignedSubSkill();
+  assignedSkillsToBuisnessUnit : AssignedSubSkill[];
   constructor(private organisationManagementService: OrganisationManagementService, private skillsManagementService: SkillsManagementService)
    {
-    this.skillList=[];
-    this.selectedSkills=[];
+   
   }
 
   ngOnInit(): void {
-    this.getAllPositions();
-    this.getAllSkills()
-    this.getAllBusinessUnit();
-    this.getAllSkillsGroup();
-    this.getAllBusinessUnitSkills()
+    //this.getAllPositions();
+    //this.getAllSkills()
+    //this.getAllBusinessUnit();
+    //this.getAllSkillsGroup();
+    this.getBuisnessUnitWithAllAssignedSkills();
   }
 
-  getAllBusinessUnitSkills() {
-    this.organisationManagementService.get(OrganisationManagementService.API_BUSINESS_UNIT_SKILL).subscribe(
-      (response: any) => {
-        this.businessUnitSKills = response;
-        console.log(this.businessUnitSKills);
-
-      },
-      (error) => {
-        this.organisationManagementService.showToast(
+  
+  //Trouver les unités organisationelles avec les competences deja assignées
+  getBuisnessUnitWithAllAssignedSkills() {
+    this.skillsManagementService.getBuisnessUnitWithAllAssignedSkills().subscribe(response => {
+      this.businessUnitSKills = response;
+    }, error => {
+      this.organisationManagementService.showToast(
+        'danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de chargement des unités organisationelles avec leurs compétences assignées`
+      );
+    })
+  }
+//Trouver les compétences assignées à une unité fonctionelle
+  getAssignedSkillsForBuisnessUnit() {
+    this.skillsManagementService.getAssignedSkillsForBuisnessUnit(this.selectedBuisnessUnit.buisnessUnitId).subscribe(response => {
+      this.assignedSkillsToBuisnessUnit = response;
+      this.displayAddSkillsBusinessUnit = true;
+    }, error => {
+this.organisationManagementService.showToast(
           'danger',
           'Erreur interne',
-          `Un erreur interne a été produit lors du l'importation des unités fonctionnelle`
+          `Un erreur interne a été produit lors de chargement des compétences assignées à cette unité fonctionnelle`
         );
-      }
-    );
+    })
   }
 
-  getAllBusinessUnit() {
-    this.organisationManagementService.get(OrganisationManagementService.API_BUSINESS_UNIT).subscribe(
-      (response: any) => {
-        this.businessUnitList = response;
-      },
-      (error) => {
-        this.organisationManagementService.showToast(
-          'danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du l'importation des unités fonctionnelle`
-        );
-      }
-    );
+  //Edit les compétences assignées à une unité fonctionelle
+  validateSubSkillsModification() {
+    this.skillsManagementService.updateSkillsForBuisnessUnit(this.selectedBuisnessUnit.buisnessUnitId, this.assignedSkillsToBuisnessUnit).subscribe(response => {
+      this.displayAddSkillsBusinessUnit = false;
+      this.getBuisnessUnitWithAllAssignedSkills();
+      this.organisationManagementService.showToast('success',
+      "Compétences modifiées avec succées",
+      `La liste des compétences assignées à cette unité fonctionelle a été modifiée avec succcés`);
+  }, error => {
+this.organisationManagementService.showToast(
+        'danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de chargement des compétences assignées à cette unité fonctionnelle`
+      );
+  })
   }
 
-  getAllPositions() {
+  //Cacher le modal d'edit des compétences
+  cancelEditSkillsForBuisnessUnit() {
+    this.displayAddSkillsBusinessUnit = false;
+    this.selectedBuisnessUnit = null;
+    this.assignedSkillsToBuisnessUnit = [];
+  }
+
+ 
+    
+
+  /*getAllPositions() {
     this.organisationManagementService.get(OrganisationManagementService.API_POSITION + 'get-positions-with-sub-skills').subscribe(
       (response: any) => {
         this.positions_list = response;
@@ -85,161 +104,21 @@ export class AddSkillToPositionComponent implements OnInit {
         );
       }
     );
-  }
+  }*/
 
-  getAllSkillsGroup() {
-    const context = this;
-    this.skillsManagementService.getAll(SkillsManagementService.API_SKILLS_GROUP).subscribe(response => {
-      context.skillsGroupList = response;
-    },
-      error => {
-        context.organisationManagementService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du chargement des familles de compétences`);
+  
+  
+  
 
-      });
-
-  }
-
-  getAllSkills() {
-    const context = this;
-    this.skillsManagementService.getAll(SkillsManagementService.API_SKILL).subscribe(response => {
-      context.skillsList = response;
-      console.log('contex ', context.skillsList);
-    },
-      error => {
-        context.organisationManagementService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du chargement des compétences`);
-
-      });
-
-  }
-
-  checkValidPositionSubSkill(position) {
-    return this.positionSubSkill.skill == null || this.positionSubSkill.level == null ||
-      position.positionSubSkills.some(positionSubSkill =>
-        positionSubSkill.subSkill.subSkillId == this.positionSubSkill.skill.subSkillId);
-  }
-  positionContainsSubSkill(position) {
-    position.positionSubSkills.forEach(positionSubSkill => {
-      if (positionSubSkill.subSkill.subSkillId == this.positionSubSkill.skill.subSkillId) {
-        return true;
-      }
-    })
-    return false;
-  }
-
-  initPositionSubSkill() {
-    this.positionSubSkill = {
-      skill: null,
-      level: null,
-    };
-  }
-  savePositionSubSkill(position) {
-    const positionSubSkill1 = {
-      "positionId": position.positionId,
-      "subSkill": this.positionSubSkill.skill,
-      "requiredLevel": this.positionSubSkill.level,
-      "local": true
-    };
-    this.skillsManagementService.post(SkillsManagementService.API_POSITION_SUB_SKILL, positionSubSkill1).subscribe(
-      response => {
-        this.skillsManagementService.showToast('success',
-          'Compétence ajoutée avec succé',
-          `La compétence  ${this.positionSubSkill.skill.subSkilllabel} a été ajouté au position avec succcés`);
-        this.getAllPositions();
-        this.initPositionSubSkill();
-      },
-      error => {
-        this.skillsManagementService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du l'ajout de compétence au position`);
-      });
-  }
-
-  filterSubSkills(event) {
-    this.getAllSkills();
-  }
-
-  onSelectSkills(event) {
-    this.skillLevelList = event.skillLevels;
-    this.positionSubSkill.level = null;
-  }
-
-  compareSkillLevel(a, b) {
-    return a && b && a.skillLevelLabel == b.skillLevelLabel;
-  }
-
-  deletePositionSubSkill(position, positionSubSkill, rowIndex) {
-    this.skillsManagementService.delete(SkillsManagementService.API_POSITION_SUB_SKILL + positionSubSkill.positionSubSkillId).subscribe(
-      (response) => {
-        position.positionSubSkills.splice(rowIndex, 1)
-      },
-      (error) => {
-        this.skillsManagementService.showToast(
-          "danger",
-          "Erreur interne",
-          `Un erreur interne a été produit lors de la suppression du compétences ${positionSubSkill.subSkill.subSkillLabel} de position`
-        );
-      }
-    );
-  }
-
-  editPositionSubSkill(positionSubSkill) {
-    this.skillsManagementService.post(SkillsManagementService.API_POSITION_SUB_SKILL, positionSubSkill).subscribe(
-      response => {
-        this.skillsManagementService.showToast('success',
-          'Compétence modifiée avec succé',
-          `La compétence  ${positionSubSkill.subSkill.subSkillLabel} du position a été modifiée avec succcés`);
-        this.getAllPositions();
-        this.initPositionSubSkill();
-      },
-      error => {
-        this.skillsManagementService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du modification de compétence du position`);
-      });
-  }
-
-  showBusinessUnitSkills(businessUnit) {
-    this.showBusinessUnitSkillsWindow = true;
-    console.log(businessUnit);
-  }
-
-  filterSkills($event, skillsGroup) {
-    this.skillList=[];
-    this.skillsGroupList.forEach(skillGroup =>{
-      if(skillsGroup.id == skillGroup.skillsGroupId){
-        this.skillList=skillGroup.skillList
-      }
-    })
-  }
-
-  onSelectSubSKill($event,businessUnit,skillsGroup) {
-    let idBusinessUnit=businessUnit.businessUnitId;
-    let idSkillGroup=skillsGroup.id;
-    let idSubSkill=$event.subSkillId
-    let businessUnitSkills:any={
-      "businessunitId":idBusinessUnit,
-      "skillsGroupId":idSkillGroup,
-      "subSkillId":idSubSkill
-    }
-  this.organisationManagementService.post(UtilsService.API_BUSINESS_UNIT_SKILLS,businessUnitSkills).subscribe((sucess)=>{
-console.log("---success----");
-
-  },
-  (error)=>{
-    console.log("---error----");
-
-  })
-  }
+  
+  
+  
   AddSkillBusinessUnit(businessUnit)
   {
-    this.displayAddSkillsBusinessUnit=true;
-    this.businessUnitSKill=businessUnit;
+    this.selectedBuisnessUnit = businessUnit;
+    this.getAssignedSkillsForBuisnessUnit();
+    
   }
-  validerSkillsBusinessUnit()
-  {}
+  
 
 }
