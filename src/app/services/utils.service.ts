@@ -36,6 +36,7 @@ export class UtilsService {
 
 
   public static API_ATTRIBUTION=UtilsService.REMOTE_ORGANISATION_URL+"api/attribution";
+  public static API_ATTRIBUTION_MODIF_LABEL=UtilsService.REMOTE_ORGANISATION_URL+"api/attribution/modif_label";
  
 
   constructor(

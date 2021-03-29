@@ -3,7 +3,7 @@
     padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-    List Attributions
+   Attributions
 </h4>
 <div class="card" style="margin: auto;margin-top:3%; border-color:#E7E8E8
     !important; border:solid">
@@ -14,24 +14,16 @@
         currentPageReportTemplate="" [filterDelay]="0"
         [globalFilterFields]="['positionLabel','positionCode']">
         <ng-template pTemplate="caption">
-            <div>
-                <div class="p-d-flex p-ai-center p-jc-between" style="width:
-                    60%; display: inline-block;">
-                    <span class="p-input-icon-left" style="width: 100%">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" style="margin-left: 5%;
-                            width: 93%;"
-                            class="searchInput, p-inputtext"
-                            (input)="dt.filterGlobal($event.target.value,
-                            'contains')"
-                            placeholder="Chercher une position.." />
-                    </span>
-                </div>
-
-
-            </div>
-
-
+          <div >
+            <div class="p-d-flex p-ai-center p-jc-between" style=" width: 60%; display: inline-block;">
+              <span class="p-input-icon-left" style="width: 100%">
+                          <i class="pi pi-search"></i>
+                          <input pInputText type="text" style="width: 93%;" class="searchInput, p-inputtext"(input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Chercher une position.." />
+                      </span>
+              </div>
+      
+             
+          </div>
 
 
         </ng-template>
@@ -39,7 +31,7 @@
             <tr style="text-align: center; font-size: 15px;">
                 <th style="width: 3rem"></th>
              
-                <th pSortableColumn="positionLabel" style="text-align: center;
+                <th pSortableColumn="positionLabel" style="text-align: left;
                     font-size: 13px;width: 100%">Position </th>
                 
 
@@ -56,7 +48,21 @@
                 </td>
               
                 <td style="text-align: left!important;font-size: 13px;">
-                    {{position.positionLabel}} <span style="float: right;color:#960032;font-size: 13px;">({{position.attributions.length}})</span>
+                    {{position.positionLabel}}    <div style="
+                    float: right;
+                    text-align: center;
+                    background-color: #960032;
+                    color: white;
+                    font-size: 13px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 40%;
+                    margin-left: -60px;
+                    margin-top: -3px;
+                  " ngbTooltip="{{position.attributions.length}} attribution(s) affectes">
+           {{position.attributions.length}}
+                  </div>
+    
                 </td>
                
 
@@ -70,20 +76,20 @@
                 <td colspan="10" style="background-color: #960032 ;">
                     <div class="p-p-3">
                         <div style="margin-top: 10px;">
-                            <p-panel header="List d'attribution">
+                            <p-panel header="List des attributions">
                         
                               <p-table #dt [value]="position.attributions" dataKey="attributionId" styleClass="p-datatable-customers" [rowHover]="true"
                                 [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,15]" [paginator]="true"
                                 currentPageReportTemplate="" >
                                 <ng-template pTemplate="header">
                                   <tr style="text-align: center; font-size: 13px;">
-                                    <th style="text-align: left; font-size: 13px; width: 80%;">Attribution</th>
-                                    <th style="width:20%"></th>
+                                    <th style="text-align: left; font-size: 13px; width: 92%;">Attribution</th>
+                                    <th style="width:8%"></th>
                                   </tr>
                         
                                   <tr>
-                                    <th style="font-size: 13px;">
-                                      <textarea style="font-size: 13px;" type="text" rows="2" class="form-control p-field" pInputTextarea [(ngModel)]="line.attributionLabel"></textarea>
+                                    <th style="font-size: 13px">
+                                      <textarea style="font-size: 13px;" type="text" rows="2" class="form-control p-field"  pInputTextarea [(ngModel)]="line.attributionLabel"></textarea>
                    
                                     
                                     </th>
@@ -99,11 +105,11 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-attribution>
                                   <tr class="p-selectable-row" style="text-align: left; font-size: 13px;">
-                                    <td pEditableColumn style="text-align: left !important;">
+                                    <td pEditableColumn style="text-align: left !important">
                                       <p-cellEditor>
                                         <ng-template pTemplate="input">
                                           <input style="font-size: 13px;" pInputText type="text" class="form-control p-field"
-                                            [(ngModel)]="attribution.attributionLabel">
+                                            [(ngModel)]="attribution.attributionLabel" (change)="editattribution(attribution)">
                                         </ng-template>
                                         <ng-template pTemplate="output">
                                           {{attribution.attributionLabel}} 
@@ -112,12 +118,11 @@
                                     </td>
                                   
                         
-                                    <td style="text-align: center;">
-                                      <div style="display: flex;">
+                                    <td >
                         
                                         <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
                                           (click)="deleteLine(attribution)"></i>
-                                      </div>
+                                      
                         
                                     </td>
                                   </tr>

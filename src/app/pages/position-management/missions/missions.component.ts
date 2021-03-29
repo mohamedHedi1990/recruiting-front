@@ -58,6 +58,7 @@ validerOperation(position){
         'Erreur interne',
         `Un erreur interne a été produit lors de modification de la mission de la position ${position.positionLabel}`); });
 
+        
   }
 }
 

@@ -40,8 +40,15 @@ export class AttributionsComponent implements OnInit {
     this.line.position=this.position
     const context = this;
     this.UtilsService.post(UtilsService.API_ATTRIBUTION,this.line).subscribe( response => {
-      this.initiateLine();
-   this.getAllPositions();
+  
+
+        
+        this.UtilsService.showToast('success',
+        'Attribution ajoutée avec succés',
+        `L'attribution   ${this.line.attributionLabel} a été enregistrée avec succcés`);
+    
+        this.initiateLine();
+        this.getAllPositions();
         console.log(response);
         },
       error => {
@@ -73,11 +80,19 @@ export class AttributionsComponent implements OnInit {
             console.log(response);
             this.getAllPositions();
           
+            this.UtilsService.showToast('success',
+            'Attribution supprimée avec succés',
+            `L'attribution ${line.attributionLabel} a été supprimée avec succcés`);
+        
+       
         },
         (error) => {
           console.log('error ', error);
-         
-        });
+          this.UtilsService.showToast('danger',
+          'Erreur interne',
+          `Un erreur interne a été produit lors de suppression  d'attribution ${line.attributionLabel}'`);
+      });
+    
       
     
 
@@ -85,4 +100,26 @@ export class AttributionsComponent implements OnInit {
   checkLineValid(): boolean {
     return this.line.attributionLabel === "" || this.line.attributionLabel == null 
   }
-}
+  editattribution(attribution){
+    console.log(attribution.attributionLabel)
+      const context = this;
+      this.UtilsService.put(UtilsService.API_ATTRIBUTION_MODIF_LABEL+'/'+attribution.attributionId,attribution.attributionLabel).subscribe( response => {
+    
+  
+          
+          this.UtilsService.showToast('success',
+          'Attribution modifiée avec succés',
+          `L'attribution   a été modifiée avec succcés`);
+      
+          this.initiateLine();
+          this.getAllPositions();
+          console.log(response);
+          },
+        error => {
+          this.UtilsService.showToast('danger',
+            'Erreur interne',
+            `Un erreur interne a été produit lors du modification`);
+        });
+    }
+  }
+
