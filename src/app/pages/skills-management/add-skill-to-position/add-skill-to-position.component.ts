@@ -13,20 +13,29 @@ import { BuisnessUnitListComponent } from '../../organisation-management/buisnes
 })
 export class AddSkillToPositionComponent implements OnInit {
 
-  positions_list = []
-  
+  availableSkills= [];
+  positionToDisplay;
+  availableSkillsGroup=[];
   loading = false;
-  
- 
-  businessUnitSKills : any = [];
-  displayAddSkillsBusinessUnit=false;
- 
+  attributionSubSkill = {
+    'attributionId' : null ,
+    'requiredLevel' : null,
+    'isEvaluated' : false,
+    'subSkill' : null,
+    'skillsGroup' : null,
+  };
 
+  businessUnitSKills : any = [];
+  positionsSKills : any = [];
+
+  displayAddSkillsBusinessUnit=false;
+  displayAddSkillsAttribution=false;
+  displayAucuneAttribution=false;
   selectedBuisnessUnit: AssignedSubSkill = new AssignedSubSkill();
   assignedSkillsToBuisnessUnit : AssignedSubSkill[];
   constructor(private organisationManagementService: OrganisationManagementService, private skillsManagementService: SkillsManagementService)
    {
-   
+
   }
 
   ngOnInit(): void {
@@ -35,9 +44,9 @@ export class AddSkillToPositionComponent implements OnInit {
     //this.getAllBusinessUnit();
     //this.getAllSkillsGroup();
     this.getBuisnessUnitWithAllAssignedSkills();
+    this.getPositionsWithAllAssignedSkills();
   }
 
-  
   //Trouver les unités organisationelles avec les competences deja assignées
   getBuisnessUnitWithAllAssignedSkills() {
     this.skillsManagementService.getBuisnessUnitWithAllAssignedSkills().subscribe(response => {
@@ -88,8 +97,6 @@ this.organisationManagementService.showToast(
     this.assignedSkillsToBuisnessUnit = [];
   }
 
- 
-    
 
   /*getAllPositions() {
     this.organisationManagementService.get(OrganisationManagementService.API_POSITION + 'get-positions-with-sub-skills').subscribe(
@@ -106,19 +113,108 @@ this.organisationManagementService.showToast(
     );
   }*/
 
-  
-  
-  
-
-  
-  
-  
   AddSkillBusinessUnit(businessUnit)
   {
     this.selectedBuisnessUnit = businessUnit;
     this.getAssignedSkillsForBuisnessUnit();
-    
   }
-  
+
+  //Trouver les positions avec les competences deja assignées
+  getPositionsWithAllAssignedSkills() {
+    this.skillsManagementService.getPositionsWithAllAssignedSkills().subscribe(response => {
+      this.positionsSKills = response;
+    }, error => {
+      this.organisationManagementService.showToast(
+        'danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de chargement des positions avec leurs compétences assignées`
+      );
+    })
+  }
+
+ /* compareSkillGroup(a, b) {
+    return a && b && a.skillsGroupLabel == b.skillsGroupLabel;
+  }
+
+  compareSkillLevel(a, b) {
+    return a && b && a.skillLevelLabel == b.skillLevelLabel;
+  }
+
+  editPositionSubSkill(positionSubSKill){
+
+  }
+
+  filterSubSkills($event,position){
+    this.availableSkills=position.availableSkills;
+  }
+  filterSkillsGroup($event,position){
+    this.availableSkillsGroup=position.availableSkills;
+  }
+
+  onSelectSkillGroup(){
+    this.availableSkills=this.attributionSubSkill.skillsGroup.skillList
+  }
+
+  savePositionSubSkill(position){
+    let positionSubSKill={
+      'isEvaluated': this.attributionSubSkill.isEvaluated,
+      'requiredLevel': this.attributionSubSkill.requiredLevel,
+      'skillsGroup': this.attributionSubSkill.skillsGroup,
+      'subSkill': this.attributionSubSkill.subSkill,
+      'positionId':  position.positionId,
+    };
+
+    this.skillsManagementService.addSkillToPosition(positionSubSKill).subscribe(response => {
+      this.organisationManagementService.showToast('success',
+        "Compétence assignée avec succées",
+        `La compétence à éte assignée à cette position avec succcés`);
+      this.getPositionsWithAllAssignedSkills();
+    }, error => {
+      this.organisationManagementService.showToast(
+        'danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de l'ajout de compétences au position`
+      );
+    })
+  }
+
+  deletePositionSubSkill(position,positionSubSkill){
+    let positionSubSK={
+      'subSkill': positionSubSkill.subSkill,
+      'positionId':  position.positionId,
+      'requiredLevel':positionSubSkill.requiredLevel,
+      'isEvaluated': null,
+      'skillsGroup': null,
+    };
+
+    this.skillsManagementService.deleteSkillFromPosition(positionSubSK).subscribe(response => {
+      this.organisationManagementService.showToast('success',
+        "Compétence supprimée avec succées",
+        `La compétence à éte supprimée de cette position avec succcés`);
+      this.getPositionsWithAllAssignedSkills();
+    }, error => {
+      this.organisationManagementService.showToast(
+        'danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors du suppression de compétences du position`
+      );
+    })
+  }
+
+  checkValidPositionSubSkill(position){
+    return this.attributionSubSkill.skillsGroup == null ||
+      this.attributionSubSkill.subSkill == null ||
+      this.attributionSubSkill.requiredLevel == null;
+  }
+*/
+  showAddSkillsAttributionWindow(position){
+    if(position.nbPositionAttribution >0) {
+      this.positionToDisplay = position;
+      this.displayAddSkillsAttribution = true;
+    }
+    else{
+      this.displayAucuneAttribution=true;
+    }
+  }
 
 }

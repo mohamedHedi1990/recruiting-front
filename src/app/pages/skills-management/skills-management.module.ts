@@ -50,10 +50,11 @@ import {AutoCompleteModule} from "primeng/autocomplete";
 import { SkillsReferentialComponent } from './skills-referential/skills-referential.component';
 import { TabViewModule } from 'primeng/tabview';
 import { PickListModule } from 'primeng/picklist';
+import { AddSkillToAttributionComponent } from './add-skill-to-attribution/add-skill-to-attribution.component';
 
 
 @NgModule({
-  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent],
+  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent, AddSkillToAttributionComponent],
   imports: [
     TabViewModule,
     MultiSelectModule,

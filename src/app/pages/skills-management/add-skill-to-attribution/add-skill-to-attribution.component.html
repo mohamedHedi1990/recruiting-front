@@ -1,0 +1,139 @@
+<div>
+  <div class="p-d-flex p-ai-center p-jc-between" style="margin-top:20px;width: 90%; display: inline-block">
+    <span style="text-align: left !important;font-size: 13px;width: 22%;font-weight:bold"
+    >Attribution</span>
+    <select class="form-control p-field" id="requiredLevel" name="side" [(ngModel)]="selectedAttribution"
+            style="font-size: 13px;margin-top:20px" [compareWith]="compareAttribution">
+      <option *ngFor="let attribution of attributionsSKills" [ngValue]="attribution">
+        {{ attribution?.attributionLabel }}
+      </option>
+    </select>
+  </div>
+</div>
+<div style="margin-top:30px">
+<p-table *ngIf="selectedAttribution != null" [value]="selectedAttribution?.assignedGroups" dataKey="attribution.assignedGroups.skillsGroupId">
+            <ng-template pTemplate="header">
+    <tr style="text-align: center; font-size: 13px">
+      <th style="
+                      text-align: left !important;
+                      font-size: 13px;
+                      width: 30%;
+                    ">
+        Famille
+      </th>
+      <th style="
+                      text-align: left !important;
+                      font-size: 13px;
+                      width: 30%;
+                    ">
+        Compétence
+      </th>
+      <th style="text-align: center; font-size: 13px; width: 20%">
+        Niveau réquis
+      </th>
+      <th style="text-align: center; font-size: 13px; width: 13%">
+        Evalué
+      </th>
+      <th style="width: 10%; font-size: 13px; text-align: center"></th>
+    </tr>
+
+    <tr>
+      <th style="font-size: 13px">
+        <select class="form-control p-field" id="requiredLevel" name="side" [(ngModel)]="attributionSubSkill.skillsGroup"
+                style="font-size: 13px" [compareWith]="compareSkillGroup">
+          <option *ngFor="let group of selectedAttribution?.availableSkills" [ngValue]="group">
+            {{ group?.skillsGroupLabel }}
+          </option>
+        </select>
+      </th>
+      <th style="font-size: 13px">
+        <select class="form-control p-field" id="requiredLevel" name="side" [(ngModel)]="attributionSubSkill.subSkill"
+                style="font-size: 13px" [compareWith]="compareSkillLevel">
+          <option *ngFor="let subSkill of attributionSubSkill.skillsGroup?.subSkills" [ngValue]="subSkill">
+            {{ subSkill?.subSkillLabel }}
+          </option>
+        </select>
+      </th>
+      <th style="font-size: 13px">
+        <select class="form-control p-field" id="requiredLevel" name="side" [(ngModel)]="attributionSubSkill.requiredLevel"
+                style="font-size: 13px" [compareWith]="compareSkillLevel">
+          <option *ngFor="let level of attributionSubSkill.subSkill?.skillLevels" [ngValue]="level">
+            {{ level?.skillLevelLabel }}
+          </option>
+        </select>
+      </th>
+      <th style="font-size: 13px; text-align: center !important;">
+        <p-checkbox name="groupname" binary="true" [(ngModel)]="attributionSubSkill.isEvaluated"></p-checkbox>
+      </th>
+      <th style="text-align: center">
+        <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                class="p-button-rounded p-mr-2" style="background-color: #960032; border-color: #960032"
+                [disabled]="checkValidAttributionSubSkill(selectedAttribution)"
+                [ngClass]="{ disabled: checkValidAttributionSubSkill(selectedAttribution) }"
+                (click)="saveAttributionSubSkill(selectedAttribution)"></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-assignedGroup let-rowIndex="rowIndex">
+    <tr>
+      <td style="text-align:left !important; font-size: 13px;font-weight: bold" colspan="5">{{assignedGroup.skillsGroupLabel}}</td>
+    </tr>
+    <tr *ngFor="let attributionSubSKill of assignedGroup.assignedSkills" class="p-selectable-row" style="text-align: center; font-size: 13px">
+
+      <td pEditableColumn style="text-align: left !important; font-size: 13px">
+        {{ attributionSubSKill.subSkill.subSkillLabel }}
+      </td>
+      <td ></td>
+      <td pEditableColumn style="text-align: center !important; font-size: 13px">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <select class="form-control p-field" id="requiredLevel" name="side"
+                    [(ngModel)]="attributionSubSKill.requiredLevel" style="font-size: 13px"
+                    [compareWith]="compareSkillLevel" (change)="editAttributionSubSkill(attributionSubSKill)">
+              <option *ngFor="let level of attributionSubSKill.subSkill.skillLevels" [ngValue]="level">
+                {{ level.skillLevelLabel }}
+              </option>
+            </select>
+          </ng-template>
+          <ng-template pTemplate="output">
+               {{ attributionSubSKill.requiredLevel.skillLevelLabel }}
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td pEditableColumn style="text-align: center !important; font-size: 13px">
+        <p-cellEditor>
+          <ng-template pTemplate="input">
+            <p-checkbox name="groupname" binary="true"
+                        [(ngModel)]="attributionSubSKill.isEvaluated"
+                        (onChange)="editAttributionSubSkill(attributionSubSKill)">
+            </p-checkbox>
+          </ng-template>
+          <ng-template pTemplate="output">
+                    <span *ngIf="attributionSubSKill.isEvaluated" class="customer-badge evaluated">
+                      A EVALUER
+                    </span>
+            <span *ngIf="! attributionSubSKill.isEvaluated" class="customer-badge low">
+                      A PAS EVALUER
+                    </span>
+          </ng-template>
+        </p-cellEditor>
+      </td>
+      <td style="text-align: center">
+        <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" (click)="
+                        deleteAttributionSubSkill(
+                          attributionSubSKill
+                        )
+                      "></i>
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr style="font-size: 13px">
+      <td colspan="8" style="text-align: left !important">
+        Aucune compétence a été ajoutée pour cette attribution!
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+</div>

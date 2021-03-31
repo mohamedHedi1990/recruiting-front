@@ -18,6 +18,7 @@ export class SkillsManagementService {
   public static API_SKILL_LEVEL=SkillsManagementService.REMOTE_ADDRESS +"api/skill-level/";
   public static API_POSITION_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/position-sub-skill/";
   public static API_BUISNESS_UNIT_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/buisness-unit-sub-skill/";
+  public static API_Attribution_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/attribution-sub-skill/";
 
   header = new HttpHeaders();
 
@@ -72,10 +73,41 @@ export class SkillsManagementService {
     return this.httpClient.get(SkillsManagementService.API_BUISNESS_UNIT_SUB_SKILL);
   }
 
+  public getPositionsWithAllAssignedSkills(): Observable<any> {
+    return this.httpClient.get(SkillsManagementService.API_Attribution_SUB_SKILL);
+  }
+
+  public getPositionAttributionWithAllAssignedSkills(positionId:any): Observable<any> {
+    return this.httpClient.get(SkillsManagementService.API_Attribution_SUB_SKILL+'get-position-attribution-with-assigned-skills/'+positionId);
+  }
+
 
   public delete(url): Observable<any> {
 
     return this.httpClient.delete(url);
   }
+/*
+  addSkillToPosition(positionSubSKill:  any ): Observable<any> {
+    return this.httpClient.post(SkillsManagementService.API_Attribution_SUB_SKILL + 'add-to-position', positionSubSKill);
+  }
 
+ */
+
+  addSkillToAttribution(attributionSubSKill:  any ): Observable<any> {
+    return this.httpClient.post(SkillsManagementService.API_Attribution_SUB_SKILL + 'add-to-attribution', attributionSubSKill);
+  }
+
+  editAttributionSkill(attributionSubSKill:  any ): Observable<any> {
+    return this.httpClient.post(SkillsManagementService.API_Attribution_SUB_SKILL + 'edit-attribution-sub-skill', attributionSubSKill);
+  }
+/*
+  deleteSkillFromPosition(positionSubSKill:  any ): Observable<any> {
+    return this.httpClient.post(SkillsManagementService.API_Attribution_SUB_SKILL + 'delete-from-position', positionSubSKill);
+  }
+
+ */
+
+  deleteSkillFromAttribution(attributionSubSkillId:  any ): Observable<any> {
+    return this.httpClient.delete(SkillsManagementService.API_Attribution_SUB_SKILL + 'delete-from-attribution/'+attributionSubSkillId);
+  }
 }
