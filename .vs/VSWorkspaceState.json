@@ -3,13 +3,14 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\models",
     "\\src\\app\\pages",
     "\\src\\app\\pages\\organisation-management",
-    "\\src\\app\\pages\\organisation-management\\add-new-position",
-    "\\src\\app\\pages\\organisation-management\\position-list-tree",
-    "\\src\\app\\services"
+    "\\src\\app\\pages\\organisation-management\\job-weight-list",
+    "\\src\\app\\pages\\skills-management",
+    "\\src\\app\\pages\\skills-management\\add-new-skills-group",
+    "\\src\\app\\pages\\skills-management\\skills-group",
+    "\\src\\app\\pages\\skills-management\\skills-management"
   ],
-  "SelectedNode": "\\src\\app\\pages\\organisation-management\\organisation-management-routing.module.ts",
+  "SelectedNode": "\\src\\app\\pages\\skills-management\\add-new-skills-group\\add-new-skills-group.component.ts",
   "PreviewInSolutionExplorer": false
 }

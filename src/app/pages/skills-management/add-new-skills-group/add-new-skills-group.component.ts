@@ -1,11 +1,9 @@
-import { Component, OnInit } from "@angular/core";
 import {
-  EventEmitter,
-  Input,
-  Output
+    Component, EventEmitter,
+    Input, OnInit, Output
 } from "@angular/core";
+import { SkillLevel } from '../../../models/SkillLevel.model';
 
-import { exit } from "process";
 @Component({
   selector: "ngx-add-new-skills-group",
   templateUrl: "./add-new-skills-group.component.html",
@@ -19,6 +17,7 @@ export class AddNewskillsGroupComponent implements OnInit {
     skillsGroupCreatedAt: null,
     skillsGroupUpdatedAt: null,
     skillList: [],
+    skillGroupLevels: [],
   };
   checkInValidSkills = false ;
 
@@ -27,6 +26,7 @@ export class AddNewskillsGroupComponent implements OnInit {
     skillCode: null,
 
   };
+  lineLevel: SkillLevel = new SkillLevel(null, null, null, null, null);
   skillsList = [];
   @Input() titleHeaderskill:any;
   @Output() addNewSkillsGroupEvent = new EventEmitter();
@@ -49,6 +49,11 @@ export class AddNewskillsGroupComponent implements OnInit {
     this.skillsGroup.skillList.push(this.line);
     this.initiateLine();
   }
+  addLineLevel() {
+
+    this.skillsGroup.skillGroupLevels.push(this.lineLevel);
+    this.lineLevel = new SkillLevel(null, null, null, null, null);
+  }
   deleteLine(line) {
     for (let i = 0; i < this.skillsGroup.skillList.length; i++) {
       const element = this.skillsGroup.skillList[i];
@@ -60,6 +65,17 @@ export class AddNewskillsGroupComponent implements OnInit {
         break;
       }
     }
+  }
+  deleteLevelLine(levelLine: SkillLevel) {
+    let index = -1;
+    for (let i = 0; i < this.skillsGroup.skillGroupLevels.length; i++) {
+      const skillLevel = this.skillsGroup.skillGroupLevels[i];
+      if (skillLevel.skillLevelCode === levelLine.skillLevelCode) {
+        index = i;
+        break;
+      }
+    }
+    this.skillsGroup.skillGroupLevels.splice(index, 1);
   }
   saveNewSkillsGroup() {
     this.addNewSkillsGroupEvent.emit(this.skillsGroup);
@@ -82,8 +98,14 @@ export class AddNewskillsGroupComponent implements OnInit {
       this.line.skillCode === "" || this.line.skillCode == null
     );
   }
+  checkLineLevelValid(): boolean {
+  return (
+    this.lineLevel.skillLevelLabel === "" || this.lineLevel.skillLevelLabel == null ||
+      this.lineLevel.skillLevelScore == null
+  );
+}
   
-validIndicator()  {
+/*validIndicator()  {
   this.checkInValidSkills = false ;
   this.skillsGroup.skillList.forEach(element => {
     if(element.skillLabel == null || element.skillLabel == "" ||
@@ -94,5 +116,5 @@ validIndicator()  {
 
     }
   });
-}
+}*/
 }

@@ -32,7 +32,7 @@ padding: 10px 10px 10px 10px !important;
             <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
 
             <input type="text" class="form-control p-field" id="skillsGrouplabel"
-              [(ngModel)]="skillsGroup.skillsGroupLabel" style="font-size: 13px" />
+                   [(ngModel)]="skillsGroup.skillsGroupLabel" style="font-size: 13px" />
           </div>
         </div>
 
@@ -45,7 +45,7 @@ padding: 10px 10px 10px 10px !important;
           <div class="p-inputgroup">
             <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
             <textArea id="skillsGroupDetails" name="fielddetails" ngDefaultControl
-              [(ngModel)]="skillsGroup.skillsGroupDetails" [placeholder]="
+                      [(ngModel)]="skillsGroup.skillsGroupDetails" [placeholder]="
             'Saisir içi plus de détatils sur votre famille des compétences..'
           " rows="3" style="width: 100%; text-align: justify; padding: 20px;">
             </textArea>
@@ -53,17 +53,117 @@ padding: 10px 10px 10px 10px !important;
         </div>
 
 
-        
+
 
       </div>
     </div>
   </p-panel>
+  <!-- les niveaux de competences de chaque famille-->
   <div style="margin-top: 10px;">
-    <p-panel header={{titleHeaderskill}} >
+    <p-panel header="Niveaux de compétences" toggleable = "true" collapsed="false">
+
+      <p-table #dt [value]="skillsGroup.skillGroupLevels" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
+               [rows]="5" [showCurrentPageReport]="true"
+               >
+        <ng-template pTemplate="header">
+          <tr style="text-align: center; font-size: 13px;">
+            <th style="text-align: left; font-size: 13px; width: 20%;">Libellé</th>
+            <th style="text-align: center; font-size: 13px; width: 20%;">Score (%)</th>
+            <th style="text-align: center; font-size: 13px; width: 50%;">Détails</th>
+            <th style="width:10%"></th>
+          </tr>
+          <tr>
+            <th style="font-size: 13px;">
+              <input style="font-size: 13px;" pInputText type="text" placeholder="Libellé" class="form-control p-field"
+                     [(ngModel)]="lineLevel.skillLevelLabel">
+            </th>
+            <th style="font-size: 13px;">
+              <input style="font-size: 13px;" pInputText type="number" placeholder="Score" class="form-control p-field"
+                     [(ngModel)]="lineLevel.skillLevelScore">
+            </th>
+            <th style="font-size: 13px;">
+              <textArea id="skillsGroupDetails" name="fielddetails" ngDefaultControl
+                        [(ngModel)]="lineLevel.skillLevelDetails" [placeholder]="
+            'Saisir içi plus de détatils sur le niveau des compétences..'
+          " rows="3" style="width: 100%; text-align: justify; padding: 20px;">
+            </textArea>
+            </th>
+            <th>
+              <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
+                      class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                        background-color: #960032; border-color: #960032;" [disabled]="checkLineLevelValid()"
+                      [ngClass]="{ disabled: checkLineLevelValid() }" (click)="addLineLevel()"></button>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-skillLevel>
+          <tr class="p-selectable-row" style="text-align: left; font-size: 13px;">
+            <td pEditableColumn style="text-align: left !important;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="text" class="form-control p-field" (change)="validIndicator()"
+                         [(ngModel)]="skillLevel.skillLevelLabel">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{skillLevel.skillLevelLabel}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+
+            <td pEditableColumn style="text-align: center !important;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input style="font-size: 13px;" pInputText type="number" class="form-control p-field" (change)="validIndicator()"
+                         [(ngModel)]="skillLevel.skillLevelScore">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{skillLevel.skillLevelScore}} 
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn style="text-align: left !important;">
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <textArea   ngDefaultControl
+                            [(ngModel)]="skillLevel.skillLevelDetails" 
+          rows="3" style="width: 100%;font-size:13px; text-align: justify; padding: 20px;">
+            </textArea>
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{skillLevel.skillLevelDetails}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td style="text-align: center;">
+              <div style="display: flex;">
+
+                <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
+                   (click)="deleteLevelLine(line)"></i>
+              </div>
+
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr style="font-size: 13px;">
+            <td colspan="8" style="text-align: left !important;">Aucune compétence trouvée!</td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+
+
+
+    </p-panel>
+  </div>
+
+  <!-- les competences de la famille-->
+  <div style="margin-top: 10px;">
+    <p-panel header={{titleHeaderskill}}>
 
       <p-table #dt [value]="skillsGroup.skillList" dataKey="id" styleClass="p-datatable-customers" [rowHover]="true"
-        [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,15]" [paginator]="true"
-        currentPageReportTemplate="" >
+               [rows]="5" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,15]" [paginator]="true"
+               currentPageReportTemplate="">
         <ng-template pTemplate="header">
           <tr style="text-align: center; font-size: 13px;">
             <th style="text-align: left; font-size: 13px; width: 90%;">Libellé de compétence</th>
@@ -72,18 +172,18 @@ padding: 10px 10px 10px 10px !important;
           </tr>
           <tr>
             <th style="font-size: 13px;">
-              <input style="font-size: 13px;"  pInputText type="text" placeholder="Libellé de compétence" class="form-control p-field"
-                  [(ngModel)]="line.skillLabel">
+              <input style="font-size: 13px;" pInputText type="text" placeholder="Libellé de compétence" class="form-control p-field"
+                     [(ngModel)]="line.skillLabel">
             </th>
             <th style="font-size: 13px;">
               <input style="font-size: 13px;" pInputText type="text" placeholder="Code de compétence" class="form-control p-field"
-                  [(ngModel)]="line.skillCode">
+                     [(ngModel)]="line.skillCode">
             </th>
             <th>
               <button pButton placement="top" ngbTooltip="Ajouter" pRipple icon="pi pi-plus"
-                class="p-button-rounded p-mr-2" style="margin-right: 7px;
+                      class="p-button-rounded p-mr-2" style="margin-right: 7px;
                         background-color: #960032; border-color: #960032;" [disabled]="checkLineValid()"
-                [ngClass]="{ disabled: checkLineValid() }" (click)="addLine()"></button>
+                      [ngClass]="{ disabled: checkLineValid() }" (click)="addLine()"></button>
             </th>
           </tr>
         </ng-template>
@@ -93,7 +193,7 @@ padding: 10px 10px 10px 10px !important;
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="text" class="form-control p-field" (change)="validIndicator()"
-                    [(ngModel)]="line.skillLabel">
+                         [(ngModel)]="line.skillLabel">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.skillLabel}}
@@ -105,21 +205,21 @@ padding: 10px 10px 10px 10px !important;
               <p-cellEditor>
                 <ng-template pTemplate="input">
                   <input style="font-size: 13px;" pInputText type="text" class="form-control p-field" (change)="validIndicator()"
-                    [(ngModel)]="line.skillCode">
+                         [(ngModel)]="line.skillCode">
                 </ng-template>
                 <ng-template pTemplate="output">
                   {{line.skillCode}}
                 </ng-template>
               </p-cellEditor>
             </td>
-  
+
             <td style="text-align: center;">
               <div style="display: flex;">
-  
+
                 <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #960032"
-                  (click)="deleteLine(line)"></i>
+                   (click)="deleteLine(line)"></i>
               </div>
-  
+
             </td>
           </tr>
         </ng-template>
@@ -140,7 +240,7 @@ padding: 10px 10px 10px 10px !important;
     <button pButton pRipple label="Annuler" icon="pi pi-times" class="btn btn-secondary" (click)="cancel()"></button>
 
     <button [disabled]="checkskillsGroupValid() || checkInValidSkills" [ngClass]="{ disabled: checkskillsGroupValid() || checkInValidSkills}" pButton pRipple
-      label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveNewSkillsGroup()"
-      style="margin-left: 10px"></button>
+            label="Enregistrer" icon="pi pi-check" class="primaryBtn" (click)="saveNewSkillsGroup()"
+            style="margin-left: 10px"></button>
   </div>
 </div>

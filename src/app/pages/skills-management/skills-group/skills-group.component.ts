@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { SkillsManagementService } from "../../../services/skills-management.service";
 import { ConfirmationService } from "primeng/api";
 import { DialogService } from "primeng/dynamicdialog";
+import { SkillLevel } from '../../../models/SkillLevel.model';
 @Component({
   selector: "ngx-skills-group",
   templateUrl: "./skills-group.component.html",
@@ -160,8 +161,19 @@ initSkillsGroup() {
     skillsGroupDetails: null,
     CreatedAt: null,
     UpdatedAt: null,
-    skillList:[],
+    skillList: [],
+    skillGroupLevels: [],
   };
+
+  // initiate default skill level
+  this.skillsGroup.skillGroupLevels.push(new SkillLevel("Débutant", "DEBUTANT", "Connait certains concepts du domaine de compétences mais il n'est pas capable d'opérer d'une façon indépendante. Les tâches sont généralement effectuées sous supervision.",
+    50, 1));
+  this.skillsGroup.skillGroupLevels.push(new SkillLevel("Intermédiaire", "INTERMEDIAIRE", "Possède une bonne compréhension de certaines compétences et il est capable de les appliquer efficacement dans sa fonction. Il devrait utiliser ces compétences fréquemment afin d'accomplir ses tâches d'une façon partiellement autonome.",
+    75, 2));
+  this.skillsGroup.skillGroupLevels.push(new SkillLevel("Professionel", "PROFESSIONNEL", " Possède une compréhension très détaillée et approfondie du domaine de compétences et il est capable de l'appliquer avec une efficacité considérable dans sa fonction. Sert de modèle pour certaines compétences et peut conseiller ou former les autres.",
+    100, 3));
+  this.skillsGroup.skillGroupLevels.push(new SkillLevel("Expert", "EXPERT", "Possède une compréhension très détaillée et approfondie du domaine de compétences et est capable de l'appliquer avec une efficacité considérable dans le poste. Sert de modèle pour certaines compétences et démontre un haut niveau de compréhension pour effectuer des tâches entièrement indépendantes. Peut conseiller ou former les autres.",
+    120, 4));
 }
 
 
