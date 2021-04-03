@@ -4,6 +4,7 @@ import { SkillsGroupComponent } from './skills-group/skills-group.component';
 import { SkillsManagementComponent } from './skills-management/skills-management.component';
 import {AddSkillToPositionComponent} from "./add-skill-to-position/add-skill-to-position.component";
 import {SkillsReferentialComponent} from "./skills-referential/skills-referential.component";
+import { SkillsMatrixComponent } from './skills-matrix/skills-matrix.component';
 
 export const routes: Routes = [
   {
@@ -22,7 +23,7 @@ export const routes: Routes = [
     },
     {
       path:'skills-referential',
-      component:SkillsReferentialComponent,
+      component:SkillsMatrixComponent,
     }
   ],
 

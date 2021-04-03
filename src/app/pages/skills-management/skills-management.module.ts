@@ -51,10 +51,11 @@ import { SkillsReferentialComponent } from './skills-referential/skills-referent
 import { TabViewModule } from 'primeng/tabview';
 import { PickListModule } from 'primeng/picklist';
 import { AddSkillToAttributionComponent } from './add-skill-to-attribution/add-skill-to-attribution.component';
+import { SkillsMatrixComponent } from './skills-matrix/skills-matrix.component';
 
 
 @NgModule({
-  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent, AddSkillToAttributionComponent],
+  declarations: [SkillsGroupComponent, SkillsManagementComponent, AddNewskillsGroupComponent, AddNewSkillComponent, AddSkillToPositionComponent, SkillsReferentialComponent, AddSkillToAttributionComponent, SkillsMatrixComponent],
   imports: [
     TabViewModule,
     MultiSelectModule,

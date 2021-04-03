@@ -17,11 +17,11 @@ export class AddSkillToAttributionComponent implements OnInit {
   availableSkillsGroup=[];
   loading = false;
   attributionSubSkill = {
-    'attributionId' : null ,
-    'requiredLevel' : null,
-    'isEvaluated' : false,
-    'subSkill' : null,
-    'skillsGroup' : null,
+    attributionId : null ,
+    requiredLevel : null,
+    isEvaluated : false,
+    subSkill : null,
+    skillsGroup : null,
   };
   selectedAttribution: any = null;
 
@@ -100,11 +100,12 @@ export class AddSkillToAttributionComponent implements OnInit {
 
   saveAttributionSubSkill(attribution){
     let attributionSubSKill={
-      'isEvaluated': this.attributionSubSkill.isEvaluated,
-      'requiredLevel': this.attributionSubSkill.requiredLevel,
-      'skillsGroup': this.attributionSubSkill.skillsGroup,
-      'subSkill': this.attributionSubSkill.subSkill,
-      'attributionId':  attribution.attributionId,
+      isEvaluated: this.attributionSubSkill.isEvaluated,
+      requiredLevel: this.attributionSubSkill.requiredLevel,
+      skillsGroup: this.attributionSubSkill.skillsGroup,
+      subSkill: this.attributionSubSkill.subSkill,
+      attributionId: attribution.attributionId,
+      positionId: this.position.positionId,
     };
 
     this.skillsManagementService.addSkillToAttribution(attributionSubSKill).subscribe(response => {

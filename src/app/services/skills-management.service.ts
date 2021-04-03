@@ -19,7 +19,7 @@ export class SkillsManagementService {
   public static API_POSITION_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/position-sub-skill/";
   public static API_BUISNESS_UNIT_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/buisness-unit-sub-skill/";
   public static API_Attribution_SUB_SKILL=SkillsManagementService.REMOTE_ADDRESS+"api/attribution-sub-skill/";
-
+  public static API_SKILLS_MATRIX = SkillsManagementService.REMOTE_ADDRESS + "api/skills-matrix/";
   header = new HttpHeaders();
 
   constructor(private toastrService: NbToastrService, private httpClient: HttpClient,
@@ -71,6 +71,10 @@ export class SkillsManagementService {
   public getBuisnessUnitWithAllAssignedSkills(): Observable<any> {
 
     return this.httpClient.get(SkillsManagementService.API_BUISNESS_UNIT_SUB_SKILL);
+  }
+  public getSkillsMatrix(): Observable<any> {
+
+    return this.httpClient.get(SkillsManagementService.API_SKILLS_MATRIX);
   }
 
   public getPositionsWithAllAssignedSkills(): Observable<any> {
