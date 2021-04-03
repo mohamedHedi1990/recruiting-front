@@ -11,12 +11,12 @@ export const routes: Routes = [
   },
   {
    //canActivate: [AuthGuardService],
-    path: 'zen-people-referential',
+    path: 'recruiting',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
 
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'zen-people-referential' },
 ];
 

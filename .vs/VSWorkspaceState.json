@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\pages",
-    "\\src\\app\\pages\\organisation-management",
-    "\\src\\app\\pages\\organisation-management\\job-weight-list",
     "\\src\\app\\pages\\skills-management",
-    "\\src\\app\\pages\\skills-management\\add-new-skills-group",
-    "\\src\\app\\pages\\skills-management\\skills-group",
-    "\\src\\app\\pages\\skills-management\\skills-management"
+    "\\src\\app\\pages\\skills-management\\add-skill-to-attribution",
+    "\\src\\app\\pages\\skills-management\\add-skill-to-position",
+    "\\src\\app\\pages\\skills-management\\skills-management",
+    "\\src\\app\\pages\\skills-management\\skills-matrix",
+    "\\src\\app\\services"
   ],
-  "SelectedNode": "\\src\\app\\pages\\skills-management\\add-new-skills-group\\add-new-skills-group.component.ts",
+  "SelectedNode": "\\src\\app\\pages\\skills-management\\skills-matrix\\skills-matrix.component.html",
   "PreviewInSolutionExplorer": false
 }

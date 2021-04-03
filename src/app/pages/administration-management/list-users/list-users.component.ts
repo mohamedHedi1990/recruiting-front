@@ -161,7 +161,8 @@ export class ListUsersComponent implements OnInit {
       isBlocked: null,
       userTypeContract:'STAGE',
       company:null,
-      businessUnit:null
+      businessUnit: null,
+      rhRang: null,
     };
   }
 bloquerUser(user){

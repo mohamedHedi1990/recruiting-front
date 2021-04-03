@@ -4,7 +4,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { UtilsService } from "./../../../services/utils.service";
 import { DomSanitizer } from '@angular/platform-browser';
-import { OrganisationManagementService } from '../../../services/organisation-management.service';
 @Component({
   selector: 'ngx-add-new-user',
   templateUrl: './add-new-user.component.html',
@@ -36,7 +35,8 @@ export class AddNewUserComponent implements OnInit {
     updatedAt: null,
     userTypeContract:null,
     company:null,
-    businessUnit:null,
+    businessUnit: null,
+    rhRang: null,
 
   };
   imagePath;
@@ -58,7 +58,7 @@ export class AddNewUserComponent implements OnInit {
   phone: any;
   companies: any[];
   businessUnit : any[] ;
-  constructor(private sanitizer: DomSanitizer, private organisationManagementService: OrganisationManagementService,    private utilsService : UtilsService) { }
+  constructor(private sanitizer: DomSanitizer,   private utilsService : UtilsService) { }
 
   cities: Array<any>;
   cities_: Array<any>;
@@ -73,7 +73,7 @@ export class AddNewUserComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.user.userId!=null){
-      this.getAllBuisnessUnitForCompany();
+      
     }
     this.changeCountry(this.user.userBirthCountry);
     this.changeCountry_(this.user.userPays);
@@ -92,7 +92,7 @@ export class AddNewUserComponent implements OnInit {
     else {
       this.imgURL = null;
     }
-    this.getAllCompanies();
+    
   }
 
   saveUser() {
@@ -189,7 +189,8 @@ export class AddNewUserComponent implements OnInit {
       updatedAt: null,
       userTypeContract:null,
       company:null,
-      businessUnit:null
+      businessUnit: null,
+      rhRang: null,
     };
   }
   checkMail() {
@@ -209,23 +210,7 @@ export class AddNewUserComponent implements OnInit {
   getNumber($event) {
     this.phone= $event;
   }
-  getAllCompanies() {
-
-    const context = this;
-    this.organisationManagementService.get(OrganisationManagementService.API_COMPANY).subscribe( response => {
-        context.companies = response;
-        
-        
-        
-      },
-      error => {
-        console.log(error)
-        context.organisationManagementService.showToast('danger',
-          'Erreur interne',
-          `Un erreur interne a été produit lors du chargement des societés`);
-      });
-
-  }
+  
   compareCompany(a: any, b: any): boolean {
     if (a == null || b == null) return true;
     return a.companyId === b.companyId;
@@ -235,17 +220,6 @@ export class AddNewUserComponent implements OnInit {
     return a.businessUnitId  === b.businessUnitId ;
   }
   
-  getAllBuisnessUnitForCompany() {
-    this.organisationManagementService .get (OrganisationManagementService .API_COMPANY + this.user.company.companyId + "/business-unit-list").subscribe (response => {
- this.businessUnit= response ;
-     
-    }, error => {
-      this.utilsService .showToast (
-        "danger",
-        "Erreur interne",
-        `Un erreur interne a été produit lors du chargement de la liste des unités organisationelles reliées à la société selectionnée`
-      );
-    });
-  }
+  
 
 }

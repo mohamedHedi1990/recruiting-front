@@ -4,8 +4,6 @@ import { NbMenuModule } from "@nebular/theme";
 import { ThemeModule } from "../@theme/theme.module";
 import { PagesComponent } from "./pages.component";
 import { PagesRoutingModule } from "./pages-routing.module";
-import { SkillsManagementModule } from "./skills-management/skills-management.module";
-import { PerformanceManagementModule } from "./performance-management/performance-management.module";
 import { MiscellaneousModule } from "./miscellaneous/miscellaneous.module";
 
 //dependences
@@ -40,16 +38,14 @@ import { DialogModule } from "primeng/dialog";
 import { DialogService, DynamicDialogModule } from "primeng/dynamicdialog";
 import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ConfirmationService } from "primeng/api";
-import { SkillsManagementService } from "../services/skills-management.service";
-import { PerformanceManagementService } from "../services/performance-management.service";
+
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
-    PerformanceManagementModule,
-    SkillsManagementModule,
+    
     TableModule,
     CheckboxModule,
     ButtonModule,
@@ -79,15 +75,13 @@ import { PerformanceManagementService } from "../services/performance-management
   ],
   declarations: [PagesComponent],
   providers: [
-    SkillsManagementService,
-    PerformanceManagementService,
+    
     DialogService,
     ConfirmationService,
   ],
   exports: [ThemeModule,
     NbMenuModule,
-    PerformanceManagementModule,
-    SkillsManagementModule,
+    
     TableModule,
     CheckboxModule,
     ButtonModule,
