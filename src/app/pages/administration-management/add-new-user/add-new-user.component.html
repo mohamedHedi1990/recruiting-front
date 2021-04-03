@@ -2,13 +2,13 @@
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-  Ajouter un nouveau utilisateur
+  Ajouter un nouveau employé RH
 </h4>
 <h4 *ngIf="user.userId != null" style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
-  Modifier un utilisateur
+  Modifier un employé RH
   <span style="float:right;color:#900C3F" class="customer-badge ">crée le {{user.createdAt }} -- modifié le
     {{user.updatedAt }}</span>
   <div>
@@ -143,67 +143,61 @@ padding: 10px 10px 10px 10px !important;
       </div>
     </div>
   </p-panel>
-  <div style="margin-top: 1%; display: flex;">
-    <div style="width: 40%">
+  <div style="margin-top: 1%;display:flex">
+    <div style="width: 50%">
       <p-panel header="Contacts" [toggleable]="false">
         <div class="p-grid p-fluid">
           <div style="display: flex">
             <div class="mb-1 col-md-12 col-12 p-field">
-              <label for="userPhoneNumber" class="p-float-label">Numéro de téléphone <strong
-                  style="color: #960032;">*</strong></label>
+              <label for="userPhoneNumber" class="p-float-label">
+                Numéro de téléphone <strong style="color: #960032;">*</strong>
+              </label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
 
-                <input style="width: 220px;" type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}"
-                  (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
-                  (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
-                  class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
-                  (keyup)="CheckTelHasError=null" [ngClass]="{
+                <input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}"
+                       (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)"
+                       (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
+                       class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
+                       (keyup)="CheckTelHasError=null" [ngClass]="{
     'is-valid': CheckTelHasError==true && user.userPhoneNumber!=null ,
     'is-invalid': CheckTelHasError==false && user.userPhoneNumber!= phone
-}" /></div>
+}" />
+              </div>
             </div>
+
           </div>
           <div style="display: flex">
+
             <div class="mb-1 col-md-12 col-12 p-field">
               <label for="userEmail" class="p-float-label">Mail <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
 
                 <input type="email" pattern="/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/" (keyup)="checkMail()" required
-                  class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail" [ngClass]="{
+                       class="form-control p-field" id="userEmail" [(ngModel)]="user.userEmail" [ngClass]="{
                     'is-invalid' : checkEmail== false ,
             'is-valid': checkEmail== true && user.userEmail!=null
           }">
               </div>
             </div>
+          </div>
 
-          </div>
-          <div style="display: flex">
-            <div class="mb-1 col-md-12 col-12 p-field">
-              <label for="userNRue" class="p-float-label">N° et Rue <strong style="color: #960032;">*</strong></label>
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                <input type="text" class="form-control p-field" id="userNRue" [(ngModel)]="user.userNRue" [ngClass]="{
-        
-                  'is-valid': user.userNRue != null && user.userNRue !== ''
-                }">
-              </div>
-            </div>
-          </div>
           <div style="display: flex">
             <div class="mb-1 col-md-12 col-12 p-field">
               <label for="userPays" class="p-float-label">Pays <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                 <select [(ngModel)]="user.userPays" class="browser-default custom-select"
-                  (change)="changeCountry_($event.target.value)">
+                        (change)="changeCountry_($event.target.value)">
                   <option *ngFor="let count of countriesList"> {{count.name}} </option>
                 </select>
               </div>
             </div>
+           
           </div>
           <div style="display: flex">
+            
             <div class="mb-1 col-md-12 col-12 p-field">
               <label for="userCity" class="p-float-label">Ville <strong style="color: #960032;">*</strong></label>
               <div class="p-inputgroup">
@@ -212,101 +206,94 @@ padding: 10px 10px 10px 10px !important;
                   <option *ngFor="let city of cities_">{{city.name}} </option>
                 </select>
               </div>
-          <br>
+              <br>
             </div>
           </div>
+          <div style="display: flex; margin-top: -21px">
+            <div class="mb-1 col-md-12 col-12 p-field">
+              <label for="userNRue" class="p-float-label">N° et Rue <strong style="color: #960032;">*</strong></label>
+              <div class="p-inputgroup">
+                <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                <textarea type="text" rows="2" class="form-control p-field" id="userNRue" [(ngModel)]="user.userNRue" [ngClass]="{
+
+                  'is-valid': user.userNRue != null && user.userNRue !== ''
+                }"></textarea>
+              </div>
+            </div>
+          </div>
+
         </div>
       </p-panel>
     </div>
 
-    <div style="width: 60%">
-
+    <div style="width: 50%">
+      
       <div>
         <p-panel header="Informations d'embauche" [toggleable]="false">
           <div class="p-grid p-fluid">
+
+
             <div style="display: flex">
-              <div class="mb-1 col-md-6 col-12 p-field">
-                <label for="usercompany" class="p-float-label">société <strong
-                    style="color: #960032;">*</strong></label>
+              <div class="mb-1 col-md-12 col-12 p-field">
+                <label for="userHirringDate" class="p-float-label">
+                  Date d’embauche <strong style="color: #960032;">*</strong>
+                </label>
                 <div class="p-inputgroup">
-                  <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                 
-                  <select
-                 
-                  [(ngModel)]="user.company"
-                  class="browser-default custom-select"
-                  [compareWith]="compareCompany" 
-                  (change)="getAllBuisnessUnitForCompany()"
-                >
-                  <option *ngFor="let c of companies" [ngValue]="c">
-                    {{ c.companyLabel }}
-                  </option>
-                </select>
+                  <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
+                  <input type="date" class="form-control p-field" id="userHirringDate" [(ngModel)]="user.userHirringDate">
                 </div>
               </div>
-              <div class="mb-1 col-md-6 col-12 p-field">
-                <label for="userbusinessUnit" class="p-float-label">Unité organisationelle <strong
-                    style="color: #960032;">*</strong></label>
-                <div class="p-inputgroup">
-                  <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                 
-                  <select
-                 
-                  [(ngModel)]="user.businessUnit"
-                  class="browser-default custom-select"
-                  [compareWith]="compareBusinessUnit" 
-                >
-                  <option *ngFor="let c of businessUnit" [ngValue]="c">
-                    {{ c.businessUnitLabel }}
-                  </option>
-                </select>
-                </div>
-              </div>
+
               
             </div>
-          
-          <div style="display: flex">
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userHirringDate" class="p-float-label">Date d’embauche <strong
-                  style="color: #960032;">*</strong></label>
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-calendar"></i></span>
-                <input type="date" class="form-control p-field" id="userHirringDate" [(ngModel)]="user.userHirringDate">
-              </div>
-            </div>
+            <div style="display: flex">
+              
 
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userRegistrationNumber" class="p-float-label">Matricule <strong
-                  style="color: #960032;">*</strong></label>
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
-                <input type="text" class="form-control p-field" id="userRegistrationNumber"
-                  [(ngModel)]="user.userRegistrationNumber" [ngClass]="{
+              <div class="mb-1 col-md-12 col-12 p-field">
+                <label for="userRegistrationNumber" class="p-float-label">
+                  Matricule <strong style="color: #960032;">*</strong>
+                </label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
+                  <input type="text" class="form-control p-field" id="userRegistrationNumber"
+                         [(ngModel)]="user.userRegistrationNumber" [ngClass]="{
             'is-valid': user.userRegistrationNumber != null && user.userRegistrationNumber !== ''
           }">
+                </div>
+              </div>
+            </div>
+            <div style="display: flex">
+              <div class="mb-1 col-md-6 col-12 p-field">
+                <label for="userTypeContract" class="p-float-label">
+                  Type de contrat <strong style="color: #960032;">*</strong>
+                </label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
+                  <select [(ngModel)]="user.userTypeContract" class="browser-default custom-select">
+                    <option value="STAGE">STAGE</option>
+                    <option value="SIVP">SIVP</option>
+                    <option value="CDD">CDD</option>
+                    <option value="CDI">CDI</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mb-1 col-md-6 col-12 p-field">
+                <label for="rhRang" class="p-float-label">
+                  Rang <strong style="color: #960032;">*</strong>
+                </label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
+                  <input type="text" class="form-control p-field" id="rhRang"
+                         [(ngModel)]="user.rhRang" [ngClass]="{
+            'is-valid': user.rhRang != null && user.rhRang !== ''
+          }">
+                </div>
               </div>
             </div>
           </div>
-           <div style="display: flex">
-            <div class="mb-1 col-md-6 col-12 p-field">
-              <label for="userTypeContract" class="p-float-label">Type de contrat <strong
-                  style="color: #960032;">*</strong></label>
-              <div class="p-inputgroup">
-                <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
-                <select [(ngModel)]="user.userTypeContract" class="browser-default custom-select">
-                  <option value="STAGE">STAGE</option>
-                  <option value="SIVP">SIVP</option>
-                  <option value="CDD">CDD</option>
-                  <option value="CDI">CDI</option>
-                </select>
-              </div>
-            </div>
-
-          </div>
-        </div>
         </p-panel>
       </div>
-
+      
       <div>
         <p-panel header="Identifants d'accés" [toggleable]="false">
           <div class="p-grid p-fluid">
@@ -338,7 +325,7 @@ padding: 10px 10px 10px 10px !important;
               </div>
               <div class="mb-1 col-md-2 col-12" style="padding-top: 18px;">
                 <label for="userPassword" class="p-float-label"></label>
-                <div style="width: 80px;" class="p-inputgroup">
+                <div style="width: 80px;float: right;" class="p-inputgroup">
                   <button pButton pRipple label="Générer" style=" padding-top: 18px;
                   padding: 5px;
                   width: 62px;" class="primaryBtn" (click)="generatePassword()" placement="top"

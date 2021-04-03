@@ -38,7 +38,7 @@ export class NgxLoginComponent {
         if(data.userPictureUrl != null && data.userPictureUrl != ""){
         localStorage.setItem("picture",data.userPictureUrl)
         }
-        this.router.navigateByUrl("/zen-people-referential");
+        this.router.navigateByUrl("/recruiting");
         this.testAuth=false;
       },
       (error)=>{
