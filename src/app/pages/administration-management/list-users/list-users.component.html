@@ -84,9 +84,10 @@ Liste des employés RH
         </td>
         <td style="text-align: center;">
           <div>
-            <i *ngIf="!user.isBlocked" placement="top" ngbTooltip="Bloquer" class="pi pi-lock" style="margin-right: 7px;color: #6200ee" (click)="bloquerUser(user)"></i>
-            <i *ngIf="user.isBlocked" placement="top" ngbTooltip="Activer" class="pi pi-unlock" style="margin-right: 7px;color: #6200ee" (click)="activerUser(user)"></i>
-
+            <!--
+  <i *ngIf="!user.isBlocked" placement="top" ngbTooltip="Bloquer" class="pi pi-lock" style="margin-right: 7px;color: #6200ee" (click)="bloquerUser(user)"></i>
+  <i *ngIf="user.isBlocked" placement="top" ngbTooltip="Activer" class="pi pi-unlock" style="margin-right: 7px;color: #6200ee" (click)="activerUser(user)"></i>
+    -->
             <i placement="top" ngbTooltip="Modifier" class="pi pi-pencil" style="margin-right: 7px;color: #6200ee" (click)="editUser(user)" [disabled]="checkBlockUser(user)" [ngClass]="{'disabled':  checkBlockUser(user)}"></i>
             <i placement="top" ngbTooltip="Supprimer" class="pi pi-trash" style="color: #6200ee" (click)="deleteUser(user)"></i>
           </div>
