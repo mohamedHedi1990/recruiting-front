@@ -46,18 +46,7 @@ export class NgxRegisterComponent {
       }
     )
   }
-  next1(){
-    // console.log(event.target.id);
-        this.foo=2
-  }
-  next2(){
-    // console.log(event.target.id);
-        this.foo=3
-  }
-  next3(){
-    // console.log(event.target.id);
-        this.foo=4
-  }
+ 
   next(event){
     // console.log(event.target.id);
         this.foo=event.target.id
