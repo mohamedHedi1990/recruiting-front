@@ -12,11 +12,20 @@ import { Component, OnInit } from '@angular/core';
 export class NgxRegisterComponent {
   user: any = {
     password: null,
-    matricule: null
+    matricule: null,
+    genre:'masculin',
+    userCivilStatus:'Celibataire',
+    role:''
   };
-  foo:any=1
-  loginRequest: LoginRequest;
+  checkEmail;
+  phone: any;
+  worldMapData = require('city-state-country');
 
+  countriesList = this.worldMapData.getAllCountries();
+  section:any='1'
+  loginRequest: LoginRequest;
+  cities: Array<any>;
+  cities_: Array<any>;
   testAuth = false;
   authFailed = false;
   constructor(
@@ -46,11 +55,31 @@ export class NgxRegisterComponent {
       }
     )
   }
- 
+
   next(event){
-    // console.log(event.target.id);
-        this.foo=event.target.id
+    // this.loginRequest.role=event.target.value
+    console.log(event.target.value);
+    console.log(event.target.id);
+    this.section=event.target.id
   }
- 
+  getNumber($event) {
+    this.phone= $event;
+  }
+  checkMail() {
+    this.checkEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(this.user.userEmail);
+  }
+  changeCountry(count) {
+    this.cities = this.worldMapData.getAllStatesFromCountry(count);
+
+  }
+  changeCountry_(count) {
+    this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
+
+  }
+  changeRole(event){
+    this.section=event.target.id
+    this.user.role=event.target.value
+
+  }
 }
 

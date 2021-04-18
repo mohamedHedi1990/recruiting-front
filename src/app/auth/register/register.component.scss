@@ -2,6 +2,22 @@
   display: none !important;
 }
 
+.containner {
+
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #00275a;
+
+
+}
+.ijob{
+      font-weight: bold;
+  color: white;
+  font-size: 32px;
+}
 .sidelogin {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,11 +30,19 @@
   margin-top: 2% !important;
   border-color: #0b2089;
 }
+
 .btnNext {
   background-color: #07112f2e !important;
   margin-top: 2% !important;
   border-color: #0b2089;
   float: right;
+}
+
+.btnPrecedent {
+  background-color: #07112f2e !important;
+  margin-top: 2% !important;
+  border-color: #0b2089;
+  float: left;
 }
 
 .loginblock {
