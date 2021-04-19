@@ -10,8 +10,6 @@
   background-attachment: fixed;
   background-size: cover;
   background-color: #00275a;
-
-
 }
 .ijob{
       font-weight: bold;
@@ -24,17 +22,48 @@
   background-size: cover;
   background-color: #00275a;
 }
-
+.btn-image {
+  background-size: contain; //or cover
+}
 .btnRegister {
   background-color: #07112f2e !important;
   margin-top: 2% !important;
   border-color: #0b2089;
 }
+.btnStagiaire{
 
-.btnNext {
+  background-image: url('../../../assets/images/stagiaire.png') !important;
   background-color: #07112f2e !important;
+  background-repeat: no-repeat;
+  background-size: contain;
   margin-top: 2% !important;
   border-color: #0b2089;
+  height: 100px;
+  float: right;
+  background-position: center;
+  padding-top: 70px  !important;
+}
+.btnCondidat{
+
+  background-image: url('../../../assets/images/condidat.png') !important;
+  background-color: #07112f2e !important;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 2% !important;
+  border-color: #0b2089;
+  height: 100px;
+  float: right;
+  background-position: center;
+  padding-top: 70px  !important;
+}
+.btnNext {
+  // background-image: url('https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png') !important;
+  background-color: #07112f2e !important;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  margin-top: 2% !important;
+  border-color: #0b2089;
+  // height: 100px;
   float: right;
 }
 

@@ -5,7 +5,7 @@
 
   <!-- <nb-layout-column class="colored-column-basic">Layout Content</nb-layout-column> -->
   <nb-layout-column>
-    <div class="containner" >
+    <div class="containner">
       <div class="loginblock">
         <div>
           <img src="../../../assets/images/back.png" width="35%" />
@@ -18,7 +18,7 @@
 ">
           <span style="    font-weight: bold;
   color: white;
-  font-size: 15px;">Application de gestion des recrutements {{user.role}}</span>
+  font-size: 15px;">Application de gestion des recrutements </span>
         </div>
         <div style="    margin-top: 21px;
         text-align: right;
@@ -32,24 +32,21 @@
           <ng-template [ngIf]="section === '1'">
             <!-- <h5 class="text-white">1) Information générale</h5> -->
             <hr>
-
-            <div class="form-control-group">
-              <!-- <input type="text" style="background-image:url(../../../assets/images/stagiaire.png);" /> -->
-              <!-- <input type="image" name="toto" value="toto" src="../../../assets/images/stagiaire.png"> -->
-
-              <input type="button" fullWidth nbButton value="stagiaire" (click)="changeRole($event)"
-                 id="2" status="primary" size="large" class="btnNext ">
-              <!-- <br> -->
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-control-group">
+                  <input type="button" fullWidth nbButton value="stagiaire" (click)="changeRole($event)" id="2"
+                    status="primary" size="large" class="btnStagiaire">
+                  <!-- <br> -->
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="form-control-group">
+                  <input type="button" fullWidth nbButton value="condidat" (click)="changeRole($event)" id="2"
+                  status="primary" size="large" class="btnCondidat">
+                </div>
+              </div>
             </div>
-
-            <div class="form-control-group">
-              <input type="button" fullWidth nbButton value="condidat"
-              (click)="changeRole($event)"  id="2" status="primary"
-                size="large" class="btnNext ">
-            </div>
-
-
-
           </ng-template>
           <!-- Step 2 -->
           <ng-template [ngIf]="section === '2'">
@@ -199,10 +196,10 @@
             <div class="form-control-group">
               <label class="label" for="input-userPhoneNumber">Numéro téléphone:</label>
               <input type="text" ng2TelInput [ng2TelInputOptions]="{initialCountry: 'tn'}" name="userPhoneNumber"
-                (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)" #userPhoneNumber="ngModel" placeholder="Numéro téléphone:"
-                (intlTelInputObject)="telInputObject($event)" (countryChange)="onCountryChange($event)"
-                class="form-control p-field" id="userPhoneNumber" [(ngModel)]="user.userPhoneNumber"
-                (keyup)="CheckTelHasError=null" [ngClass]="{
+                (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)" #userPhoneNumber="ngModel"
+                placeholder="Numéro téléphone:" (intlTelInputObject)="telInputObject($event)"
+                (countryChange)="onCountryChange($event)" class="form-control p-field" id="userPhoneNumber"
+                [(ngModel)]="user.userPhoneNumber" (keyup)="CheckTelHasError=null" [ngClass]="{
 'is-valid': CheckTelHasError==true && user.userPhoneNumber!=null ,
 'is-invalid': CheckTelHasError==false && user.userPhoneNumber!= phone
 }" />
@@ -299,8 +296,8 @@
             <div class="form-control-group">
               <label class="label" for="input-email">Login*</label>
 
-              <input nbInput fullWidth [(ngModel)]="user.password" #password="ngModel" name="login"
-                type="password" id="input-password" placeholder="Login:" fieldSize="small"
+              <input nbInput fullWidth [(ngModel)]="user.password" #password="ngModel" name="login" type="password"
+                id="input-password" placeholder="Login:" fieldSize="small"
                 [status]="password.dirty ? (password.invalid  ? 'danger' : 'primary') : 'basic'"
                 [attr.aria-invalid]="password.invalid && password.touched ? true : null">
               <ng-container *ngIf="password.invalid && password.touched ">
@@ -424,7 +421,8 @@
                 <div class="form-control-group">
                   <label class="label" for="input-userAndiplome">Année de Diplome </label>
                   <input nbInput fullWidth [(ngModel)]="user.userAndiplome" #userAndiplome="ngModel" maxlength="4"
-                    name="Mot de passe" type="text" id="input-userAndiplome" placeholder="Année de Diplome:" fieldSize="small"
+                    name="Mot de passe" type="text" id="input-userAndiplome" placeholder="Année de Diplome:"
+                    fieldSize="small"
                     [status]="userAndiplome.dirty ? (userAndiplome.invalid  ? 'danger' : 'primary') : 'basic'"
                     [attr.aria-invalid]="userAndiplome.invalid && userAndiplome.touched ? true : null">
                   <ng-container *ngIf="userAndiplome.invalid && userAndiplome.touched ">
@@ -438,7 +436,8 @@
                 <div class="form-control-group">
                   <label class="label" for="input-userAnExperience">Nombre d'année d'expérience</label>
                   <input nbInput fullWidth [(ngModel)]="user.userAnExperience" maxlength="2" #userAnExperience="ngModel"
-                    name="Mot de passe" type="text" id="input-userAnExperience" placeholder="Nombre d'année d'expérience:" fieldSize="small"
+                    name="Mot de passe" type="text" id="input-userAnExperience"
+                    placeholder="Nombre d'année d'expérience:" fieldSize="small"
                     [status]="userAnExperience.dirty ? (userAnExperience.invalid  ? 'danger' : 'primary') : 'basic'"
                     [attr.aria-invalid]="userAnExperience.invalid && userAnExperience.touched ? true : null">
                   <ng-container *ngIf="userAnExperience.invalid && userAnExperience.touched ">
