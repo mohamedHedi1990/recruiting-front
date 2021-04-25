@@ -22,6 +22,7 @@ export class UtilsService {
   public static API_USER = UtilsService.REMOTE_ADDRESS+ "/api/user";
   public static API_RH = UtilsService.REMOTE_ADDRESS + "/api/rh";
   public static API_USER_FILE = UtilsService.REMOTE_ADDRESS + "/api/file";
+  public static API_DOMAINE = UtilsService.REMOTE_ADDRESS + "/api/domaine";
 
   
 
@@ -32,6 +33,11 @@ export class UtilsService {
   ) {
 
   }
+
+  getDomains() {
+    return this.httpClient.get(UtilsService.API_DOMAINE);
+  }
+
 
   public showToast(type: NbComponentStatus, title: string, body: string) {
     const config = {
