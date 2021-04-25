@@ -1,10 +1,10 @@
-<h4 *ngIf="user.userId  == null" style="background: #E7E8E8; 
+<h4 *ngIf="user.userId  == null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
   Ajouter un nouveau employé RH
 </h4>
-<h4 *ngIf="user.userId != null" style="background: #E7E8E8; 
+<h4 *ngIf="user.userId != null" style="background: #E7E8E8;
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
     color: #222b45;margin-left: 10px">
@@ -57,9 +57,7 @@ padding: 10px 10px 10px 10px !important;
               <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                 <input type="text" class="form-control p-field" id="userFirstName" [(ngModel)]="user.userFirstName"
-                  [ngClass]="{
-        
-        'is-valid': user.userFirstName != null && user.userFirstName !== ''
+                  [ngClass]="{'is-valid': user.userFirstName != null && user.userFirstName !== ''
       }">
               </div>
             </div>
@@ -194,10 +192,10 @@ padding: 10px 10px 10px 10px !important;
                 </select>
               </div>
             </div>
-           
+
           </div>
           <div style="display: flex">
-            
+
             <div class="mb-1 col-md-12 col-12 p-field">
               <label for="userCity" class="p-float-label">Ville <strong style="color: #0b2089;">*</strong></label>
               <div class="p-inputgroup">
@@ -227,7 +225,7 @@ padding: 10px 10px 10px 10px !important;
     </div>
 
     <div style="width: 50%">
-      
+
       <div>
         <p-panel header="Informations d'embauche" [toggleable]="false">
           <div class="p-grid p-fluid">
@@ -244,10 +242,10 @@ padding: 10px 10px 10px 10px !important;
                 </div>
               </div>
 
-              
+
             </div>
             <div style="display: flex">
-              
+
 
               <div class="mb-1 col-md-12 col-12 p-field">
                 <label for="userRegistrationNumber" class="p-float-label">
@@ -293,7 +291,7 @@ padding: 10px 10px 10px 10px !important;
           </div>
         </p-panel>
       </div>
-      
+
       <div>
         <p-panel header="Identifants d'accés" [toggleable]="false">
           <div class="p-grid p-fluid">

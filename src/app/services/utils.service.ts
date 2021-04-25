@@ -20,6 +20,7 @@ export class UtilsService {
   public static REMOTE_ORGANISATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-organisation-management/';
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "/api/auth/signin";
   public static API_USER = UtilsService.REMOTE_ADDRESS + "/api/user";
+  public static API_CONDIDAT = UtilsService.REMOTE_ADDRESS + "/api/";
   public static API_RH = UtilsService.REMOTE_ADDRESS + "/api/rh";
   public static API_USER_FILE = UtilsService.REMOTE_ADDRESS + "/api/file";
 

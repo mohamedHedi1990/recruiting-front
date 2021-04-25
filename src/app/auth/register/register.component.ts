@@ -1,3 +1,7 @@
+import { Filiere } from './../../models/filiere';
+import { Condidat } from './../../models/condidat';
+import { Stagiaire } from './../../models/stagiaire';
+import { User } from './../../models/user';
 import { AuthServiceService } from './../../services/auth/auth-service.service';
 import { Router } from '@angular/router';
 import { JwtResponse } from './../../models/JwtResponse.model';
@@ -10,42 +14,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class NgxRegisterComponent {
-  user: any = {
-    password: null,
-    matricule: null,
-    genre:'masculin',
-    userCivilStatus:'Celibataire',
-    role:''
-  };
+  user: User = new User()
+  stagiaire: Stagiaire = new Stagiaire()
+  condidat: Condidat = new Condidat()
+  filiere: Filiere = new Filiere()
   checkEmail;
   phone: any;
+  role: string
   worldMapData = require('city-state-country');
-
+  CheckTelHasError;
   countriesList = this.worldMapData.getAllCountries();
-  section:any='1'
+  section: any = '1'
   loginRequest: LoginRequest;
   cities: Array<any>;
   cities_: Array<any>;
   testAuth = false;
   authFailed = false;
+  passwordconfirme: string = ''
   constructor(
     private router: Router, private serviceAuth: AuthServiceService) {
 
   }
 
-  login() {
+  register() {
+    console.log(this.role);
 
-    this.loginRequest = new LoginRequest(this.user.matricule, this.user.password);
-    this.serviceAuth.login(this.loginRequest).subscribe(
+    this.serviceAuth.register(this.user, this.role).subscribe(
       (data: JwtResponse) => {
-
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('userFirstName', data.userFirstName);
-        localStorage.setItem('userLastName', data.userLastName);
-        localStorage.setItem("roles", JSON.stringify(data.roles));
-        if (data.userPictureUrl != null && data.userPictureUrl != "") {
-          localStorage.setItem("picture", data.userPictureUrl)
-        }
         this.router.navigateByUrl("/recruiting");
         this.testAuth = false;
       },
@@ -55,15 +50,23 @@ export class NgxRegisterComponent {
       }
     )
   }
+  hasError($event) {
+    this.CheckTelHasError = $event;
 
-  next(event){
+  }
+  onCountryChange($event) {
+    this.user.userPhoneNumber = null;
+
+    this.CheckTelHasError = true;
+  }
+  next(event) {
     // this.loginRequest.role=event.target.value
     console.log(event.target.value);
     console.log(event.target.id);
-    this.section=event.target.id
+    this.section = event.target.id
   }
   getNumber($event) {
-    this.phone= $event;
+    this.phone = $event;
   }
   checkMail() {
     this.checkEmail = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(this.user.userEmail);
@@ -76,10 +79,32 @@ export class NgxRegisterComponent {
     this.cities_ = this.worldMapData.getAllStatesFromCountry(count);
 
   }
-  changeRole(event){
-    this.section=event.target.id
-    this.user.role=event.target.value
+  changeRole(event) {
+    this.section = event.target.id
+    this.role = event.target.value
 
+  }
+  checkSection1Valid(): boolean {
+    return this.user.userFirstName === '' || this.user.userLastName === '' ||
+      this.user.userGender == '' || this.user.userCivilStatus === '' ||
+      this.user.userBirthDate == '' || this.user.userBirthCity == null || this.user.userBirthCountry === '';
+  }
+  checkSection2Valid(): boolean {
+    return this.user.userPhoneNumber == null || this.user.userPays === '' ||
+      this.user.userCity == '' || this.user.userAddress === ''
+
+  }
+  checkSection3Valid(): boolean {
+    return this.user.userEmail ==='' || this.user.userLogin === '' ||
+      this.passwordconfirme ==='' ||  this.user.userPassword ==='' || this.user.userPassword !== this.passwordconfirme;
+  }
+  checkCondidatValid(): boolean {
+    return this.condidat.candidatDiplome ==='' || this.condidat.candidatAnneeDiplome === '' ||
+       this.condidat.candidatNumberExperience ==null ;
+  }
+  checkStagiaireValid(): boolean {
+    return this.stagiaire.stagiaireEcole ==='' || this.stagiaire.stagiaireFuturDiplome === '' ||
+       this.stagiaire.stagiaireNiveauEtude ==null ;
   }
 }
 

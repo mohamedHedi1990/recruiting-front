@@ -10,7 +10,11 @@
   background-size: cover;
   background-color: #00275a;
 }
-
+.ijob{
+  font-weight: bold;
+color: white;
+font-size: 32px;
+}
 .sidelogin {
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -26,7 +30,7 @@
 
 .loginblock {
   float: left;
-  margin-top: 10%;
+  // margin-top: 10%;
   margin-left: 8%;
   margin-right: 8%;
 }
