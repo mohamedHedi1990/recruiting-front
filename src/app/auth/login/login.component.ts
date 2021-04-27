@@ -30,10 +30,11 @@ export class NgxLoginComponent {
     this.loginRequest=new LoginRequest(this.user.matricule,this.user.password);
     this.serviceAuth.login(this.loginRequest).subscribe(
       (data:JwtResponse)=>{
-       
+        
         localStorage.setItem('token',data.token);
         localStorage.setItem('userFirstName',data.userFirstName);
         localStorage.setItem('userLastName',data.userLastName);
+        localStorage.setItem('userRole',data.userRole);
         localStorage.setItem("roles", JSON.stringify(data.roles));
         localStorage.setItem("roleUser", JSON.stringify(data.userRole));
 

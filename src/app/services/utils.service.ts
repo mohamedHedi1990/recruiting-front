@@ -36,6 +36,11 @@ export class UtilsService {
 
   }
 
+  getDomains() {
+    return this.httpClient.get(UtilsService.API_DOMAIN);
+  }
+
+
   public showToast(type: NbComponentStatus, title: string, body: string) {
     const config = {
       status: type,
