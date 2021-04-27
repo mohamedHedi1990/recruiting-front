@@ -29,12 +29,13 @@ Ajouter une offre
                           <div class="mb-12 col-md-12 col-12">
                             <label for="groupName" class="p-float-label" style="font-size: 13px">Description</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                  
-                              <input [ngClass]="{
+                              <span class="p-inputgroup-addon"><i class="pi pi-ellipsis-h"></i></span>
+                              <p-editor [(ngModel)]="job.jobOffreDescription" [style]="{'width':'1190px'}"></p-editor>
+
+                              <!-- <input [ngClass]="{
                                   'is-invalid': job.jobOffreDescription == ''
                                 }" type="text" class="form-control p-field" id="jobOffreDescription" [(ngModel)]="job.jobOffreDescription"
-                                style="font-size: 13px" />
+                                style="font-size: 13px" /> -->
                             </div>
                           </div>
                     </div>
@@ -44,19 +45,23 @@ Ajouter une offre
                           <div class="mb-6 col-md-6 col-6">
                             <label for="jobOffreDomaineActivite" class="p-float-label" style="font-size: 13px">Domaine</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                  
-                              <input [ngClass]="{
+                              <span class="p-inputgroup-addon"><i class="pi pi-briefcase"></i></span>
+                              <select [(ngModel)]="job.jobOffreDomaineActivite" class="browser-default custom-select"
+                              [compareWith]="compareFiliere">
+                                <option *ngFor="let filiere of filiereList" [ngValue]="filiere">{{filiere.domaineLabel}}</option>
+            
+                              </select>
+                              <!-- <input [ngClass]="{
                                   'is-invalid': job.jobOffreDescription == ''
                                 }" type="text" class="form-control p-field" id="jobOffreDomaineActivite" [(ngModel)]="job.jobOffreDomaineActivite"
-                                style="font-size: 13px" />
+                                style="font-size: 13px" /> -->
                             </div>
                           </div>
 
                           <div class="mb-6 col-md-6 col-6">
                             <label for="contractType" class="p-float-label" style="font-size: 13px">Type de contrat</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                              <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
                               <select [(ngModel)]="job.contractType" class="browser-default custom-select">
                                 <option value="STAGE">STAGE</option>
                                 <option value="CDD">CDD</option>
@@ -72,7 +77,7 @@ Ajouter une offre
                           <div class="mb-12 col-md-12 col-12">
                             <label for="stageOffreCompetences" class="p-float-label" style="font-size: 13px">Compétences</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                              <span class="p-inputgroup-addon"><i class="pi pi-list"></i></span>
                   
                               <textarea [ngClass]="{
                                   'is-invalid': job.stageOffreCompetences == ''
@@ -90,7 +95,7 @@ Ajouter une offre
                           <div class="mb-6 col-md-6 col-6">
                             <label for="jobOffreSalaire" class="p-float-label" style="font-size: 13px">Salaire</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                              <span class="p-inputgroup-addon"><i class="pi pi-money-bill"></i></span>
                               <input  type="number" class="form-control p-field" id="jobOffreSalaire" [(ngModel)]="job.jobOffreSalaire"
                                 style="font-size: 13px" />
                             </div>
@@ -98,7 +103,7 @@ Ajouter une offre
                           <div class="mb-6 col-md-6 col-6">
                             <label for="jobOffreDateFin" class="p-float-label" style="font-size: 13px">Date de fin</label>
                             <div class="p-inputgroup p-fluid">
-                              <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
+                              <span class="p-inputgroup-addon"><i class="pi pi-calendar-times"></i></span>
                               <input type="date" class="form-control p-field" id="jobOffreDateFin" [(ngModel)]="job.jobOffreDateFin"
                               style="font-size: 13px" />
                             </div>
@@ -113,11 +118,11 @@ Ajouter une offre
                             <div class="p-inputgroup p-fluid">
                               <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
                               <select [(ngModel)]="job.jobStatus" class="browser-default custom-select">
-                                <option value="Ouvert">Ouvert</option>
-                                <option value="En cours">En cours</option>
-                                <option value="Fermé">Fermé</option>
-                                <option value="Candidature(s) retenue(s)">Candidature(s) retenue(s)</option>
-                            </select>
+                                <option value="OPENED">Ouvert</option>
+                                <option value="IN_PROGRESS">En cours</option>
+                                <option value="CLOSED">Fermé</option>
+                                <option value="CHOOSED">Candidature(s) retenue(s)</option>
+                              </select>
                             </div>
                           </div>
                     </div>

@@ -4,16 +4,7 @@ padding: 10px 10px 10px 10px !important;
     color: #222b45;margin-left: 10px">
   Profil
 </h4>
-<!-- <h4 *ngIf="user.userId != null" style="background: #E7E8E8; 
-padding: 10px 10px 10px 10px !important;
-    font-size: 20px !important;
-    color: #222b45;margin-left: 10px">
-  Modifier un employé RH
-  <span style="float:right;color:#900C3F" class="customer-badge ">crée le {{user.createdAt }} -- modifié le
-    {{user.updatedAt }}</span>
-  <div>
-    <span class="customer-badge status-label">{{user.userLogin}}</span></div>
-</h4> -->
+
 
 <div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid">
   <p-panel header="Informations Personnelles" [toggleable]="false">
@@ -367,7 +358,7 @@ padding: 10px 10px 10px 10px !important;
                 </label>
                 <div class="p-inputgroup">
                   <span class="p-inputgroup-addon"><i class="pi pi-bars"></i></span>
-                  <select [(ngModel)]="trainee.stagiaireFiliere" class="browser-default custom-select">
+                  <select [(ngModel)]="trainee.stagiaireFiliere" class="browser-default custom-select" [compareWith]="compareFiliere">
                     <option *ngFor="let filiere of filiereList" [ngValue]="filiere">{{filiere.domaineLabel}}</option>
 
                   </select>
