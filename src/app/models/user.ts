@@ -14,7 +14,7 @@ export class User {
     public userCivilStatus: string;
     public userAddress: string;
     public userEmail: string;
-    public userPhoneNumber: string;
+    public userPhoneNumber: number;
 
 
 

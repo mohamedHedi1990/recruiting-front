@@ -1,0 +1,64 @@
+<!-- <ng-template [ngIf]="section === '5' && role==='stagiaire'"> -->
+  <hr>
+  <div class="form-control-group">
+    <label class="label" for="input-stagiaireFuturDiplome">Diplôme a obtenir</label>
+    <input nbInput fullWidth placeholder="Diplome à obtenir:" [(ngModel)]="stagiaire.stagiaireFuturDiplome"
+      #stagiaireFuturDiplome="ngModel" name="diplome" type="text" id="input-stagiaireFuturDiplome"
+      fieldSize="small"
+      [status]="stagiaireFuturDiplome.dirty ? (stagiaireFuturDiplome.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="stagiaireFuturDiplome.invalid && stagiaireFuturDiplome.touched ? true : null">
+    <ng-container *ngIf="stagiaireFuturDiplome.invalid && stagiaireFuturDiplome.touched ">
+      <p class="caption status-danger" *ngIf="stagiaireFuturDiplome.errors?.required">
+        Diplome à obtenir
+      </p>
+    </ng-container>
+  </div>
+  <div class="form-control-group">
+    <label class="label" for="input-stagiaireNiveauEtude">Niveau d'étude</label>
+    <input nbInput fullWidth [(ngModel)]="stagiaire.stagiaireNiveauEtude" #stagiaireNiveauEtude="ngModel" name="Mot de passe"
+      type="text" id="input-stagiaireNiveauEtude" placeholder="Niveau d'étude:" fieldSize="small"
+      [status]="stagiaireNiveauEtude.dirty ? (stagiaireNiveauEtude.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="stagiaireNiveauEtude.invalid && stagiaireNiveauEtude.touched ? true : null">
+    <ng-container *ngIf="stagiaireNiveauEtude.invalid && stagiaireNiveauEtude.touched ">
+      <p class="caption status-danger" *ngIf="stagiaireNiveauEtude.errors?.required">
+        Niveau d'étude
+      </p>
+    </ng-container>
+  </div>
+  <div class="form-control-group">
+    <label class="label" for="input-stagiaireEcole">Ecole</label>
+    <input nbInput fullWidth [(ngModel)]="stagiaire.stagiaireEcole" #stagiaireEcole="ngModel" name="Mot de passe"
+      type="text" id="input-stagiaireEcole" placeholder="Ecole:" fieldSize="small"
+      [status]="stagiaireEcole.dirty ? (stagiaireEcole.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="stagiaireEcole.invalid && stagiaireEcole.touched ? true : null">
+    <ng-container *ngIf="stagiaireEcole.invalid && stagiaireEcole.touched ">
+      <p class="caption status-danger" *ngIf="stagiaireEcole.errors?.required">
+        Ecole
+      </p>
+    </ng-container>
+  </div>
+  <div class="form-control-group">
+    <label class="label" for="input-domaineLabel">Filiére</label>
+    <input nbInput fullWidth [(ngModel)]="filiere.domaineLabel" #domaineLabel="ngModel" name="Mot de passe"
+      type="text" id="input-domaineLabel" placeholder="Filiére:" fieldSize="small"
+      [status]="domaineLabel.dirty ? (domaineLabel.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="domaineLabel.invalid && domaineLabel.touched ? true : null">
+    <ng-container *ngIf="domaineLabel.invalid && domaineLabel.touched ">
+      <p class="caption status-danger" *ngIf="domaineLabel.errors?.required">
+        Filiére
+      </p>
+    </ng-container>
+  </div>
+
+
+
+  <!-- <button  nbButton fullWidth status="primary" size="large" style="background-color: #07112f2e !important; margin-top: 2% !important;
+  border-color: #0b2089;">
+    S'inscrire
+  </button> -->
+  <input type="submit" nbButton value="S'inscrire" [disabled]="checkStagiaireValid()"
+  [ngClass]="{'disabled': checkStagiaireValid()}"  (click)="register()" status="primary" size="large"
+    class="btnNext ">
+  <input type="button" nbButton value="Précédent" (click)="next($event)" id="3" status="info" size="large"
+    class="btnPrecedent ">
+<!-- </ng-template> -->

@@ -1,0 +1,143 @@
+<!-- <ng-template [ngIf]="section === '2'"> -->
+  <!-- <h5 class="text-white">2) Information de contact</h5> -->
+  <hr>
+  <div class="row">
+    <div class="col-lg-6">
+
+      <div class="form-control-group">
+        <label class="label" for="input-userFirstName">Nom*</label>
+
+        <input nbInput fullWidth [(ngModel)]="user.userFirstName" #userFirstName="ngModel"
+          name="userFirstName" type="text" id="input-userFirstName" placeholder="Nom:" fieldSize="small"
+          [status]="userFirstName.dirty ? (userFirstName.invalid  ? 'danger' : 'primary') : 'basic'"
+          [attr.aria-invalid]="userFirstName.invalid && userFirstName.touched ? true : null">
+        <ng-container *ngIf="userFirstName.invalid && userFirstName.touched ">
+          <p class="caption status-danger" *ngIf="userFirstName.errors?.required">
+            Nom*
+          </p>
+
+        </ng-container>
+      </div>
+    </div>
+    <div class="col-lg-6">
+
+      <div class="form-control-group">
+        <label class="label" for="input-userLastName">Prénom*</label>
+
+        <input nbInput fullWidth [(ngModel)]="user.userLastName" #userLastName="ngModel" name="userLastName"
+          type="text" id="input-userLastName" placeholder="Prénom:" fieldSize="small"
+          [status]="userLastName.dirty ? (userLastName.invalid  ? 'danger' : 'primary') : 'basic'"
+          [attr.aria-invalid]="userLastName.invalid && userLastName.touched ? true : null">
+        <ng-container *ngIf="userLastName.invalid && userLastName.touched ">
+          <p class="caption status-danger" *ngIf="userLastName.errors?.required">
+            Prénom*
+          </p>
+        </ng-container>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userGender">Genre*</label>
+        <select nbSelect class="browser-default custom-select" [(ngModel)]="user.userGender"
+          #userGender="ngModel" name="userGender" type="text" id="input-userGender" value="masculin"
+          selected="Masculin" fieldSize="small"
+          [attr.aria-invalid]="userGender.invalid && userGender.touched ? true : null">
+          <option value="masculin" checked selected="Masculin">Masculin</option>
+          <option value="feminin">Feminin</option>
+
+        </select>
+
+
+        <ng-container *ngIf="userGender.invalid && userGender.touched ">
+          <p class="caption status-danger" *ngIf="userGender.errors?.required">
+            Genre
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userCivilStatus">Etat civil*</label>
+
+        <select nbSelect class="browser-default custom-select" [(ngModel)]="user.userCivilStatus"
+          #userCivilStatus="ngModel" name="userCivilStatus" type="text" id="input-userCivilStatus"
+          fieldSize="small"
+          [attr.aria-invalid]="userCivilStatus.invalid && userCivilStatus.touched ? true : null">
+          <option value="celibataire" checked selected="Celibataire"> Célibataire</option>
+          <option value="marie">Marié(e)</option>
+          <option value="divorce">Divorcé(e)</option>
+        </select>
+
+        <ng-container *ngIf="userCivilStatus.invalid && userCivilStatus.touched ">
+          <p class="caption status-danger" *ngIf="userCivilStatus.errors?.required">
+            Etat civil*
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="form-control-group">
+    <label class="label" for="input-userBirthDate">Date de naissance</label>
+
+    <input nbInput fullWidth [(ngModel)]="user.userBirthDate" #userBirthDate="ngModel" name="Mot de passe"
+      type="date" id="input-userBirthDate" placeholder="Nom:" fieldSize="small"
+      [status]="userBirthDate.dirty ? (userBirthDate.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="userBirthDate.invalid && userBirthDate.touched ? true : null">
+    <ng-container *ngIf="userBirthDate.invalid && userBirthDate.touched ">
+      <p class="caption status-danger" *ngIf="userBirthDate.errors?.required">
+        Date de naissance
+      </p>
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userBirthCountry">Pays de naissance</label>
+        <select nbSelect class="browser-default custom-select" [(ngModel)]="user.userBirthCountry" #userBirthCountry="ngModel"
+          name="Mot de passe" type="text" id="input-userBirthCountry" (change)="changeCountry_($event.target.value)"
+          placeholder="Nom:" fieldSize="small"
+          [attr.aria-invalid]="userBirthCountry.invalid && userBirthCountry.touched ? true : null">
+          <option *ngFor="let count of countriesList" [value]="count.name"> {{count.name}}
+          </option>
+
+        </select>
+
+        <ng-container *ngIf="userBirthCountry.invalid && userBirthCountry.touched ">
+          <p class="caption status-danger" *ngIf="userBirthCountry.errors?.required">
+            Pays de naissance
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userBirthCity">Ville de naissance</label>
+        <select nbSelect class="browser-default custom-select" [(ngModel)]="user.userBirthCity" #userBirthCity="ngModel"
+          name="userBirthCity" type="text" id="input-userBirthCity" placeholder="Ville de naissance:" fieldSize="small"
+          [attr.aria-invalid]="userBirthCity.invalid && userBirthCity.touched ? true : null">
+          <option *ngFor="let city of cities_" [value]="city.name">{{city.name}} </option>
+
+        </select>
+
+        <ng-container *ngIf="userBirthCity.invalid && userBirthCity.touched ">
+          <p class="caption status-danger" *ngIf="userBirthCity.errors?.required">
+            Ville de naissance
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <input type="button" nbButton value="Suivant" [disabled]="checkSection1Valid()"
+  [ngClass]="{'disabled': checkSection1Valid()}" (click)="next($event)" id="3" status="primary" size="large"
+    class="btnNext ">
+  <!-- <input type="button" nbButton value="Suivant" (click)="next($event)" id="3" status="primary" size="large"
+    class="btnNext "> -->
+  <input type="button" nbButton value="Précédent" (click)="next($event)" id="1" status="info" size="large"
+    class="btnPrecedent ">
+
+<!-- </ng-template> -->

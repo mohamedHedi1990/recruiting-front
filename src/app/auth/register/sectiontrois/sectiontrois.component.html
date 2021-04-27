@@ -1,0 +1,83 @@
+<!-- <ng-template [ngIf]="section === '3'"> -->
+  <!-- <h5 class="text-white">3) stagiaire condidat</h5> -->
+  <hr>
+
+  <div class="form-control-group">
+    <label class="label" for="input-userPhoneNumber">Numéro téléphone:</label>
+    <input type="number" ng2TelInput  name="userPhoneNumber"
+      (hasError)="hasError($event)" (ng2TelOutput)="getNumber($event)" #userPhoneNumber="ngModel"
+      placeholder="Numéro téléphone:" 
+      (countryChange)="onCountryChange($event)" class="form-control p-field" id="userPhoneNumber"
+      [(ngModel)]="user.userPhoneNumber" (keyup)="CheckTelHasError=null" [ngClass]="{
+'is-valid': CheckTelHasError==true && user.userPhoneNumber!=null ,
+'is-invalid': CheckTelHasError==false && user.userPhoneNumber!= phone
+}" />
+    <ng-container *ngIf="userPhoneNumber.invalid && userPhoneNumber.touched">
+      <p class="caption status-danger" *ngIf="userPhoneNumber.errors?.required">
+        Numéro téléphone !
+      </p>
+
+    </ng-container>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userPays">Pays de résidence</label>
+        <select class="browser-default custom-select" [(ngModel)]="user.userPays" #userPays="ngModel"
+          name="userPays" id="input-userPays" required (change)="changeCountry_($event.target.value)"
+          placeholder="Pays de naissance:" fieldSize="small">
+          <option *ngFor="let count of countriesList" [value]="count.name"> {{count.name}}
+          </option>
+
+        </select>
+
+        <ng-container *ngIf="userPays.invalid && userPays.touched ">
+          <p class="caption status-danger" *ngIf="userPays.errors?.required">
+            Pays de naissance
+          </p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="form-control-group">
+        <label class="label" for="input-userCity">Ville de résidence</label>
+        <select nbSelect class="browser-default custom-select" [(ngModel)]="user.userCity" #userCity="ngModel"
+          name="userCity" type="text" id="input-userCity" placeholder="Ville de naissance:" fieldSize="small"
+          [attr.aria-invalid]="userCity.invalid && userCity.touched ? true : null">
+          <option *ngFor="let city of cities_" [value]="city.name">{{city.name}} </option>
+
+        </select>
+
+        <ng-container *ngIf="userCity.invalid && userCity.touched ">
+          <p class="caption status-danger" *ngIf="userCity.errors?.required">
+            Ville de naissance
+          </p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="form-control-group">
+    <label class="label" for="input-userAddress">Adresse</label>
+
+    <textarea nbInput fullWidth [(ngModel)]="user.userAddress" #userAddress="ngModel" name="Adresse"
+       id="input-userAddress" placeholder="Adresse:" fieldSize="small"
+      [status]="userAddress.dirty ? (userAddress.invalid  ? 'danger' : 'primary') : 'basic'"
+      [attr.aria-invalid]="userAddress.invalid && userAddress.touched ? true : null"></textarea>
+    <ng-container *ngIf="userAddress.invalid && userAddress.touched ">
+      <p class="caption status-danger" *ngIf="userAddress.errors?.required">
+        Adresse
+      </p>
+    </ng-container>
+  </div>
+
+  <!-- <input type="button" nbButton value="Suivant" (click)="next($event)" id="4" status="primary" size="large"
+    class="btnNext "> -->
+  <input type="button" nbButton value="Suivant" [disabled]="checkSection2Valid()"
+    [ngClass]="{'disabled': checkSection2Valid()}" (click)="next($event)" id="4" status="primary" size="large"
+    class="btnNext ">
+  <input type="button" nbButton value="Précédent" (click)="next($event)" id="2" status="info" size="large"
+    class="btnPrecedent ">
+<!-- </ng-template> -->

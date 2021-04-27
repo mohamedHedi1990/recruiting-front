@@ -5,21 +5,6 @@ textarea{
   height: 90px;
   resize: none;
 }
-.titreApp{
-
-  margin-top: 21px;
-   text-align: center;
-}
-.titreApp{
-
-  margin-top: 21px;
-   text-align: center;
-}
-.titreSpan{
-  font-weight: bold;
-  color: white;
-  font-size: 15px;
-}
 .containner {
 
   height: 100%;
@@ -50,7 +35,7 @@ textarea{
 }
 .btnStagiaire{
 
-  background-image: url('../../../assets/images/stagiaire.png') !important;
+  background-image: url('../../../../assets/images/stagiaire.png') !important;
   background-color: #07112f2e !important;
   background-repeat: no-repeat;
   background-size: contain;
@@ -63,7 +48,7 @@ textarea{
 }
 .btnCondidat{
 
-  background-image: url('../../../assets/images/condidat.png') !important;
+  background-image: url('../../../../assets/images/condidat.png') !important;
   background-color: #07112f2e !important;
   background-repeat: no-repeat;
   background-size: contain;
@@ -127,7 +112,7 @@ nb-layout-column:last-child {
   background-attachment: inherit;
   background-size: cover;
   background-position: 100%;
-  background-image: url('../../../assets/images/bg.jpg');
+  background-image: url('../../../../assets/images/bg.jpg');
 }
 
 

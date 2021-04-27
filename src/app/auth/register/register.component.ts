@@ -1,3 +1,5 @@
+import { BehaviorSubject } from 'rxjs';
+import { FiliereService } from './../../services/filiere.service';
 import { Filiere } from './../../models/filiere';
 import { Condidat } from './../../models/condidat';
 import { Stagiaire } from './../../models/stagiaire';
@@ -13,7 +15,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class NgxRegisterComponent {
+export class NgxRegisterComponent implements OnInit{
   user: User = new User()
   stagiaire: Stagiaire = new Stagiaire()
   condidat: Condidat = new Condidat()
@@ -21,10 +23,12 @@ export class NgxRegisterComponent {
   checkEmail;
   phone: any;
   role: string
-  worldMapData = require('city-state-country');
   CheckTelHasError;
+  worldMapData = require('city-state-country');
   countriesList = this.worldMapData.getAllCountries();
-  section: any = '1'
+  section :any='1'
+  // section:string='1'
+  sections:any=[]
   loginRequest: LoginRequest;
   cities: Array<any>;
   cities_: Array<any>;
@@ -32,21 +36,84 @@ export class NgxRegisterComponent {
   authFailed = false;
   passwordconfirme: string = ''
   constructor(
-    private router: Router, private serviceAuth: AuthServiceService) {
+    private router: Router,
+    private filiereService: FiliereService,
+     private serviceAuth: AuthServiceService) {
 
   }
-
+ngOnInit(){
+  console.log('section',this.section==='1');
+  this.getAllFilieres()
+}
   register() {
     console.log(this.role);
 
-    this.serviceAuth.register(this.user, this.role).subscribe(
-      (data: JwtResponse) => {
-        this.router.navigateByUrl("/recruiting");
-        this.testAuth = false;
+    var body={}
+    if (this.role === 'condidat') {
+
+
+       body =
+      {
+        userFirstName: this.user.userFirstName,
+        userLastName: this.user.userLastName,
+        userLogin: this.user.userLogin,
+        userPassword: this.user.userPassword,
+        userBirthDate: this.user.userBirthDate,
+        userBirthCountry: this.user.userBirthCountry,
+        userBirthCity: this.user.userBirthCity,
+        userNRue: this.user.userNRue,
+        userPays: this.user.userPays,
+        userCity: this.user.userCity,
+        userGender: this.user.userGender,
+        userCivilStatus: this.user.userCivilStatus,
+        userAddress: this.user.userAddress,
+        userEmail: this.user.userEmail,
+        userPhoneNumber: this.user.userPhoneNumber,
+        candidatDiplome: this.condidat.candidatDiplome,
+        candidatAnneeDiplome: this.condidat.candidatAnneeDiplome,
+        candidatNumberExperience: this.condidat.candidatNumberExperience,
+        candidatFiliere:  this.filiere
+
+
+      }
+    } else if (this.role === 'stagiaire') {
+       body = {
+        userFirstName: this.user.userFirstName,
+        userLastName: this.user.userLastName,
+        userLogin: this.user.userLogin,
+        userPassword: this.user.userPassword,
+        userBirthDate: this.user.userBirthDate,
+        userBirthCountry: this.user.userBirthCountry,
+        userBirthCity: this.user.userBirthCity,
+        userNRue: this.user.userNRue,
+        userPays: this.user.userPays,
+        userCity: this.user.userCity,
+        userGender: this.user.userGender,
+        userCivilStatus: this.user.userCivilStatus,
+        userAddress: this.user.userAddress,
+        userEmail: this.user.userEmail,
+        userPhoneNumber: this.user.userPhoneNumber,
+        stagiaireEcole: this.stagiaire.stagiaireEcole,
+        stagiaireFuturDiplome: this.stagiaire.stagiaireFuturDiplome,
+        stagiaireNiveauEtude: this.stagiaire.stagiaireNiveauEtude,
+
+        stagiaireFilier: this.filiere,
+
+
+      }
+    }
+    console.log(body);
+
+    this.serviceAuth.register( this.role,body).subscribe(
+      (data: any) => {
+        console.log(data);
+
+        this.router.navigateByUrl("/");
+
       },
       (error) => {
-        console.log("error");
-        this.testAuth = true;
+        console.log(error);
+
       }
     )
   }
@@ -63,7 +130,9 @@ export class NgxRegisterComponent {
     // this.loginRequest.role=event.target.value
     console.log(event.target.value);
     console.log(event.target.id);
-    this.section = event.target.id
+
+    // this.section.next( event.target.id)
+    this.section= event.target.id
   }
   getNumber($event) {
     this.phone = $event;
@@ -80,7 +149,8 @@ export class NgxRegisterComponent {
 
   }
   changeRole(event) {
-    this.section = event.target.id
+    // this.section.next( event.target.id)
+    this.section= event.target.id
     this.role = event.target.value
 
   }
@@ -90,21 +160,31 @@ export class NgxRegisterComponent {
       this.user.userBirthDate == '' || this.user.userBirthCity == null || this.user.userBirthCountry === '';
   }
   checkSection2Valid(): boolean {
-    return this.user.userPhoneNumber == null || this.user.userPays === '' ||
-      this.user.userCity == '' || this.user.userAddress === ''
+
+    return this.user.userPhoneNumber == null  || this.user.userPays === undefined ||
+       this.user.userAddress === undefined
 
   }
   checkSection3Valid(): boolean {
-    return this.user.userEmail ==='' || this.user.userLogin === '' ||
-      this.passwordconfirme ==='' ||  this.user.userPassword ==='' || this.user.userPassword !== this.passwordconfirme;
+    return this.user.userEmail === '' || this.user.userLogin === '' ||
+      this.passwordconfirme === '' || this.user.userPassword === '' || this.user.userPassword !== this.passwordconfirme;
   }
   checkCondidatValid(): boolean {
-    return this.condidat.candidatDiplome ==='' || this.condidat.candidatAnneeDiplome === '' ||
-       this.condidat.candidatNumberExperience ==null ;
+    return this.condidat.candidatDiplome === '' || this.condidat.candidatAnneeDiplome === '' ||
+      this.condidat.candidatNumberExperience == null;
   }
   checkStagiaireValid(): boolean {
-    return this.stagiaire.stagiaireEcole ==='' || this.stagiaire.stagiaireFuturDiplome === '' ||
-       this.stagiaire.stagiaireNiveauEtude ==null ;
+  //  console.log(this.stagiaire.stagiaireEcole !== '');
+  //  console.log(this.stagiaire.stagiaireFuturDiplome !== '');
+  //  console.log(this.stagiaire.stagiaireNiveauEtude !== '');
+  //  console.log(this.filiere.domaineLabel.domaineLabel);
+
+    return this.stagiaire.stagiaireEcole === '' || this.stagiaire.stagiaireFuturDiplome === '' ||
+       this.stagiaire.stagiaireNiveauEtude ==='';
+  }
+  getAllFilieres(){
+    this.filiereService.getAllFilieres().subscribe(arg => this.sections = arg);
+
   }
 }
 

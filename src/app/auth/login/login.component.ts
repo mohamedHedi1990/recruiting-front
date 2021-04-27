@@ -26,11 +26,11 @@ export class NgxLoginComponent {
 
   login()
   {
-   
+
     this.loginRequest=new LoginRequest(this.user.matricule,this.user.password);
     this.serviceAuth.login(this.loginRequest).subscribe(
       (data:JwtResponse)=>{
-       
+
         localStorage.setItem('token',data.token);
         localStorage.setItem('userFirstName',data.userFirstName);
         localStorage.setItem('userLastName',data.userLastName);
@@ -42,7 +42,7 @@ export class NgxLoginComponent {
         this.testAuth=false;
       },
       (error)=>{
-        console.log("error");
+        console.log(error);
         this.testAuth=true;
       }
     )
