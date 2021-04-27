@@ -16,13 +16,15 @@ export class UtilsService {
   // public static REMOTE_ADDRESS = 'http://212.129.62.79:8090/';
   public static REMOTE_ADDRESS = "http://localhost:8090";
 
-
   public static REMOTE_ORGANISATION_URL = UtilsService.REMOTE_ADDRESS + 'bs-organisation-management/';
   public static API_AUTH = UtilsService.REMOTE_ADDRESS + "/api/auth/signin";
   public static API_USER = UtilsService.REMOTE_ADDRESS+ "/api/user";
   public static API_RH = UtilsService.REMOTE_ADDRESS + "/api/rh";
   public static API_USER_FILE = UtilsService.REMOTE_ADDRESS + "/api/file";
-  public static API_DOMAINE = UtilsService.REMOTE_ADDRESS + "/api/domaine";
+  public static API_DOMAIN = UtilsService.REMOTE_ADDRESS+ "/api/domaine";
+  public static API_CANDIDATE = UtilsService.REMOTE_ADDRESS+ "/api/candidat";
+  public static API_TRAINEER = UtilsService.REMOTE_ADDRESS+ "/api/stagiaire";
+  public static API_JOB = UtilsService.REMOTE_ADDRESS+ "/api/offre-job";
 
   
 
@@ -35,7 +37,7 @@ export class UtilsService {
   }
 
   getDomains() {
-    return this.httpClient.get(UtilsService.API_DOMAINE);
+    return this.httpClient.get(UtilsService.API_DOMAIN);
   }
 
 

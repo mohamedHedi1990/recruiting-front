@@ -44,10 +44,15 @@ import {DragDropModule} from 'primeng/dragdrop';
 import {LOCALE_ID} from '@angular/core';
 import { UtilsService } from '../../services/utils.service';
 import {Ng2TelInputModule} from 'ng2-tel-input';
+import { ProfilComponent } from './profil/profil.component';
+import { JobListComponent } from './job-list/job-list.component';
+import { AddJobComponent } from './add-job/add-job.component';
+import {EditorModule} from 'primeng/editor';
+
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [AddNewUserComponent,ListUsersComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent],
   imports: [
     CommonModule,
     AdministrationManagementRoutingModule,
@@ -78,7 +83,8 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     ConfirmDialogModule,
     CardModule,
     Ng2TelInputModule,
-    DragDropModule
+    DragDropModule,
+    EditorModule,
   ],
   providers: [
     UtilsService,
