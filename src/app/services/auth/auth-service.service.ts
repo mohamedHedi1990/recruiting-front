@@ -20,12 +20,8 @@ export class AuthServiceService {
     return this.http.post<JwtResponse>(UtilsService.API_AUTH, loginRequest);
 
   }
-  register(url:string,object:any):Observable<JwtResponse> {
-    console.log(url);
-
-    return this.http.post<JwtResponse>(UtilsService.API+url, object).pipe(map((res:any)=>{
-      return res
-    }));
+  register(role:string,object:any):Observable<JwtResponse> {
+    return this.http.post<JwtResponse>(UtilsService.API+role, object);
 // return object
   }
 

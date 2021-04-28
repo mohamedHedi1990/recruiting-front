@@ -55,10 +55,7 @@ export class CondidatComponent implements OnInit {
         candidatDiplome: this.condidat.candidatDiplome,
         candidatAnneeDiplome: this.condidat.candidatAnneeDiplome,
         candidatNumberExperience: this.condidat.candidatNumberExperience,
-        candidatFiliere: {
-          domaineId: this.filiere.domaineId,
-
-        }
+         candidatFiliere: this.filiere
       }
 
     console.log(body);
