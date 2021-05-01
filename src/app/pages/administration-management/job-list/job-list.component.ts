@@ -9,7 +9,7 @@ import { UtilsService } from '../../../services/utils.service';
 export class JobListComponent implements OnInit {
 
   displayAddJob=false;
-
+  displayDetailsJob=false;
   jobList=[];
 
   job={
@@ -39,11 +39,17 @@ hideAddJobWindow(){
   this.getAllJobs();
   this.displayAddJob=false;
 }
-
+hideDetailsJobWindow()
+{
+  this.getAllJobs();
+  this.displayDetailsJob=false;
+}
 getAllJobs(){
   this.utilsService.get(UtilsService.API_JOB).subscribe(
     (response) => {
       this.jobList=response;
+      console.log("-----job lists----");
+      console.log(this.jobList);
     },
     (error) => {
       this.utilsService.showToast(
@@ -56,7 +62,15 @@ getAllJobs(){
 }
 
 showPlus(job){
-  
+  console.log("---show Plus----")
+  this.job=job;
+  this.displayDetailsJob=true;
 }
+cancelDetailsHandler()
+{
+  console.log("--------handler event--------");
+  this.displayDetailsJob=false;
+  this.displayAddJob=true;
 
+}
 }

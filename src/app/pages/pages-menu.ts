@@ -26,6 +26,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/recruiting/administration/job-list',
         icon: 'people-outline',
       },
+     
       
     ],
 

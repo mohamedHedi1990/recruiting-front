@@ -2,7 +2,7 @@
 <h4 style="background: #E7E8E8; 
 padding: 10px 10px 10px 10px !important;
     font-size: 20px !important;
-    color: #222b45;margin-left: 10px" *ngIf="!displayAddJob">
+    color: #222b45;margin-left: 10px" *ngIf="!displayAddJob && !displayDetailsJob">
     Liste des offres
     <div style="float: right;">
         <div style="display: flex">
@@ -12,7 +12,7 @@ padding: 10px 10px 10px 10px !important;
         </div>
     </div>
 </h4>
-<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid" *ngIf="!displayAddJob">
+<div style="width: 90%; margin: auto;margin-top:3%; border-color:#E7E8E8 !important; border:solid" *ngIf="!displayAddJob && !displayDetailsJob">
     <div class="card" *ngFor="let job of jobList" style="border-color:#E7E8E8 !important; border:solid;height: 130px">
         <div class="row">
             <div class="col-8">
@@ -50,6 +50,10 @@ padding: 10px 10px 10px 10px !important;
         </div>
     </div>
 </div>
-<ngx-add-job *ngIf="displayAddJob" (cancelEvent)="hideAddJobWindow()">
+<ngx-add-job *ngIf="displayAddJob" [job]="job" (cancelEvent)="hideAddJobWindow()">
 
 </ngx-add-job>
+
+<ngx-details-offre *ngIf="displayDetailsJob" [job]="job" (cancelDetails)="cancelDetailsHandler()">
+
+</ngx-details-offre>
