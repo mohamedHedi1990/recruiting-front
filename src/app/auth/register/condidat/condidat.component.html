@@ -62,7 +62,7 @@
     <select nbSelect class="browser-default custom-select" [(ngModel)]="filiere.domaineLabel" #domaineLabel="ngModel"
     name="domaineLabel" type="text" id="input-domaineLabel" placeholder="Ville de naissance:" fieldSize="small"
     [attr.aria-invalid]="domaineLabel.invalid && domaineLabel.touched ? true : null">
-    <option *ngFor="let sectionn of sections" [value]="sectionn.domaineId">{{sectionn.domaineLabel}} </option>
+    <option *ngFor="let sectionn of sections" [value]="sectionn">{{sectionn.domaineLabel}} </option>
 
   </select>
 

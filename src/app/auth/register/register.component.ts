@@ -49,7 +49,7 @@ ngOnInit(){
     console.log(this.role);
 
     var body={}
-    if (this.role === 'condidat') {
+    if (this.role === 'candidat') {
 
 
        body =
