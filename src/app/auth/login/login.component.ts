@@ -11,11 +11,8 @@ import { AuthServiceService } from '../../services/auth/auth-service.service';
 
 })
 export class NgxLoginComponent {
-  user: any = {
-    password: null,
-    matricule: null
-  };
-  loginRequest:LoginRequest;
+
+  loginRequest:LoginRequest=new LoginRequest('','');
 
   testAuth=false;
   authFailed=false;
@@ -27,7 +24,7 @@ export class NgxLoginComponent {
   login()
   {
 
-    this.loginRequest=new LoginRequest(this.user.matricule,this.user.password);
+    this.loginRequest=new LoginRequest(this.loginRequest.userLogin,this.loginRequest.userPassword);
     this.serviceAuth.login(this.loginRequest).subscribe(
       (data:JwtResponse)=>{
 
@@ -46,5 +43,8 @@ export class NgxLoginComponent {
         this.testAuth=true;
       }
     )
+  }
+  checkValid(){
+    return this.loginRequest.userLogin==='' || this.loginRequest.userPassword===''
   }
 }

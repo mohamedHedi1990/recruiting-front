@@ -9,12 +9,7 @@ import { NbAlertModule, NbButtonModule, NbCheckboxModule, NbIconModule, NbInputM
 import { NgxLoginComponent } from './login/login.component'; // <---
 import { NbThemeModule, NbLayoutModule, NbSidebarModule } from '@nebular/theme';
 import { NgxRegisterComponent } from './register/register.component';
-import { CondidatComponent } from './register/condidat/condidat.component';
-import { StagiaireComponent } from './register/stagiaire/stagiaire.component';
-import { SectionunComponent } from './register/sectionun/sectionun.component';
-import { SectiondeuxComponent } from './register/sectiondeux/sectiondeux.component';
-import { SectiontroisComponent } from './register/sectiontrois/sectiontrois.component';
-import { SectionquatreComponent } from './register/sectionquatre/sectionquatre.component';
+
 
 @NgModule({
   imports: [
@@ -35,14 +30,9 @@ import { SectionquatreComponent } from './register/sectionquatre/sectionquatre.c
   declarations: [
     NgxLoginComponent,
     NgxRegisterComponent,
-    CondidatComponent,
-    StagiaireComponent,
-    SectionunComponent,
-    SectiondeuxComponent,
-    SectiontroisComponent,
-    SectionquatreComponent, // <---
+     // <---
   ],
-  exports:[CondidatComponent]
+  exports:[]
 })
 export class NgxAuthModule {
 }

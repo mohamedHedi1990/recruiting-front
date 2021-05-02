@@ -1,3 +1,5 @@
+import { Filiere } from './filiere';
+
 export class User {
 
     public userFirstName: string;
@@ -16,7 +18,16 @@ export class User {
     public userEmail: string;
     public userPhoneNumber: number;
 
+    public candidatDiplome:string;
+    public candidatAnneeDiplome:string;
+  public candidatNumberExperience: number;
 
+
+  public stagiaireEcole:string;
+  public stagiaireFuturDiplome:string;
+  public stagiaireNiveauEtude:string;
+  public candidatFiliere:Filiere;
+  public stagiaireFilier:Filiere;
 
 
 

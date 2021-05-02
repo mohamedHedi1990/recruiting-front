@@ -1,8 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { FiliereService } from './../../services/filiere.service';
 import { Filiere } from './../../models/filiere';
-import { Condidat } from './../../models/condidat';
-import { Stagiaire } from './../../models/stagiaire';
 import { User } from './../../models/user';
 import { AuthServiceService } from './../../services/auth/auth-service.service';
 import { Router } from '@angular/router';
@@ -17,8 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NgxRegisterComponent implements OnInit{
   user: User = new User()
-  stagiaire: Stagiaire = new Stagiaire()
-  condidat: Condidat = new Condidat()
+
   filiere: Filiere = new Filiere()
   checkEmail;
   phone: any;
@@ -49,64 +46,16 @@ ngOnInit(){
     console.log(this.role);
 
     var body={}
-    if (this.role === 'candidat') {
+    if (this.role === 'condidat') {
 
+      this.user.candidatFiliere=  this.filiere
 
-       body =
-      {
-        userFirstName: this.user.userFirstName,
-        userLastName: this.user.userLastName,
-        userLogin: this.user.userLogin,
-        userPassword: this.user.userPassword,
-        userBirthDate: this.user.userBirthDate,
-        userBirthCountry: this.user.userBirthCountry,
-        userBirthCity: this.user.userBirthCity,
-        userNRue: this.user.userNRue,
-        userPays: this.user.userPays,
-        userCity: this.user.userCity,
-        userGender: this.user.userGender,
-        userCivilStatus: this.user.userCivilStatus,
-        userAddress: this.user.userAddress,
-        userEmail: this.user.userEmail,
-        userPhoneNumber: this.user.userPhoneNumber,
-        candidatDiplome: this.condidat.candidatDiplome,
-        candidatAnneeDiplome: this.condidat.candidatAnneeDiplome,
-        candidatNumberExperience: this.condidat.candidatNumberExperience,
-        candidatFiliere:  this.filiere
-
-
-      }
     } else if (this.role === 'stagiaire') {
-       body = {
-        userFirstName: this.user.userFirstName,
-        userLastName: this.user.userLastName,
-        userLogin: this.user.userLogin,
-        userPassword: this.user.userPassword,
-        userBirthDate: this.user.userBirthDate,
-        userBirthCountry: this.user.userBirthCountry,
-        userBirthCity: this.user.userBirthCity,
-        userNRue: this.user.userNRue,
-        userPays: this.user.userPays,
-        userCity: this.user.userCity,
-        userGender: this.user.userGender,
-        userCivilStatus: this.user.userCivilStatus,
-        userAddress: this.user.userAddress,
-        userEmail: this.user.userEmail,
-        userPhoneNumber: this.user.userPhoneNumber,
-        stagiaireEcole: this.stagiaire.stagiaireEcole,
-        stagiaireFuturDiplome: this.stagiaire.stagiaireFuturDiplome,
-        stagiaireNiveauEtude: this.stagiaire.stagiaireNiveauEtude,
+      this.user.stagiaireFilier=this.filiere
 
-        stagiaireFilier: this.filiere,
-
-
-      }
     }
-    console.log(body);
-
-    this.serviceAuth.register( this.role,body).subscribe(
+    this.serviceAuth.register( this.role,this.user).subscribe(
       (data: any) => {
-        console.log(data);
 
         this.router.navigateByUrl("/");
 
@@ -127,9 +76,6 @@ ngOnInit(){
     this.CheckTelHasError = true;
   }
   next(event) {
-    // this.loginRequest.role=event.target.value
-    console.log(event.target.value);
-    console.log(event.target.id);
 
     // this.section.next( event.target.id)
     this.section= event.target.id
@@ -170,17 +116,13 @@ ngOnInit(){
       this.passwordconfirme === '' || this.user.userPassword === '' || this.user.userPassword !== this.passwordconfirme;
   }
   checkCondidatValid(): boolean {
-    return this.condidat.candidatDiplome === '' || this.condidat.candidatAnneeDiplome === '' ||
-      this.condidat.candidatNumberExperience == null;
+    return this.user.candidatDiplome === '' || this.user.candidatAnneeDiplome === '' ||
+      this.user.candidatNumberExperience == null;
   }
   checkStagiaireValid(): boolean {
-  //  console.log(this.stagiaire.stagiaireEcole !== '');
-  //  console.log(this.stagiaire.stagiaireFuturDiplome !== '');
-  //  console.log(this.stagiaire.stagiaireNiveauEtude !== '');
-  //  console.log(this.filiere.domaineLabel.domaineLabel);
 
-    return this.stagiaire.stagiaireEcole === '' || this.stagiaire.stagiaireFuturDiplome === '' ||
-       this.stagiaire.stagiaireNiveauEtude ==='';
+    return this.user.stagiaireEcole === '' || this.user.stagiaireFuturDiplome === '' ||
+       this.user.stagiaireNiveauEtude ==='';
   }
   getAllFilieres(){
     this.filiereService.getAllFilieres().subscribe(arg => this.sections = arg);

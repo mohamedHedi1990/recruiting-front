@@ -30,14 +30,14 @@
             <!-- <h5 class="text-white">1) Information générale</h5> -->
             <hr>
             <div class="row">
-              <div class="col-lg-6">
+              <div class="col-lg-6 col-sm-6 col-md-6">
                 <div class="form-control-group">
                   <input type="button" fullWidth nbButton value="stagiaire" (click)="changeRole($event)" id="2"
                     status="primary" size="large" class="btnStagiaire">
                   <!-- <br> -->
                 </div>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6 col-sm-6 col-md-6">
                 <div class="form-control-group">
                   <input type="button" fullWidth nbButton value="condidat" (click)="changeRole($event)" id="2"
                     status="primary" size="large" class="btnCondidat">
@@ -118,6 +118,7 @@
                     <option value="CELIBATAIRE" checked selected="Celibataire"> Célibataire</option>
                     <option value="MARIE">Marié(e)</option>
                     <option value="DIVORCE">Divorcé(e)</option>
+                    <option value="VEUF">Veuf</option>
                   </select>
 
                   <ng-container *ngIf="userCivilStatus.invalid && userCivilStatus.touched ">
@@ -181,14 +182,22 @@
                 </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-lg-6 col-sm-12 col-md-12">
+
+                <input type="button" nbButton value="Précédent" (click)="next($event)" id="1" status="info" size="large"
+                  class="btnPrecedent ">
+              </div>
+              <div class="col-lg-6 col-sm-12 col-md-12">
+
+                <input type="button" nbButton value="Suivant" [disabled]="checkSection1Valid()"
+                  [ngClass]="{'disabled': checkSection1Valid()}" (click)="next($event)" id="3" status="primary" size="large"
+                  class="btnNext ">
+              </div>
+            </div>
             <!-- <input type="button" nbButton value="Suivant"  (click)="next($event)" id="3" status="primary" size="large"
               class="btnNext "> -->
-            <input type="button" nbButton value="Suivant" [disabled]="checkSection1Valid()"
-              [ngClass]="{'disabled': checkSection1Valid()}" (click)="next($event)" id="3" status="primary" size="large"
-              class="btnNext ">
 
-            <input type="button" nbButton value="Précédent" (click)="next($event)" id="1" status="info" size="large"
-              class="btnPrecedent ">
 
           </ng-template>
           <!-- Step 3 -->
@@ -277,17 +286,17 @@
           <ng-template [ngIf]="section  === '4' ">
             <hr>
             <div class="form-control-group">
-              <label class="label" for="input-email">Email*</label>
+              <label class="label" for="input-email">Email* </label>
 
               <input nbInput fullWidth [(ngModel)]="user.userEmail" required #userEmail="ngModel" name="userEmail"
-                type="email" id="input-userEmail" [ngClass]="{
-                  'is-invalid' : checkEmail== false ,
-          'is-valid': checkEmail== true && user.userEmail!=null
+                type="email" id="input-userEmail" (change)="checkMail()" [ngClass]="{
+                  'is-invalid' : checkEmail=== false ,
+          'is-valid': checkEmail== true && user.userEmail!==''
         }" placeholder="Email" fieldSize="small" (keyup)="checkMail()" required
                 [status]="userEmail.dirty ? (userEmail.invalid  ? 'danger' : 'primary') : 'basic'"
                 [attr.aria-invalid]="userEmail.invalid && userEmail.touched ? true : null">
-              <ng-container *ngIf="userEmail.invalid && userEmail.touched ">
-                <p class="caption status-danger" [ngIf]="userEmail.errors?.required">
+              <ng-container *ngIf="checkEmail=== false">
+                <p class="caption status-danger" >
                   Email !
                 </p>
               </ng-container>
@@ -339,7 +348,7 @@
               class="btnNext ">
             <!-- <input type="button" nbButton value="Suivant"  (click)="next($event)" id="5" status="primary" size="large"
               class="btnNext "> -->
-            <input type="button" nbButton value="Précédent" (click)="next($event)" id="3" status="info" size="large"
+            <input type="button" nbButton value="Précédent" (click)="next($event)" id="4" status="info" size="large"
               class="btnPrecedent ">
 
           </ng-template>
@@ -348,7 +357,7 @@
             <hr>
             <div class="form-control-group">
               <label class="label" for="input-stagiaireFuturDiplome">Diplôme a obtenir</label>
-              <input nbInput fullWidth placeholder="Diplome à obtenir:" [(ngModel)]="stagiaire.stagiaireFuturDiplome"
+              <input nbInput fullWidth placeholder="Diplome à obtenir:" [(ngModel)]="user.stagiaireFuturDiplome"
                 #stagiaireFuturDiplome="ngModel" name="diplome" type="text" id="input-stagiaireFuturDiplome"
                 fieldSize="small"
                 [status]="stagiaireFuturDiplome.dirty ? (stagiaireFuturDiplome.invalid  ? 'danger' : 'primary') : 'basic'"
@@ -361,7 +370,7 @@
             </div>
             <div class="form-control-group">
               <label class="label" for="input-stagiaireNiveauEtude">Niveau d'étude</label>
-              <input nbInput fullWidth [(ngModel)]="stagiaire.stagiaireNiveauEtude" #stagiaireNiveauEtude="ngModel"
+              <input nbInput fullWidth [(ngModel)]="user.stagiaireNiveauEtude" #stagiaireNiveauEtude="ngModel"
                 name="Mot de passe" type="text" id="input-stagiaireNiveauEtude" placeholder="Niveau d'étude:"
                 fieldSize="small"
                 [status]="stagiaireNiveauEtude.dirty ? (stagiaireNiveauEtude.invalid  ? 'danger' : 'primary') : 'basic'"
@@ -374,7 +383,7 @@
             </div>
             <div class="form-control-group">
               <label class="label" for="input-stagiaireEcole">Ecole</label>
-              <input nbInput fullWidth [(ngModel)]="stagiaire.stagiaireEcole" #stagiaireEcole="ngModel" name="Mot de passe"
+              <input nbInput fullWidth [(ngModel)]="user.stagiaireEcole" #stagiaireEcole="ngModel" name="Mot de passe"
                 type="text" id="input-stagiaireEcole" placeholder="Ecole:" fieldSize="small"
                 [status]="stagiaireEcole.dirty ? (stagiaireEcole.invalid  ? 'danger' : 'primary') : 'basic'"
                 [attr.aria-invalid]="stagiaireEcole.invalid && stagiaireEcole.touched ? true : null">
@@ -386,7 +395,7 @@
             </div>
             <div class="form-control-group">
               <label class="label" for="input-domaineLabel">Filiére</label>
-              <select nbSelect class="browser-default custom-select" [(ngModel)]="filiere"
+              <select nbSelect class="browser-default custom-select" [(ngModel)]="user.stagiaireFilier"
                 #domaineLabel="ngModel" name="domaineLabel" type="text" id="input-domaineLabel"
                 placeholder="Ville de naissance:" fieldSize="small"
                 [attr.aria-invalid]="domaineLabel.invalid && domaineLabel.touched ? true : null">
@@ -411,7 +420,7 @@
             <!-- 4) Information de condidate -->
             <div class="form-control-group">
               <label class="label" for="input-candidatDiplome">Diplôme obtenu</label>
-              <input nbInput fullWidth [(ngModel)]="condidat.candidatDiplome" #candidatDiplome="ngModel"
+              <input nbInput fullWidth [(ngModel)]="user.candidatDiplome" #candidatDiplome="ngModel"
                 name="Mot de passe" type="text" id="input-candidatDiplome" placeholder="Diplôme obtenu:"
                 fieldSize="small"
                 [status]="candidatDiplome.dirty ? (candidatDiplome.invalid  ? 'danger' : 'primary') : 'basic'"
@@ -426,7 +435,7 @@
               <div class="col-lg-6">
                 <div class="form-control-group">
                   <label class="label" for="input-candidatAnneeDiplome">Année de Diplome </label>
-                  <input nbInput fullWidth [(ngModel)]="condidat.candidatAnneeDiplome" #candidatAnneeDiplome="ngModel"
+                  <input nbInput fullWidth [(ngModel)]="user.candidatAnneeDiplome" #candidatAnneeDiplome="ngModel"
                     maxlength="4" name="Mot de passe" type="number" id="input-candidatAnneeDiplome"
                     placeholder="Année de Diplome:" fieldSize="small"
                     [status]="candidatAnneeDiplome.dirty ? (candidatAnneeDiplome.invalid  ? 'danger' : 'primary') : 'basic'"
@@ -441,7 +450,7 @@
               <div class="col-lg-6">
                 <div class="form-control-group">
                   <label class="label" for="input-candidatNumberExperience">Nombre d'année d'expérience</label>
-                  <input nbInput fullWidth [(ngModel)]="condidat.candidatNumberExperience" maxlength="2"
+                  <input nbInput fullWidth [(ngModel)]="user.candidatNumberExperience" maxlength="2"
                     #candidatNumberExperience="ngModel" name="candidatNumberExperience" type="number"
                     id="input-candidatNumberExperience" placeholder="Nombre d'année d'expérience:" fieldSize="small"
                     [status]="candidatNumberExperience.dirty ? (candidatNumberExperience.invalid  ? 'danger' : 'primary') : 'basic'"
@@ -457,7 +466,7 @@
 
             <div class="form-control-group">
               <label class="label" for="input-domaineLabel">Filiére</label>
-              <select nbSelect class="browser-default custom-select" [(ngModel)]="filiere"
+              <select nbSelect class="browser-default custom-select" [(ngModel)]="user.candidatFiliere"
                 #domaineLabel="ngModel" name="domaineLabel" type="text" id="input-domaineLabel"
                 placeholder="Ville de naissance:" fieldSize="small"
                 [attr.aria-invalid]="domaineLabel.invalid && domaineLabel.touched ? true : null">
@@ -472,10 +481,7 @@
                 </p>
               </ng-container>
             </div>
-            <!-- <button  nbButton fullWidth status="primary" size="large" style="background-color: #07112f2e !important; margin-top: 2% !important;
-  border-color: #0b2089;">
-    S'inscrire
-  </button> -->
+
             <input type="submit" nbButton value="S'inscrire" [disabled]="checkCondidatValid()"
               [ngClass]="{'disabled': checkCondidatValid()}" (click)="register()" status="primary" size="large"
               class="btnNext ">
