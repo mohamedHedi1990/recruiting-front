@@ -27,6 +27,8 @@ export class AddJobComponent implements OnInit {
   constructor(private datePipe:DatePipe,private utilsService:UtilsService) { }
 
   ngOnInit(): void {
+    console.log("-----details job-----");
+    console.log(this.job);
     this.getAllFilieres();
   }
 

@@ -49,6 +49,7 @@ import { JobListComponent } from './job-list/job-list.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import {EditorModule} from 'primeng/editor';
 import { DetailsOffreComponent } from './details-offre/details-offre.component';
+import {TabViewModule} from 'primeng/tabview';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
@@ -86,6 +87,8 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     Ng2TelInputModule,
     DragDropModule,
     EditorModule,
+    TableModule,
+    TabViewModule,
   ],
   providers: [
     UtilsService,

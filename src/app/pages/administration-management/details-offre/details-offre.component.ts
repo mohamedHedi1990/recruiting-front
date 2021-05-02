@@ -20,13 +20,9 @@ export class DetailsOffreComponent implements OnInit {
   isCandidate:Boolean;
   isTrainee:Boolean;
   listCandidat:any=[];
-  candidatureTrainee:any={
+  isJob:boolean=false
+  candidature:any={
     "stagiaire":null,
-    "stageOffre":null,
-    "candStDate":null,
-    "candStEtat":null,
-  };
-  candidatureCandidat:any={
     "candidat":null,
     "jobOffre":null,
     "candJbDate":null,
@@ -39,10 +35,20 @@ export class DetailsOffreComponent implements OnInit {
     this.getCurrentUser();
     console.log("------candidature for current job-------");
     console.log(this.job);
+     this.isJob=this.job.contractType!="STAGE";
+    if(this.job.contractType!="STAGE")
+    {
     this.job.candJobs.forEach(candJob => {
       this.listCandidat.push(candJob.candidat);
     });
-
+    } 
+    if(this.job.contractType=="STAGE")
+    {
+    this.job.candJobs.forEach(candJob => {
+      console.log("stageiare");
+      this.listCandidat.push(candJob.stagiaire);
+    });
+    } 
     console.log("----candidat job list -----");
     console.log(this.listCandidat);
   }
@@ -59,9 +65,9 @@ export class DetailsOffreComponent implements OnInit {
       if(this.isComplet==true)
       {
           this.getCandidat();
-          this.candidatureCandidat.candidat=this.user;
-          this.candidatureCandidat.jobOffre=this.job;
-          this.utilsService.post(UtilsService.API_CAND_JOB,this.candidatureCandidat).subscribe((Response)=>{
+          this.candidature.candidat=this.user;
+          this.candidature.jobOffre=this.job;
+          this.utilsService.post(UtilsService.API_CAND_JOB,this.candidature).subscribe((Response)=>{
                console.log("----success-----");
                Swal.fire(
                 'Candidature envoyée!',
@@ -95,9 +101,9 @@ export class DetailsOffreComponent implements OnInit {
       if(this.isComplet==true)
       {
         this.getTrainee();
-        this.candidatureTrainee.stagiaire=this.user;
-        this.candidatureTrainee.jobOffre=this.job;
-        this.utilsService.post(UtilsService.API_CAND_STAGE,this.candidatureTrainee).subscribe((Response)=>{
+        this.candidature.stagiaire=this.user;
+        this.candidature.jobOffre=this.job;
+        this.utilsService.post(UtilsService.API_CAND_JOB,this.candidature).subscribe((Response)=>{
           console.log("----success-----");
           console.log("----success-----");
           Swal.fire(
@@ -132,6 +138,15 @@ export class DetailsOffreComponent implements OnInit {
       this.candidate = response.candidatDto;
       this.trainee = response.stagiaireDto;
       console.log(this.user.userRole);
+      if(this.user.userRole === "CANDIDATE" )
+      {
+          this.isCandidate=true;
+        
+      }
+      else if(this.user.userRole === "TRAINEE")
+      {
+         this.isTrainee=true;
+      }
       if (this.user.userRole === "CANDIDATE" || this.user.userRole === "TRAINEE") {
         this.isRh = false;
       }
