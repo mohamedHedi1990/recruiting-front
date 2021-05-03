@@ -29,7 +29,8 @@ export class DetailsOffreComponent implements OnInit {
     "candJbEtat":null
   };
   @Output() cancelDetails = new EventEmitter<boolean>();
-
+  displayViewCv:boolean=false;
+  currentUserCV:any;
   constructor(private utilsService: UtilsService,private route:Router,private sanitizer: DomSanitizer) { }
   ngOnInit(): void {
     this.getCurrentUser();
@@ -196,5 +197,10 @@ getTrainee()
   traineeUser.stagiaireNiveauEtude = this.trainee.stagiaireNiveauEtude;
   traineeUser.stagiaireFiliere = this.trainee.stagiaireFiliere;
   this.user = traineeUser;
+}
+visualiserCV(userCvUrl)
+{
+  this.displayViewCv=true;
+  this.currentUserCV=userCvUrl;
 }
 }

@@ -20,13 +20,17 @@ export class AddJobComponent implements OnInit {
 	  "jobOffreDateDebut":this.datePipe.transform(new Date(),"dd-MM-yyyy"),
     "jobOffreDateFin":this.datePipe.transform(new Date(),"dd-MM-yyyy"),
     "jobStatus":"OPENED",
-"jobReference": "",
+    "jobReference": "",
   }
   @Output() cancelEvent = new EventEmitter();
   filiereList:any;
-  constructor(private datePipe:DatePipe,private utilsService:UtilsService) { }
+  constructor(private datePipe:DatePipe,private utilsService:UtilsService) { 
+    this.job.jobOffreDateDebut=this.datePipe.transform(new Date(),"dd-MM-yyyy");
+    this.job.jobOffreDateFin=this.datePipe.transform(new Date(),"dd-MM-yyyy");
+  }
 
   ngOnInit(): void {
+
     console.log("-----details job-----");
     console.log(this.job);
     this.getAllFilieres();
@@ -47,24 +51,29 @@ export class AddJobComponent implements OnInit {
   }
 
   saveJob(){
-    this.utilsService.post(
-      UtilsService.API_JOB,this.job
-    ).subscribe(
-      (response) => {
+    console.log("----Job To Save------");
+    this.job.jobOffreDateFin=this.datePipe.transform(this.job.jobOffreDateFin,"dd-MM-yyyy")
+    this.job.jobOffreDateDebut=this.datePipe.transform(new Date(),"dd-MM-yyyy")
+
+    console.log(this.job);
+     this.utilsService.post(
+       UtilsService.API_JOB,this.job
+     ).subscribe(
+       (response) => {
         this.utilsService.showToast('success',
-        'Offre ajoutée avec succés',
-        `L'offre  ${this.job.jobOffreLabel} a été ajoutée avec succcés`);
-        this.initJob();
-        this.cancelEvent.emit();
-      },
-      (error) => {
-        this.utilsService.showToast(
-          "danger",
-          "Erreur interne",
-          `Un erreur interne a été produit lors du sauvgarde du l'offre d'emplois`
-        );
-      }
-    );
+         'Offre ajoutée avec succés',
+         `L'offre  ${this.job.jobOffreLabel} a été ajoutée avec succcés`);
+         this.initJob();
+         this.cancelEvent.emit();
+       },
+       (error) => {
+         this.utilsService.showToast(
+           "danger",
+           "Erreur interne",
+           `Un erreur interne a été produit lors du sauvgarde du l'offre d'emplois`
+         );
+       }
+     );
   }
 
   cancel(){
