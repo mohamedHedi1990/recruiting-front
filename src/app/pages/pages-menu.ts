@@ -13,7 +13,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Stages',
-        //link: '/recruiting/administration/job-list',
+        link: '/recruiting/administration/stages-list',
         icon: 'layers-outline',
       },
       {
@@ -45,6 +45,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/recruiting/administration/job-list',
         icon: 'people-outline',
       },
+     
       
     ],
 
