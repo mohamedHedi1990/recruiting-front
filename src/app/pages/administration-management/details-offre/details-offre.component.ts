@@ -200,7 +200,9 @@ getTrainee()
 }
 visualiserCV(userCvUrl)
 {
-  this.displayViewCv=true;
+  console.log("--------user cv url-----------");
+  console.log(userCvUrl);
   this.currentUserCV=userCvUrl;
+  this.displayViewCv=true;
 }
 }

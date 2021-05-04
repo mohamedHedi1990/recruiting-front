@@ -51,7 +51,7 @@ import {EditorModule} from 'primeng/editor';
 import { DetailsOffreComponent } from './details-offre/details-offre.component';
 import {TabViewModule} from 'primeng/tabview';
 import { StageListComponent } from './stage-list/stage-list.component';
-//import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
@@ -91,7 +91,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     EditorModule,
     TableModule,
     TabViewModule,
-    //NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule
 
   ],
   providers: [
