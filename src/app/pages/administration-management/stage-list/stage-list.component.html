@@ -1,0 +1,59 @@
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000"></p-confirmDialog>
+<h4 style="background: #E7E8E8; 
+padding: 10px 10px 10px 10px !important;
+    font-size: 20px !important;
+    color: #222b45;margin-left: 10px" *ngIf="!displayAddJob && !displayDetailsJob">
+    Liste des stages
+    <div style="float: right;">
+        <div style="display: flex">
+            <button *ngIf="isRh" pButton pRipple label="Ajouter un stage" icon="pi pi-plus"
+                class="btn btn-secondary btn_stepper next" (click)="showAddJobWindow()"
+                style="margin-right: 10px;height:37px;"></button>
+        </div>
+    </div>
+</h4>
+<div style=" margin: auto; " *ngIf="!displayAddJob && !displayDetailsJob">
+    <div class="card" *ngFor="let job of jobList" style="padding:1%; margin-bottom:2%">
+        <div class="row">
+            <div class="col-10 standardStyle">
+                <div style="margin-left: 3%;">
+                    <div style="color: black;font-size: 20px;margin-top: 20px;font-weight: bold;">{{job.jobOffreLabel}}
+                    </div>
+                    <div style="color: #aaaaaa;font-size: 18px;margin-top: 15px;">
+                        <span>{{job.stageOffreCompetences}}</span>
+                    </div>
+                </div>
+                <div style="margin-left: 3%;font-size: 13px;margin-top: 20px;">
+                    <span>
+                        <icon class="pi pi-briefcase"></icon> &nbsp; &nbsp; {{job.jobOffreDomaineActivite.domaineLabel}}
+                    </span>
+                    <span style="margin-left:  70px">
+                        <icon class="pi pi-users"></icon> &nbsp; &nbsp; {{job.candJobs.length}} Candidatures
+                    </span>
+                    <span  *ngIf="job.jobStatus=='OPENED'" class="customer-badge" style="margin-left:70px" [ngClass]="{'status-active':true}">Ouvert</span>
+                    <span *ngIf="job.jobStatus=='CLOSED'" class="customer-badge" style="margin-left:70px" [ngClass]="{'status-active':true}">Fermé</span>
+                    <span *ngIf="job.jobStatus=='CHOOSED'"  class="customer-badge" style="margin-left:70px" [ngClass]="{'status-active':true}">Candidature retenue</span>
+                    <span *ngIf="job.jobStatus=='IN_PROGRESS'" class="customer-badge" style="margin-left:70px" [ngClass]="{'status-active':true}">En</span>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <div style="float: right;margin-top: 20px">
+                    <div style="color: #aaaaaa;font-size: 15px">
+                        <span>{{job.jobOffreDateDebut| date: 'dd-MM-yyyy'}}</span>
+                    </div>
+                    <button pButton pRipple label="Voir Plus" icon="pi pi-eye"
+                        class="btn btn-secondary btn_stepper next" (click)="showPlus(job)"
+                        style="margin-right: 15px;height:37px;margin-top: 5px;"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-add-job *ngIf="displayAddJob" [job]="job" (cancelEvent)="hideAddJobWindow()">
+
+</ngx-add-job>
+
+<ngx-details-offre *ngIf="displayDetailsJob" [job]="job" (cancelDetails)="cancelDetailsHandler()">
+
+</ngx-details-offre>
