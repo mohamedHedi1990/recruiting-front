@@ -1,12 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
-import { FiliereService } from './../../services/filiere.service';
-import { Filiere } from './../../models/filiere';
-import { User } from './../../models/user';
 import { AuthServiceService } from './../../services/auth/auth-service.service';
 import { Router } from '@angular/router';
 import { JwtResponse } from './../../models/JwtResponse.model';
 import { LoginRequest } from './../../models/LoginRequest.model';
 import { Component, OnInit } from '@angular/core';
+import { UtilsService } from '../../services/utils.service';
+import { Filiere } from '../../models/Filiere.model';
+import { User } from '../../models/User.model';
 
 @Component({
   selector: 'ngx-register',
@@ -34,8 +34,7 @@ export class NgxRegisterComponent implements OnInit{
   passwordconfirme: string = ''
   constructor(
     private router: Router,
-    private filiereService: FiliereService,
-     private serviceAuth: AuthServiceService) {
+     private utilsService: UtilsService,private serviceAuth:AuthServiceService) {
 
   }
 ngOnInit(){
@@ -46,7 +45,7 @@ ngOnInit(){
     console.log(this.role);
 
     var body={}
-    if (this.role === 'condidat') {
+    if (this.role === 'candidat') {
 
       this.user.candidatFiliere=  this.filiere
 
@@ -54,15 +53,21 @@ ngOnInit(){
       this.user.stagiaireFilier=this.filiere
 
     }
+    console.log("------user-------");
+    console.log(this.user);
     this.serviceAuth.register( this.role,this.user).subscribe(
       (data: any) => {
-
-        this.router.navigateByUrl("/");
+        this.utilsService.showToast('success',
+        'Inscription faite',
+        `L\'inscription d'un nouveau utilisateur à étè faite avec success`);
+        this.router.navigateByUrl("/auth/login");
 
       },
       (error) => {
         console.log(error);
-
+        this.utilsService.showToast('danger',
+        'Erreur interne',
+        `L\'inscription n'a pas été faite`);
       }
     )
   }
@@ -125,7 +130,7 @@ ngOnInit(){
        this.user.stagiaireNiveauEtude ==='';
   }
   getAllFilieres(){
-    this.filiereService.getAllFilieres().subscribe(arg => this.sections = arg);
+    this.utilsService.get(UtilsService.API_DOMAIN).subscribe(arg => this.sections = arg);
 
   }
 }

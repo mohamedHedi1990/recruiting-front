@@ -39,7 +39,7 @@
               </div>
               <div class="col-lg-6 col-sm-6 col-md-6">
                 <div class="form-control-group">
-                  <input type="button" fullWidth nbButton value="condidat" (click)="changeRole($event)" id="2"
+                  <input type="button" fullWidth nbButton value="candidat" (click)="changeRole($event)" id="2"
                     status="primary" size="large" class="btnCondidat">
                 </div>
               </div>
@@ -93,8 +93,9 @@
                     #userGender="ngModel" name="userGender" type="text" id="input-userGender" value="masculin"
                     selected="Masculin" fieldSize="small"
                     [attr.aria-invalid]="userGender.invalid && userGender.touched ? true : null">
-                    <option value="masculin" checked selected="Masculin">Masculin</option>
-                    <option value="feminin">Feminin</option>
+                    <option value="MADEMOISELLE" checked selected="MADEMOISELLE">Mademoiselle</option>
+                    <option value="MADAME">Madame</option>
+                    <option value="MONSIEUR">Monsieur</option>
                     "JSON parse error: Can not deserialize value of type org.MONSIEUR, MADAME, MADEMOISELLE
                   </select>
 
