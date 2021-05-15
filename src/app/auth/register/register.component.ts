@@ -5,8 +5,9 @@ import { JwtResponse } from './../../models/JwtResponse.model';
 import { LoginRequest } from './../../models/LoginRequest.model';
 import { Component, OnInit } from '@angular/core';
 import { UtilsService } from '../../services/utils.service';
-import { Filiere } from '../../models/Filiere.model';
 import { User } from '../../models/User.model';
+import { Filiere } from '../../models/Filiere.model';
+
 
 @Component({
   selector: 'ngx-register',
