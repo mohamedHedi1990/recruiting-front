@@ -92,6 +92,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     EditorModule,
     TableModule,
     TabViewModule,
+    ConfirmDialogModule,
 
   ],
   providers: [
