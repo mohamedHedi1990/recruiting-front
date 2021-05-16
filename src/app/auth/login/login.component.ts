@@ -11,11 +11,8 @@ import { AuthServiceService } from '../../services/auth/auth-service.service';
 
 })
 export class NgxLoginComponent {
-  user: any = {
-    password: null,
-    matricule: null
-  };
-  loginRequest:LoginRequest;
+
+  loginRequest:LoginRequest=new LoginRequest('','');
 
   testAuth=false;
   authFailed=false;
@@ -26,17 +23,15 @@ export class NgxLoginComponent {
 
   login()
   {
-   
-    this.loginRequest=new LoginRequest(this.user.matricule,this.user.password);
+
+    this.loginRequest=new LoginRequest(this.loginRequest.userLogin,this.loginRequest.userPassword);
     this.serviceAuth.login(this.loginRequest).subscribe(
       (data:JwtResponse)=>{
-        
+
         localStorage.setItem('token',data.token);
         localStorage.setItem('userFirstName',data.userFirstName);
         localStorage.setItem('userLastName',data.userLastName);
-        localStorage.setItem('userRole',data.userRole);
         localStorage.setItem("roles", JSON.stringify(data.roles));
-        localStorage.setItem("roleUser", JSON.stringify(data.userRole));
         if(data.userPictureUrl != null && data.userPictureUrl != ""){
         localStorage.setItem("picture",data.userPictureUrl)
         }
@@ -44,9 +39,12 @@ export class NgxLoginComponent {
         this.testAuth=false;
       },
       (error)=>{
-        console.log("error");
+        console.log(error);
         this.testAuth=true;
       }
     )
+  }
+  checkValid(){
+    return this.loginRequest.userLogin==='' || this.loginRequest.userPassword===''
   }
 }
