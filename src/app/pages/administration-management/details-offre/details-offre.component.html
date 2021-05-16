@@ -234,7 +234,7 @@ padding: 10px 10px 10px 10px !important;
             <td style="font-size: 13px;text-align: center;">
 
               <div>
-                <i placement="top" (click)="visualiserCV(cand.userCvUrl)" ngbTooltip="Visualiser CV"
+                <i placement="top" (click)="visualiserCV(cand.userCvUrl, cand.userFirstName, cand.userLastName)" ngbTooltip="Visualiser CV"
                    class="pi pi-eye" style="margin-right: 7px; color: #4700ee"></i>
                 <i placement="top" ngbTooltip="Réserver RDV" class="pi pi-calendar"
                    style="margin-right: 7px; color: #4700ee"></i>
@@ -354,7 +354,7 @@ padding: 10px 10px 10px 10px !important;
 
 
 
-<p-dialog header="Visualiser CV" [(visible)]="displayViewCv" [modal]="true" [style]="{width: '60vw'}"
+<p-dialog [header]="currentUserDetail" [(visible)]="displayViewCv" [modal]="true" [style]="{width: '60vw'}"
     [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
 

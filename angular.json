@@ -27,6 +27,11 @@
                 "glob": "**/*",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "/assets/img/markers"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "/assets/"
               }
             ],
             "styles": [
@@ -60,6 +65,8 @@
               "node_modules/intl-tel-input/build/js/intlTelInput.min.js",
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/moment/min/moment.min.js"
+       
+              
             ]
           },
           "configurations": {
