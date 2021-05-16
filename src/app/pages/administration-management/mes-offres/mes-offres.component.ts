@@ -113,7 +113,8 @@ export class MesOffresComponent implements OnInit {
         console.log("---------list candidatures des jobs------------");
         console.log(this.candJobList);
         this.loadingOffre=true;
-
+        console.log("------loading offre-------");
+        console.log(this.loadingOffre);
       }
 
     }, error => {

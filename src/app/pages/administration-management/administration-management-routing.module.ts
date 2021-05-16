@@ -16,6 +16,7 @@ export const routes: Routes = [
       path: 'profil',
       component: ProfilComponent,
     },
+   
     {
       path: 'job-list',
       component: JobListComponent,
