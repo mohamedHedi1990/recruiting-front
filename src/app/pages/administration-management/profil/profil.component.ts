@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { UtilsService } from '../../../services/utils.service';
 
 @Component({
@@ -67,7 +68,7 @@ export class ProfilComponent implements OnInit {
   fileName = null;
   currentFileCV: File;
 
-  constructor(private sanitizer: DomSanitizer, private utilsService: UtilsService) {
+  constructor(private sanitizer: DomSanitizer, private utilsService: UtilsService,private router:Router) {
     this.roleUser = localStorage.getItem("userRole");
     console.log("------role user-----" + this.roleUser);
     console.log(this.roleUser === "CANDIDATE");
@@ -184,6 +185,7 @@ export class ProfilComponent implements OnInit {
     });
   }
   cancel() {
+    this.router.navigateByUrl("/recruiting/administration/profil");
   }
   selectFile(event) {
     this.currentFileCV = event.target.files.item(0);
@@ -308,7 +310,7 @@ export class ProfilComponent implements OnInit {
        this.utilsService.showToast('success',
                 'Candidat modifié avec succés',
                 `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-                this.getCurrentUser();
+                this.router.navigateByUrl("/recruiting/administration/job-list");
       }
       catch(e) {
         this.utilsService.showToast('danger',
@@ -333,8 +335,8 @@ export class ProfilComponent implements OnInit {
       this.utilsService.showToast('success',
       'Candidat modifié avec succés',
       `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-      this.getCurrentUser();
-}
+      this.router.navigateByUrl("/recruiting/administration/stages-list");
+    }
 catch(e) {
 this.utilsService.showToast('danger',
     'Erreur interne',
