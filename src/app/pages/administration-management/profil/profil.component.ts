@@ -67,14 +67,15 @@ export class ProfilComponent implements OnInit {
   filiereList: any;
   fileName = null;
   currentFileCV: File;
-
+  isAdmin:any;
   constructor(private sanitizer: DomSanitizer, private utilsService: UtilsService,private router:Router) {
     this.roleUser = localStorage.getItem("userRole");
     console.log("------role user-----" + this.roleUser);
     console.log(this.roleUser === "CANDIDATE");
     this.isCandidate = this.roleUser === "CANDIDATE";
     this.isTrainee = this.roleUser === "TRAINEE";
-
+    this.isAdmin=this.roleUser === "ADMINISTRATOR";
+    this.isRh=this.roleUser === "RH";
 
   }
 
@@ -185,8 +186,9 @@ export class ProfilComponent implements OnInit {
     });
   }
   cancel() {
-    this.router.navigateByUrl("/recruiting/administration/profil");
-  }
+    this.redirectAccueil();
+   }
+ 
   selectFile(event) {
     this.currentFileCV = event.target.files.item(0);
     this.user.userCvUrl = this.currentFileCV.name;
@@ -290,59 +292,56 @@ export class ProfilComponent implements OnInit {
     return a.domaineId === b.domaineId;
   }
 
-
-
   async saveCandidate(candidate) {
-    try
-    {
-    let response:any=await this.utilsService.put(UtilsService.API_CANDIDATE, candidate).toPromise();
-    console.log("----response----");
-    console.log(response)
-    if(this.currentFileCV != null){
-         console.log("-----cv------");
-           await this.saveUserCV(response.userId);
-       }
-       if (this.userPicture != null) {
+    try {
+      let response: any = await this.utilsService.put(UtilsService.API_CANDIDATE, candidate).toPromise();
+      console.log("----response----");
+      console.log(response)
+      if (this.currentFileCV != null) {
+        console.log("-----cv------");
+        await this.saveUserCV(response.userId);
+      }
+      if (this.userPicture != null) {
         console.log("-----picture------");
 
-            await this.saveUserPicture(response.userId);
-       }
-       this.utilsService.showToast('success',
-                'Candidat modifié avec succés',
-                `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-                this.router.navigateByUrl("/recruiting/administration/job-list");
+        await this.saveUserPicture(response.userId);
       }
-      catch(e) {
-        this.utilsService.showToast('danger',
-              'Erreur interne',
-              `Un erreur interne a été produit lors de la modification du profil candidat  ${this.user.userFirstName} ${this.user.userLastName}`);
-        
-      }
+      this.utilsService.showToast('success',
+        'Candidat modifié avec succés',
+        `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
+        this.redirectAccueil();
+
+    }
+    catch (e) {
+      this.utilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la modification du profil candidat  ${this.user.userFirstName} ${this.user.userLastName}`);
+
+    }
 
 
   }
 
   async saveTraineer(traineer) {
-    try
-    {
-    let response=await this.utilsService.put(UtilsService.API_TRAINEER, traineer).toPromise();
-      if(this.currentFileCV != null){
-         await this.saveUserCV(response.userId);
+    try {
+      let response = await this.utilsService.put(UtilsService.API_TRAINEER, traineer).toPromise();
+      if (this.currentFileCV != null) {
+        await this.saveUserCV(response.userId);
       }
       if (this.userPicture != null) {
         await this.saveUserPicture(response.userId);
-      } 
+      }
       this.utilsService.showToast('success',
-      'Candidat modifié avec succés',
-      `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-      this.router.navigateByUrl("/recruiting/administration/stages-list");
+        'Candidat modifié avec succés',
+        `Candidat  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
+     this.redirectAccueil();
     }
-catch(e) {
-this.utilsService.showToast('danger',
-    'Erreur interne',
-    `Un erreur interne a été produit lors de la modification du profil candidat  ${this.user.userFirstName} ${this.user.userLastName}`);
+    catch (e) {
+      this.utilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la modification du profil candidat  ${this.user.userFirstName} ${this.user.userLastName}`);
 
-}
+    }
 
 
   }
@@ -352,22 +351,8 @@ this.utilsService.showToast('danger',
     const formData = new FormData();
     formData.append('file', this.userPicture);
     this.utilsService.post(UtilsService.API_USER_FILE + '/ADD_USER_PICTURE_CONTEXT/' + userId, formData).subscribe(response => {
-      if (this.user.userId == null) {
-        this.utilsService.showToast('success',
-          'Utilisateur ajouté avec succés',
-          `L'utlisateur'   ${this.user.userFirstName} ${this.user.userLastName} a été ajouté avec succcés`);
-      } else {
-        this.utilsService.showToast('success',
-          'Utilisateur modfié avec succés',
-          `L'utlisateur  ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-      }
-      //this.initUser();
-      this.getCurrentUser();
-
     }, error => {
-      this.utilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de la sauvegarde du utilisateur  ${this.user.userFirstName} ${this.user.userLastName}`);
+    
     });
   }
 
@@ -375,22 +360,26 @@ this.utilsService.showToast('danger',
     const formData = new FormData();
     formData.append('file', this.currentFileCV);
     this.utilsService.post(UtilsService.API_USER_FILE + '/ADD_CV_CONTEXT/' + userId, formData).subscribe(response => {
-      if (this.user.userId == null) {
-        this.utilsService.showToast('success',
-          'Utilisateur ajouté avec succés',
-          `L'utlisateur'  ${this.user.userFirstName} ${this.user.userLastName}   a été ajouté avec succcés`);
-      } else {
-        this.utilsService.showToast('success',
-          'Utilisateur modfié avec succés',
-          `L'utlisateur   ${this.user.userFirstName} ${this.user.userLastName} a été modifié avec succcés`);
-      }
-      //this.initUser();
-      this.getCurrentUser();
     }, error => {
-      this.utilsService.showToast('danger',
-        'Erreur interne',
-        `Un erreur interne a été produit lors de la sauvegarde du utilisateur  ${this.user.userFirstName} ${this.user.userLastName}`);
     });
   }
 
+  redirectAccueil()
+  {
+   if (this.isCandidate == true) {
+     this.router.navigateByUrl("/recruiting/administration/job-list");
+   }
+   else if (this.isTrainee==true) {
+     this.router.navigateByUrl("/recruiting/administration/stages-list");
+ 
+   }
+   else if (this.isRh==true) {
+     this.router.navigateByUrl("/recruiting/administration/job-list");
+ 
+    }
+   else if (this.isAdmin == true) {
+     this.router.navigateByUrl("/recruiting/administration/job-list");
+ 
+    }
+  }
 }
