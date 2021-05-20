@@ -213,7 +213,7 @@ export class DetailsOffreComponent implements OnInit {
     console.log("effectuer RDV")
     console.log(this.currentCand);
     console.log(this.dateMeeting);
-    let dateMeeting= this.datePipe.transform(this.dateMeeting,'yyyy-MM-dd');
+    let dateMeeting= this.datePipe.transform(this.dateMeeting,'yyyy-MM-dd HH:mm:ss');
     let url=UtilsService.API_CAND_JOB+"/update/"+this.currentCand.idCandJob
     if(this.dateMeeting!=null)
     {

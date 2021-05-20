@@ -53,11 +53,14 @@ import {TabViewModule} from 'primeng/tabview';
 import { StageListComponent } from './stage-list/stage-list.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import {CalendarModule} from 'primeng/calendar';
+import { CalendrierComponent } from './calendrier/calendrier.component';
+import {FullCalendarModule} from 'primeng/fullcalendar';
+import { MesOffresComponent } from './mes-offres/mes-offres.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent, CalendrierComponent,MesOffresComponent],
   imports: [
     CalendarModule,
     PdfViewerModule,
@@ -94,6 +97,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     EditorModule,
     TableModule,
     TabViewModule,
+    FullCalendarModule
 
   ],
   providers: [
