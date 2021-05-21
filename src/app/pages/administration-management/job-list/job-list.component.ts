@@ -100,10 +100,14 @@ export class JobListComponent implements OnInit {
     this.job = job;
     this.displayDetailsJob = true;
   }
-  cancelDetailsHandler() {
-    console.log("--------handler event--------");
-    this.displayDetailsJob = false;
-    this.displayAddJob = true;
 
-  }
+    cancelDetailsHandler() {
+      console.log("--------handler event--------");
+      this.displayDetailsJob = false;
+      this.displayAddJob = false;
+      this.getAllJobs();
+  
+    }
+
+  
 }

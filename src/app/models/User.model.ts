@@ -21,13 +21,13 @@ export class User {
     public candidatDiplome:string;
     public candidatAnneeDiplome:string;
   public candidatNumberExperience: number;
+  public candidatFiliere:Filiere;
 
 
   public stagiaireEcole:string;
   public stagiaireFuturDiplome:string;
   public stagiaireNiveauEtude:string;
-  public candidatFiliere:Filiere;
-  public stagiaireFilier:Filiere;
+  public stagiaireFiliere:Filiere;
 
 
 
