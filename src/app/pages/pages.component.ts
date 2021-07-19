@@ -23,14 +23,20 @@ export class PagesComponent {
  
       console.log("----isRH------");
       this.menu=[];
-      this.menu.push(MENU_ITEMS[0]);
-      this.menu.push(MENU_ITEMS[1]);
+       this.menu.push(MENU_ITEMS[0]);
+       this.menu.push(MENU_ITEMS[1]);
+       this.menu.push(MENU_ITEMS[3]);
+       this.menu.push(MENU_ITEMS[4]);
     }
     else if(this.roleUser==="ADMINISTRATOR")
     {
-      this.menu = MENU_ITEMS;
 
       console.log("----isAdmin------");
+      this.menu=MENU_ITEMS;
+      this.menu.push(MENU_ITEMS[0]);
+      this.menu.push(MENU_ITEMS[1]);
+      this.menu.push(MENU_ITEMS[2]);
+      this.menu.push(MENU_ITEMS[4]);
     }
   
   }

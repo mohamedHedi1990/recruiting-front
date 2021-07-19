@@ -27,6 +27,8 @@ export class UtilsService {
   public static API_JOB = UtilsService.REMOTE_ADDRESS+ "/api/offre-job";
   public static API_CAND_STAGE = UtilsService.REMOTE_ADDRESS+ "/api/candstage";
   public static API_CAND_JOB = UtilsService.REMOTE_ADDRESS+ "/api/candjob";
+  public static API_STATISTIC = UtilsService.REMOTE_ADDRESS+ "/api/statistic";
+
   constructor(
     private toastrService: NbToastrService,
     private httpClient: HttpClient,
