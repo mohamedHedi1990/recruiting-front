@@ -32,13 +32,15 @@ export class CalendrierComponent implements OnInit {
     this.getCurrentUser();
     this.options = {
       plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      defaultDate: '2021-02-01',
+      defaultDate: new Date(),
       header: {
         left: 'prev,next',
         center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        right: 'dayGridMonth,timeGridWeek,timeGridDay',
+        
       },
-      editable: true
+      editable: true,
+    
     };
 
   }
@@ -55,15 +57,29 @@ export class CalendrierComponent implements OnInit {
              console.log(this.candJobs);
              let newEvents=[];
              this.candJobs.forEach(element => {
-               if(element.meetingDate!=null)
+               if(element.meetingDate!=null && element.candJbEtat=="WAITING_MEET")
                {
                let event={
-                 "title":"RDV",
-                  "start":this.datePipe.transform(element.meetingDate,"yyyy-MM-dd HH:mm:ss")
+                 "title":"réunion en ligne",
+                  "start":this.datePipe.transform(element.meetingDate,"yyyy-MM-dd HH:mm:ss"),
+
                }
                newEvents.push(event);
               
              }
+             if(element.meetingPhoneDate!=null  && element.candJbEtat=="WAITING_CALL_PHONE")
+             {
+             let eventPhone={
+               "title":"réunion téléphonique",
+                "start":this.datePipe.transform(element.meetingPhoneDate,"yyyy-MM-dd HH:mm:ss"),
+                "backgroundColor":'coral',
+                "borderColor":"coral"
+
+             }
+             
+             newEvents.push(eventPhone);
+            
+           }
              });
              this.events=[...newEvents];
           }, error => {
@@ -77,15 +93,31 @@ export class CalendrierComponent implements OnInit {
             console.log(this.candJobs);
             let newEvents=[];
             this.candJobs.forEach(element => {
-              if(element.meetingDate!=null)
+              if(element.meetingDate!=null && element.candJbEtat=="WAITING_MEET")
               {
               let event={
-                "title":"RDV",
-                 "start":this.datePipe.transform(element.meetingDate,"yyyy-MM-dd HH:mm:ss")
+                "title":"réunion en ligne",
+                 "start":this.datePipe.transform(element.meetingDate,"yyyy-MM-dd HH:mm:ss"),
+
               }
+              
               newEvents.push(event);
              
             }
+            if(element.meetingPhoneDate!=null && element.candJbEtat=="WAITING_CALL_PHONE")
+            {
+            let eventPhone={
+              "title":"réunion téléphonique",
+               "start":this.datePipe.transform(element.meetingPhoneDate,"yyyy-MM-dd HH:mm:ss"),
+               "backgroundColor":'coral',
+               "borderColor":"coral",
+
+            }
+            
+            newEvents.push(eventPhone);
+           
+          }
+
             });
             this.events=[...newEvents];
 

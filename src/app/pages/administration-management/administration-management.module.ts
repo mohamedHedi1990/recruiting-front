@@ -56,11 +56,19 @@ import {CalendarModule} from 'primeng/calendar';
 import { CalendrierComponent } from './calendrier/calendrier.component';
 import {FullCalendarModule} from 'primeng/fullcalendar';
 import { MesOffresComponent } from './mes-offres/mes-offres.component';
+import { StatisticDashboardComponent } from './statistic-dashboard/statistic-dashboard.component';
+import {ChartModule} from 'primeng/chart';
+import { DashboardCandidatByOffreComponent } from './dashboard-candidat-by-offre/dashboard-candidat-by-offre.component';
+import { DashboardCandidatByDomainComponent } from './dashboard-candidat-by-domain/dashboard-candidat-by-domain.component';
+import { ListCandidatComponent } from './list-candidat/list-candidat.component';
+import { AddCandidatComponent } from './add-candidat/add-candidat.component';
+import { ListTraineeComponent } from './list-trainee/list-trainee.component';
+import { AddTraineeComponent } from './add-trainee/add-trainee.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent, CalendrierComponent,MesOffresComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent, CalendrierComponent,MesOffresComponent, StatisticDashboardComponent, DashboardCandidatByOffreComponent, DashboardCandidatByDomainComponent, ListCandidatComponent, AddCandidatComponent, ListTraineeComponent, AddTraineeComponent],
   imports: [
     CalendarModule,
     PdfViewerModule,
@@ -97,7 +105,7 @@ registerLocaleData(localeFr, 'fr', localeFrExtra);
     EditorModule,
     TableModule,
     TabViewModule,
-    FullCalendarModule
+    FullCalendarModule,ChartModule
 
   ],
   providers: [
