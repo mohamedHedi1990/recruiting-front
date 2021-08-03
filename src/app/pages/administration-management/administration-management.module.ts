@@ -64,11 +64,12 @@ import { ListCandidatComponent } from './list-candidat/list-candidat.component';
 import { AddCandidatComponent } from './add-candidat/add-candidat.component';
 import { ListTraineeComponent } from './list-trainee/list-trainee.component';
 import { AddTraineeComponent } from './add-trainee/add-trainee.component';
+import { MessageListComponent } from './message-list/message-list.component';
 
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 
 @NgModule({
-  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent, CalendrierComponent,MesOffresComponent, StatisticDashboardComponent, DashboardCandidatByOffreComponent, DashboardCandidatByDomainComponent, ListCandidatComponent, AddCandidatComponent, ListTraineeComponent, AddTraineeComponent],
+  declarations: [AddNewUserComponent,ListUsersComponent, ProfilComponent, JobListComponent, AddJobComponent, DetailsOffreComponent, StageListComponent, CalendrierComponent,MesOffresComponent, StatisticDashboardComponent, DashboardCandidatByOffreComponent, DashboardCandidatByDomainComponent, ListCandidatComponent, AddCandidatComponent, ListTraineeComponent, AddTraineeComponent, MessageListComponent],
   imports: [
     CalendarModule,
     PdfViewerModule,
