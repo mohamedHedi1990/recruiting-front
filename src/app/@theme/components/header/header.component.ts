@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   domains:any;
   domain:any;
   inputsearch:any;
-
   themes = [
     {
       value: 'default',
@@ -174,6 +173,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.router.navigateByUrl("/recruiting/administration/message-list")
   }
   search(){
+    console.log("---------domain-----------");
+    console.log(this.domain);
+    if(localStorage.getItem("userRole")==="TRAINEE"){
+      this.router.navigateByUrl("/recruiting/administration/stages-list/"+this.domain.domaineId);
+
+    }
+    else if(localStorage.getItem("userRole")==="CANDIDATE"){
+      this.router.navigateByUrl("/recruiting/administration/job-list/"+this.domain.domaineId);
+
+    }
 
   }
   

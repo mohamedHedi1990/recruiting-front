@@ -220,6 +220,10 @@ ngx-login nb-layout-column {
   overflow:  hidden !important;
 }
 
+ngx-register nb-layout-column {
+  padding: 0 0 0 0 !important;
+  overflow:  hidden !important;
+}
 .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
   background-color: #0b2089 !important;
   color: #fff;
