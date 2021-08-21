@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   currentTheme = 'default';
 
   userMenu = [];
-  userMenuAd = [ { title: 'Mon Profile', icon: 'person-outline'}, { title: 'Mon Calendrier', icon: 'calendar-outline' },{ title: 'Déconnecter', icon: 'arrow-circle-left-outline' } ];
-
+  userMenuAd = [ { title: 'Déconnecter', icon: 'arrow-circle-left-outline' } ];
+  
   userMenuCond = [ { title: 'Mon Profile', icon: 'person-outline'} ,{ title: 'toutes les Offres', icon: 'briefcase-outline' }, { title: 'Mes Offres', icon: 'briefcase-outline' }
   , { title: 'Mon Calendrier', icon: 'calendar-outline' },{ title: 'Déconnecter', icon: 'arrow-circle-left-outline' } ];
   UtilsService: any;

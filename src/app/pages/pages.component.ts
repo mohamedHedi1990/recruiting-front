@@ -32,11 +32,10 @@ export class PagesComponent {
     {
 
       console.log("----isAdmin------");
-      this.menu=MENU_ITEMS;
+      this.menu=[];
       this.menu.push(MENU_ITEMS[0]);
-      this.menu.push(MENU_ITEMS[1]);
       this.menu.push(MENU_ITEMS[2]);
-      this.menu.push(MENU_ITEMS[4]);
+  
     }
   
   }
