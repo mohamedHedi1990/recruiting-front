@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   domains:any;
   domain:any;
   inputsearch:any;
+  isAdmin:boolean=false;
   themes = [
     {
       value: 'default',
@@ -80,7 +81,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.currentTheme = this.themeService.currentTheme;
     this.domains=this.getDomainsList();
     console.log(this.domains);
-
+    this.isAdmin=localStorage.getItem("userRole")==="ADMINISTRATOR";
     this.user= this.userService.getCurrentUser();
     let firstName=localStorage.getItem("userFirstName");
     let firstLastName=localStorage.getItem("userLastName");

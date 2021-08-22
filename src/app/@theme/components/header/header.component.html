@@ -34,7 +34,7 @@
 <div class="header-container">
   <nb-actions size="small">
 
-    <nb-action class="control-item" icon="bell-outline" (click)="messageRedirect()"></nb-action>
+    <nb-action *ngIf="!isAdmin" class="control-item" icon="bell-outline" (click)="messageRedirect()"></nb-action>
     <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
       <nb-user  [nbContextMenu]="userMenu"
                [onlyPicture]="userPictureOnly"
