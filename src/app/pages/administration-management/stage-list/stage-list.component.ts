@@ -86,6 +86,7 @@ export class StageListComponent implements OnInit {
         this.jobList = response;
         console.log("-----job lists----");
         console.log(this.jobList);
+    
       },
       (error) => {
         this.utilsService.showToast(
