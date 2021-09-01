@@ -81,6 +81,8 @@ export class ProfilComponent implements OnInit {
 
   cities: Array<any>;
   cities_: Array<any>;
+  displayDeleteUser = false;
+
   changeCountry(count) {
     this.cities = this.worldMapData.getAllStatesFromCountry(count);
 
@@ -381,5 +383,31 @@ export class ProfilComponent implements OnInit {
      this.router.navigateByUrl("/recruiting/administration/job-list");
  
     }
+  }
+  deleteCompte()
+  {
+    this.displayDeleteUser=true;
+  }
+  deleteCompteCurrentUser()
+  {
+
+
+
+    const context = this;
+    const url = UtilsService.API_USER + '/' + this.user.userId;
+    this.utilsService.delete(UtilsService.API_USER).subscribe( response => {
+        this.utilsService.showToast('success',
+          'compte supprimé avec succés',
+          `Compte Utilisateur a été supprimé avec succcés`);
+        
+        context.displayDeleteUser = false;
+        this.router.navigateByUrl("auth/login");
+      },
+      error => {this.utilsService.showToast('danger',
+        'Erreur interne',
+        `Un erreur interne a été produit lors de la suppression du votre compte `);
+        context.displayDeleteUser = false;
+      });
+
   }
 }
